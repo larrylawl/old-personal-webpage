@@ -7,16 +7,16 @@ disqus:
 google-ID: "UA-143006563-1"
 
 menu:
-  - { name: "About", path: "menu", url: "about.html" }
+  - { name: "About Me", path: "menu", url: "about.html" }
   - { name: "Writing", path: "menu", url: "writing.html" }
-  - { name: "Contact", path: "menu", url: "contact.html" }
+  # - { name: "Contact", path: "menu", url: "contact.html" }
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:
   - { icon: "github", link: "https://www.github.com/larrylawl" }
   - { icon: "linkedin", link: "https://www.linkedin.com/in/larry-law" }
   - { icon: "envelope", link: "mailto:larrylaw97@gmail.com" }
-  - { icon: "rss-square", link: "/feed.xml" }
+  # - { icon: "rss-square", link: "/feed.xml" }
   - { icon: "rss-square", link: "/rss-feed.xml" }
 
 # Customize site text

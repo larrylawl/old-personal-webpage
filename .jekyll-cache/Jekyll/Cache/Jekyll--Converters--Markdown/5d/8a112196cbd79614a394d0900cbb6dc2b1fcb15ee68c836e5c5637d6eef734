@@ -1,4 +1,4 @@
-I" [<h1 id="lagrange">Lagrange</h1>
+I"[<h1 id="lagrange">Lagrange</h1>
 
 <p>Lagrange is a minimalist Jekyll theme for running a personal blog or site for free through <a href="https://pages.github.com/">Github Pages</a>, or on your own server. Everything that you will ever need to know about this Jekyll theme is included in the README below, which you can also find in <a href="https://lenpaul.github.io/Lagrange/">the demo site</a>.</p>
 
@@ -211,7 +211,7 @@ image:
     <p>In <code class="highlighter-rouge">_data/settings.yml</code>, under ‘social’, comment out the rss-square that points to <code class="highlighter-rouge">feed.xml</code>, and uncomment the rss-square that points to <code class="highlighter-rouge">rss-feed.xml</code>.</p>
   </li>
   <li>
-    <p>In <code class="highlighter-rouge">_includes/head.html</code>, comment out <code class="highlighter-rouge">&lt;link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lagrange" /&gt;</code> and uncomment the line under the RSS 2.0 comment.</p>
+    <p>In <code class="highlighter-rouge">_includes/head.html</code>, comment out <code class="highlighter-rouge">&lt;link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="1000" /&gt;</code> and uncomment the line under the RSS 2.0 comment.</p>
   </li>
 </ul>
 

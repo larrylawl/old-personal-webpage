@@ -1,18 +1,32 @@
 ---
 layout: page
-title: Welcome to Lagrange!
+title: 0001 about me
 ---
 
-Lagrange is a minimalist Jekyll theme. The purpose of this theme is to provide a simple, clean, content-focused blogging platform for your personal site or blog. Below you can find everything you need to get started.
+![Larry Photo](/assets/img/larry.jpg)
 
-### Getting Started
+### Intro
 
-[Getting Started]({{ site.github.url }}{% post_url 2015-10-10-getting-started %}): getting started with installing Lagrange, whether you are completely new to using Jekyll, or simply just migrating to a new Jekyll theme.
+I am a computer science sophomore at the
+[National University of Singapore](https://www.comp.nus.edu.sg/programmes/ug/cs/),
+and a scholar of the [University Scholar's Programme](http://www.usp.nus.edu.sg/)
+(a multidisciplinary academic programme wherein I learn to write and think critically).
 
-### Example Content
+### Experience
 
-[Text and Formatting]({{ site.github.url }}{% post_url 2014-01-01-text-formatting-examples %})
+I have previously interned at [AXA Singapore](https://www.axa.com.sg/),
+where I did full stack web development.
 
-### Questions?
+### Why document my learning?
 
-This theme is completely free and open source software. You may use it however you want, as it is distributed under the [MIT License](http://choosealicense.com/licenses/mit/). If you are having any problems, any questions or suggestions, feel free to [tweet at me](https://twitter.com/intent/tweet?text=My%question%about%Lagrange%is:%&amp;via=paululele), or [file a GitHub issue](https://github.com/lenpaul/lagrange/issues/new).
+**To achieve mastery** - To me, the litmus test of one's mastery for a complex concept is the
+ability to explain said concept simply.
+By penning my learning down, I hope to have truly understood what I have learnt.
+
+**To share knowledge** - I have always loved how developers helped each other so readily. These articles
+are my humble way of contributing to this open-source culture;
+I will be delighted if others found the articles helpful in their own pursuit of knowledge.
+
+### Feedback
+
+I'm always looking to improve. Any feedback is welcomed either via my socials, or directly in the comment section of my articles.

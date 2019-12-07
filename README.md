@@ -1,4 +1,6 @@
-# `1000`
+# `1000` Byte Size Knowledge
+
+[![Build Status](https://travis-ci.org/larrylawl/larrylawl.github.io.svg?branch=master)](https://travis-ci.org/larrylawl/larrylawl.github.io)
 
 ![favicon](favicon.ico)
 

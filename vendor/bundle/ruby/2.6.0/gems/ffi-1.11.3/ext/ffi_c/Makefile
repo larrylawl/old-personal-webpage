@@ -12,12 +12,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/include/ruby-2.6.0
+topdir = /home/travis/.rvm/rubies/ruby-2.6.3/include/ruby-2.6.0
 hdrdir = $(topdir)
-arch_hdrdir = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/include/ruby-2.6.0/universal-darwin19
+arch_hdrdir = /home/travis/.rvm/rubies/ruby-2.6.3/include/ruby-2.6.0/x86_64-linux
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr
+prefix = $(DESTDIR)/home/travis/.rvm/rubies/ruby-2.6.3
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -31,9 +31,9 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20191207-25617-8iri5p
-sitelibdir = $(DESTDIR)./.gem.20191207-25617-8iri5p
-sitedir = $(DESTDIR)/Library/Ruby/Site
+sitearchdir = $(DESTDIR)./.gem.20191207-7544-vvlhg8
+sitelibdir = $(DESTDIR)./.gem.20191207-7544-vvlhg8
+sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
 sitearchincludedir = $(includedir)/$(sitearch)
@@ -41,20 +41,20 @@ archincludedir = $(includedir)/$(arch)
 sitearchlibdir = $(libdir)/$(sitearch)
 archlibdir = $(libdir)/$(arch)
 ridir = $(datarootdir)/$(RI_BASE_NAME)
-mandir = $(DESTDIR)/usr/share/man
+mandir = $(datarootdir)/man
 localedir = $(datarootdir)/locale
 libdir = $(exec_prefix)/lib
 psdir = $(docdir)
 pdfdir = $(docdir)
 dvidir = $(docdir)
 htmldir = $(docdir)
-infodir = $(DESTDIR)/usr/share/info
+infodir = $(datarootdir)/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
 oldincludedir = $(DESTDIR)/usr/include
-includedir = $(DESTDIR)/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk$(prefix)/include
+includedir = $(prefix)/include
 localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
-sysconfdir = $(DESTDIR)/Library/Ruby/Site
+sysconfdir = $(DESTDIR)/etc
 datadir = $(datarootdir)
 datarootdir = $(prefix)/share
 libexecdir = $(exec_prefix)/libexec
@@ -64,12 +64,12 @@ archdir = $(rubyarchdir)
 
 
 CC_WRAPPER = 
-CC = xcrun clang
-CXX = xcrun clang++
+CC = gcc
+CXX = g++
 LIBRUBY = $(LIBRUBY_SO)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
-LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
-LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static -framework Security -framework Foundation $(MAINLIBS)
+LIBRUBYARG_SHARED = -Wl,-rpath,'$${ORIGIN}/../lib' -Wl,-rpath,'$${ORIGIN}/../lib' -l$(RUBY_SO_NAME)
+LIBRUBYARG_STATIC = -Wl,-rpath,'$${ORIGIN}/../lib' -Wl,-rpath,'$${ORIGIN}/../lib' -l$(RUBY_SO_NAME)-static $(MAINLIBS)
 empty =
 OUTFLAG = -o $(empty)
 COUTFLAG = -o $(empty)
@@ -78,33 +78,33 @@ CSRCFLAG = $(empty)
 RUBY_EXTCONF_H = extconf.h
 cflags   = $(optflags) $(debugflags) $(warnflags)
 cxxflags = $(optflags) $(debugflags) $(warnflags)
-optflags = 
-debugflags = -g
+optflags = -O3
+debugflags = -ggdb3
 warnflags = 
 cppflags = 
-CCDLFLAGS = 
-CFLAGS   = $(CCDLFLAGS)  -g -Os -pipe -DHAVE_GCC_ATOMIC_BUILTINS $(ARCH_FLAG)
-INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
+CCDLFLAGS = -fPIC
+CFLAGS   = $(CCDLFLAGS) $(cflags)  -fPIC  $(ARCH_FLAG)
+INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir) 
 DEFS     = 
-CPPFLAGS = -DRUBY_EXTCONF_H=\"$(RUBY_EXTCONF_H)\" -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
-CXXFLAGS = $(CCDLFLAGS)  -g -Os -pipe  $(ARCH_FLAG)
-ldflags  = -L. -L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.Internal.sdk/usr/local/lib
-dldflags = -arch x86_64             -undefined dynamic_lookup -multiply_defined suppress 
-ARCH_FLAG =  -arch x86_64
+CPPFLAGS = -DRUBY_EXTCONF_H=\"$(RUBY_EXTCONF_H)\"  $(DEFS) $(cppflags)
+CXXFLAGS = $(CCDLFLAGS) $(cxxflags)  $(ARCH_FLAG)
+ldflags  = -L. -fstack-protector-strong -rdynamic -Wl,-export-dynamic 
+dldflags = -Wl,--compress-debug-sections=zlib 
+ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
-LDSHARED = $(CC) -dynamic -bundle
-LDSHAREDXX = $(CXX) -dynamic -bundle
-AR = libtool -static
+LDSHARED = $(CC) -shared
+LDSHAREDXX = $(CXX) -shared
+AR = ar
 EXEEXT = 
 
 RUBY_INSTALL_NAME = $(RUBY_BASE_NAME)
-RUBY_SO_NAME = ruby.2.6
+RUBY_SO_NAME = ruby
 RUBYW_INSTALL_NAME = 
 RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = universal-darwin19
+arch = x86_64-linux
 sitearch = $(arch)
 ruby_version = 2.6.0
 ruby = $(bindir)/$(RUBY_BASE_NAME)
@@ -113,9 +113,9 @@ ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/backward.h $(hdrdir)/ruby/ruby.h 
 
 RM = rm -f
 RM_RF = $(RUBY) -run -e rm -- -rf
-RMDIRS = rmdir -p
-MAKEDIRS = mkdir -p
-INSTALL = /usr/bin/install -c
+RMDIRS = rmdir --ignore-fail-on-non-empty -p
+MAKEDIRS = /bin/mkdir -p
+INSTALL = /usr/bin/install
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
 COPY = cp
@@ -125,7 +125,7 @@ TOUCH = exit >
 
 preload = 
 libpath = . $(libdir)
-LIBPATH =  -L. -L$(libdir)
+LIBPATH =  -L. -L$(libdir) -Wl,-rpath,$(libdir)
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -136,16 +136,16 @@ extout =
 extout_prefix = 
 target_prefix = 
 LOCAL_LIBS = 
-LIBS = $(LIBRUBYARG_SHARED)   
+LIBS = $(LIBRUBYARG_SHARED) -lffi  -lffi -lm   -lc
 ORIG_SRCS = AbstractMemory.c ArrayType.c Buffer.c Call.c ClosurePool.c DynamicLibrary.c Function.c FunctionInfo.c LastError.c LongDouble.c MappedType.c MemoryPointer.c MethodHandle.c Platform.c Pointer.c Struct.c StructByValue.c StructLayout.c Thread.c Type.c Types.c Variadic.c ffi.c
 SRCS = $(ORIG_SRCS) 
 OBJS = AbstractMemory.o ArrayType.o Buffer.o Call.o ClosurePool.o DynamicLibrary.o Function.o FunctionInfo.o LastError.o LongDouble.o MappedType.o MemoryPointer.o MethodHandle.o Platform.o Pointer.o Struct.o StructByValue.o StructLayout.o Thread.o Type.o Types.o Variadic.o ffi.o
-HDRS = $(srcdir)/Type.h $(srcdir)/rbffi_endian.h $(srcdir)/MappedType.h $(srcdir)/Types.h $(srcdir)/LastError.h $(srcdir)/ArrayType.h $(srcdir)/extconf.h $(srcdir)/StructByValue.h $(srcdir)/AbstractMemory.h $(srcdir)/ClosurePool.h $(srcdir)/Call.h $(srcdir)/MethodHandle.h $(srcdir)/Struct.h $(srcdir)/rbffi.h $(srcdir)/Thread.h $(srcdir)/compat.h $(srcdir)/DynamicLibrary.h $(srcdir)/Platform.h $(srcdir)/Function.h $(srcdir)/LongDouble.h $(srcdir)/MemoryPointer.h $(srcdir)/Pointer.h
+HDRS = $(srcdir)/Thread.h $(srcdir)/Function.h $(srcdir)/LongDouble.h $(srcdir)/DynamicLibrary.h $(srcdir)/AbstractMemory.h $(srcdir)/Call.h $(srcdir)/Platform.h $(srcdir)/MappedType.h $(srcdir)/MemoryPointer.h $(srcdir)/rbffi_endian.h $(srcdir)/MethodHandle.h $(srcdir)/ArrayType.h $(srcdir)/compat.h $(srcdir)/Struct.h $(srcdir)/extconf.h $(srcdir)/ClosurePool.h $(srcdir)/Type.h $(srcdir)/Types.h $(srcdir)/Pointer.h $(srcdir)/rbffi.h $(srcdir)/LastError.h $(srcdir)/StructByValue.h
 LOCAL_HDRS = 
 TARGET = ffi_c
 TARGET_NAME = ffi_c
 TARGET_ENTRY = Init_$(TARGET_NAME)
-DLLIB = $(TARGET).bundle
+DLLIB = $(TARGET).so
 EXTSTATIC = 
 STATIC_LIB = 
 
@@ -259,10 +259,7 @@ $(TARGET_SO): $(OBJS) Makefile
 	$(ECHO) linking shared-object $(DLLIB)
 	-$(Q)$(RM) $(@)
 	$(Q) $(LDSHARED) -o $@ $(OBJS) $(LIBPATH) $(DLDFLAGS) $(LOCAL_LIBS) $(LIBS)
-	$(Q) $(POSTLINK)
 
 
 
 $(OBJS): $(HDRS) $(ruby_headers)
-LIBFFI_HOST=--host=
-include ${srcdir}/libffi.darwin.mk

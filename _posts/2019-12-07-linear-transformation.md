@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Intuition for Linear Transformation"
+author: "Larry Law"
+categories: journal
+tags: [Linear Algebra]
+image: mountains.jpg
+---
+
+$$
+\begin{matrix}
+a & b \\
+c & d
+\end{matrix}
+\quad
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\quad
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\quad
+\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}
+\quad
+\begin{Vmatrix}
+a & b \\
+c & d
+\end{Vmatrix}
+$$

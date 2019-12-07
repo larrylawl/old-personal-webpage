@@ -4,7 +4,7 @@ title: "Intuition for Linear Transformation"
 author: "Larry Law"
 categories: journal
 tags: [Linear Algebra]
-image: mountains.jpg
+image: pi.jpg
 ---
 
 $$

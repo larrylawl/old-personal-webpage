@@ -4,7 +4,7 @@ title: "Global, nonlocal, and local values in Python"
 author: "Larry Law"
 categories: journal
 tags: [python]
-image: cutting.jpg
+image: python.jpg
 ---
 
 ## The problem

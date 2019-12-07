@@ -11,7 +11,7 @@
 - [ ] Travis for deployment
 - [ ] Update README.md
 - [x] Blog name
-- [ ] Update images
+- [x] Update images
 
 ## v1.1
 

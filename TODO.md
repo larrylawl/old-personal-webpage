@@ -21,3 +21,28 @@ Good to have
 
 1. Icon for byte sized
 2. Byte theme
+
+# TODO
+
+## v1.0
+
+- [ ] Change basic information
+- [ ] Update google analytics
+- [x] Comment
+- [x] Latex
+- [x] Post
+- [x] Syntax highlighting
+- [ ] Travis for deployment
+- [ ] Update README.md
+
+## v1.1
+
+- [ ] Reposense to track progress
+- [ ] Netlify for review
+- [ ] Time in articles
+- [ ] Description in index page not formatted properly
+
+## v2.0
+
+- [ ] Icon for byte sized
+- [ ] Byte theme

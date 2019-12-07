@@ -1,0 +1,53 @@
+I"�<p>(For a more detailed explanation, check out 3Blue1Brown’s video <a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">here</a>)</p>
+
+<h2 id="parsing-linear-transformation">Parsing Linear Transformation</h2>
+
+<p>Transformation: A function that takes in an input vector and <em>moves</em> it.
+Linear: The <em>movement</em> described above is linear if and only if</p>
+
+<ol>
+  <li>the origin remains</li>
+  <li>lines stay as lines. (In other words, the set of vectors that have the same span remains the same after the transformation)</li>
+</ol>
+
+<h2 id="geometric-intuition-of-linear-transformation-in-matrix-multiplication">Geometric intuition of Linear Transformation in Matrix Multiplication</h2>
+
+<script type="math/tex; mode=display">T(\overrightarrow{v}) := A\overrightarrow{v}</script>
+
+<p>This linear transformation <em>moves</em> $ \overrightarrow{v} $ from the representation of the basis vectors in the coefficient matrix to the standard basis. ($ \overrightarrow{e_x} = (1,0) $, $\overrightarrow{e_y} = (0, 1) $ in $ R_2 $.)</p>
+
+<p>An example in $ R_2 $ will make things clearer.</p>
+
+<p>Recall the matrix multiplication operation</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+T(\overrightarrow{v}) :=
+\begin{bmatrix}
+i_1 & j_1 \\
+i_2 & j_2
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+i_1 \\
+i_2
+\end{bmatrix} v_1 +
+\begin{bmatrix}
+j_1 \\
+j_2
+\end{bmatrix} v_2
+=
+\begin{bmatrix}
+i_1v_1 & j_1v_2 \\
+i_2v_1 & j_2v_2
+\end{bmatrix} %]]></script>
+
+<p>$ \overrightarrow{v} $ represented by the basis vectors ($ \overrightarrow{i} $, $ \overrightarrow{j} $) equals to the summation of the scalar multiple of $ v_1 $\ with $ \overrightarrow{i} $\ and the scalar multiple of $ v_2 $\ with $ \overrightarrow{j} $.</p>
+
+<p>More crudely, the linear transformation of $ \overrightarrow{v} $ shows us what $ \overrightarrow{v} $ in the “world” represented by the basis vectors in the coefficient matrix, looks like in our “world”.</p>
+
+<script type="math/tex; mode=display"></script>
+:ET

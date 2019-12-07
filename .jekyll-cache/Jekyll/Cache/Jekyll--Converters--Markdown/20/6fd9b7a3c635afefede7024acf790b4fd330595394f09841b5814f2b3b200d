@@ -1,0 +1,87 @@
+I"<p>(For a more detailed explanation, check out 3Blue1Brown’s video <a href="https://www.youtube.com/watch?v=kYB8IZa5AuE">here</a>)</p>
+
+<h2 id="parsing-linear-transformation">Parsing Linear Transformation</h2>
+
+<p>Transformation: A function that takes in an input vector and <em>moves</em> it.
+Linear: The <em>movement</em> described above is linear if and only if</p>
+
+<ol>
+  <li>the origin remains</li>
+  <li>lines stay as lines. (In other words, the set of vectors that have the same span remains the same after the transformation)</li>
+</ol>
+
+<h2 id="let-us-consider-the-main-application-of-linear-transformation-matrix-multiplication">Let us consider the main application of linear transformation: Matrix Multiplication</h2>
+
+<script type="math/tex; mode=display">T(v) := Av</script>
+
+<p>This <em>linear transformation</em> moves $test$ from the representation of the basis vectors in the
+coefficient matrix A, to the standard basis. ($$ In R_2, e_x = (1,0), e_y = (0, 1))</p>
+
+<h2 id="heres-the-matrix-multiplication-we-are-familiar-with">Here’s the matrix multiplication we are familiar with</h2>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{bmatrix}
+i_1 & j_1 \\
+i_2 & j_2
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\
+v_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+i_1 \\
+i_2
+\end{bmatrix} v_1
++
+\begin{bmatrix}
+j_1 \\
+j_2
+\end{bmatrix} v_2
+=
+\begin{bmatrix}
+i_1v_1 & j_1v_2 \\
+i_2v_1 & j_2v_2
+\end{bmatrix} %]]></script>
+
+<h2 id="but-what-is-the-geometric-intuition-behind-matrix-multiplication">But what is the geometric intuition behind matrix multiplication?</h2>
+
+<p>The input vector, v, is _ linearly transformed_ from being represented by the basis vectors in A, to the basis vectors ihat and jhat.</p>
+
+<h2 id="parsing-linear-transformation-1">Parsing Linear Transformation</h2>
+
+<p>Transformation: A function that takes in an input vector and <em>moves</em> it.
+Linear: The <em>movement</em> described above is linear if and only if</p>
+
+<ol>
+  <li>the origin remains</li>
+  <li>lines stay as lines. (In other words, the set of vectors that have the same span remains the same after the transformation)</li>
+</ol>
+
+<p>Without loss of generality to <script type="math/tex">R_n</script>, lets consider <script type="math/tex">R_2</script></p>
+
+<script type="math/tex; mode=display">T(v) := Av, where A</script>
+
+<p>A has the basis vector ihat and jhat. Suppose that ihat and jhat lie on different span, these vectors can represent any vector in <script type="math/tex">R_2</script>.</p>
+
+<p>So what does it mean to multiply the coefficient matrix A with input vector?</p>
+
+<p>The input vector, v, is _ linearly transformed_ from being represented by the basis vectors in A, to the basis vectors ihat and jhat.</p>
+
+<p>Av = (…)</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{bmatrix}
+i_1 & j_1 \\
+i_2 & j_2
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+= %]]></script>
+
+<blockquote>
+  <p>(Note: If the coefficient matrix lies on the same span, then it will transform the input vector to <script type="math/tex">R_1</script>.)</p>
+</blockquote>
+:ET

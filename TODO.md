@@ -8,18 +8,17 @@
 - [x] Latex
 - [x] Post
 - [x] Syntax highlighting
-- [ ] Travis for deployment
-- [ ] Update README.md
+- [x] Travis for deployment
+- [x] Update README.md
 - [x] Blog name
 - [x] Update images
 
 ## v1.1
 
+- [ ] Tags page
 - [ ] Reposense to track progress
-- [ ] Netlify for review
 - [ ] Time in articles
 - [ ] Description in index page not formatted properly
-- [ ] Writing sort by tags than date
 
 ## v2.0
 

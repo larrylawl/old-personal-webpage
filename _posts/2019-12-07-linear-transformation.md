@@ -33,3 +33,5 @@ a & b \\
 c & d
 \end{Vmatrix}
 $$
+
+\( hey )\there

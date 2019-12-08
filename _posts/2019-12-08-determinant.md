@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Intuition for Determinant"
+title: "Interpretation for Determinant"
 author: "Larry Law"
 categories: journal
 tags: [Linear Algebra]
@@ -9,7 +9,7 @@ image: pi.jpg
 
 (For a more detailed explanation, check out 3Blue1Brown's video [here](https://www.youtube.com/watch?v=Ip3X9LOh2dk&t=57s))
 
-## Intuition for Determinant
+## Interpretation for Determinant
 
 Recall that a linear transformation _moves_ the vector. The determinant computes the **factor by which the space was changed by this linear transformation** (space := area in \$ R_2 \$, volume in \$ R_3 \$).
 

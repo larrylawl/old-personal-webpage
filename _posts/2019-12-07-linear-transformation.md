@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Intuition for Matrix Multiplication and Linear Transformation"
+title: "Interpretation for Matrix Multiplication and Linear Transformation"
 author: "Larry Law"
 categories: journal
 tags: [Linear Algebra]
@@ -17,7 +17,7 @@ Suppose I have two vectors, \$ \overrightarrow{v_i} \$ and \$ \overrightarrow{v_
 
 In the "typical" world, the basis vectors are \$ \overrightarrow{e_x} = (0, 1) \$, \$ \overrightarrow{e_y} = (1, 0) \$ in \$ R_2 \$. These special vectors are also called the standard basis.
 
-## Intuition of Matrix Multiplication
+## Interpretation of Matrix Multiplication
 
 Now suppose I have any vector \$ \overrightarrow{x} \$ \$ \in \$ in \$ R_2 \$ and is represented by my basis vectors \$ \overrightarrow{v_i} \$ and \$ \overrightarrow{v_j} \$.
 
@@ -51,7 +51,7 @@ i_2x_1 & j_2x_2
 \end{bmatrix}
 $$
 
-## Intuition of Linear Transformation
+## Interpretation of Linear Transformation
 
 Matrix multiplication is the main example of a linear transformation. This linear transformation _moves_ \$ \overrightarrow{v} \$ from the representation of the basis vectors in the coefficient matrix to the standard basis. Parsing the term Linear Transformation will help us understand it better.
 

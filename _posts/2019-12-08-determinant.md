@@ -15,11 +15,11 @@ Recall that a linear transformation _moves_ the vector. The determinant computes
 
 If the determinant, d, is...
 
-≥0, d changes the space by a factor of d.
+≥0, the linear transformation changes the space by a factor of d.
 
-≤0, d _flips_ and changes the space by a factor of d.
+≤0, the linear transformation _flips_ and changes the space by a factor of d.
 
-= 0, d squishes the space to one dimension. Thus the matrix is _non-invertible_, and hence it is _singular_
+= 0, since the factor by which the space was changed is 0, this linear transformation squishes the space to one dimension. Thus the matrix is _non-invertible_, and hence it is _singular_
 
 ## Why does this work?
 

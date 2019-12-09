@@ -1,0 +1,99 @@
+I"H<h2 id="learning-outcomes">Learning outcomes</h2>
+<ol>
+  <li>Purpose of Gradient Descent</li>
+  <li>Intuition of Gradient Descent</li>
+  <li>Understand the math behind Gradient Descent</li>
+</ol>
+
+<h2 id="prerequisite-cost-function">Prerequisite: Cost Function</h2>
+<p>To measure the effectiveness of a machine learning model, we use a <em>cost function</em>. This function takes in our model’s parameters as inputs, and outputs the “difference” between the model’s result and the expected result.
+<script type="math/tex">J(\theta_1, \theta_2, ..., \theta_n)</script></p>
+<blockquote>
+  <p>Common cost functions include: root mean square error (RSME), Mean square error (MSE).</p>
+</blockquote>
+
+<h2 id="purpose-of-gradient-descent">Purpose of Gradient Descent</h2>
+<p><strong>For parameter learning</strong>. In other words, we are keen in finding the parameters such that the cost function of these parameters is 0.</p>
+
+<h2 id="intuition-of-gradient-descent">Intuition of Gradient Descent</h2>
+<p>Gradient descent is an optimization algorithm used to minimize the cost function by <em>iteratively moving in the direction of steepest descent as defined by the negative of the gradient</em>.</p>
+
+<p>In the context of the graph below, each cross marks the result of each iteration of gradient descent, and it converges towards the (local) minimum of the cost function.</p>
+
+<p><img src="/assets/img/gradient-descent-3d" alt="Gradient Descent" /></p>
+
+<h2 id="the-math-behind-gradient-descent">The math behind Gradient Descent</h2>
+<p><script type="math/tex">\theta_{j}:=\theta_{j}-\alpha \frac{\partial}{\partial \theta_{j}} J\left(\theta_{0}, \theta_{1}\right), where j = 0 and 1</script></p>
+<h3 id="understanding-the-learning-rate">Understanding the learning rate</h3>
+<h3 id="understanding-the-partial-derivative-term">Understanding the partial derivative term</h3>
+<p>Let’s consider $ R_2 $ first. Suppose that we initialise $ \theta_{0} $ to the left of the minimum point of graph below. The derivative at that point is negative, thus the updated value of $ \theta_{0} $ will be increased (moves right) and thus <em>converges</em> towards the local minimum, which is the purpose of gradient descent.</p>
+<blockquote>
+  <p>Purpose of gradient descent: Learn the parameters such that the cost function is minimised.</p>
+</blockquote>
+
+<p><img src="/assets/img/gradient-descent-2d" alt="Gradient Descent" /></p>
+
+<p>I intentionally used the word <em>converges</em>. As can be seen from the graph, the derivative of each iteration as we approach the local minimum decreases, thus each update of $ \theta_{0} $ will correspondingly get smaller. This “natural” convergence is also the reason why the learning rate can be fixed, instead of decreasing as we approach the local minimum.</p>
+
+<p>Now let’s consider $ R_3 $. Recall that by taking the partial derivative of a multivariate function, I first need to fix the other variables as constants. This will give us the red line below.</p>
+
+<p><img src="/assets/img/partial-derivative-sv" alt="Partial Derivative of Single Variable" /></p>
+
+<p>This “reduces” the problem we had in $ R_2 $, where we have shown how the subtraction of the partial derivative eventually brings us to the local minimum.</p>
+<blockquote>
+  <p>Local minimum as the cost function might have ≥1 minimums. 
+<img src="/assets/img/gradient-descent-3d.jpg" alt="Geometric interpretation of partial derivative of a two variables" />
+To learn more about partial derivatives, check out my post on it <a href="./partial-derivatives">here</a></p>
+</blockquote>
+
+<p>Recall that by taking the partial derivative of my multivariate function $ J\left(\theta_{0}, \theta_{1}\right) $ wrt $ \theta_{0} $, I am seeing how a small change in $ \theta_{0} $ is changing my function.</p>
+
+<script type="math/tex; mode=display">\theta_{j}:=\theta_{j}-\alpha \frac{\partial}{\partial \theta_{j}} J\left(\theta_{0}, \theta_{1}\right), where j = 0 and 1</script>
+
+<p>Suppose that we are keen in learning the parameter $ \theta_{0} $.</p>
+
+<h2 id="credits">Credits</h2>
+<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning?utm_source=gg&amp;utm_medium=sem&amp;utm_content=93-BrandedSearch-INTL&amp;campaignid=1599063752&amp;adgroupid=58953588605&amp;device=c&amp;keyword=coursera%20courses&amp;matchtype=b&amp;network=g&amp;devicemodel=&amp;adpostion=1t1&amp;creativeid=303554599611&amp;hide_mobile_promo&amp;gclid=EAIaIQobChMIvfCauaSo5gIVF4iPCh1U1gK3EAAYASABEgLY6vD_BwE">here</a></p>
+
+<p>ML-cheat sheet for the definition of gradient descent. Source <a href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html">here</a>.</p>
+
+<h2 id="interpretation-of-partial-derivatives-wrt-single-variable">Interpretation of partial derivatives wrt single variable</h2>
+<p>Recall that derivatives tell us how a small change in x changes f(x).</p>
+
+<script type="math/tex; mode=display">\frac{df(x)}{dx}</script>
+
+<p>Similarly in the multivariate world, the partial derivative below tells us how a small change in $ x_1 $ changes the multivariate function.</p>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2)}{dx_1}</script>
+
+<p>In other words, we are interested in the derivative of the red line below for a fixed value of $ x_2 $.</p>
+
+<p><img src="/assets/img/partial-derivative-sv.jpg" alt="Geometric interpretation of partial derivative of a single variable" /></p>
+
+<p>Note that the partial derivative of a function of $ x_1 $ is still a function of $ x_1 $. This function outputs the gradient of the multivariate function with respect to $ x_1 $, and with $ x_2 $ held constant.</p>
+
+<h2 id="interpretation-of-partial-derivatives-wrt-multiple-variables">Interpretation of partial derivatives wrt multiple variables</h2>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n}</script>
+
+<p>Similarly, the partial derivatives wrt multiple variables tells us how a small change in all $ x_i $ changes the multivariate function. It is a function of all $ x_i $ that outputs the gradient of the multivariate function with respect to all $ x_i $. In $ R_3 $, this is the gradient of any surface we see.</p>
+
+<p><img src="/assets/img/gradient-descent-3d.jpg" alt="Geometric interpretation of partial derivative of a two variables" /></p>
+
+<h2 id="computation-of-partial-derivatives-wrt-multiple-variables">Computation of partial derivatives wrt multiple variables</h2>
+<p>Recall that to compute partial derivatives wrt $ x_i $, we differentiate wrt to our variable of interest, and <em>treat the rest of the variables constant</em>. We iteratively repeat the partial differentiation until all variables have been partially differentiated. But can <em>treating the rest of the variables constant</em> allow us to arrive at the interpretation we have above?</p>
+
+<blockquote>
+  <p>Partial derivatives wrt multiple variables tells us how a small change in all $ x_i $ changes the multivariate function</p>
+</blockquote>
+
+<p>To reconcile the computation with the interpretation, I like to think of each partial differentiation computation as an <em>expression.</em></p>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n}</script>
+
+<ol>
+  <li>$ \frac{\partial f}{\partial x_1} $ describes how a small change in $ x_1 $ changes $ f $.</li>
+  <li>$ \frac{1}{\partial x_2} \frac{\partial f}{\partial x_1} $ describes how a small change in $ x_2 $ changes $ \frac{\partial f}{\partial x_1} $, which itself has captured how a small change in $ x_1 $ changes $ f $. Thus the expression as a whole describes how a small change in $ x_1 $ and $ x_2 $ changes $ f $.</li>
+  <li>Repeat until $ x_n $</li>
+</ol>
+:ET

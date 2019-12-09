@@ -1,0 +1,52 @@
+I"x	<h2 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h2>
+
+<p>Lecturer: Professor Andrew Ng <br />
+Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">here</a></p>
+
+<h2 id="week-1">Week 1</h2>
+
+<ol>
+  <li>
+    <p><strong>Machine Learning</strong>: the field of study that gives computers the ability to learn without being explicitly programmed.</p>
+
+    <ol>
+      <li><strong>Supervised Learning</strong>: “Know the right answers” 1.<strong>Regression</strong>: Predict results within a <em>continuous output</em> 2.<strong>Classification</strong>: Map input variables to a <em>discrete output</em></li>
+      <li><strong>Unsupervised Learning</strong>: No idea what our results should look like
+        <ol>
+          <li><strong>Clustering</strong></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p><strong>Cost Function</strong>: Measures the accuracy of the hypothesis function.</p>
+    <ol>
+      <li>0.5 * mean square error</li>
+    </ol>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Note: cost function is a function of the model parameters $ h_\theta $ while hypothesis function is a function of the variables $ x $…</p>
+</blockquote>
+
+<ol>
+  <li><strong>Gradient Descent</strong>
+    <ol>
+      <li><em>Minimise the cost function</em> by <em>iteratively moving in the direction of steepest descent</em> as defined by the negative of the gradient. <a href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html">source</a></li>
+    </ol>
+  </li>
+</ol>
+
+<p><img src="/assets/img/gradient-descent.jpg" alt="gradient-descent" />
+    - <strong>$ \alpha $</strong>: Learning rate. The higher the learning rate, the faster the descent.
+    - (Partial) derivative of the cost function: Intuitively this tells us the direction to take to reach the local minimum.</p>
+
+<blockquote>
+  <p>Why does gradient descent <em>converge</em> (ie each descent, or subtraction, is getting smaller and smaller) to (local) minimum even with <strong>$ \alpha $</strong> being fixed? 
+Intuitively, descent towards (local) minimum will get get naturally gentler. Mathematically, this means that the (partial) derivative will get smaller as we approach (local) minimum, thus the value of the second term will converge to a smaller value even with a fixed learning rate.</p>
+</blockquote>
+
+<!-- TODO: Explain why subtracting partial derivative gets me to the local min -->
+
+:ET

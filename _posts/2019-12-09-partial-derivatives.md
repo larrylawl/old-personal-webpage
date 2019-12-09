@@ -49,3 +49,6 @@ $$ \frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n} $$
 1. \$ \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_1 \$ changes \$ f \$.
 2. \$ \frac{1}{\partial x_2} \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_2 \$ changes \$ \frac{\partial f}{\partial x_1} \$, which itself has captured how a small change in \$ x_1 \$ changes \$ f \$. Thus the expression as a whole describes how a small change in \$ x_1 \$ and \$ x_2 \$ changes \$ f \$.
 3. Repeat until \$ x_n \$
+
+## Application of partial derivatives: Gradient Descent
+Learn more about Gradient Descent in my post [here](./gradient-descent).

@@ -1,0 +1,59 @@
+I"B<h2 id="learning-outcomes">Learning outcomes</h2>
+<ol>
+  <li>Purpose of Gradient Descent</li>
+  <li>Intuition of Gradient Descent</li>
+  <li>Understand the math behind Gradient Descent</li>
+</ol>
+
+<h2 id="prerequisite-cost-function">Prerequisite: Cost Function</h2>
+<p><em>cost function</em> measures the effectiveness of a machine learning model. This function takes in our model’s parameters as inputs, and outputs the “difference” between the model’s result and the expected result.
+<script type="math/tex">J(\theta_1, \theta_2, ..., \theta_n)</script></p>
+<blockquote>
+  <p>Common cost functions include: root mean square error (RSME), Mean square error (MSE).</p>
+</blockquote>
+
+<h2 id="purpose-of-gradient-descent">Purpose of Gradient Descent</h2>
+<p><strong>For parameter learning</strong>. In other words, we are keen in finding the parameters such that the cost function of these parameters is 0.</p>
+
+<h2 id="intuition-of-gradient-descent">Intuition of Gradient Descent</h2>
+<p>Gradient descent is an optimization algorithm used to minimize the cost function by <em>iteratively moving in the direction of steepest descent as defined by the negative of the gradient</em>.</p>
+
+<p>In the context of the graph below, each cross marks the result of each iteration of gradient descent, and it converges towards the (local) minimum of the cost function.</p>
+
+<p><img src="/assets/img/gradient-descent-3d" alt="Gradient Descent" /></p>
+
+<h2 id="the-math-behind-gradient-descent">The math behind Gradient Descent</h2>
+<p><script type="math/tex">\theta_{j}:=\theta_{j}-\alpha \frac{\partial}{\partial \theta_{j}} J\left(\theta_{0}, \theta_{1}\right), where j = 0 and 1</script></p>
+<h3 id="understanding-the-partial-derivative-term">Understanding the partial derivative term</h3>
+<p>Let’s consider $ R_2 $ first. Suppose that we initialise $ \theta_{0} $ to the left of the minimum point of graph below. The derivative at that point is negative, thus the updated value of $ \theta_{0} $ will be increased (moves right) and thus <em>converges</em> towards the local minimum, which is the purpose of gradient descent.</p>
+<blockquote>
+  <p>Purpose of gradient descent: Learn the parameters such that the cost function is minimised.</p>
+</blockquote>
+
+<p><img src="/assets/img/gradient-descent-2d.jpg" alt="Gradient Descent" /></p>
+
+<p>I intentionally used the word <em>converges</em>. As can be seen from the graph, the derivative of each iteration as we approach the local minimum decreases, thus each update of $ \theta_{0} $ will correspondingly get smaller. This “natural” convergence is also the reason why the learning rate can be fixed, instead of decreasing as we approach the local minimum.</p>
+
+<p>Now let’s consider $ R_3 $. Recall that by taking the partial derivative of a multivariate function, I first need to fix the other variables as constants. This will give us the red line below.</p>
+
+<p><img src="/assets/img/partial-derivative-sv.jpg" alt="Partial Derivative of Single Variable" /></p>
+
+<p>This “reduces” the problem we had in $ R_2 $, where we have shown how the subtraction of the partial derivative eventually brings us to the local minimum.</p>
+<blockquote>
+  <p>Local minimum as the cost function might have ≥1 minimums. 
+<img src="/assets/img/gradient-descent-3d.jpg" alt="Geometric interpretation of partial derivative of a two variables" />
+To learn more about partial derivatives, check out my post on it <a href="./partial-derivatives">here</a></p>
+</blockquote>
+
+<h3 id="understanding-the-learning-rate--alpha-">Understanding the learning rate, $ \alpha $</h3>
+<p>Intuitively, the learning rate denotes the “size” of each descent. The image below summarises the implications of the different partitions of the chosen learning rate.</p>
+
+<p><img src="/assets/img/learning-rate.jpg" alt="Learning rate" /></p>
+
+<h2 id="credits">Credits</h2>
+<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning?utm_source=gg&amp;utm_medium=sem&amp;utm_content=93-BrandedSearch-INTL&amp;campaignid=1599063752&amp;adgroupid=58953588605&amp;device=c&amp;keyword=coursera%20courses&amp;matchtype=b&amp;network=g&amp;devicemodel=&amp;adpostion=1t1&amp;creativeid=303554599611&amp;hide_mobile_promo&amp;gclid=EAIaIQobChMIvfCauaSo5gIVF4iPCh1U1gK3EAAYASABEgLY6vD_BwE">here</a></p>
+
+<p>ML-cheat sheet for the definition of gradient descent. Source <a href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html">here</a>.</p>
+
+<p>Learning rate image. Source <a href="https://medium.com/octavian-ai/how-to-use-the-learning-rate-finder-in-tensorflow-126210de9489">here</a></p>
+:ET

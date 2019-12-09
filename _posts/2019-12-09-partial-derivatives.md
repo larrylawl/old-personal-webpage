@@ -51,4 +51,4 @@ $$ \frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n} $$
 3. Repeat until \$ x_n \$
 
 ## Application of partial derivatives: Gradient Descent
-Learn more about Gradient Descent in my post [here](./gradient-descent).
+Learn more about Gradient Descent in my post [here](./gradient-descent.html).

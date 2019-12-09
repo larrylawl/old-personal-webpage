@@ -49,7 +49,7 @@ This "reduces" the problem we had in \$ R_2 \$, where we have shown how the subt
 > Local minimum as the cost function might have ≥1 minimums. The graph below has 2 minimums, as denoted by the red arrows.
 
 ![Geometric interpretation of partial derivative of a two variables](/assets/img/gradient-descent-3d.jpg)
-> To learn more about partial derivatives, check out my post [here](./partial-derivatives).
+> To learn more about partial derivatives, check out my post [here](./partial-derivatives.html).
 
 ### Understanding the learning rate, \$ \alpha \$
 Intuitively, the learning rate denotes the _"size"_ of each descent. This makes sense as the learning rate is the coefficient of the partial derivative, which gives us the _direction of descent_. The image below summarises the implications of the different partitions of the chosen learning rate.

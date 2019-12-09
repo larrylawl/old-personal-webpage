@@ -4,7 +4,7 @@ title: "Interpretation for Partial Derivatives"
 author: "Larry Law"
 categories: journal
 tags: [Calculus]
-image: pi.jpg
+image: calculus.jpg
 ---
 
 (For a more detailed explanation, check out Khan Academy's post [here](https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/introduction-to-partial-derivatives))
@@ -43,8 +43,9 @@ Recall that to compute partial derivatives wrt \$ x_i \$, we differentiate wrt t
 > Partial derivatives wrt multiple variables tells us how a small change in all \$ x_i \$ changes the multivariate function
 
 To reconcile the computation with the interpretation, I like to think of each partial differentiation computation as an _expression._
-1. \$ \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_1 \$ changes \$ f \$.
-2. \$ \frac{1}{\partial x_2} \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_2 \$ changes \$ \frac{\partial f}{\partial x_1} \$, which itself captures how a small change in \$ x_1 \$ changes \$ f \$. Thus the expression as a whole describes how a small change in \$ x_1 \$ and \$ x_2 \$ changes \$ f \$.
-3. Repeat until \$ x_n \$
 
-Hope this is of help!
+$$ \frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n} $$
+
+1. \$ \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_1 \$ changes \$ f \$.
+2. \$ \frac{1}{\partial x_2} \frac{\partial f}{\partial x_1} \$ describes how a small change in \$ x_2 \$ changes \$ \frac{\partial f}{\partial x_1} \$, which itself has captured how a small change in \$ x_1 \$ changes \$ f \$. Thus the expression as a whole describes how a small change in \$ x_1 \$ and \$ x_2 \$ changes \$ f \$.
+3. Repeat until \$ x_n \$

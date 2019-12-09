@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+IMAGE=$1
+FILEPATH="../assets/img"
+DEFAULT_WIDTH=1024
+DEFAULT_HEIGHT=600
+
+cd $FILEPATH
+convert $IMAGE -resize ${DEFAULT_WIDTH}x${DEFAULT_HEIGHT}\! $IMAGE
+

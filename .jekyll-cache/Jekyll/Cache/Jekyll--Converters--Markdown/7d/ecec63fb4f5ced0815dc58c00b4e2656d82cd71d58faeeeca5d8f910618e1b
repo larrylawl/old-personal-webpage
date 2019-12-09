@@ -1,0 +1,104 @@
+I"�<p>(For a more detailed explanation, check out Khan Academy’s post <a href="https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/partial-derivative-and-gradient-articles/a/introduction-to-partial-derivatives">here</a>)</p>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<ol>
+  <li>Interpretation of partial derivatives wrt (a) single variable (b) multivariables</li>
+  <li>Geometric intepretation of (1)</li>
+  <li>Computation of partial derivatives, and its relation to (1)</li>
+</ol>
+
+<h2 id="interpretation-of-partial-derivatives-wrt-single-variable">Interpretation of partial derivatives wrt single variable</h2>
+
+<script type="math/tex; mode=display">\frac{df(x)}{dx}</script>
+
+<p>Recall that derivatives tell us how a small change in x changes f(x). Similarly in the multivariate world,</p>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2)}{dx_1}</script>
+
+<blockquote>
+  <p>Without loss of generalisation to $ R_n $</p>
+</blockquote>
+
+<p>The partial derivatives tells us how a small change in $ x_1 $ changes the multivariate function. For a fixed value of $ x_2 $, we are interested in the derivative of the red line below.</p>
+
+<p><img src="/assets/img/partial-derivative-sv.jpg" alt="Geometric interpretation of partial derivative of a single variable" /></p>
+
+<p>Remember that the partial derivative of a function of $ x_1 $ is still a function of $ x_1 $. This function outputs the gradient of the multivariate function with respect to $ x_1 $, and with $ x_2 $ held constant.</p>
+
+<h2 id="interpretation-of-partial-derivatives-wrt-multiple-variables">Interpretation of partial derivatives wrt multiple variables</h2>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n}</script>
+
+<p>Similarly, the partial derivatives tells us how a small change in all $ x_i $ changes the multivariate function. It is a function of all $ x_i $ that outputs the gradient of the multivariate function with respect to all $ x_i $. In $ R_3 $, this is the gradient of any surface we see.</p>
+
+<h2 id="computation-of-partial-derivatives-wrt-multiple-variables">Computation of partial derivatives wrt multiple variables</h2>
+<p>Recall that to compute partial derivatives wrt $ x_i $, we differentiate wrt to our variable of interest, and <em>treat the rest of the variables constant</em>. We iteratively repeat the partial differentation until all variables have been partially differentiated. But can <em>treating the rest of the variables constant</em> allow us to arrive at the interpretation we have above?</p>
+
+<p>To reconcile the computation with the interpretation, I like to think of each computation as an <em>expression.</em></p>
+<ol>
+  <li>$ \frac{\partial f}{\partial x_1} $ returns us a function that describes how a small change in $ x_1 $ changes the multivariate function $ f $.</li>
+  <li>$ \frac{1}{\partial x_2} \frac{\partial f}{\partial x_1} $</li>
+</ol>
+
+<p>Suppose that we are differentiating wrt to all the variables (expression above). Partial differentiation wrt $ x_1 $ is an expression that returns another function of $ x_1 $ that describes how a small change in $ x_1 $ changes the multivariate function. Next, the partial differention of this function will return us another function of $ x_1, $x_2 $ that describes how a small change in $ x_2 $ changes the multivariate function.</p>
+
+<h2 id="application-of-partial-derivative-gradient-descent">Application of partial derivative: Gradient Descent</h2>
+<p>The purpose of gradient descent is to minimise our cost function by <em>iteratively moving in the direction of steepest descent</em> as defined by the negative of the gradient. <a href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html">source</a>.</p>
+
+<p>Let’s look at the algorithm for gradient descent and break it down.
+<img src="/assets/img/gradient-descent.jpg" alt="gradient-descent" /></p>
+
+<p>Intuitively in $ R_3 $, it means stepping in the direction of the steepest descent, which is given by your gradient, iteratively until you hit your local minimum. This is illustrated by the black cross marks in the image below.</p>
+
+<p>It tells us the gradient with respect to all $ x_i $, thus it is</p>
+
+<h2 id="partial-derivatives-wrt-to-one-variable">Partial derivatives wrt to one variable</h2>
+<h3 id="interpretation">Interpretation</h3>
+
+<script type="math/tex; mode=display">\frac{df(x)}{dx}</script>
+
+<p>Recall that derivatives tell us how a small change in x changes f(x). Similarly in the multivariate world,</p>
+
+<h3 id="geometric-interpretation">Geometric interpretation</h3>
+
+<h3 id="computation">Computation</h3>
+<h2 id="partial-derivatives-wrt-to-multiple-variables">Partial derivatives wrt to multiple variables</h2>
+
+<script type="math/tex; mode=display">\frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n}</script>
+
+<p>The partial derivatives tells us how a small change in all $ x_i $ changes the multivariate function.</p>
+
+<h2 id="how-does-the-computation-of-partial-derivatives-relate-to-this-interpretation">How does the computation of partial derivatives relate to this interpretation?</h2>
+
+<p>Recall that to compute partial derivatives wrt $ x_i $, we differentiate wrt to our variable of interest, and <em>treat the rest of the variables constant</em>.</p>
+
+<h2 id="interpretation-of-partial-derivatives-in--r_3-">Interpretation of partial derivatives in $ R_3 $</h2>
+
+<!-- single partial derivative -->
+
+<!-- double partial derivative -->
+<p>gradient descent</p>
+
+<p>Recall that a linear transformation <em>moves</em> the vector. The determinant computes the <strong>factor by which the space was changed by this linear transformation</strong> (space := area in $ R_2 $, volume in $ R_3 $).</p>
+
+<p>If the determinant, d, is…</p>
+
+<p>≥0, d changes the space by a factor of d.</p>
+
+<p>≤0, d <em>flips</em> and changes the space by a factor of d.</p>
+
+<p>= 0, d squishes the space to one dimension. Thus the matrix is <em>non-invertible</em>, and hence it is <em>singular</em></p>
+
+<h2 id="why-does-this-work">Why does this work?</h2>
+
+<script type="math/tex; mode=display">det(AB) = det(A)det(B)</script>
+
+<p>AB is equivalent to</p>
+
+<ol>
+  <li>first applying linear transformation of B, which moves the vector. The factor by which this movement changes space is $ det(B) $.</li>
+  <li>then applying linear transformation of A. The factor by which this movement changes space is $ det(A) $.</li>
+</ol>
+
+<p>Thus determinant of the linear transformation of B then A equals the multiplication of the individual determinant values.</p>
+:ET

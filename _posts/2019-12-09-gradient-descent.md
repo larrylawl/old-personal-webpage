@@ -4,7 +4,7 @@ title: "Gradient Descent"
 author: "Larry Law"
 categories: journal
 tags: [Machine Learning]
-image: calculus.jpg
+image: machine-learning.jpg
 ---
 ## Learning outcomes
 1. Purpose of Gradient Descent

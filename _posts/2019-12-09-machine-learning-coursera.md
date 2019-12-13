@@ -6,11 +6,34 @@ categories: journal
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---
-
-## Machine Learning Coursera Notes
+<!-- omit in toc -->
+# Machine Learning Coursera Notes
 
 Lecturer: Professor Andrew Ng <br>
 Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
+
+<!-- omit in toc -->
+## Table of Contents
+- [Week 1](#week-1)
+  - [Learning Outcomes](#learning-outcomes)
+  - [Machine learning](#machine-learning)
+  - [Cost Function](#cost-function)
+  - [Gradient Descent](#gradient-descent)
+- [Week 2: Multivariate Linear Regression](#week-2-multivariate-linear-regression)
+  - [Learning outcomes](#learning-outcomes)
+  - [Linear regression with multiple variables](#linear-regression-with-multiple-variables)
+  - [Gradient Descent for multiple variables](#gradient-descent-for-multiple-variables)
+  - [Feature Scaling](#feature-scaling)
+  - [How to adjust learning rate?](#how-to-adjust-learning-rate)
+  - [What is feature combination?](#what-is-feature-combination)
+  - [What is polynomial regression?](#what-is-polynomial-regression)
+- [Week 2: Computing Parameters Analytically](#week-2-computing-parameters-analytically)
+  - [Learning Outcomes](#learning-outcomes-1)
+  - [Why do we need normal equation?](#why-do-we-need-normal-equation)
+  - [The math behind normal equation](#the-math-behind-normal-equation)
+  - [Normal Equation vs Gradient Descent](#normal-equation-vs-gradient-descent)
+  - [Causes for Normal Equation noninvertibility](#causes-for-normal-equation-noninvertibility)
+
 
 ## Week 1
 ### Learning Outcomes
@@ -46,8 +69,7 @@ $$
 ### Gradient Descent
 Refer to post on gradient descent [here](./gradient-descent.html). 
 
-## Week 2
-## Multivariate Linear Regression
+## Week 2: Multivariate Linear Regression
 ### Learning outcomes
 1. What is multivariate linear regression? 
 2. Gradient descent for multiple variables?
@@ -100,7 +122,7 @@ $$
 Cubic: h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} x_{1}^{2}+\theta_{3} x_{1}^{3}
 $$
 
-## Computing Parameters Analytically
+## Week 2: Computing Parameters Analytically
 ### Learning Outcomes
 1. Normal equation: why and what?
 2. Normal equation vs Gradient Descent

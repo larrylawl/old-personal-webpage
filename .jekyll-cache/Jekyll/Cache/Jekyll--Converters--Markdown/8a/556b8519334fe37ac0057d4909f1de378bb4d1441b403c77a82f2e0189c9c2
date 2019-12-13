@@ -1,8 +1,29 @@
-I"V<ul class="posts">
+I"8<ul class="posts">
   
 
     
       <h3>2019</h3>
+    
+
+    <li itemscope="">
+      <a href="/journal/gradient-descent-linear-regression.html">Vectorised form of Gradient Descent for Linear Regression</a>
+      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> December 13 - <i class="fa fa-clock-o" aria-hidden="true"></i> 
+  
+  
+    less than 1 minute read
+  
+
+
+
+</span></p>
+    </li>
+
+  
+
+    
+      
+      
+      
     
 
     <li itemscope="">
@@ -32,6 +53,27 @@
   
   
     2 minute read
+  
+
+
+
+</span></p>
+    </li>
+
+  
+
+    
+      
+      
+      
+    
+
+    <li itemscope="">
+      <a href="/journal/machine-learning-coursera.html">Machine Learning Coursera</a>
+      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> December 9 - <i class="fa fa-clock-o" aria-hidden="true"></i> 
+  
+  
+    3 minute read
   
 
 

@@ -15,8 +15,9 @@
 
 ## v1.1
 
+- [ ] Abstract notes out
 - [ ] Tags page
-- [ ] Reposense to track progress
+- [ ] Claps feature
 - [ ] Time in articles
 - [ ] Description in index page not formatted properly
 
@@ -24,3 +25,4 @@
 
 - [ ] Icon for byte sized
 - [ ] Byte theme
+- [ ] Abstract posts out into directories

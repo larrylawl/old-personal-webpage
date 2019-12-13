@@ -1,0 +1,133 @@
+I"�<h2 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h2>
+
+<p>Lecturer: Professor Andrew Ng <br />
+Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">here</a></p>
+
+<h2 id="week-1">Week 1</h2>
+<h3 id="learning-outcomes">Learning Outcomes</h3>
+<ol>
+  <li>What is (1) machine learning, (2) supervised learning and types of (2), (3) unsupervised learning and types of (3)</li>
+  <li>What is the cost function?</li>
+  <li>What is gradient descent?</li>
+</ol>
+
+<h3 id="machine-learning">Machine learning</h3>
+<p>The field of study that gives computers the ability to learn without being explicitly programmed.</p>
+<ol>
+  <li>
+    <p><strong>Supervised Learning</strong>: “Know the right answers.</p>
+
+    <ul>
+      <li><strong>Regression</strong>: Predict results within a <em>continuous output</em></li>
+      <li><strong>Classification</strong>: Map input variables to a <em>discrete output</em></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Unsupervised Learning</strong>: No idea what our results should look like</p>
+    <ul>
+      <li><strong>Clustering</strong></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="cost-function">Cost Function</h3>
+<p>Refer to post on gradient descent <a href="./gradient-descent.html">here</a>. The below is the 0.5 * Mean-Squared-Error (MSE) cost function.</p>
+
+<script type="math/tex; mode=display">J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\hat{y}_{i}-y_{i}\right)^{2}=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta}\left(x_{i}\right)-y_{i}\right)^{2}</script>
+
+<p>Vectorised form:
+<script type="math/tex">\begin{array}{l}{\qquad J(\theta)=\frac{1}{2 m}(X \theta-\vec{y})^{T}(X \theta-\vec{y})} \\ {\text { where }} \\ {\qquad X=\left[\begin{array}{c}{-\left(x^{(1)}\right)^{T}-} \\ {-\left(x^{(2)}\right)^{T}-} \\ {\vdots} \\ {-\left(x^{(m)}\right)^{T}-}\end{array}\right] \quad \vec{y}=\left[\begin{array}{c}{y^{(1)}} \\ {\vdots} \\ {y^{(m)}}\end{array}\right]}\end{array}</script></p>
+
+<blockquote>
+  <p>Note: cost function is a function of the model parameters $ h_\theta $ while hypothesis function is a function of the variables $ x $…</p>
+</blockquote>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p>Refer to post on gradient descent <a href="./gradient-descent.html">here</a>.</p>
+
+<h2 id="week-2">Week 2</h2>
+<h2 id="multivariate-linear-regression">Multivariate Linear Regression</h2>
+<h3 id="learning-outcomes-1">Learning outcomes</h3>
+<ol>
+  <li>What is multivariate linear regression?</li>
+  <li>Gradient descent for multiple variables?</li>
+  <li>Feature scaling: why and how?</li>
+  <li>How to adjust the learning rate?</li>
+  <li>What is feature combination?</li>
+  <li>What is polynomial regression?</li>
+</ol>
+
+<h3 id="linear-regression-with-multiple-variables">Linear regression with multiple variables</h3>
+<p><script type="math/tex">% <![CDATA[
+h_{\theta}(x)=\left[\begin{array}{llll}{\theta_{0}} & {\theta_{1}} & {\ldots} & {\theta_{n}}\end{array}\right]\left[\begin{array}{c}{x_{0}} \\ {x_{1}} \\ {\vdots} \\ {x_{n}}\end{array}\right]=\theta^{T} x %]]></script></p>
+
+<h3 id="gradient-descent-for-multiple-variables">Gradient Descent for multiple variables</h3>
+<blockquote>
+  <p>Similar to gradient descent for single variable.
+<script type="math/tex">\begin{array}{l}{\text { repeat until convergence: }\{} \\ {\theta_{j}:=\theta_{j}-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) \cdot x_{j}^{(i)} \quad \text { for } j:=0 \ldots n} \\ {\}}\end{array}</script></p>
+</blockquote>
+
+<p>Vectorised form of Gradient Descent for linear regression (derivation <a href="./gradient-descent-linear-regression.html">here</a>):</p>
+
+<script type="math/tex; mode=display">\theta:=\theta-\frac{\alpha}{m} X^{T}(X \theta-\vec{y})</script>
+
+<h3 id="feature-scaling">Feature Scaling</h3>
+<p>Refer to post on feature scaling <a href="./feature-scaling.html">here</a></p>
+
+<h3 id="how-to-adjust-learning-rate">How to adjust learning rate?</h3>
+<ol>
+  <li><strong>Debugging gradient descent</strong>: Plotting a graph of the cost function over no. of iterations. If the cost function ever increases, the learning rate is likely to be too high.
+    <blockquote>
+      <p>A high learning rate might cause divergence.</p>
+    </blockquote>
+  </li>
+  <li><strong>Automatic convergence test</strong>: Declare convergence if the cost function decreases by less than E in one iteration, where E is some small value such as 10^-3.</li>
+</ol>
+
+<h3 id="what-is-feature-combination">What is feature combination?</h3>
+<p>Eg $ x_3 = x_1 * x_2 $</p>
+
+<h3 id="what-is-polynomial-regression">What is polynomial regression?</h3>
+<p>Change the hypothesis function to a polynomial equation that better models the data (ie lower cost function).</p>
+
+<script type="math/tex; mode=display">Square root: h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} \sqrt{x_{1}}</script>
+
+<script type="math/tex; mode=display">Cubic: h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} x_{1}^{2}+\theta_{3} x_{1}^{3}</script>
+
+<h2 id="computing-parameters-analytically">Computing Parameters Analytically</h2>
+<h3 id="learning-outcomes-2">Learning Outcomes</h3>
+<ol>
+  <li>Normal equation: why and what?</li>
+  <li>Normal equation vs Gradient Descent</li>
+  <li>Causes for normal equation non-invertability</li>
+</ol>
+
+<h3 id="why-do-we-need-normal-equation">Why do we need normal equation?</h3>
+<p>** To obtain the optimum parameters <em>analytically</em>. ** In other words, the parameters are computed explicitly, instead of being estimated iteratively in gradient descent.</p>
+
+<h3 id="the-math-behind-normal-equation">The math behind normal equation</h3>
+<p>Recall that parameters are <em>optimum</em> when the cost function is minimum. Thus, we are interested in the value of the parameters at the minimum points of the cost function. How do we obtain this value then?</p>
+
+<p>In $ R_2 $, we do so by first setting the derivative of the function to be 0 (to obtain the points of inflexion), then solve for the value of the parameter at the minimum point.</p>
+
+<p>Similarly in $ R_3 $, we first set the <em>partial derivative</em> with respect to $ \theta_0 $ to be 0, then we solve for $ \theta_0 $. Repeat iteratively till $ \theta_n $.</p>
+
+<p>The result will arrive to the <strong>normal equation formula</strong>:</p>
+
+<script type="math/tex; mode=display">\theta=\left(X^{T} X\right)^{-1} X^{T} y</script>
+
+<blockquote>
+  <p>There is <strong>no need</strong> to do feature scaling with normal equation as the purpose of feature scaling was to speed up gradient descent, which is a different method of obtaining the parameters.</p>
+</blockquote>
+
+<p><img src="/assets/img/comparison.jpg" alt="Normal Equation vs Gradient Descent" /></p>
+
+<!-- TODO: Normal equation only for linear regression? -->
+
+<h3 id="normal-equation-noninvertibility">Normal Equation noninvertibility</h3>
+<p>If $ X^{T} X $ is <strong>noninvertible</strong>, the common causes include</p>
+<ol>
+  <li><strong>Redundant features:</strong> Features are closely related, thus they are linearly dependent (lie on the same span), hence the matrix containing these vectors results in a linear transformation that squishes input vectors to the single dimension (ie determinant is zero), thus its a noninvertible matrix.</li>
+  <li><strong>Too many features</strong>. Delete some features or use regularisation</li>
+</ol>
+:ET

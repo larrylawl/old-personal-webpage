@@ -9,7 +9,8 @@ image: machine-learning.jpg
 ## Learning outcomes
 1. Purpose of Gradient Descent
 2. Intuition of Gradient Descent
-2. Understand the math behind Gradient Descent
+3. Understand the math behind Gradient Descent
+4. Understand simultaneous updates
 
 ## Prerequisite: Cost Function
 Cost function is a function of our model's parameters that **measures the effectiveness of a machine learning model**. It is commonly denoted as,

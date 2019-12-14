@@ -16,6 +16,7 @@
 ## v1.1
 
 - [ ] Abstract notes out
+- [ ] Footer to let me know if there're any mistakes
 - [ ] Tags page
 - [ ] Claps feature
 - [ ] Time in articles

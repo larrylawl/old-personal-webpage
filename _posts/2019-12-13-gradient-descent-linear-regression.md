@@ -48,19 +48,22 @@ $$
 Claim that \$ \theta \$ can be rewritten from summation form (as above) to vector form (as below):
 
 $$
-{\theta=\theta-\alpha \delta}
+\theta:=\theta-\alpha \delta, where\\
+\delta := \frac{1}{m} X^{T}(X \theta-\vec{y})
 $$
 
 Let H denote the hypothesis matrix, 
 
 $$
-\begin{array}{l}{\dot{H}_{m \times 1}:=\left(\begin{array}{c}{h_{\theta}\left(x^{1}\right)} \\ {h_{\theta}\left(x^{2}\right)} \\ {\vdots} \\ {h_{\theta}\left(x^{m}\right)}\end{array}\right)=X \theta}\end{array}
+\begin{array}{l}{\dot{H}_{m \times 1}:=\left(\begin{array}{c}{h_{\theta}\left(x^{1}\right)} \\ {h_{\theta}\left(x^{2}\right)} \\ {\vdots} \\ {h_{\theta}\left(x^{m}\right)}\end{array}\right)=X \theta} & 
+
+\end{array}
 $$
 
 Let E denote the error matrix,
 
 $$
-E_{m \times 1}=\left(\begin{array}{c}{e_{1}} \\ {e_{2}} \\ {\vdots} \\ {e_{m}}\end{array}\right)=\left(\begin{array}{c}{h_{\theta}\left(x^{1}\right)-y^{1}} \\ {h_{\theta}\left(x^{2}\right)-y^{2}} \\ 
+E_{m \times 1}:=\left(\begin{array}{c}{e_{1}} \\ {e_{2}} \\ {\vdots} \\ {e_{m}}\end{array}\right)=\left(\begin{array}{c}{h_{\theta}\left(x^{1}\right)-y^{1}} \\ {h_{\theta}\left(x^{2}\right)-y^{2}} \\ 
 {\vdots} \\
 {h_{\theta}\left(x^{m}\right)-y^{m}}\end{array}\right)_{m \times 1}=H-\vec{y}
 $$
@@ -68,7 +71,7 @@ $$
 Let \$ \delta \$ denote the summation term
 
 $$
-\begin{aligned} \delta_{j} &=\frac{1}{n} \sum_{i=1}^{n}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)} \\ &=\frac{1}{m}\left(e_{1} x_{j}^{1}+e_{2} x_{j}^{2}+\ldots+e_{m} x_{j}^{m}\right) \\ &=\frac{1}{m} x_{j}^{\top} E \\ \end{aligned}
+\begin{aligned} \delta_{j} &:=\frac{1}{n} \sum_{i=1}^{n}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)} \\ &=\frac{1}{m}\left(e_{1} x_{j}^{1}+e_{2} x_{j}^{2}+\ldots+e_{m} x_{j}^{m}\right) \\ &=\frac{1}{m} x_{j}^{\top} E \\ \end{aligned}
 $$
 
 $$
@@ -76,10 +79,22 @@ $$
 $$
 
 $$
-{\theta=\theta-\alpha \delta} \text{  (shown)}
+{\theta=\theta-\alpha \delta} = {\theta-\frac{\alpha}{m} X^{T}(X \theta-\vec{y})} \text{ (shown)}\\
 $$
 
+> Note that this vectorised form applies for **logistic regression too.** Recall that logistic regression has the same gradient descent formula, with the only difference being that the hypothesis function of a logistic regression is a function of the linear regression (ie \$ h_{\theta}(x) = g(\theta^Tx) \$). 
+> 
+> Thus for logistic regression, we will need to substitute the hypothesis matrix to be a function of the linear regression.
 
+$$
+H = g(X\theta)
+$$
+
+> Vectorised formula will be as follow:
+
+$$
+{\theta=\theta-\alpha \delta} = {\theta-\frac{\alpha}{m} X^{T}(g(X \theta)-\vec{y})}\\
+$$
 
 ## Credits
 Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)

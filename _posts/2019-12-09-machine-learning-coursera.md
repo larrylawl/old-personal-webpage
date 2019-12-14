@@ -52,6 +52,7 @@ The field of study that gives computers the ability to learn without being expli
     - **Clustering**
 
 ### Cost Function
+<!-- TODO: Add in convex vs non-convex cost function, cost functions of diff type of machine learning algo (MSE for linear regression, x for logistic etc) -->
 Refer to post on gradient descent [here](./gradient-descent.html). The below is the 0.5 * Mean-Squared-Error (MSE) cost function.
 
 $$

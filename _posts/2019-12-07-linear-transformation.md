@@ -4,7 +4,7 @@ title: "Interpretation for Matrix Multiplication and Linear Transformation"
 author: "Larry Law"
 categories: journal
 tags: [Linear Algebra]
-image: pi.jpg
+image: linear-algebra.jpg
 ---
 
 (For a more detailed explanation, check out 3Blue1Brown's video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE))

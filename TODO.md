@@ -13,7 +13,7 @@
 - [x] Blog name
 - [x] Update images
 
-## v1.1
+## Features
 
 - [ ] Abstract notes out
 - [ ] Footer to let me know if there're any mistakes
@@ -21,6 +21,12 @@
 - [ ] Claps feature
 - [ ] Time in articles
 - [ ] Description in index page not formatted properly
+
+## Articles
+- [ ] Why are only square matrices invertible?
+
+## Refactoring
+- [ ] Change inline mathjax to `$ $`
 
 ## v2.0
 

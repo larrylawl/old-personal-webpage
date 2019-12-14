@@ -1,4 +1,4 @@
-I"¥%<!-- omit in toc -->
+I"Æ'<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -18,6 +18,7 @@ Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">h
   <li><a href="#week-2-multivariate-linear-regression">Week 2: Multivariate Linear Regression</a>
     <ul>
       <li><a href="#learning-outcomes">Learning outcomes</a></li>
+      <li><a href="#denoting-multiple-features">Denoting multiple features</a></li>
       <li><a href="#linear-regression-with-multiple-variables">Linear regression with multiple variables</a></li>
       <li><a href="#gradient-descent-for-multiple-variables">Gradient Descent for multiple variables</a></li>
       <li><a href="#feature-scaling">Feature Scaling</a></li>
@@ -92,6 +93,11 @@ Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">h
   <li>What is polynomial regression?</li>
 </ol>
 
+<h3 id="denoting-multiple-features">Denoting multiple features</h3>
+
+<script type="math/tex; mode=display">x^(i)_j = value of feature _j_ in the _ith_ training example
+x^(i) = input features of the _ith_ training example</script>
+
 <h3 id="linear-regression-with-multiple-variables">Linear regression with multiple variables</h3>
 
 <p>Vectorised form:</p>
@@ -152,7 +158,9 @@ h_{\theta}(x)=\left[\begin{array}{llll}{\theta_{0}} & {\theta_{1}} & {\ldots} & 
 
 <p>The result will arrive to the <strong>normal equation formula</strong>:</p>
 
-<script type="math/tex; mode=display">\theta=\left(X^{T} X\right)^{-1} X^{T} y</script>
+<script type="math/tex; mode=display">\theta=\left(X^{T} X\right)^{-1} X^{T} y, where \\
+
+X_{m\times(n+1)}=\left[\begin{array}{c}{1\left(x^{(1)}\right)^{\top}} \\ {1\left(x^{(n)}\right)^{\top}} \\ {\vdots} \\ {1\left(x^{(n)}\right)^{\top}}\end{array}\right]</script>
 
 <blockquote>
   <p>There is <strong>no need</strong> to do feature scaling with normal equation as the purpose of feature scaling was to speed up gradient descent, which is a different method of obtaining the parameters.</p>
@@ -171,5 +179,7 @@ h_{\theta}(x)=\left[\begin{array}{llll}{\theta_{0}} & {\theta_{1}} & {\ldots} & 
   <li><strong>Too many features</strong>. Delete some features or use regularisation</li>
 </ol>
 
+<!-- omit in toc -->
+<h2 id="credits">Credits</h2>
 <p>Andrew Ngâ€™s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
 :ET

@@ -21,6 +21,7 @@ Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
   - [Gradient Descent](#gradient-descent)
 - [Week 2: Multivariate Linear Regression](#week-2-multivariate-linear-regression)
   - [Learning outcomes](#learning-outcomes)
+  - [Denoting multiple features](#denoting-multiple-features)
   - [Linear regression with multiple variables](#linear-regression-with-multiple-variables)
   - [Gradient Descent for multiple variables](#gradient-descent-for-multiple-variables)
   - [Feature Scaling](#feature-scaling)
@@ -78,6 +79,13 @@ Refer to post on gradient descent [here](./gradient-descent.html).
 3. How to adjust the learning rate?
 4. What is feature combination?
 5. What is polynomial regression?
+
+### Denoting multiple features
+
+$$
+x^(i)_j = value of feature _j_ in the _ith_ training example
+x^(i) = input features of the _ith_ training example
+$$
 
 ### Linear regression with multiple variables
 
@@ -142,7 +150,10 @@ Similarly in \$ R_3 \$, we first set the _partial derivative_ with respect to \$
 The result will arrive to the **normal equation formula**:
 
 $$
-\theta=\left(X^{T} X\right)^{-1} X^{T} y
+\theta=\left(X^{T} X\right)^{-1} X^{T} y, where \\
+
+X_{m\times(n+1)}=\left[\begin{array}{c}{1\left(x^{(1)}\right)^{\top}} \\ {1\left(x^{(n)}\right)^{\top}} \\ {\vdots} \\ {1\left(x^{(n)}\right)^{\top}}\end{array}\right]
+
 $$
 
 > There is **no need** to do feature scaling with normal equation as the purpose of feature scaling was to speed up gradient descent, which is a different method of obtaining the parameters.
@@ -158,4 +169,6 @@ If \$ X^{T} X \$ is **noninvertible**, the common causes include
 1. **Redundant features:** Features are closely related, thus they are linearly dependent (lie on the same span), hence the matrix containing these vectors results in a linear transformation that squishes input vectors to the single dimension (ie determinant is zero), thus its a noninvertible matrix.
 2. **Too many features**. Delete some features or use regularisation
 
+<!-- omit in toc -->
+## Credits
 Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)

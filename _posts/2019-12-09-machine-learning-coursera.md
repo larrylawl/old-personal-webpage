@@ -12,6 +12,8 @@ image: machine-learning.jpg
 Lecturer: Professor Andrew Ng <br>
 Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
 
+> All code is written in MatLab/Octave.
+
 <!-- omit in toc -->
 ## Table of Contents
 - [Week 1](#week-1)
@@ -34,6 +36,28 @@ Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
   - [The math behind normal equation](#the-math-behind-normal-equation)
   - [Normal Equation vs Gradient Descent](#normal-equation-vs-gradient-descent)
   - [Causes for Normal Equation noninvertibility](#causes-for-normal-equation-noninvertibility)
+- [Week 3: Classification and Representation](#week-3-classification-and-representation)
+  - [Learning Outcomes](#learning-outcomes-2)
+  - [Sigmoid/Logistic Function: why and what?](#sigmoidlogistic-function-why-and-what)
+  - [Decision boundary: what](#decision-boundary-what)
+  - [Decision boundary: how to compute](#decision-boundary-how-to-compute)
+- [Week 3: Logistic Regression Model](#week-3-logistic-regression-model)
+  - [Learning Outcomes](#learning-outcomes-3)
+  - [What is the Cost Function of the Logistic Regression Model](#what-is-the-cost-function-of-the-logistic-regression-model)
+  - [Gradient Descent of the updated Cost Function](#gradient-descent-of-the-updated-cost-function)
+  - [Advanced Optimisation: why and what](#advanced-optimisation-why-and-what)
+  - [Advanced Optimisation: how](#advanced-optimisation-how)
+- [Week 3: Multiclass Classification](#week-3-multiclass-classification)
+  - [Learning Outcomes](#learning-outcomes-4)
+  - [What is multiclass classification? How do we implement it?](#what-is-multiclass-classification-how-do-we-implement-it)
+- [Week 3: Solving the Problem of Overfitting](#week-3-solving-the-problem-of-overfitting)
+  - [Learning Outcomes](#learning-outcomes-5)
+  - [Understanding Underfitting and Overfitting](#understanding-underfitting-and-overfitting)
+  - [Implementation for Regularisation](#implementation-for-regularisation)
+  - [The Tradeoff between Underfitting and Overfitting](#the-tradeoff-between-underfitting-and-overfitting)
+  - [Regularised Linear Regression](#regularised-linear-regression)
+  - [Regularised Logistic Regression](#regularised-logistic-regression)
+- [Credits](#credits)
 
 
 ## Week 1
@@ -83,8 +107,9 @@ Refer to post on gradient descent [here](./gradient-descent.html).
 ### Denoting multiple features
 
 $$
-x^(i)_j = value of feature _j_ in the _ith_ training example
-x^(i) = input features of the _ith_ training example
+x^{i}_j \text{= value of feature j in the ith training example} \\
+
+x^{i} \text{= input features of the ith training example}
 $$
 
 ### Linear regression with multiple variables
@@ -158,6 +183,14 @@ $$
 
 > There is **no need** to do feature scaling with normal equation as the purpose of feature scaling was to speed up gradient descent, which is a different method of obtaining the parameters.
 
+> Note that \$ (X^{\top}X) \$ is non-invertible if m < n. Proof as follows:
+
+1. rank(X) ≤ min(m, n+1)
+2. rank(\$ X^{\top}X \$) = rank(X) (proof [here](https://math.stackexchange.com/questions/349738/prove-operatornamerankata-operatornameranka-for-any-a-in-m-m-times-n))
+3. Since m < n, rank(\$ X^{\top}X \$) ≤ m ≤ n + 1.
+4. rank(\$ X^{\top}X \$) = n + 1 for it to be invertible.
+5. Hence \$ X^{\top}X \$ is non-invertible.
+
 ### Normal Equation vs Gradient Descent
 
 ![Normal Equation vs Gradient Descent](/assets/img/comparison.jpg)
@@ -169,6 +202,208 @@ If \$ X^{T} X \$ is **noninvertible**, the common causes include
 1. **Redundant features:** Features are closely related, thus they are linearly dependent (lie on the same span), hence the matrix containing these vectors results in a linear transformation that squishes input vectors to the single dimension (ie determinant is zero), thus its a noninvertible matrix.
 2. **Too many features**. Delete some features or use regularisation
 
-<!-- omit in toc -->
+## Week 3: Classification and Representation
+### Learning Outcomes
+1. Sigmoid/Logistic function: why and what?
+2. Decision boundary: why and how to compute?
+
+### Sigmoid/Logistic Function: why and what?
+We use the Logistic Function for **classification problems**. For now, let's focus on _binary_ classification problems (ie output is {0, 1}). 
+
+The hypothesis function of the logistic function _outputs_ the _probability_ that our output is 1 conditioned on our input data (ie \$ x \$), parameterised by our model's parameter (ie \$ ;\theta \$).
+
+$$
+h_\theta(x) = P(y = 1|x; \theta)
+$$
+> `;` denote parameterised
+
+Since the logistic regression is used for the binary classification problem, we need to _translate_ the output of the hypothesis function from (0, 1) to {0, 1}.
+
+$$
+h_\theta(x) ≥ 0.5 \rightarrow y = 1 \\
+h_\theta(x) < 0.5 \rightarrow y = 0
+$$
+
+Vectorised form of this translation
+```m
+function p = predict(theta, X)
+...
+p = sigmoid(X * theta) >= 0.5 % size = [m, 1]
+```
+
+Internally, this hypothesis function is defined as such:
+
+$$
+h_\theta(x) = g(\theta^{\top}x) = g(z) = \frac{1}{1 + e^{-z}}
+$$
+
+Vectorised form of the hypothesis function
+```m
+function g = sigmoid(z)
+...
+g = 1 ./ (1 .+ e .^ -z) % size = [m, 1]
+```
+
+Graphically, it looks like this:
+![logistic function](/assets/img/logistic.jpg)
+Note certain properties of it
+1. **\$ h_\theta(x) \in (1, 0) \$.** This makes sense as the hypothesis function is a probability.
+2. **\$ If x = 0, h_\theta(x) = 0.5 \$.** Intuitively, if the input data is null, the model will not have any information to make a prediction, thus the probability of the binary classification will be 0.5
+
+### Decision boundary: what
+The decision boundary is the **line** that partitions y (ie. {0, 1}). 
+
+![decision boundary](/assets/img/decision-boundary-fit.jpg)
+
+### Decision boundary: how to compute
+Let us start with an example.
+
+We are interested in the inequality \$ \theta^{\top}x ≥ 0 \$ as it partitions the output to {0, 1}. The heuristic explaining why it partitions is shown below:
+
+$$
+\theta^{\top}x ≥ 0 \rightarrow g(\theta^{\top}x) ≥ 0.5 \rightarrow y = 1
+$$
+
+An example will clear things up. 
+
+$$
+\begin{array}{l}{\theta=\left[\begin{array}{c}{5} \\ {-1} \\ {0}\end{array}\right]} \\ {y=1 \text { if } 5+(-1) x_{1}+0 x_{2} \geq 0} \\ {5-x_{1} \geq 0} \\ {-x_{1} \geq-5} \\ {x_{1} \leq 5}\end{array}
+$$
+
+This inequality is useful as it tells us both the _equation of the decision boundary_ (ie \$ x_1 = 5 \$) and the _how the training examples were partitioned_ (ie \$ x_1 ≤ 5 \$ will be classified as 1).
+
+> Notice how the boundary line is not dependent on \$ x_2 \$
+
+## Week 3: Logistic Regression Model
+### Learning Outcomes
+1. What is the Cost Function of the Logistic Regression Model? What is the Gradient Descent of it?
+2. Advanced optimisation: why, what and how?
+
+### What is the Cost Function of the Logistic Regression Model
+
+$$
+J(\theta)=-\frac{1}{m} \sum_{i=1}^{m}\left[y^{(i)} \log \left(h_{\theta}\left(x^{(i)}\right)\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]
+$$
+
+Vectorised form
+
+```m
+g = sigmoid(X * theta);
+J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
+```
+
+Plotting the graph of the Cost Function,
+![cost function graph](/assets/img/cost-function-graph.jpg)
+Note the following properties
+1. If y = 1 and the model predicts y = 0 (ie \$ h_\theta(x) \rightarrow 0 \$), the cost tends to infinity. Likewise for the opposite case (if y = 0 and the model predicts y = 1).
+2. \$ {\operatorname{cost}\left(h_{\theta}(x), y\right)=0 \text { if } h_{\theta}(x)=y} \$
+
+### Gradient Descent of the updated Cost Function
+Exactly the same as linear regression (can be shown through calculus).
+
+$$
+{\theta=\theta-\alpha \delta} = {\theta-\frac{\alpha}{m} X^{T}(g(X \theta)-\vec{y})}\\
+$$
+
+### Advanced Optimisation: why and what
+They **learn the model's parameters more quickly wo learning rate**. Examples include "Conjugate gradient", "BFGS", and "L-BFGS".
+
+### Advanced Optimisation: how
+```m
+function [J, grad] = costFunction(theta)
+g = sigmoid(X * theta);
+...
+J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
+grad = (1 / m) * X' * (g - y);
+end
+```
+
+## Week 3: Multiclass Classification
+### Learning Outcomes
+1. What is multiclass classification? How do we implement it?
+
+### What is multiclass classification? How do we implement it?
+Classifying data in > 2 categories (ie y = {0, 1, ... , n}). We do so by adopting the **one-vs-all** algorithm.
+$$
+\begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned}
+$$
+
+![multiclass](/assets/img/multiclass.jpg)
+
+## Week 3: Solving the Problem of Overfitting
+### Learning Outcomes
+1. Understanding Underfitting and Overfitting
+2. Implementing Regularisation and understand the tradeoff between Underfitting and Overfitting
+3. Regularized linear regression
+4. Regularized logistic regression
+
+
+### Understanding Underfitting and Overfitting
+![fitting](/assets/img/fitting.jpg)
+
+Underfitting (left) is when the hypothesis function, \$ h_\theta{x} \$, maps poorly to the trend of the data. Notice how the \$ h_\theta{x} \$ is a linear function while the data is quadratic (mid). Underfitting is usually caused by a function that is too simple.
+
+Overfitting (right) is when the \$ h_\theta{x} \$ fits the available data but does not generalise well to predict new data. Notice how \$ h_\theta{x} \$ fits the test data well, but does not have any structure that shows that it can predict new data equally well.
+
+To address overfitting, we can either (1) Reduce number of features or (2) implement **regularisation**.
+
+### Implementation for Regularisation
+
+$$
+J(\theta)= E(\theta) + \frac{\lambda}{2 m} \sum_{j=1}^{n} \theta_{j}^{2}, where \\
+E(\theta) = \text{error function}
+$$
+
+> Regularisation term starts from j = 1, not 0. We don't penalise \$ tetha_0 \$ as the term was introduced for neater notation.
+
+> We regulate all parameters as we are not able to predict which parameter is more important than the other.
+
+### The Tradeoff between Underfitting and Overfitting
+
+Recall that the error function (1st term) measures how different our model's prediction is from the expected value. Optimising the error function allows us to fit the training sample better at the risk of overfitting.
+
+Regularisation (2nd term), on the other hand, reduces the magnitude of the parameters, thus smoothing out the hypothesis function, and _reduce overfitting_ at the risk of _underfitting_.
+
+> While it reduces overfitting, implementing regularisation does not always mean the model will predict well for new training samples; too much regularisation will cause underfitting, which will lead to poorer prediction.
+
+Thus the new cost function is the summation of both the error function and regularisation, as a better attempt to optimise the tradeoff between underfitting and overfitting.
+
+### Regularised Linear Regression
+Gradient Descent:
+$$
+\begin{array}{l}{\text { Repeat }\{} \\ {\qquad \begin{array}{l}{\theta_{0}:=\theta_{0}-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{0}^{(i)}} \\ {\theta_{j}:=\theta_{j}-\alpha\left[\left(\frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)}\right)+\frac{\lambda}{m} \theta_{j}\right]}\\ \}\end{array}} \\ \end{array}
+$$
+
+Rearranging...
+$$
+\theta_{j}:=\theta_{j}\left(1-\alpha \frac{\lambda}{m}\right)-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)}
+$$
+
+> Note that \$ (1-\alpha \frac{\lambda}{m} \$ < 1. Intuitively you can see it as reducing the value of \$ \theta_j \$ by some amount on every update, which is the purpose of regularisation.
+
+Normal Equation
+
+$$
+\begin{array}{l}{\theta=\left(X^{T} X+\lambda \cdot L\right)^{-1} X^{T} y} \\ {\text { where } L=\left[\begin{array}{cccc}{0} \\ {} & {1} \\ {} & {} & {1} \\ {} & {} & {} & {1}\end{array}\right]}\end{array}
+$$
+> Adding the term λ⋅L, then the matrix becomes invertible.
+
+### Regularised Logistic Regression
+$$
+J(\theta)=-\frac{1}{m} \sum_{i=1}^{m}\left[y^{(i)} \log \left(h_{\theta}\left(x^{(i)}\right)\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{j=1}^{n} \theta_{j}^{2}
+$$
+
+```m
+function [J, grad] = costFunctionReg(theta, X, y, lambda)
+...
+g = sigmoid(X * theta);
+e = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g)); % error term
+newTheta = theta;
+newTheta(1,1) = 0;
+r = (lambda / (2 * m)) * (newTheta' * newTheta);
+J = e + r;
+grad = (1 / m) * X' * (g - y) + (lambda / m) * newTheta;
+```
+
 ## Credits
 Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)

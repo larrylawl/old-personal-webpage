@@ -24,9 +24,11 @@
 
 ## Articles
 - [ ] Why are only square matrices invertible?
+- [ ] Regularisation
+- [ ] All types of regression
 
 ## Refactoring
-- [ ] Change inline mathjax to `$ $`
+
 
 ## v2.0
 

@@ -5,14 +5,14 @@
 <div align="center">
   <img src="/assets/img/byte.png" width="400"/>
   <h3>
-      <a href="https://larrylawl.github.io/">Live here</a>
+      <a href="https://larrylawl.github.io/">Website live here</a>
   </h3>
 </div>
 
 
 ## What is this?
 
-Documenting my love of learning, one byte at a time. More concretely, I write about 
+My personal website where I document my love of learning, one byte at a time. More concretely, I write about 
 1. Byte-sized articles about machine learning, math, or any cool stuff I happen to learn
 2. Notes for school or online courses.
 

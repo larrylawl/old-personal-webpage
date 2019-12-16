@@ -10,9 +10,7 @@ image: machine-learning.jpg
 # Machine Learning Coursera Notes
 
 Lecturer: Professor Andrew Ng <br>
-Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
-
-> All code is written in MatLab/Octave.
+Source: [here](https://www.coursera.org/learn/machine-learning)
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -57,7 +55,13 @@ Source: [here](https://www.coursera.org/learn/machine-learning/home/welcome)
   - [The Tradeoff between Underfitting and Overfitting](#the-tradeoff-between-underfitting-and-overfitting)
   - [Regularised Linear Regression](#regularised-linear-regression)
   - [Regularised Logistic Regression](#regularised-logistic-regression)
-- [Credits](#credits)
+- [Week 4: Neural Networks](#week-4-neural-networks)
+  - [Learning Outcomes](#learning-outcomes-6)
+  - [Motivation: Non-linear hypotheses](#motivation-non-linear-hypotheses)
+  - [Neurons and the Brain](#neurons-and-the-brain)
+  - [Intuition for Neural Networks](#intuition-for-neural-networks)
+  - [Model Representation](#model-representation)
+  - [Multiclass Classification](#multiclass-classification)
 
 
 ## Week 1
@@ -288,7 +292,7 @@ $$
 Vectorised form
 
 ```m
-g = sigmoid(X * theta);
+g = sigmoid(X * theta); % size = [m, 1]
 J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
 ```
 
@@ -324,6 +328,7 @@ end
 
 ### What is multiclass classification? How do we implement it?
 Classifying data in > 2 categories (ie y = {0, 1, ... , n}). We do so by adopting the **one-vs-all** algorithm.
+
 $$
 \begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned}
 $$
@@ -405,5 +410,95 @@ J = e + r;
 grad = (1 / m) * X' * (g - y) + (lambda / m) * newTheta;
 ```
 
-## Credits
-Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)
+## Week 4: Neural Networks
+### Learning Outcomes
+1. Motivation: Non-linear hypotheses
+2. Neurons and the Brain
+3. Intuition for Neural Networks
+4. Model Representation
+5. Multiclass Classification
+
+### Motivation: Non-linear hypotheses
+It is expensive for logistic regression to add more polynomial features.
+> 1. Represent all quadratic terms: O(\$ n^2 \$) (sum of arithmetic sequence)
+> 2. Represent all cubic terms: O(\$ n^3 \$)
+
+Neural networks are a faster way to represent non-linear hypothesis.
+
+### Neurons and the Brain
+Neural Network's initial purpose was to build learning systems, thus they modeled after the most amazing one - **human brains**.
+
+Surprisingly, human brains have _one learning algorithm_ (instead of many distinct ones for each functionality). Thus it'll be valuable to model how the brain learns.
+
+![neurons](/assets/img/neurons.jpg)
+_Dendrites_ (inputs) take in electrical inputs and channel them to _axons_ (outputs).
+
+### Intuition for Neural Networks
+Every additional layer allows the network to compute slightly more complex functions. Thus neural networks are able to compute complicated functions.
+
+Consider this example of computing `xnor` utilising a hidden layer of `and` and `not` neurons, and output layer of `or`neuron. The additional layers allowed this neural network to compute the `xor` operator.
+![xor](/assets/img/xor-example.png)
+
+
+### Model Representation
+Notations
+$$
+\begin{array}{l}{a_{i}^{(j)} = \text{"activation" of unit i in layer j}} \\ 
+{\Theta^{(j)} = \text{matrix of weights controlling function mapping from layer j to layer j+1}}\end{array}
+$$
+
+![Neural network model](/assets/img/neural-network-model.png)
+
+Expanding the terms
+
+$$
+\begin{aligned} a_{1}^{(2)} &=g\left(\Theta_{10}^{(1)} x_{0}+\Theta_{11}^{(1)} x_{1}+\Theta_{12}^{(1)} x_{2}+\Theta_{13}^{(1)} x_{3}\right) \\ a_{2}^{(2)} &=g\left(\Theta_{20}^{(1)} x_{0}+\Theta_{21}^{(1)} x_{1}+\Theta_{22}^{(1)} x_{2}+\Theta_{23}^{(1)} x_{3}\right) \\ a_{3}^{(2)} &=g\left(\Theta_{30}^{(1)} x_{0}+\Theta_{31}^{(1)} x_{1}+\Theta_{32}^{(1)} x_{2}+\Theta_{33}^{(1)} x_{3}\right) \\ h_{\Theta}(x)=a_{1}^{(3)}=& g\left(\Theta_{10}^{(2)} a_{0}^{(2)}+\Theta_{11}^{(2)} a_{1}^{(2)}+\Theta_{12}^{(2)} a_{2}^{(2)}+\Theta_{13}^{(2)} a_{3}^{(2)}\right) \end{aligned}
+$$
+
+`g` is the **logistic activation function,** whose argument is the **linear regression.** However, note the difference in vectorised form between neural networks and logistic regression.
+
+```m
+% Logistic Regression
+g = sigmoid(X * theta); % size = [m, 1]
+
+% Neural network
+a_2 = g;
+a_1 = X;
+a_2 = sigmoid(a_1 * Theta1'); % size = [m, k], where k denote the number of units in the next layer.
+```
+
+<!-- Different theta size -->
+This is because every neuron has its own set of parameters (refer to the arguments of `g` in the expanded equation above), thus the size of \$ \Theta \$ is \$ s_{j+1} \times (s_j + 1) \$ while that of \$ \theta \$ in logistic regression is \$ (n + 1) \times 1 \$.
+
+> Thats why neural networks use \$ \Theta \$, not \$ \theta \$. 
+
+Also, remember to add the bias nodes.
+```m
+a_2 = [ones(m, 1) a_2];
+```
+
+### Multiclass Classification
+Recall that in multiclass classification, our output y \$ \in \$ {1, 2, ... , n}. In neural networks, y is represented as a matrix. 
+
+$$
+y^{(i)}=\left[\begin{array}{l}{1} \\ {0} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {1} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {1} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {0} \\ {1}\end{array}\right]
+$$
+
+Neural networks follow the exact same algorithm as logistic regression for multiclass classification. The implementation is as follows:
+
+```m
+function p = predict(Theta1, Theta2, X)
+...
+a_1 = [ones(m, 1) X]; % size = [m = 500, n + 1 = 401]
+
+a_2 = sigmoid(a_1 * Theta1'); % size = [500, 25] 
+a_2 = [ones(m, 1) a_2]; % size = [500, 26]
+
+a_3 = sigmoid(a_2 * Theta2'); % size = [500, 10]
+[max_values, indices] = max(a_3, [], 2);
+
+p = indices;
+```
+> Note use of `max` function.
+
+> In neural networks, we are dealing with more parameters. Thus we use `fmincg` instead of `fminunc` as the former is more efficient.

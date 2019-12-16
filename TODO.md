@@ -23,9 +23,7 @@
 - [ ] Description in index page not formatted properly
 
 ## Articles
-- [ ] Why are only square matrices invertible?
-- [ ] Regularisation
-- [ ] All types of regression
+- [ ] Understand `figmincg` and `fminunc`
 
 ## Refactoring
 

@@ -1,12 +1,8 @@
-I"�u<!-- omit in toc -->
+I"�<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
-Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">here</a></p>
-
-<blockquote>
-  <p>All code is written in MatLab/Octave.</p>
-</blockquote>
+Source: <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
 
 <!-- omit in toc -->
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -73,7 +69,16 @@ Source: <a href="https://www.coursera.org/learn/machine-learning/home/welcome">h
       <li><a href="#regularised-logistic-regression">Regularised Logistic Regression</a></li>
     </ul>
   </li>
-  <li><a href="#credits">Credits</a></li>
+  <li><a href="#week-4-neural-networks">Week 4: Neural Networks</a>
+    <ul>
+      <li><a href="#learning-outcomes-6">Learning Outcomes</a></li>
+      <li><a href="#motivation-non-linear-hypotheses">Motivation: Non-linear hypotheses</a></li>
+      <li><a href="#neurons-and-the-brain">Neurons and the Brain</a></li>
+      <li><a href="#intuition-for-neural-networks">Intuition for Neural Networks</a></li>
+      <li><a href="#model-representation">Model Representation</a></li>
+      <li><a href="#multiclass-classification">Multiclass Classification</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="week-1">Week 1</h2>
@@ -348,9 +353,10 @@ Note the following properties</p>
 </ol>
 
 <h3 id="what-is-multiclass-classification-how-do-we-implement-it">What is multiclass classification? How do we implement it?</h3>
-<p>Classifying data in &gt; 2 categories (ie y = {0, 1, … , n}). We do so by adopting the <strong>one-vs-all</strong> algorithm.
-<script type="math/tex">% <![CDATA[
-\begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned} %]]></script></p>
+<p>Classifying data in &gt; 2 categories (ie y = {0, 1, … , n}). We do so by adopting the <strong>one-vs-all</strong> algorithm.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned} %]]></script>
 
 <p><img src="/assets/img/multiclass.jpg" alt="multiclass" /></p>
 
@@ -430,6 +436,57 @@ E(\theta) = \text{error function}</script>
 <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">newTheta</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="credits">Credits</h2>
-<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
+<h2 id="week-4-neural-networks">Week 4: Neural Networks</h2>
+<h3 id="learning-outcomes-7">Learning Outcomes</h3>
+<ol>
+  <li>Motivation: Non-linear hypotheses</li>
+  <li>Neurons and the Brain</li>
+  <li>Intuition for Neural Networks</li>
+  <li>Model Representation</li>
+  <li>Multiclass Classification</li>
+</ol>
+
+<h3 id="motivation-non-linear-hypotheses">Motivation: Non-linear hypotheses</h3>
+<p>It is expensive for logistic regression to add more polynomial features.</p>
+<blockquote>
+  <ol>
+    <li>Represent all quadratic terms: O($ n^2 $) (sum of arithmetic sequence)</li>
+    <li>Represent all cubic terms: O($ n^3 $)</li>
+  </ol>
+</blockquote>
+
+<p>Neural networks are a faster way to represent non-linear hypothesis.</p>
+
+<h3 id="neurons-and-the-brain">Neurons and the Brain</h3>
+<p>Neural Network’s initial purpose was to build learning systems, thus they modeled after the most amazing one - <strong>human brains</strong>.</p>
+
+<p>Surprisingly, human brains have <em>one learning algorithm</em> (instead of many distinct ones for each functionality). Thus it’ll be valuable to model how the brain learns.</p>
+
+<p><img src="/assets/img/neurons.jpg" alt="neurons" />
+<em>Dendrites</em> (inputs) take in electrical inputs and chanel them to <em>axons</em> (outputs).</p>
+
+<h3 id="intuition-for-neural-networks">Intuition for Neural Networks</h3>
+<p>Every additional layer allows the network to compute slightly more complex functions. Thus neural networks are able to compute complicated functions.</p>
+
+<p>Consider this example of computing <code class="highlighter-rouge">xnor</code> utilising a hidden layer of <code class="highlighter-rouge">and</code> and <code class="highlighter-rouge">not</code> neurons, and output layer of <code class="highlighter-rouge">or</code>neuron. The additional layers allowed this neural network to compute the <code class="highlighter-rouge">xor</code> operator.
+<img src="/assets/img/xor-example.png" alt="xor" /></p>
+
+<h3 id="model-representation">Model Representation</h3>
+
+<h3 id="multiclass-classification">Multiclass Classification</h3>
+
+<ol>
+  <li>Note that for neural network rep, x_1 x_2 are not the design matrix (m x n) but features themselves</li>
+  <li>s_{j+1} is for the number of neurons in the j+1th layer</li>
+  <li>Why do we use logistic activation function for neural networks?</li>
+  <li>Add in model rep</li>
+  <li>Distinguish between X and Theta of neural networks vs logistic regression;
+    <ul>
+      <li>Logistic: xtheta, X is the design matrix, with each row denoting training sample</li>
+      <li>nn: thetax, x is the input from the jth layer</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">fmincg</code> working better than <code class="highlighter-rouge">fminunc</code> for more parameters</li>
+  <li>Don’t forget to add in a_0!</li>
+</ol>
 :ET

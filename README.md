@@ -2,12 +2,13 @@
 
 [![Build Status](https://travis-ci.org/larrylawl/larrylawl.github.io.svg?branch=master)](https://travis-ci.org/larrylawl/larrylawl.github.io)
 
-<p align="center">
+<div align="center">
   <img src="/assets/img/byte.png" width="400"/>
-</p>
-<h3>
-    <a href="https://larrylawl.github.io/">Live here</a>
+  <h3>
+      <a href="https://larrylawl.github.io/">Live here</a>
   </h3>
+</div>
+
 
 ## What is this?
 

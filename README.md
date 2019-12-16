@@ -2,18 +2,17 @@
 
 [![Build Status](https://travis-ci.org/larrylawl/larrylawl.github.io.svg?branch=master)](https://travis-ci.org/larrylawl/larrylawl.github.io)
 
-<div align="center">
+<p align="center">
   <img src="/assets/img/byte.png" width="400"/>
-  <h3>
-      <a href="https://larrylawl.github.io/">Website live here</a>
+</p>
+<h3>
+    <a href="https://larrylawl.github.io/">Live here</a>
   </h3>
-</div>
-
 
 ## What is this?
 
-My personal website where I document my love of learning, one byte at a time. More concretely, I write about 
-1. Articles about machine learning, math, or any cool stuff I happen to learn.
+Documenting my love of learning, one byte at a time. More concretely, I write about 
+1. Byte-sized articles about machine learning, math, or any cool stuff I happen to learn
 2. Notes for school or online courses.
 
 ## Why do this?

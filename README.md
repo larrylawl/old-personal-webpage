@@ -25,4 +25,4 @@ My personal website where I document my love of learning, one byte at a time. Mo
 Always welcomed, either via my socials or directly in the comment section of my articles.
 
 ## Credits
-Paul Le's boilerplate [here](https://github.com/LeNPaul/Lagrange))
+Paul Le's [boilerplate](https://github.com/LeNPaul/Lagrange) for the website.

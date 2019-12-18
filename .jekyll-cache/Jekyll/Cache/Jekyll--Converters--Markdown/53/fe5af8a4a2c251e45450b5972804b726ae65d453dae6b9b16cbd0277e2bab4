@@ -1,4 +1,4 @@
-I"�<!-- omit in toc -->
+I"��<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -69,7 +69,7 @@ Source: <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
       <li><a href="#regularised-logistic-regression">Regularised Logistic Regression</a></li>
     </ul>
   </li>
-  <li><a href="#week-4-neural-networks">Week 4: Neural Networks</a>
+  <li><a href="#week-4-neural-networks---representation">Week 4: Neural Networks - Representation</a>
     <ul>
       <li><a href="#learning-outcomes-6">Learning Outcomes</a></li>
       <li><a href="#motivation-non-linear-hypotheses">Motivation: Non-linear hypotheses</a></li>
@@ -77,6 +77,11 @@ Source: <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
       <li><a href="#intuition-for-neural-networks">Intuition for Neural Networks</a></li>
       <li><a href="#model-representation">Model Representation</a></li>
       <li><a href="#multiclass-classification">Multiclass Classification</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-5-neural-networks---learning">Week 5: Neural Networks - Learning</a>
+    <ul>
+      <li><a href="#learning-outcomes-7">Learning Outcomes</a></li>
     </ul>
   </li>
 </ul>
@@ -317,13 +322,14 @@ Note certain properties of it</p>
 
 <p>Vectorised form</p>
 
-<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
 <span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="s1">' * log(g) - (1 - y'</span><span class="p">)</span> <span class="o">*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">));</span>
 </code></pre></div></div>
 
 <p>Plotting the graph of the Cost Function,
-<img src="/assets/img/cost-function-graph.jpg" alt="cost function graph" />
-Note the following properties</p>
+<img src="/assets/img/cost-function-graph.jpg" alt="cost function graph" /></p>
+
+<p>Note the following properties</p>
 <ol>
   <li>If y = 1 and the model predicts y = 0 (ie $ h_\theta(x) \rightarrow 0 $), the cost tends to infinity. Likewise for the opposite case (if y = 0 and the model predicts y = 1).</li>
   <li>$ {\operatorname{cost}\left(h_{\theta}(x), y\right)=0 \text { if } h_{\theta}(x)=y} $</li>
@@ -338,12 +344,22 @@ Note the following properties</p>
 <p>They <strong>learn the model’s parameters more quickly wo learning rate</strong>. Examples include “Conjugate gradient”, “BFGS”, and “L-BFGS”.</p>
 
 <h3 id="advanced-optimisation-how">Advanced Optimisation: how</h3>
+<p>Getting <code class="highlighter-rouge">costFunction</code></p>
 <div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">J</span><span class="p">,</span> <span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="n">costFunction</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span>
 <span class="k">...</span>
 <span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="s1">' * log(g) - (1 - y'</span><span class="p">)</span> <span class="o">*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">));</span>
-<span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">);</span> <span class="c1">% Partial derivative term</span>
 <span class="k">end</span>
+</code></pre></div></div>
+<p>Using <code class="highlighter-rouge">fminunc</code></p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">%  Set options for fminunc</span>
+<span class="n">options</span> <span class="o">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s1">'GradObj'</span><span class="p">,</span> <span class="s1">'on'</span><span class="p">,</span> <span class="s1">'MaxIter'</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+<span class="c1">%  Run fminunc to obtain the optimal theta</span>
+<span class="c1">%  This function will return theta and the cost </span>
+<span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="k">...</span>
+	<span class="n">fminunc</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">t</span><span class="p">)(</span><span class="n">costFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
 </code></pre></div></div>
 
 <h2 id="week-3-multiclass-classification">Week 3: Multiclass Classification</h2>
@@ -357,6 +373,39 @@ Note the following properties</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned} %]]></script>
+
+<p>To implement this, first we need to learn the parameters for each of the hypothesis functions.</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">all_theta</span><span class="p">]</span> <span class="o">=</span> <span class="n">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambda</span><span class="p">)</span>
+<span class="k">...</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">num_labels</span>
+        <span class="n">initial_theta</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">% Set options for fmincg</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s1">'GradObj'</span><span class="p">,</span> <span class="s1">'on'</span><span class="p">,</span> <span class="s1">'MaxIter'</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+        <span class="c1">% Run fmincg to obtain the optimal theta</span>
+        <span class="c1">% This function will return theta and the cost </span>
+        <span class="p">[</span><span class="n">theta</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmincg</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">t</span><span class="p">)(</span><span class="n">lrCostFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">),</span> <span class="n">lambda</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+        <span class="n">all_theta</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="n">theta</span><span class="p">;</span> 
+    <span class="n">endfor</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Use <code class="highlighter-rouge">fmincg</code> instead of <code class="highlighter-rouge">fminunc</code> as the former is more efficient when dealing with more parameters.</p>
+</blockquote>
+
+<p>Next, we run the algorithm shown above.</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">p</span> <span class="o">=</span> <span class="n">predictOneVsAll</span><span class="p">(</span><span class="n">all_theta</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="n">all_theta</span><span class="o">'</span><span class="p">;</span> <span class="c1">% size = [m, k]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
+<span class="p">[</span><span class="n">max_values</span><span class="p">,</span> <span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">indices</span><span class="p">;</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Note use of <code class="highlighter-rouge">max</code> function.</p>
+</blockquote>
 
 <p><img src="/assets/img/multiclass.jpg" alt="multiclass" /></p>
 
@@ -436,7 +485,7 @@ E(\theta) = \text{error function}</script>
 <span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">newTheta</span><span class="p">;</span>
 </code></pre></div></div>
 
-<h2 id="week-4-neural-networks">Week 4: Neural Networks</h2>
+<h2 id="week-4-neural-networks---representation">Week 4: Neural Networks - Representation</h2>
 <h3 id="learning-outcomes-7">Learning Outcomes</h3>
 <ol>
   <li>Motivation: Non-linear hypotheses</li>
@@ -463,30 +512,110 @@ E(\theta) = \text{error function}</script>
 <p>Surprisingly, human brains have <em>one learning algorithm</em> (instead of many distinct ones for each functionality). Thus it’ll be valuable to model how the brain learns.</p>
 
 <p><img src="/assets/img/neurons.jpg" alt="neurons" />
-<em>Dendrites</em> (inputs) take in electrical inputs and chanel them to <em>axons</em> (outputs).</p>
+<em>Dendrites</em> (inputs) take in electrical inputs and channel them to <em>axons</em> (outputs).</p>
 
 <h3 id="intuition-for-neural-networks">Intuition for Neural Networks</h3>
 <p>Every additional layer allows the network to compute slightly more complex functions. Thus neural networks are able to compute complicated functions.</p>
 
-<p>Consider this example of computing <code class="highlighter-rouge">xnor</code> utilising a hidden layer of <code class="highlighter-rouge">and</code> and <code class="highlighter-rouge">not</code> neurons, and output layer of <code class="highlighter-rouge">or</code>neuron. The additional layers allowed this neural network to compute the <code class="highlighter-rouge">xor</code> operator.
-<img src="/assets/img/xor-example.png" alt="xor" /></p>
+<p>Consider this example of predicting digits (credits: 3B1B’s video explaining neural networks <a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">here</a>. Each additional layer builts upon the previous layer in order to compute increasingly complicated functions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Layer 1</th>
+      <th>Layer 2</th>
+      <th>Layer 3</th>
+      <th>Layer 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Output</td>
+      <td>Pixels</td>
+      <td>Edges</td>
+      <td>Patterns</td>
+      <td>Numbers</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/img/neural-networks-intuition.png" alt="neural networks intuition" /></p>
 
 <h3 id="model-representation">Model Representation</h3>
+<p>Notations
+<script type="math/tex">\begin{array}{l}{a_{i}^{(j)} = \text{"activation" of unit i in layer j}} \\ 
+{\Theta^{(j)} = \text{matrix of weights controlling function mapping from layer j to layer j+1}}\end{array}</script></p>
+
+<p><img src="/assets/img/neural-network-model.png" alt="Neural network model" /></p>
+
+<p>Expanding the terms</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} a_{1}^{(2)} &=g\left(\Theta_{10}^{(1)} x_{0}+\Theta_{11}^{(1)} x_{1}+\Theta_{12}^{(1)} x_{2}+\Theta_{13}^{(1)} x_{3}\right) \\ a_{2}^{(2)} &=g\left(\Theta_{20}^{(1)} x_{0}+\Theta_{21}^{(1)} x_{1}+\Theta_{22}^{(1)} x_{2}+\Theta_{23}^{(1)} x_{3}\right) \\ a_{3}^{(2)} &=g\left(\Theta_{30}^{(1)} x_{0}+\Theta_{31}^{(1)} x_{1}+\Theta_{32}^{(1)} x_{2}+\Theta_{33}^{(1)} x_{3}\right) \\ h_{\Theta}(x)=a_{1}^{(3)}=& g\left(\Theta_{10}^{(2)} a_{0}^{(2)}+\Theta_{11}^{(2)} a_{1}^{(2)}+\Theta_{12}^{(2)} a_{2}^{(2)}+\Theta_{13}^{(2)} a_{3}^{(2)}\right) \end{aligned} %]]></script>
+
+<p><code class="highlighter-rouge">g</code> is the <strong>logistic activation function,</strong> whose argument is the <strong>linear regression.</strong> However, note the difference in vectorised form between neural networks and logistic regression.</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Logistic Regression</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
+
+<span class="c1">% Neural network</span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">g</span><span class="p">;</span>
+<span class="n">a_1</span> <span class="o">=</span> <span class="n">X</span><span class="p">;</span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_1</span> <span class="o">*</span> <span class="n">Theta1</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [m, k], where k denote the number of units in the next layer.</span>
+</code></pre></div></div>
+
+<!-- Different theta size -->
+<p>This is because every neuron has its own set of parameters (refer to the arguments of <code class="highlighter-rouge">g</code> in the expanded equation above), thus the size of $ \Theta $ is $ s_{j+1} \times (s_j + 1) $ while that of $ \theta $ in logistic regression is $ (n + 1) \times 1 $.</p>
+
+<blockquote>
+  <p>Thats why neural networks use $ \Theta $, not $ \theta $.</p>
+</blockquote>
+
+<p>Also, remember to add the bias nodes.</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a_2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">a_2</span><span class="p">];</span>
+</code></pre></div></div>
 
 <h3 id="multiclass-classification">Multiclass Classification</h3>
+<p>Recall that in multiclass classification, our output y $ \in $ {1, 2, … , n}. In neural networks, y is represented as a matrix.</p>
 
+<script type="math/tex; mode=display">y^{(i)}=\left[\begin{array}{l}{1} \\ {0} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {1} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {1} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {0} \\ {1}\end{array}\right]</script>
+
+<p>Neural networks follow the exact same algorithm as logistic regression for multiclass classification. The implementation is as follows:</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">p</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">Theta1</span><span class="p">,</span> <span class="n">Theta2</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">a_1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">X</span><span class="p">];</span> <span class="c1">% size = [m = 500, n + 1 = 401]</span>
+
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_1</span> <span class="o">*</span> <span class="n">Theta1</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [500, 25] </span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">a_2</span><span class="p">];</span> <span class="c1">% size = [500, 26]</span>
+
+<span class="n">a_3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_2</span> <span class="o">*</span> <span class="n">Theta2</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [500, 10]</span>
+<span class="p">[</span><span class="n">max_values</span><span class="p">,</span> <span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a_3</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">indices</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="week-5-neural-networks---learning">Week 5: Neural Networks - Learning</h2>
+<h3 id="learning-outcomes-8">Learning Outcomes</h3>
+
+<script type="math/tex; mode=display">J(\Theta)=-\frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K}\left[y_{k}^{(i)} \log \left(\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)+\left(1-y_{k}^{(i)}\right) \log \left(1-\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_{l}} \sum_{j=1}^{s_{l+1}}\left(\Theta_{j, i}^{(l)}\right)^{2}\right.</script>
+
+<p>Note that</p>
 <ol>
-  <li>Note that for neural network rep, x_1 x_2 are not the design matrix (m x n) but features themselves</li>
-  <li>s_{j+1} is for the number of neurons in the j+1th layer</li>
-  <li>Why do we use logistic activation function for neural networks?</li>
-  <li>Add in model rep</li>
-  <li>Distinguish between X and Theta of neural networks vs logistic regression;
+  <li>The double sum simply adds up the logistic regression costs calculated for each cell in the output layer
     <ul>
-      <li>Logistic: xtheta, X is the design matrix, with each row denoting training sample</li>
-      <li>nn: thetax, x is the input from the jth layer</li>
+      <li>Inner loop: Loops through each cell in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.</li>
+      <li>Outer loop: Loops through all training sample and computes the cost for the training set (containing the samples).</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">fmincg</code> working better than <code class="highlighter-rouge">fminunc</code> for more parameters</li>
-  <li>Don’t forget to add in a_0!</li>
+  <li>the triple sum simply adds up the squares of all the individual Θs in the entire network.</li>
+  <li>the i in the triple sum does <strong>not</strong> refer to training example i</li>
+</ol>
+
+<p>ALgo</p>
+<ol>
+  <li>Big delta is only until l-1</li>
+  <li>j = 0 corresponds to bias term –&gt; Thus no regularisation for it</li>
 </ol>
 :ET

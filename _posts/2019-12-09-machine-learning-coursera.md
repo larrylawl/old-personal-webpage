@@ -55,13 +55,15 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [The Tradeoff between Underfitting and Overfitting](#the-tradeoff-between-underfitting-and-overfitting)
   - [Regularised Linear Regression](#regularised-linear-regression)
   - [Regularised Logistic Regression](#regularised-logistic-regression)
-- [Week 4: Neural Networks](#week-4-neural-networks)
+- [Week 4: Neural Networks - Representation](#week-4-neural-networks---representation)
   - [Learning Outcomes](#learning-outcomes-6)
   - [Motivation: Non-linear hypotheses](#motivation-non-linear-hypotheses)
   - [Neurons and the Brain](#neurons-and-the-brain)
   - [Intuition for Neural Networks](#intuition-for-neural-networks)
   - [Model Representation](#model-representation)
   - [Multiclass Classification](#multiclass-classification)
+- [Week 5: Neural Networks - Learning](#week-5-neural-networks---learning)
+  - [Learning Outcomes](#learning-outcomes-7)
 
 
 ## Week 1
@@ -297,7 +299,9 @@ J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
 ```
 
 Plotting the graph of the Cost Function,
-![cost function graph](/assets/img/cost-function-graph.jpg)
+![cost function graph](/assets/img/cost-function-graph.jpg) 
+
+
 Note the following properties
 1. If y = 1 and the model predicts y = 0 (ie \$ h_\theta(x) \rightarrow 0 \$), the cost tends to infinity. Likewise for the opposite case (if y = 0 and the model predicts y = 1).
 2. \$ {\operatorname{cost}\left(h_{\theta}(x), y\right)=0 \text { if } h_{\theta}(x)=y} \$
@@ -313,13 +317,24 @@ $$
 They **learn the model's parameters more quickly wo learning rate**. Examples include "Conjugate gradient", "BFGS", and "L-BFGS".
 
 ### Advanced Optimisation: how
+Getting `costFunction`
 ```m
 function [J, grad] = costFunction(theta)
 g = sigmoid(X * theta);
 ...
 J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
-grad = (1 / m) * X' * (g - y);
+grad = (1 / m) * X' * (g - y); % Partial derivative term
 end
+```
+Using `fminunc`
+```m
+%  Set options for fminunc
+options = optimset('GradObj', 'on', 'MaxIter', 400);
+
+%  Run fminunc to obtain the optimal theta
+%  This function will return theta and the cost 
+[theta, cost] = ...
+	fminunc(@(t)(costFunction(t, X, y)), initial_theta, options);
 ```
 
 ## Week 3: Multiclass Classification
@@ -332,6 +347,37 @@ Classifying data in > 2 categories (ie y = {0, 1, ... , n}). We do so by adoptin
 $$
 \begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned}
 $$
+
+To implement this, first we need to learn the parameters for each of the hypothesis functions.
+```m
+function [all_theta] = oneVsAll(X, y, num_labels, lambda)
+...
+    for c = 1:num_labels
+        initial_theta = zeros(n + 1, 1);
+
+        % Set options for fmincg
+        options = optimset('GradObj', 'on', 'MaxIter', 50);
+
+        % Run fmincg to obtain the optimal theta
+        % This function will return theta and the cost 
+        [theta] = fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
+        all_theta(c, :) = theta; 
+    endfor
+```
+
+> Use `fmincg` instead of `fminunc` as the former is more efficient when dealing with more parameters.
+
+Next, we run the algorithm shown above.
+
+```m
+function p = predictOneVsAll(all_theta, X)
+...
+z = X * all_theta'; % size = [m, k]
+g = sigmoid(z);
+[max_values, indices] = max(g, [], 2); % size = [m, 1]
+p = indices;
+```
+> Note use of `max` function.
 
 ![multiclass](/assets/img/multiclass.jpg)
 
@@ -410,7 +456,7 @@ J = e + r;
 grad = (1 / m) * X' * (g - y) + (lambda / m) * newTheta;
 ```
 
-## Week 4: Neural Networks
+## Week 4: Neural Networks - Representation
 ### Learning Outcomes
 1. Motivation: Non-linear hypotheses
 2. Neurons and the Brain
@@ -436,8 +482,13 @@ _Dendrites_ (inputs) take in electrical inputs and channel them to _axons_ (outp
 ### Intuition for Neural Networks
 Every additional layer allows the network to compute slightly more complex functions. Thus neural networks are able to compute complicated functions.
 
-Consider this example of computing `xnor` utilising a hidden layer of `and` and `not` neurons, and output layer of `or`neuron. The additional layers allowed this neural network to compute the `xor` operator.
-![xor](/assets/img/xor-example.png)
+Consider this example of predicting digits (credits: 3B1B's video explaining neural networks [here](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi). Each additional layer builts upon the previous layer in order to compute increasingly complicated functions.
+
+|        | Layer 1 | Layer 2 | Layer 3  | Layer 4 |
+|--------|---------|---------|----------|---------|
+| Output | Pixels  | Edges   | Patterns | Numbers |
+
+![neural networks intuition](/assets/img/neural-networks-intuition.png)
 
 
 ### Model Representation
@@ -499,6 +550,21 @@ a_3 = sigmoid(a_2 * Theta2'); % size = [500, 10]
 
 p = indices;
 ```
-> Note use of `max` function.
 
-> In neural networks, we are dealing with more parameters. Thus we use `fmincg` instead of `fminunc` as the former is more efficient.
+## Week 5: Neural Networks - Learning
+### Learning Outcomes
+
+$$
+J(\Theta)=-\frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K}\left[y_{k}^{(i)} \log \left(\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)+\left(1-y_{k}^{(i)}\right) \log \left(1-\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_{l}} \sum_{j=1}^{s_{l+1}}\left(\Theta_{j, i}^{(l)}\right)^{2}\right.
+$$
+
+Note that
+1. The double sum simply adds up the logistic regression costs calculated for each cell in the output layer
+    - Inner loop: Loops through each cell in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.
+    - Outer loop: Loops through all training sample and computes the cost for the training set (containing the samples).
+2. the triple sum simply adds up the squares of all the individual Θs in the entire network.
+3. the i in the triple sum does **not** refer to training example i
+
+ALgo
+1. Big delta is only until l-1
+2. j = 0 corresponds to bias term --> Thus no regularisation for it

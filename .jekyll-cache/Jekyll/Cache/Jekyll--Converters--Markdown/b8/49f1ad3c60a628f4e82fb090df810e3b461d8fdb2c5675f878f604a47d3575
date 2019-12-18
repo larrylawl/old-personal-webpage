@@ -1,4 +1,4 @@
-I"p<h2 id="learning-outcomes">Learning outcomes</h2>
+I"<h2 id="learning-outcomes">Learning outcomes</h2>
 <ol>
   <li>Purpose of Gradient Descent</li>
   <li>Intuition of Gradient Descent</li>
@@ -60,7 +60,7 @@
 <img src="/assets/img/simult-update.jpg" alt="Simultaneous update" /></p>
 
 <h2 id="credits">Credits</h2>
-<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning?utm_source=gg&amp;utm_medium=sem&amp;utm_content=93-BrandedSearch-INTL&amp;campaignid=1599063752&amp;adgroupid=58953588605&amp;device=c&amp;keyword=coursera%20courses&amp;matchtype=b&amp;network=g&amp;devicemodel=&amp;adpostion=1t1&amp;creativeid=303554599611&amp;hide_mobile_promo&amp;gclid=EAIaIQobChMIvfCauaSo5gIVF4iPCh1U1gK3EAAYASABEgLY6vD_BwE">here</a></p>
+<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
 
 <p>ML-cheat sheet for the definition of gradient descent. Source <a href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html">here</a>.</p>
 

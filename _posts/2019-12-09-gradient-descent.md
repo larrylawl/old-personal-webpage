@@ -62,7 +62,7 @@ Simultaneous updates brings us to the minimum of the cost function quicker.
 ![Simultaneous update](/assets/img/simult-update.jpg)
 
 ## Credits
-Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning?utm_source=gg&utm_medium=sem&utm_content=93-BrandedSearch-INTL&campaignid=1599063752&adgroupid=58953588605&device=c&keyword=coursera%20courses&matchtype=b&network=g&devicemodel=&adpostion=1t1&creativeid=303554599611&hide_mobile_promo&gclid=EAIaIQobChMIvfCauaSo5gIVF4iPCh1U1gK3EAAYASABEgLY6vD_BwE)
+Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)
 
 ML-cheat sheet for the definition of gradient descent. Source [here](https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html).
 

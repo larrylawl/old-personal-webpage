@@ -69,7 +69,7 @@ $$
 
 Finally, let's compute the gradient vector, which will be passed as an argument to parameter learning methods.
 
-> Recall that aradient vector of a multivariable function packages the partial derivative of its parameters into a vector.
+> Recall that gradient vector of a multivariable function packages the partial derivative of its parameters into a vector.
 
 Fitting the partial derivatives into the gradient vector, we get
 
@@ -78,6 +78,8 @@ $$
 $$
 
 > For simplicity, bias terms are ignored.
+
+And we are done :).
 
 ## Fitting the Calculus with the Intuition
 

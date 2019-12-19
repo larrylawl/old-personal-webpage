@@ -568,3 +568,6 @@ Note that
 ALgo
 1. Big delta is only until l-1
 2. j = 0 corresponds to bias term --> Thus no regularisation for it
+
+1. Heuristic for random intialisation --> https://stackoverflow.com/questions/20027598/why-should-weights-of-neural-networks-be-initialized-to-random-numbers
+   1. a same, error term (almost) same, partial derivative (almost) same, thus parameters remain the same. (Almost := only the unit whose output ≠1 will be different)

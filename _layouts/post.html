@@ -12,6 +12,8 @@ layout: default
 
 {{ content }}
 
+{% include ending-note.html %}
+
 <span class="post-date">
   {{ site.data.settings.post_date_prefix }}
   {% assign d = page.date | date: "%-d"  %}
@@ -29,8 +31,6 @@ layout: default
   {{ site.author }}
   {% endif %}
 </span>
-
-{% include social-sharing.html %}
 
 {% include related-posts.html %}
 

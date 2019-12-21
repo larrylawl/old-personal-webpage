@@ -23,6 +23,7 @@
 - [ ] Time in articles
 - [ ] Description in index page not formatted properly
 - [ ] Footer to return to top of page/home
+- [ ] VScode plugin that shows size of matrix
 
 ## Articles
 - [ ] Understand `figmincg` and `fminunc`

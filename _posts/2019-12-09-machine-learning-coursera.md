@@ -64,6 +64,11 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [Multiclass Classification](#multiclass-classification)
 - [Week 5: Neural Networks - Learning](#week-5-neural-networks---learning)
   - [Learning Outcomes](#learning-outcomes-7)
+  - [Cost Function](#cost-function-1)
+  - [Backpropagation: Intuition and Calculus](#backpropagation-intuition-and-calculus)
+  - [Backpropagation: Algorithm](#backpropagation-algorithm)
+  - [Gradient Checking](#gradient-checking)
+  - [Random Initialisation](#random-initialisation)
 
 
 ## Week 1
@@ -553,21 +558,146 @@ p = indices;
 
 ## Week 5: Neural Networks - Learning
 ### Learning Outcomes
+1. Cost Function
+2. Backpropagation: Intuition, Calculus, and Algorithm
+3. Gradient Checking
+4. Random Initialisation
 
+### Cost Function
 $$
 J(\Theta)=-\frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K}\left[y_{k}^{(i)} \log \left(\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)+\left(1-y_{k}^{(i)}\right) \log \left(1-\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_{l}} \sum_{j=1}^{s_{l+1}}\left(\Theta_{j, i}^{(l)}\right)^{2}\right.
 $$
 
-Note that
-1. The double sum simply adds up the logistic regression costs calculated for each cell in the output layer
-    - Inner loop: Loops through each cell in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.
+For the double summation,
+1. It adds up the logistic regression costs calculated for each unit in the output layer
+    - Inner loop: Loops through each unit in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.
     - Outer loop: Loops through all training sample and computes the cost for the training set (containing the samples).
-2. the triple sum simply adds up the squares of all the individual Θs in the entire network.
-3. the i in the triple sum does **not** refer to training example i
 
-ALgo
-1. Big delta is only until l-1
-2. j = 0 corresponds to bias term --> Thus no regularisation for it
+For the Triple Summation
+1. the triple sum simply adds up the squares of all the individual Θs in the entire network, except the the bias term. (ie _i_ = 0) 
+2. the _i_ in the triple sum does **not** refer to training example i.
 
-1. Heuristic for random intialisation --> https://stackoverflow.com/questions/20027598/why-should-weights-of-neural-networks-be-initialized-to-random-numbers
-   1. a same, error term (almost) same, partial derivative (almost) same, thus parameters remain the same. (Almost := only the unit whose output ≠1 will be different)
+Vectorised Implementation:
+```m
+% Compute a
+function computeActivationFunction
+    a_1 = [ones(m, 1) X];
+    z_2 = a_1 * Theta1';
+    a_2 = [ones(m, 1) sigmoid(z_2)];
+    z_3 = a_2 * Theta2';
+    a_3 = sigmoid(z_3);
+endfunction
+
+% Converts y (size = [m, 1]), where each entry in y is in [1, k]
+% to label (size = [m, k])
+function y_v = convertLabelsToVectors(y)
+    % Logical arrays
+    y_v = [1:num_labels] == y; 
+endfunction
+
+function computeCost
+    computeActivationFunction;
+    y_v = convertLabelsToVectors(y);
+
+    % cost 
+    c_each = -y_v .* log(a_3) - (1 - y_v) .* log(1 - a_3); % size = [m, s_L]
+    c_all = (1 / m) * sum(sum(c_each));
+
+    % regularisation term - rmb to not regularise bias terms!
+    Theta1_squared = Theta1 .^ 2;
+    Theta2_squared = Theta2 .^ 2;
+    Theta1_squared_wo_bias = Theta1_squared(:, 2:end);
+    Theta2_squared_wo_bias = Theta2_squared(:, 2:end);
+    r = (lambda / (2 * m)) * ...
+        (sum(sum(Theta1_squared_wo_bias)) + sum(sum(Theta2_squared_wo_bias)));
+
+    % Cost 
+    J = c_all + r;
+endfunction
+```
+
+### Backpropagation: Intuition and Calculus
+Refer to my post [here](2019-12-18-calculus-for-backpropagation.md).
+
+### Backpropagation: Algorithm
+![Neural Network](/assets/img/neural-network-model.png)
+
+![Backpropagation algorithm](/assets/img/backpropagation-algo.png)
+Implementation Note
+- Add bias term (ie 1) for all `a` except layer _L_. 
+- Don't compute \$ \delta^{1} \$. Input data should not have error terms associated with them.
+- Remove \$ \delta_0^{l} \$, where _l_ refers to any hidden layer. Bias unit of any layer is assumed to be 1 and independent of computation (ie not connected to previous layer), thus it should not have error term associated with it.
+- Sanity check that \$ \Delta \$ is of the same dimensions as \$ \Theta \$. \$ \Delta \$ is the partial derivative of the cost function wrt each \$ \Theta \$, thus there is a one-to-one mapping from \$ \Theta \$ to \$ \Delta \$.
+- Parameter unrolling
+
+Vectorised Implentation (wo `for-loops`! :):
+```m
+function backprop 
+    % Step 1: Compute a 
+    computeActivationFunction;
+    
+    % Step 2: Compute error terms
+    y_v = convertLabelsToVectors(y);
+    d_3 = a_3 - y_v; % size = [5000, 10] 
+
+    % Step 3: Delta 2
+    d_2 = (d_3 * Theta2)(:, 2: end) .* sigmoidGradient(z_2); % size = [5000, 25]; remember to remove first error term
+
+    % Step 4 and 5: Accumulate gradient and divide by sample size        
+    Theta1_grad = (1 / m) .* (d_2' * a_1); % size = [25, 401]
+    Theta2_grad = (1 / m) .* (d_3' * a_2); % size = [10, 25]
+
+endfunction
+
+function regularise
+    r_1 = (lambda / m) .* (Theta1);
+    r_1(:, 1) = 0; % Don't regularise bias term
+
+    r_2 = (lambda / m) .* (Theta2);
+    r_2(:, 1) = 0; % Don't regularise bias term
+
+    Theta1_grad = Theta1_grad + r_1;
+    Theta2_grad = Theta2_grad + r_2;
+endfunction
+```
+### Gradient Checking
+
+$$
+\frac{\partial}{\partial \Theta_{j}} J(\Theta) \approx \frac{J\left(\Theta_{1}, \ldots, \Theta_{j}+\epsilon, \ldots, \Theta_{n}\right)-J\left(\Theta_{1}, \ldots, \Theta_{j}-\epsilon, \ldots, \Theta_{n}\right)}{2 \epsilon}
+$$
+
+Compare gradient of approximation with that of backpropagation.
+Implementation tips
+1. It is more efficient to use a small neural network with relatively smaller input units and hidden units, thus having a relatively small number of parameters. Each dimension of θ requires two evaluations of the cost function and this can be expensive. After checking is done, turn off gradient checking before running learning algorithm.
+2. Gradient checking works for any hypothesis function (linear, log etc).
+
+Vectorised Implementation
+```m
+epsilon = 1e-4;
+for i = 1:n,
+  thetaPlus = theta;
+  thetaPlus(i) += epsilon;
+  thetaMinus = theta;
+  thetaMinus(i) -= epsilon;
+  gradApprox(i) = (J(thetaPlus) - J(thetaMinus))/(2*epsilon)
+end;
+```
+
+### Random Initialisation
+Refer to my post [here](2019-12-18-heuristic-for-random-init.md)
+
+Implementation note:
+1. Chooe epislon based on the number of units in the network. A good choice is 
+
+$$
+\epsilon_{i n i t}=\frac{\sqrt{6}}{\sqrt{L_{i n}+L_{o u t}}}
+$$
+
+Vectorised Implementation
+```m
+% If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.
+
+Theta1 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+```

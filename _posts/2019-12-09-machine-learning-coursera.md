@@ -617,7 +617,7 @@ endfunction
 ```
 
 ### Backpropagation: Intuition and Calculus
-Refer to my post [here](./2019-12-18-calculus-for-backpropagation.md).
+Refer to my post [here](./calculus-for-backpropagation.html).
 
 ### Backpropagation: Algorithm
 ![Neural Network](/assets/img/neural-network-model.png)
@@ -684,7 +684,7 @@ end;
 ```
 
 ### Random Initialisation
-Refer to my post [here](./2019-12-18-heuristic-for-random-init.md)
+Refer to my post [here](./heuristic-for-random-init.html)
 
 Implementation note:
 1. Chooe epislon based on the number of units in the network. A good choice is 

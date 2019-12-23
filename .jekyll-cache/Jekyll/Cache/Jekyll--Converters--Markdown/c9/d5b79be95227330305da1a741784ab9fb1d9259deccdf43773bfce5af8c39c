@@ -1,4 +1,4 @@
-I"vó<!-- omit in toc -->
+I"pó<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -668,7 +668,7 @@ E(\theta) = \text{error function}</script>
 </code></pre></div></div>
 
 <h3 id="backpropagation-intuition-and-calculus">Backpropagation: Intuition and Calculus</h3>
-<p>Refer to my post <a href="./calculus-for-backpropagation">here</a>.</p>
+<p>Refer to my post <a href="./calculus-for-backpropagation.html">here</a>.</p>
 
 <h3 id="backpropagation-algorithm">Backpropagation: Algorithm</h3>
 <p><img src="/assets/img/neural-network-model.png" alt="Neural Network" /></p>
@@ -735,7 +735,7 @@ Implementation tips</p>
 </code></pre></div></div>
 
 <h3 id="random-initialisation">Random Initialisation</h3>
-<p>Refer to my post <a href="./2019-12-19-heuristic-for-random-init.html">here</a></p>
+<p>Refer to my post <a href="./heuristic-for-random-init.html">here</a></p>
 
 <p>Implementation note:</p>
 <ol>

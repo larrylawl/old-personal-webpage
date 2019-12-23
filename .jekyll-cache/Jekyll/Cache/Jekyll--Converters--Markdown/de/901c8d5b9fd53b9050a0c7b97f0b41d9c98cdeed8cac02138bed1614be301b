@@ -1,4 +1,4 @@
-I"Úõ<!-- omit in toc -->
+I"‚ó<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -615,9 +615,9 @@ E(\theta) = \text{error function}</script>
 
 <p>For the double summation,</p>
 <ol>
-  <li>It adds up the logistic regression costs calculated for each cell in the output layer
+  <li>It adds up the logistic regression costs calculated for each unit in the output layer
     <ul>
-      <li>Inner loop: Loops through each cell in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.</li>
+      <li>Inner loop: Loops through each unit in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.</li>
       <li>Outer loop: Loops through all training sample and computes the cost for the training set (containing the samples).</li>
     </ul>
   </li>
@@ -668,18 +668,19 @@ E(\theta) = \text{error function}</script>
 </code></pre></div></div>
 
 <h3 id="backpropagation-intuition-and-calculus">Backpropagation: Intuition and Calculus</h3>
-<p>Refer to my post <a href="2019-12-18-calculus-for-backpropagation.md">here</a>.</p>
+<p>Refer to my post <a href="./2019-12-18-calculus-for-backpropagation.md">here</a>.</p>
 
 <h3 id="backpropagation-algorithm">Backpropagation: Algorithm</h3>
-<p><img src="/assets/img/neural-network-model.png" alt="Neural Network" />
-<img src="/_site/assets/img/backpropagation-algo.png" alt="Backpropagation algorithm" />
+<p><img src="/assets/img/neural-network-model.png" alt="Neural Network" /></p>
+
+<p><img src="/assets/img/backpropagation-algo.png" alt="Backpropagation algorithm" />
 Implementation Note</p>
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Add bias term (ie 1) for all <code class="highlighter-rouge">a</code> except layer <em>L</em>.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Donâ€™t compute $ \delta^{1} $. Input data should not have error terms associated with them.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Remove $ \delta_0^{l} $, where <em>l</em> refers to a hidden layer. Bias unit of any layer is assumed to be 1 and independent of computation (ie not connected to previous layer), thus it should not have error term associated with it.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Sanity check that $ \Delta $ is of the same dimensions as $ \Theta $. $ \Delta $ is the partial derivative of the cost function wrt each $ \Theta $, thus there is a one-to-one mapping from $ \Theta $ to $ \Delta $.</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />Parameter unrolling</li>
+<ul>
+  <li>Add bias term (ie 1) for all <code class="highlighter-rouge">a</code> except layer <em>L</em>.</li>
+  <li>Donâ€™t compute $ \delta^{1} $. Input data should not have error terms associated with them.</li>
+  <li>Remove $ \delta_0^{l} $, where <em>l</em> refers to any hidden layer. Bias unit of any layer is assumed to be 1 and independent of computation (ie not connected to previous layer), thus it should not have error term associated with it.</li>
+  <li>Sanity check that $ \Delta $ is of the same dimensions as $ \Theta $. $ \Delta $ is the partial derivative of the cost function wrt each $ \Theta $, thus there is a one-to-one mapping from $ \Theta $ to $ \Delta $.</li>
+  <li>Parameter unrolling</li>
 </ul>
 
 <p>Vectorised Implentation (wo <code class="highlighter-rouge">for-loops</code>! :):</p>
@@ -734,36 +735,29 @@ Implementation tips</p>
 </code></pre></div></div>
 
 <h3 id="random-initialisation">Random Initialisation</h3>
-<p>Refer to my post <a href="2019-12-18-heuristic-for-random-init.md">here</a></p>
+<p>Refer to my post <a href="./2019-12-18-heuristic-for-random-init.md">here</a></p>
+
+<p>Implementation note:</p>
+<ol>
+  <li>Chooe epislon based on the number of units in the network. A good choice is</li>
+</ol>
+
+<script type="math/tex; mode=display">\epsilon_{i n i t}=\frac{\sqrt{6}}{\sqrt{L_{i n}+L_{o u t}}}</script>
 
 <p>Vectorised Implementation</p>
-<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">If</span> <span class="n">the</span> <span class="n">dimensions</span> <span class="n">of</span> <span class="n">Theta1</span> <span class="n">is</span> <span class="mi">10</span><span class="n">x11</span><span class="p">,</span> <span class="n">Theta2</span> <span class="n">is</span> <span class="mi">10</span><span class="n">x11</span> <span class="nb">and</span> <span class="n">Theta3</span> <span class="n">is</span> <span class="mi">1</span><span class="n">x11</span><span class="o">.</span>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.</span>
 
 <span class="n">Theta1</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
 <span class="n">Theta2</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
 <span class="n">Theta3</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>ALgo</p>
+<p>Week 6</p>
 <ol>
-  <li>Big delta is only until l-1</li>
-  <li>
-    <p>j = 0 corresponds to bias term â€“&gt; Thus no regularisation for it</p>
-  </li>
-  <li>Heuristic for random intialisation â€“&gt; https://stackoverflow.com/questions/20027598/why-should-weights-of-neural-networks-be-initialized-to-random-numbers
-    <ol>
-      <li>a same, error term (almost) same, partial derivative (almost) same, thus parameters remain the same. (Almost := only the unit whose output â‰ 1 will be different)</li>
-    </ol>
-  </li>
-</ol>
-
-<p>Random init</p>
-<ol>
-  <li>
-    <p>Choose episilon close toâ€¦ refer to pdf</p>
-  </li>
-  <li>Can always check that Delta is of the same dimensions as Theta; its the partial derivative of Theta after all</li>
-  <li>Practical tip for gradient checking.</li>
-  <li>Proud of my backprop code which is fully vectorised :)</li>
+  <li>Purpose of cross validation set -&gt; This way, the degree of the polynomial d has not been trained using the test set.</li>
+  <li>Reason why we exclude regularisation form Jcv and Jtest- When we measure Jcv, and Jtest, we want to measure the true error, without any additional penalties.</li>
+  <li>Why high variance =&gt; Should add more trg examples: You can always fit any three points exactly with a quadratic but when you interpolate the result may not be anywhere near what you want. Thatâ€™s overfitting. Now add twenty more points to your training set. You may no longer fit those three (or any) points exactly, but your curve is more likely to be the shape you want.</li>
+  <li>Training error does not include regularisation term as reg terms are used only for training purposes. WHen we are calculating the error for plotting purpose, we only care about how well the predicted values match the actual ones.</li>
+  <li>Learning curve is a <em>function of the number of traininge examples</em></li>
 </ol>
 :ET

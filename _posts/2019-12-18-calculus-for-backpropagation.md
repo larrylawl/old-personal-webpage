@@ -4,7 +4,7 @@ title: "Calculus of Backpropagation"
 author: "Larry Law"
 categories: journal
 tags: [Machine Learning]
-image: machine-learning.jpg
+image: neural-network.jpeg
 ---
 ## Learning outcomes
 1. Intuition of Backpropagation

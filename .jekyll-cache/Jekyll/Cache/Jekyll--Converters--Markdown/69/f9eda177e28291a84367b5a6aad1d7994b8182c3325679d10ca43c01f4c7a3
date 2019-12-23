@@ -1,4 +1,4 @@
-I"v<ul class="posts">
+I"è<ul class="posts">
   
 
     
@@ -6,8 +6,29 @@
     
 
     <li itemscope="">
+      <a href="/journal/learning-curves.html">Heuristic Justifying Random Initialisation In Neural Networks</a>
+      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> December 23 - <i class="fa fa-clock-o" aria-hidden="true"></i> 
+  
+  
+    2 minute read
+  
+
+
+
+</span></p>
+    </li>
+
+  
+
+    
+      
+      
+      
+    
+
+    <li itemscope="">
       <a href="/journal/heuristic-for-random-init.html">Heuristic Justifying Random Initialisation In Neural Networks</a>
-      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> December 18 - <i class="fa fa-clock-o" aria-hidden="true"></i> 
+      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> December 19 - <i class="fa fa-clock-o" aria-hidden="true"></i> 
   
   
     2 minute read

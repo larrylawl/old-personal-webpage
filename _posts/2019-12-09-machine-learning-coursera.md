@@ -617,7 +617,7 @@ endfunction
 ```
 
 ### Backpropagation: Intuition and Calculus
-Refer to my post [here](2019-12-18-calculus-for-backpropagation.md).
+Refer to my post [here](./2019-12-18-calculus-for-backpropagation.md).
 
 ### Backpropagation: Algorithm
 ![Neural Network](/assets/img/neural-network-model.png)
@@ -684,7 +684,7 @@ end;
 ```
 
 ### Random Initialisation
-Refer to my post [here](2019-12-18-heuristic-for-random-init.md)
+Refer to my post [here](./2019-12-18-heuristic-for-random-init.md)
 
 Implementation note:
 1. Chooe epislon based on the number of units in the network. A good choice is 
@@ -701,3 +701,10 @@ Theta1 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 ```
+
+Week 6
+1. Purpose of cross validation set -> This way, the degree of the polynomial d has not been trained using the test set.
+2. Reason why we exclude regularisation form Jcv and Jtest- When we measure Jcv, and Jtest, we want to measure the true error, without any additional penalties.
+3. Why high variance => Should add more trg examples: You can always fit any three points exactly with a quadratic but when you interpolate the result may not be anywhere near what you want. That’s overfitting. Now add twenty more points to your training set. You may no longer fit those three (or any) points exactly, but your curve is more likely to be the shape you want.
+4. Training error does not include regularisation term as reg terms are used only for training purposes. WHen we are calculating the error for plotting purpose, we only care about how well the predicted values match the actual ones.
+5. Learning curve is a _function of the number of traininge examples_

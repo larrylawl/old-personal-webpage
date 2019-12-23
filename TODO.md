@@ -27,12 +27,13 @@
 
 ## Articles
 - [ ] Understand `figmincg` and `fminunc`
-- [ ] Backpropagation
-- [ ] Backpropagation vs Forward propagation
-- [ ] Neural networks
-    - Hebbian theory: Neurons that fire tgt, wrie tgt
-    - Being able to adjust bias and weights
-    - Recursively applying the same process backwards
+- [ ] learning curves
+  - independent of no of features (so u nn plot the feature graph)
+  - function of **trg set** (not cv set) --> See how theta learns based on i (and not m) of them --> Thus u apply the cost function based on the set of i trg samples, and the cost function based on thes et of all m cv samples.
+    - Compare the cost function that the model learnt from (which is over i trg samples), with the cost function that shows the accurate cost of the current theta on new examples (which is over all m cv samples)
+  - Diagnose variance or bias or both
+  - High bias
+    - Both cross validation and training has high error, but they converge
 
 ## Refactoring
 - [ ] Update readme with links to articles and notes

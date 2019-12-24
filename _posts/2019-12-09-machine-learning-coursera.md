@@ -69,6 +69,19 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [Backpropagation: Algorithm](#backpropagation-algorithm)
   - [Gradient Checking](#gradient-checking)
   - [Random Initialisation](#random-initialisation)
+- [Week 6: Evaluating a Learning Algorithm](#week-6-evaluating-a-learning-algorithm)
+  - [Model Selection and Train/Valiation/Test sets](#model-selection-and-trainvaliationtest-sets)
+- [Week 6: Bias &amp; Variance](#week-6-bias-amp-variance)
+  - [Learning Outcomes](#learning-outcomes-8)
+  - [Degree of polynomial and Bias/Variance](#degree-of-polynomial-and-biasvariance)
+  - [Regularisation and Bias/Variance](#regularisation-and-biasvariance)
+  - [Learning Curves](#learning-curves)
+  - [Deciding What To Do Next Summary](#deciding-what-to-do-next-summary)
+- [Week 6: Handling Skewed Data and Using Large Datasets](#week-6-handling-skewed-data-and-using-large-datasets)
+  - [Learning Outcomes](#learning-outcomes-9)
+  - [False Positives and Negatives](#false-positives-and-negatives)
+  - [Error Metrics for Skewed Classes: Precision, Recall, F Score](#error-metrics-for-skewed-classes-precision-recall-f-score)
+  - [Large Data Rationale](#large-data-rationale)
 
 
 ## Week 1
@@ -702,9 +715,96 @@ Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 ```
 
-Week 6
-1. Purpose of cross validation set -> This way, the degree of the polynomial d has not been trained using the test set.
-2. Reason why we exclude regularisation form Jcv and Jtest- When we measure Jcv, and Jtest, we want to measure the true error, without any additional penalties.
-3. Why high variance => Should add more trg examples: You can always fit any three points exactly with a quadratic but when you interpolate the result may not be anywhere near what you want. That’s overfitting. Now add twenty more points to your training set. You may no longer fit those three (or any) points exactly, but your curve is more likely to be the shape you want.
-4. Training error does not include regularisation term as reg terms are used only for training purposes. WHen we are calculating the error for plotting purpose, we only care about how well the predicted values match the actual ones.
-5. Learning curve is a _function of the number of traininge examples_
+## Week 6: Evaluating a Learning Algorithm
+
+### Model Selection and Train/Valiation/Test sets
+How should we use the Train/Valiation/Test sets?
+1. **Optimize the parameters Θ **using the training set for each polynomial degree.
+2. **Find the polynomial degree d with the least error** using the _cross validation set_.
+3. **Estimate the generalization error** using the _test set_ with \$ J_{test}(\Theta^{(d)}) \$, (d = theta from polynomial with lower error)
+
+Recommended breakdown:
+- Training Set: 60%
+- CV Set: 20%
+- Test Set: 20%
+
+> By having an extra CV set, the degree of the polynomial d has not been trained using the test set.
+
+## Week 6: Bias & Variance
+### Learning Outcomes
+1. Degree of polynomial and Bias/Variance
+2. Regularisation and Bias/Variance
+3. Learning Curves
+4. Deciding What To Do Next Summary
+
+### Degree of polynomial and Bias/Variance
+![Degree of polynomial and Bias/Variance](/assets/img/polynomial-bias-variance.png)
+
+In particular, note that
+1. As polynomial degree increases, we shift from the problem of underfitting to overfitting.
+2. High bias: \$ J_{train}(\Theta) \$ and \$ J_{CV}(\Theta) \$ will be high.
+3. High variance: \$ J_{train}(\Theta) \$ will be low but \$ J_{CV}(\Theta) \$ will be high. This is because the model fit the data too incely, st it does not predict new data well.
+
+### Regularisation and Bias/Variance
+As λ increases, we regularise more, thus we shift from the issue of high variance to high bias. How do we get the optimal λ then?
+
+1. Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});
+2. Create a set of models with different degrees or any other variants.
+3. Iterate through the λs and for each λ go through all the models to learn some Θ.
+4. Compute the cross validation error using the learned Θ (computed with λ) on the \$ J_{CV}(\Theta) \$ without regularization or λ = 0.
+5. Select the best combination that produces the lowest error on the cross validation set.
+6. Using the best combination Θ and λ, apply it on \$ J_{test}(\Theta) \$ to see if it has a good generalization of the problem.
+
+### Learning Curves
+Refer to my post [here](./learning-curves.html)
+
+### Deciding What To Do Next Summary 
+1. Getting more training examples: Fixes high variance
+2. Trying smaller sets of features: Fixes high variance
+3. Adding features: Fixes high bias
+4. Adding polynomial features: Fixes high bias
+5. Decreasing λ: Fixes high bias
+6. Increasing λ: Fixes high variance.
+
+Recommended Approach for ML problems:
+1. Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.
+2. Plot learning curves to decide if more data, more features, etc. are likely to help.
+3. Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.
+   1. Use a single, numerical value to assess algorithm's performance (e.g. error rate).
+
+## Week 6: Handling Skewed Data and Using Large Datasets
+### Learning Outcomes
+0. False Positives and Negatives
+1. Error Metrics for Skewed Classes: Precision, Recall, F Score
+2. Large Data Rationale
+
+
+### False Positives and Negatives
+![false positives and negatives](/assets/img/false-positive-negative.png)
+
+> **False positive:** Predicted positive incorrectly
+
+
+### Error Metrics for Skewed Classes: Precision, Recall, F Score
+
+Motivating example: Cancer
+Suppose that only 0.5% of patients have cancer. A function that always outputs 0 will have an accuracy of 99.5%, but this model can surely be improved. Are there any other error metrics that evaluate skewed classes better?
+
+1. Accuracy = (true positives + true negatives) / (total examples)
+2. Precision = (true positives) / (true positives + false positives)
+   1. Precision is how many of the returned hits were true positive i.e. how many of the found were correct hits.
+3. Recall = (true positives) / (true positives + false negatives)
+   1. Recall is how many of the true positives were recalled (found), i.e. how many of the correct hits were also found.
+4. F score = (2 * precision * recall) / (precision + recall)
+   1. Allows for a single numeric metric as it combines Precision and Recall. By multiplying it, it also effectively punishes the skewed cases (ie P = 1, R = 0, which can be easily achieved with a function that always outputs 1 and vice versa).
+
+### Large Data Rationale
+"It's not who has the best algorithm that wins. It's who has the most data."
+
+![big data](/assets/img/big-data.png)
+
+1. Suppose feature _x_ has sufficient information to predict _y_ accurately 
+   1. Useful test: Given the input _x_, can a human expert confidently predict _y_?
+2. Able to use a _low bias_ algorithm
+3. Using a very large training set will resolve issue of low variance
+4. Most data wins :)

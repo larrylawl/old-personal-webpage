@@ -1,8 +1,4 @@
-<<<<<<< HEAD:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c9/d5b79be95227330305da1a741784ab9fb1d9259deccdf43773bfce5af8c39c
-I"p�<!-- omit in toc -->
-=======
-I"�<!-- omit in toc -->
->>>>>>> Add week 6 ML notes:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/91/c55cbfa44708d86e90fd42950023a0fc224ef5550adb7f9bb47b5311edf5f5
+I"�<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -110,6 +106,7 @@ Source: <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
   <li><a href="#week-6-handling-skewed-data-and-using-large-datasets">Week 6: Handling Skewed Data and Using Large Datasets</a>
     <ul>
       <li><a href="#learning-outcomes-9">Learning Outcomes</a></li>
+      <li><a href="#false-positives-and-negatives">False Positives and Negatives</a></li>
       <li><a href="#error-metrics-for-skewed-classes-precision-recall-f-score">Error Metrics for Skewed Classes: Precision, Recall, F Score</a></li>
       <li><a href="#large-data-rationale">Large Data Rationale</a></li>
     </ul>
@@ -785,7 +782,7 @@ Implementation tips</p>
 <ol>
   <li>**Optimize the parameters Θ **using the training set for each polynomial degree.</li>
   <li><strong>Find the polynomial degree d with the least error</strong> using the <em>cross validation set</em>.</li>
-  <li><strong>Estimate the generalization error</strong> using the <em>test set</em> with $ J_test(\Theta^{(d)}) $, (d = theta from polynomial with lower error)</li>
+  <li><strong>Estimate the generalization error</strong> using the <em>test set</em> with $ J_{test}(\Theta^{(d)}) $, (d = theta from polynomial with lower error)</li>
 </ol>
 
 <p>Recommended breakdown:</p>
@@ -814,8 +811,8 @@ Implementation tips</p>
 <p>In particular, note that</p>
 <ol>
   <li>As polynomial degree increases, we shift from the problem of underfitting to overfitting.</li>
-  <li>High bias: $ J_train(\Theta) $ and $ J_CV(\Theta) $ will be high.</li>
-  <li>High variance: $ J_train(\Theta) $ will be low but $ J_CV(\Theta) $ will be high. This is because the model fit the data too incely, st it does not predict new data well.</li>
+  <li>High bias: $ J_{train}(\Theta) $ and $ J_{CV}(\Theta) $ will be high.</li>
+  <li>High variance: $ J_{train}(\Theta) $ will be low but $ J_{CV}(\Theta) $ will be high. This is because the model fit the data too incely, st it does not predict new data well.</li>
 </ol>
 
 <h3 id="regularisation-and-biasvariance">Regularisation and Bias/Variance</h3>
@@ -825,9 +822,9 @@ Implementation tips</p>
   <li>Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});</li>
   <li>Create a set of models with different degrees or any other variants.</li>
   <li>Iterate through the λs and for each λ go through all the models to learn some Θ.</li>
-  <li>Compute the cross validation error using the learned Θ (computed with λ) on the JCV(Θ) without regularization or λ = 0.</li>
-  <li>Select the best combo that produces the lowest error on the cross validation set.</li>
-  <li>Using the best combo Θ and λ, apply it on Jtest(Θ) to see if it has a good generalization of the problem.</li>
+  <li>Compute the cross validation error using the learned Θ (computed with λ) on the $ J_{CV}(\Theta) $ without regularization or λ = 0.</li>
+  <li>Select the best combination that produces the lowest error on the cross validation set.</li>
+  <li>Using the best combination Θ and λ, apply it on $ J_{test}(\Theta) $ to see if it has a good generalization of the problem.</li>
 </ol>
 
 <h3 id="learning-curves">Learning Curves</h3>
@@ -857,20 +854,22 @@ Implementation tips</p>
 <h2 id="week-6-handling-skewed-data-and-using-large-datasets">Week 6: Handling Skewed Data and Using Large Datasets</h2>
 <h3 id="learning-outcomes-10">Learning Outcomes</h3>
 <ol>
+  <li>False Positives and Negatives</li>
   <li>Error Metrics for Skewed Classes: Precision, Recall, F Score</li>
   <li>Large Data Rationale</li>
 </ol>
 
-<h3 id="error-metrics-for-skewed-classes-precision-recall-f-score">Error Metrics for Skewed Classes: Precision, Recall, F Score</h3>
-
-<p>Motivating example: Cancer
-Suppose that only 0.5% of patients have cancer. A function that always outputs 0 will have an accuracy of 99.5%, but this model can surely be improved. Are there any other error metrics that evaluate skewed classes better?</p>
-
+<h3 id="false-positives-and-negatives">False Positives and Negatives</h3>
 <p><img src="/assets/img/false-positive-negative.png" alt="false positives and negatives" /></p>
 
 <blockquote>
   <p><strong>False positive:</strong> Predicted positive incorrectly</p>
 </blockquote>
+
+<h3 id="error-metrics-for-skewed-classes-precision-recall-f-score">Error Metrics for Skewed Classes: Precision, Recall, F Score</h3>
+
+<p>Motivating example: Cancer
+Suppose that only 0.5% of patients have cancer. A function that always outputs 0 will have an accuracy of 99.5%, but this model can surely be improved. Are there any other error metrics that evaluate skewed classes better?</p>
 
 <ol>
   <li>Accuracy = (true positives + true negatives) / (total examples)</li>

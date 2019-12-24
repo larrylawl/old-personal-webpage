@@ -1,8 +1,4 @@
-<<<<<<< HEAD:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/c9/d5b79be95227330305da1a741784ab9fb1d9259deccdf43773bfce5af8c39c
-I"pó<!-- omit in toc -->
-=======
-I"¹<!-- omit in toc -->
->>>>>>> Add week 6 ML notes:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/91/c55cbfa44708d86e90fd42950023a0fc224ef5550adb7f9bb47b5311edf5f5
+I"»<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -785,7 +781,7 @@ Implementation tips</p>
 <ol>
   <li>**Optimize the parameters Î˜ **using the training set for each polynomial degree.</li>
   <li><strong>Find the polynomial degree d with the least error</strong> using the <em>cross validation set</em>.</li>
-  <li><strong>Estimate the generalization error</strong> using the <em>test set</em> with $ J_test(\Theta^{(d)}) $, (d = theta from polynomial with lower error)</li>
+  <li><strong>Estimate the generalization error</strong> using the <em>test set</em> with $ J_{test}(\Theta^{(d)}) $, (d = theta from polynomial with lower error)</li>
 </ol>
 
 <p>Recommended breakdown:</p>

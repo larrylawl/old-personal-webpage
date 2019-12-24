@@ -27,13 +27,17 @@
 
 ## Articles
 - [ ] Understand `figmincg` and `fminunc`
-- [ ] learning curves
-  - independent of no of features (so u nn plot the feature graph)
-  - function of **trg set** (not cv set) --> See how theta learns based on i (and not m) of them --> Thus u apply the cost function based on the set of i trg samples, and the cost function based on thes et of all m cv samples.
-    - Compare the cost function that the model learnt from (which is over i trg samples), with the cost function that shows the accurate cost of the current theta on new examples (which is over all m cv samples)
-  - Diagnose variance or bias or both
-  - High bias
-    - Both cross validation and training has high error, but they converge
+- [x] learning curves
+- [ ] Math behind large margin classification
+
+|Article   |I'm writing this because...   |Done?   |
+|---|---|---|
+|Learning Curve|Useful debugging method| Done   |
+|Math for SVM|Understand how the learning model works   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
 
 ## Refactoring
 - [ ] Update readme with links to articles and notes

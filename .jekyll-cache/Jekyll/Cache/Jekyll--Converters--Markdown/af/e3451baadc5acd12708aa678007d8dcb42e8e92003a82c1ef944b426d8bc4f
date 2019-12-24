@@ -1,0 +1,928 @@
+I"�<!-- omit in toc -->
+<h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
+
+<p>Lecturer: Professor Andrew Ng <br />
+Source: <a href="https://www.coursera.org/learn/machine-learning">here</a></p>
+
+<!-- omit in toc -->
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#week-1">Week 1</a>
+    <ul>
+      <li><a href="#learning-outcomes">Learning Outcomes</a></li>
+      <li><a href="#machine-learning">Machine learning</a></li>
+      <li><a href="#cost-function">Cost Function</a></li>
+      <li><a href="#gradient-descent">Gradient Descent</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-2-multivariate-linear-regression">Week 2: Multivariate Linear Regression</a>
+    <ul>
+      <li><a href="#learning-outcomes">Learning outcomes</a></li>
+      <li><a href="#denoting-multiple-features">Denoting multiple features</a></li>
+      <li><a href="#linear-regression-with-multiple-variables">Linear regression with multiple variables</a></li>
+      <li><a href="#gradient-descent-for-multiple-variables">Gradient Descent for multiple variables</a></li>
+      <li><a href="#feature-scaling">Feature Scaling</a></li>
+      <li><a href="#how-to-adjust-learning-rate">How to adjust learning rate?</a></li>
+      <li><a href="#what-is-feature-combination">What is feature combination?</a></li>
+      <li><a href="#what-is-polynomial-regression">What is polynomial regression?</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-2-computing-parameters-analytically">Week 2: Computing Parameters Analytically</a>
+    <ul>
+      <li><a href="#learning-outcomes-1">Learning Outcomes</a></li>
+      <li><a href="#why-do-we-need-normal-equation">Why do we need normal equation?</a></li>
+      <li><a href="#the-math-behind-normal-equation">The math behind normal equation</a></li>
+      <li><a href="#normal-equation-vs-gradient-descent">Normal Equation vs Gradient Descent</a></li>
+      <li><a href="#causes-for-normal-equation-noninvertibility">Causes for Normal Equation noninvertibility</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-3-classification-and-representation">Week 3: Classification and Representation</a>
+    <ul>
+      <li><a href="#learning-outcomes-2">Learning Outcomes</a></li>
+      <li><a href="#sigmoidlogistic-function-why-and-what">Sigmoid/Logistic Function: why and what?</a></li>
+      <li><a href="#decision-boundary-what">Decision boundary: what</a></li>
+      <li><a href="#decision-boundary-how-to-compute">Decision boundary: how to compute</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-3-logistic-regression-model">Week 3: Logistic Regression Model</a>
+    <ul>
+      <li><a href="#learning-outcomes-3">Learning Outcomes</a></li>
+      <li><a href="#what-is-the-cost-function-of-the-logistic-regression-model">What is the Cost Function of the Logistic Regression Model</a></li>
+      <li><a href="#gradient-descent-of-the-updated-cost-function">Gradient Descent of the updated Cost Function</a></li>
+      <li><a href="#advanced-optimisation-why-and-what">Advanced Optimisation: why and what</a></li>
+      <li><a href="#advanced-optimisation-how">Advanced Optimisation: how</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-3-multiclass-classification">Week 3: Multiclass Classification</a>
+    <ul>
+      <li><a href="#learning-outcomes-4">Learning Outcomes</a></li>
+      <li><a href="#what-is-multiclass-classification-how-do-we-implement-it">What is multiclass classification? How do we implement it?</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-3-solving-the-problem-of-overfitting">Week 3: Solving the Problem of Overfitting</a>
+    <ul>
+      <li><a href="#learning-outcomes-5">Learning Outcomes</a></li>
+      <li><a href="#understanding-underfitting-and-overfitting">Understanding Underfitting and Overfitting</a></li>
+      <li><a href="#implementation-for-regularisation">Implementation for Regularisation</a></li>
+      <li><a href="#the-tradeoff-between-underfitting-and-overfitting">The Tradeoff between Underfitting and Overfitting</a></li>
+      <li><a href="#regularised-linear-regression">Regularised Linear Regression</a></li>
+      <li><a href="#regularised-logistic-regression">Regularised Logistic Regression</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-4-neural-networks---representation">Week 4: Neural Networks - Representation</a>
+    <ul>
+      <li><a href="#learning-outcomes-6">Learning Outcomes</a></li>
+      <li><a href="#motivation-non-linear-hypotheses">Motivation: Non-linear hypotheses</a></li>
+      <li><a href="#neurons-and-the-brain">Neurons and the Brain</a></li>
+      <li><a href="#intuition-for-neural-networks">Intuition for Neural Networks</a></li>
+      <li><a href="#model-representation">Model Representation</a></li>
+      <li><a href="#multiclass-classification">Multiclass Classification</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-5-neural-networks---learning">Week 5: Neural Networks - Learning</a>
+    <ul>
+      <li><a href="#learning-outcomes-7">Learning Outcomes</a></li>
+      <li><a href="#cost-function-1">Cost Function</a></li>
+      <li><a href="#backpropagation-intuition-and-calculus">Backpropagation: Intuition and Calculus</a></li>
+      <li><a href="#backpropagation-algorithm">Backpropagation: Algorithm</a></li>
+      <li><a href="#gradient-checking">Gradient Checking</a></li>
+      <li><a href="#random-initialisation">Random Initialisation</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-6-evaluating-a-learning-algorithm">Week 6: Evaluating a Learning Algorithm</a>
+    <ul>
+      <li><a href="#model-selection-and-trainvaliationtest-sets">Model Selection and Train/Valiation/Test sets</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-6-bias-amp-variance">Week 6: Bias &amp; Variance</a>
+    <ul>
+      <li><a href="#learning-outcomes-8">Learning Outcomes</a></li>
+      <li><a href="#degree-of-polynomial-and-biasvariance">Degree of polynomial and Bias/Variance</a></li>
+      <li><a href="#regularisation-and-biasvariance">Regularisation and Bias/Variance</a></li>
+      <li><a href="#learning-curves">Learning Curves</a></li>
+      <li><a href="#deciding-what-to-do-next-summary">Deciding What To Do Next Summary</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-6-handling-skewed-data-and-using-large-datasets">Week 6: Handling Skewed Data and Using Large Datasets</a>
+    <ul>
+      <li><a href="#learning-outcomes-9">Learning Outcomes</a></li>
+      <li><a href="#false-positives-and-negatives">False Positives and Negatives</a></li>
+      <li><a href="#error-metrics-for-skewed-classes-precision-recall-f-score">Error Metrics for Skewed Classes: Precision, Recall, F Score</a></li>
+      <li><a href="#large-data-rationale">Large Data Rationale</a></li>
+    </ul>
+  </li>
+  <li><a href="#week-7">Week 7</a></li>
+</ul>
+
+<h2 id="week-1">Week 1</h2>
+<h3 id="learning-outcomes">Learning Outcomes</h3>
+<ol>
+  <li>What is (1) machine learning, (2) supervised learning and types of (2), (3) unsupervised learning and types of (3)</li>
+  <li>What is the cost function?</li>
+  <li>What is gradient descent?</li>
+</ol>
+
+<h3 id="machine-learning">Machine learning</h3>
+<p>The field of study that gives computers the ability to learn without being explicitly programmed.</p>
+<ol>
+  <li>
+    <p><strong>Supervised Learning</strong>: “Know the right answers.</p>
+
+    <ul>
+      <li><strong>Regression</strong>: Predict results within a <em>continuous output</em></li>
+      <li><strong>Classification</strong>: Map input variables to a <em>discrete output</em></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Unsupervised Learning</strong>: No idea what our results should look like</p>
+    <ul>
+      <li><strong>Clustering</strong></li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="cost-function">Cost Function</h3>
+<!-- TODO: Add in convex vs non-convex cost function, cost functions of diff type of machine learning algo (MSE for linear regression, x for logistic etc) -->
+<p>Refer to post on gradient descent <a href="./gradient-descent.html">here</a>. The below is the 0.5 * Mean-Squared-Error (MSE) cost function.</p>
+
+<script type="math/tex; mode=display">J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\hat{y}_{i}-y_{i}\right)^{2}=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta}\left(x_{i}\right)-y_{i}\right)^{2}</script>
+
+<p>Vectorised form:</p>
+
+<script type="math/tex; mode=display">\begin{array}{l}{\qquad J(\theta)=\frac{1}{2 m}(X \theta-\vec{y})^{T}(X \theta-\vec{y})} \\ {\text { where }} \\ {\qquad X=\left[\begin{array}{c}{-\left(x^{(1)}\right)^{T}-} \\ {-\left(x^{(2)}\right)^{T}-} \\ {\vdots} \\ {-\left(x^{(m)}\right)^{T}-}\end{array}\right] \quad \vec{y}=\left[\begin{array}{c}{y^{(1)}} \\ {\vdots} \\ {y^{(m)}}\end{array}\right]}\end{array}</script>
+
+<blockquote>
+  <p>Note: cost function is a function of the model parameters $ h_\theta $ while hypothesis function is a function of the variables $ x $…</p>
+</blockquote>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p>Refer to post on gradient descent <a href="./gradient-descent.html">here</a>.</p>
+
+<h2 id="week-2-multivariate-linear-regression">Week 2: Multivariate Linear Regression</h2>
+<h3 id="learning-outcomes-1">Learning outcomes</h3>
+<ol>
+  <li>What is multivariate linear regression?</li>
+  <li>Gradient descent for multiple variables?</li>
+  <li>Feature scaling: why and how?</li>
+  <li>How to adjust the learning rate?</li>
+  <li>What is feature combination?</li>
+  <li>What is polynomial regression?</li>
+</ol>
+
+<h3 id="denoting-multiple-features">Denoting multiple features</h3>
+
+<script type="math/tex; mode=display">x^{i}_j \text{= value of feature j in the ith training example} \\
+
+x^{i} \text{= input features of the ith training example}</script>
+
+<h3 id="linear-regression-with-multiple-variables">Linear regression with multiple variables</h3>
+
+<p>Vectorised form:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+h_{\theta}(x)=\left[\begin{array}{llll}{\theta_{0}} & {\theta_{1}} & {\ldots} & {\theta_{n}}\end{array}\right]\left[\begin{array}{c}{x_{0}} \\ {x_{1}} \\ {\vdots} \\ {x_{n}}\end{array}\right]=\theta^{T} x %]]></script>
+
+<h3 id="gradient-descent-for-multiple-variables">Gradient Descent for multiple variables</h3>
+<blockquote>
+  <p>Similar to gradient descent for single variable.
+<script type="math/tex">\begin{array}{l}{\text { repeat until convergence: }\{} \\ {\theta_{j}:=\theta_{j}-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) \cdot x_{j}^{(i)} \quad \text { for } j:=0 \ldots n} \\ {\}}\end{array}</script></p>
+</blockquote>
+
+<p>Vectorised form of Gradient Descent for linear regression (derivation <a href="./gradient-descent-linear-regression.html">here</a>):</p>
+
+<script type="math/tex; mode=display">\theta:=\theta-\frac{\alpha}{m} X^{T}(X \theta-\vec{y})</script>
+
+<h3 id="feature-scaling">Feature Scaling</h3>
+<p>Refer to post on feature scaling <a href="./feature-scaling.html">here</a></p>
+
+<h3 id="how-to-adjust-learning-rate">How to adjust learning rate?</h3>
+<ol>
+  <li><strong>Debugging gradient descent</strong>: Plotting a graph of the cost function over no. of iterations. If the cost function ever increases, the learning rate is likely to be too high.
+    <blockquote>
+      <p>A high learning rate might cause divergence.</p>
+    </blockquote>
+  </li>
+  <li><strong>Automatic convergence test</strong>: Declare convergence if the cost function decreases by less than E in one iteration, where E is some small value such as 10^-3.</li>
+</ol>
+
+<h3 id="what-is-feature-combination">What is feature combination?</h3>
+<p>Eg $ x_3 = x_1 * x_2 $</p>
+
+<h3 id="what-is-polynomial-regression">What is polynomial regression?</h3>
+<p>Change the hypothesis function to a polynomial equation that better models the data (ie lower cost function).</p>
+
+<script type="math/tex; mode=display">Square root: h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} \sqrt{x_{1}}</script>
+
+<script type="math/tex; mode=display">Cubic: h_{\theta}(x)=\theta_{0}+\theta_{1} x_{1}+\theta_{2} x_{1}^{2}+\theta_{3} x_{1}^{3}</script>
+
+<h2 id="week-2-computing-parameters-analytically">Week 2: Computing Parameters Analytically</h2>
+<h3 id="learning-outcomes-2">Learning Outcomes</h3>
+<ol>
+  <li>Normal equation: why and what?</li>
+  <li>Normal equation vs Gradient Descent</li>
+  <li>Causes for normal equation non-invertability</li>
+</ol>
+
+<h3 id="why-do-we-need-normal-equation">Why do we need normal equation?</h3>
+<p><strong>To obtain the optimum parameters <em>analytically</em>.</strong> In other words, the parameters are computed explicitly, instead of being estimated iteratively in gradient descent.</p>
+
+<h3 id="the-math-behind-normal-equation">The math behind normal equation</h3>
+<p>Recall that parameters are <em>optimum</em> when the cost function is minimum. Thus, we are interested in the value of the parameters at the minimum points of the cost function. <em>How do we obtain this value then?</em></p>
+
+<p>In $ R_2 $, we do so by first setting the derivative of the function to be 0 (to obtain the points of inflexion), then solve for the value of the parameter at the minimum point.</p>
+
+<p>Similarly in $ R_3 $, we first set the <em>partial derivative</em> with respect to $ \theta_0 $ to be 0, then we solve for $ \theta_0 $. Repeat iteratively till $ \theta_n $.</p>
+
+<p>The result will arrive to the <strong>normal equation formula</strong>:</p>
+
+<script type="math/tex; mode=display">\theta=\left(X^{T} X\right)^{-1} X^{T} y, where \\
+
+X_{m\times(n+1)}=\left[\begin{array}{c}{1\left(x^{(1)}\right)^{\top}} \\ {1\left(x^{(n)}\right)^{\top}} \\ {\vdots} \\ {1\left(x^{(n)}\right)^{\top}}\end{array}\right]</script>
+
+<blockquote>
+  <p>There is <strong>no need</strong> to do feature scaling with normal equation as the purpose of feature scaling was to speed up gradient descent, which is a different method of obtaining the parameters.</p>
+</blockquote>
+
+<blockquote>
+  <p>Note that $ (X^{\top}X) $ is non-invertible if m &lt; n. Proof as follows:</p>
+</blockquote>
+
+<ol>
+  <li>rank(X) ≤ min(m, n+1)</li>
+  <li>rank($ X^{\top}X $) = rank(X) (proof <a href="https://math.stackexchange.com/questions/349738/prove-operatornamerankata-operatornameranka-for-any-a-in-m-m-times-n">here</a>)</li>
+  <li>Since m &lt; n, rank($ X^{\top}X $) ≤ m ≤ n + 1.</li>
+  <li>rank($ X^{\top}X $) = n + 1 for it to be invertible.</li>
+  <li>Hence $ X^{\top}X $ is non-invertible.</li>
+</ol>
+
+<h3 id="normal-equation-vs-gradient-descent">Normal Equation vs Gradient Descent</h3>
+
+<p><img src="/assets/img/comparison.jpg" alt="Normal Equation vs Gradient Descent" /></p>
+
+<!-- TODO: Normal equation only for linear regression? -->
+
+<h3 id="causes-for-normal-equation-noninvertibility">Causes for Normal Equation noninvertibility</h3>
+<p>If $ X^{T} X $ is <strong>noninvertible</strong>, the common causes include</p>
+<ol>
+  <li><strong>Redundant features:</strong> Features are closely related, thus they are linearly dependent (lie on the same span), hence the matrix containing these vectors results in a linear transformation that squishes input vectors to the single dimension (ie determinant is zero), thus its a noninvertible matrix.</li>
+  <li><strong>Too many features</strong>. Delete some features or use regularisation</li>
+</ol>
+
+<h2 id="week-3-classification-and-representation">Week 3: Classification and Representation</h2>
+<h3 id="learning-outcomes-3">Learning Outcomes</h3>
+<ol>
+  <li>Sigmoid/Logistic function: why and what?</li>
+  <li>Decision boundary: why and how to compute?</li>
+</ol>
+
+<h3 id="sigmoidlogistic-function-why-and-what">Sigmoid/Logistic Function: why and what?</h3>
+<p>We use the Logistic Function for <strong>classification problems</strong>. For now, let’s focus on <em>binary</em> classification problems (ie output is {0, 1}).</p>
+
+<p>The hypothesis function of the logistic function <em>outputs</em> the <em>probability</em> that our output is 1 conditioned on our input data (ie $ x $), parameterised by our model’s parameter (ie $ ;\theta $).</p>
+
+<p><script type="math/tex">h_\theta(x) = P(y = 1|x; \theta)</script></p>
+<blockquote>
+  <p><code class="highlighter-rouge">;</code> denote parameterised</p>
+</blockquote>
+
+<p>Since the logistic regression is used for the binary classification problem, we need to <em>translate</em> the output of the hypothesis function from (0, 1) to {0, 1}.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+h_\theta(x) ≥ 0.5 \rightarrow y = 1 \\
+h_\theta(x) < 0.5 \rightarrow y = 0 %]]></script>
+
+<p>Vectorised form of this translation</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">p</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="c1">% size = [m, 1]</span>
+</code></pre></div></div>
+
+<p>Internally, this hypothesis function is defined as such:</p>
+
+<script type="math/tex; mode=display">h_\theta(x) = g(\theta^{\top}x) = g(z) = \frac{1}{1 + e^{-z}}</script>
+
+<p>Vectorised form of the hypothesis function</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">.</span><span class="p">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">.+</span> <span class="n">e</span> <span class="o">.^</span> <span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="c1">% size = [m, 1]</span>
+</code></pre></div></div>
+
+<p>Graphically, it looks like this:
+<img src="/assets/img/logistic.jpg" alt="logistic function" />
+Note certain properties of it</p>
+<ol>
+  <li><strong>$ h_\theta(x) \in (1, 0) $.</strong> This makes sense as the hypothesis function is a probability.</li>
+  <li><strong>$ If x = 0, h_\theta(x) = 0.5 $.</strong> Intuitively, if the input data is null, the model will not have any information to make a prediction, thus the probability of the binary classification will be 0.5</li>
+</ol>
+
+<h3 id="decision-boundary-what">Decision boundary: what</h3>
+<p>The decision boundary is the <strong>line</strong> that partitions y (ie. {0, 1}).</p>
+
+<p><img src="/assets/img/decision-boundary-fit.jpg" alt="decision boundary" /></p>
+
+<h3 id="decision-boundary-how-to-compute">Decision boundary: how to compute</h3>
+<p>Let us start with an example.</p>
+
+<p>We are interested in the inequality $ \theta^{\top}x ≥ 0 $ as it partitions the output to {0, 1}. The heuristic explaining why it partitions is shown below:</p>
+
+<script type="math/tex; mode=display">\theta^{\top}x ≥ 0 \rightarrow g(\theta^{\top}x) ≥ 0.5 \rightarrow y = 1</script>
+
+<p>An example will clear things up.</p>
+
+<script type="math/tex; mode=display">\begin{array}{l}{\theta=\left[\begin{array}{c}{5} \\ {-1} \\ {0}\end{array}\right]} \\ {y=1 \text { if } 5+(-1) x_{1}+0 x_{2} \geq 0} \\ {5-x_{1} \geq 0} \\ {-x_{1} \geq-5} \\ {x_{1} \leq 5}\end{array}</script>
+
+<p>This inequality is useful as it tells us both the <em>equation of the decision boundary</em> (ie $ x_1 = 5 $) and the <em>how the training examples were partitioned</em> (ie $ x_1 ≤ 5 $ will be classified as 1).</p>
+
+<blockquote>
+  <p>Notice how the boundary line is not dependent on $ x_2 $</p>
+</blockquote>
+
+<h2 id="week-3-logistic-regression-model">Week 3: Logistic Regression Model</h2>
+<h3 id="learning-outcomes-4">Learning Outcomes</h3>
+<ol>
+  <li>What is the Cost Function of the Logistic Regression Model? What is the Gradient Descent of it?</li>
+  <li>Advanced optimisation: why, what and how?</li>
+</ol>
+
+<h3 id="what-is-the-cost-function-of-the-logistic-regression-model">What is the Cost Function of the Logistic Regression Model</h3>
+
+<script type="math/tex; mode=display">J(\theta)=-\frac{1}{m} \sum_{i=1}^{m}\left[y^{(i)} \log \left(h_{\theta}\left(x^{(i)}\right)\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]</script>
+
+<p>Vectorised form</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
+<span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="s1">' * log(g) - (1 - y'</span><span class="p">)</span> <span class="o">*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">));</span>
+</code></pre></div></div>
+
+<p>Plotting the graph of the Cost Function,
+<img src="/assets/img/cost-function-graph.jpg" alt="cost function graph" /></p>
+
+<p>Note the following properties</p>
+<ol>
+  <li>If y = 1 and the model predicts y = 0 (ie $ h_\theta(x) \rightarrow 0 $), the cost tends to infinity. Likewise for the opposite case (if y = 0 and the model predicts y = 1).</li>
+  <li>$ {\operatorname{cost}\left(h_{\theta}(x), y\right)=0 \text { if } h_{\theta}(x)=y} $</li>
+</ol>
+
+<h3 id="gradient-descent-of-the-updated-cost-function">Gradient Descent of the updated Cost Function</h3>
+<p>Exactly the same as linear regression (can be shown through calculus).</p>
+
+<script type="math/tex; mode=display">{\theta=\theta-\alpha \delta} = {\theta-\frac{\alpha}{m} X^{T}(g(X \theta)-\vec{y})}\\</script>
+
+<h3 id="advanced-optimisation-why-and-what">Advanced Optimisation: why and what</h3>
+<p>They <strong>learn the model’s parameters more quickly wo learning rate</strong>. Examples include “Conjugate gradient”, “BFGS”, and “L-BFGS”.</p>
+
+<h3 id="advanced-optimisation-how">Advanced Optimisation: how</h3>
+<p>Getting <code class="highlighter-rouge">costFunction</code></p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">J</span><span class="p">,</span> <span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="n">costFunction</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span>
+<span class="k">...</span>
+<span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="s1">' * log(g) - (1 - y'</span><span class="p">)</span> <span class="o">*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">));</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">);</span> <span class="c1">% Partial derivative term</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>Using <code class="highlighter-rouge">fminunc</code></p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">%  Set options for fminunc</span>
+<span class="n">options</span> <span class="o">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s1">'GradObj'</span><span class="p">,</span> <span class="s1">'on'</span><span class="p">,</span> <span class="s1">'MaxIter'</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+
+<span class="c1">%  Run fminunc to obtain the optimal theta</span>
+<span class="c1">%  This function will return theta and the cost </span>
+<span class="p">[</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost</span><span class="p">]</span> <span class="o">=</span> <span class="k">...</span>
+	<span class="n">fminunc</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">t</span><span class="p">)(</span><span class="n">costFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="week-3-multiclass-classification">Week 3: Multiclass Classification</h2>
+<h3 id="learning-outcomes-5">Learning Outcomes</h3>
+<ol>
+  <li>What is multiclass classification? How do we implement it?</li>
+</ol>
+
+<h3 id="what-is-multiclass-classification-how-do-we-implement-it">What is multiclass classification? How do we implement it?</h3>
+<p>Classifying data in &gt; 2 categories (ie y = {0, 1, … , n}). We do so by adopting the <strong>one-vs-all</strong> algorithm.</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} y & \in\{0,1 \ldots n\} \\ h_{\theta}^{(0)}(x) &=P(y=0 | x ; \theta) \\ h_{\theta}^{(1)}(x) &=P(y=1 | x ; \theta) \\ \cdots & \\ h_{\theta}^{(n)}(x) &=P(y=n | x ; \theta) \\ \text { prediction } &=\max \left(h_{\theta}^{(i)}(x)\right) \\ & \end{aligned} %]]></script>
+
+<p>To implement this, first we need to learn the parameters for each of the hypothesis functions.</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">all_theta</span><span class="p">]</span> <span class="o">=</span> <span class="n">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambda</span><span class="p">)</span>
+<span class="k">...</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">num_labels</span>
+        <span class="n">initial_theta</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">% Set options for fmincg</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="nb">optimset</span><span class="p">(</span><span class="s1">'GradObj'</span><span class="p">,</span> <span class="s1">'on'</span><span class="p">,</span> <span class="s1">'MaxIter'</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+        <span class="c1">% Run fmincg to obtain the optimal theta</span>
+        <span class="c1">% This function will return theta and the cost </span>
+        <span class="p">[</span><span class="n">theta</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmincg</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">t</span><span class="p">)(</span><span class="n">lrCostFunction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">),</span> <span class="n">lambda</span><span class="p">)),</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+        <span class="n">all_theta</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="p">:)</span> <span class="o">=</span> <span class="n">theta</span><span class="p">;</span> 
+    <span class="n">endfor</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Use <code class="highlighter-rouge">fmincg</code> instead of <code class="highlighter-rouge">fminunc</code> as the former is more efficient when dealing with more parameters.</p>
+</blockquote>
+
+<p>Next, we run the algorithm shown above.</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">p</span> <span class="o">=</span> <span class="n">predictOneVsAll</span><span class="p">(</span><span class="n">all_theta</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="n">all_theta</span><span class="o">'</span><span class="p">;</span> <span class="c1">% size = [m, k]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">);</span>
+<span class="p">[</span><span class="n">max_values</span><span class="p">,</span> <span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">indices</span><span class="p">;</span>
+</code></pre></div></div>
+<blockquote>
+  <p>Note use of <code class="highlighter-rouge">max</code> function.</p>
+</blockquote>
+
+<p><img src="/assets/img/multiclass.jpg" alt="multiclass" /></p>
+
+<h2 id="week-3-solving-the-problem-of-overfitting">Week 3: Solving the Problem of Overfitting</h2>
+<h3 id="learning-outcomes-6">Learning Outcomes</h3>
+<ol>
+  <li>Understanding Underfitting and Overfitting</li>
+  <li>Implementing Regularisation and understand the tradeoff between Underfitting and Overfitting</li>
+  <li>Regularized linear regression</li>
+  <li>Regularized logistic regression</li>
+</ol>
+
+<h3 id="understanding-underfitting-and-overfitting">Understanding Underfitting and Overfitting</h3>
+<p><img src="/assets/img/fitting.jpg" alt="fitting" /></p>
+
+<p>Underfitting (left) is when the hypothesis function, $ h_\theta{x} $, maps poorly to the trend of the data. Notice how the $ h_\theta{x} $ is a linear function while the data is quadratic (mid). Underfitting is usually caused by a function that is too simple.</p>
+
+<p>Overfitting (right) is when the $ h_\theta{x} $ fits the available data but does not generalise well to predict new data. Notice how $ h_\theta{x} $ fits the test data well, but does not have any structure that shows that it can predict new data equally well.</p>
+
+<p>To address overfitting, we can either (1) Reduce number of features or (2) implement <strong>regularisation</strong>.</p>
+
+<h3 id="implementation-for-regularisation">Implementation for Regularisation</h3>
+
+<script type="math/tex; mode=display">J(\theta)= E(\theta) + \frac{\lambda}{2 m} \sum_{j=1}^{n} \theta_{j}^{2}, where \\
+E(\theta) = \text{error function}</script>
+
+<blockquote>
+  <p>Regularisation term starts from j = 1, not 0. We don’t penalise $ tetha_0 $ as the term was introduced for neater notation.</p>
+</blockquote>
+
+<blockquote>
+  <p>We regulate all parameters as we are not able to predict which parameter is more important than the other.</p>
+</blockquote>
+
+<h3 id="the-tradeoff-between-underfitting-and-overfitting">The Tradeoff between Underfitting and Overfitting</h3>
+
+<p>Recall that the error function (1st term) measures how different our model’s prediction is from the expected value. Optimising the error function allows us to fit the training sample better at the risk of overfitting.</p>
+
+<p>Regularisation (2nd term), on the other hand, reduces the magnitude of the parameters, thus smoothing out the hypothesis function, and <em>reduce overfitting</em> at the risk of <em>underfitting</em>.</p>
+
+<blockquote>
+  <p>While it reduces overfitting, implementing regularisation does not always mean the model will predict well for new training samples; too much regularisation will cause underfitting, which will lead to poorer prediction.</p>
+</blockquote>
+
+<p>Thus the new cost function is the summation of both the error function and regularisation, as a better attempt to optimise the tradeoff between underfitting and overfitting.</p>
+
+<h3 id="regularised-linear-regression">Regularised Linear Regression</h3>
+<p>Gradient Descent:
+<script type="math/tex">\begin{array}{l}{\text { Repeat }\{} \\ {\qquad \begin{array}{l}{\theta_{0}:=\theta_{0}-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{0}^{(i)}} \\ {\theta_{j}:=\theta_{j}-\alpha\left[\left(\frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)}\right)+\frac{\lambda}{m} \theta_{j}\right]}\\ \}\end{array}} \\ \end{array}</script></p>
+
+<p>Rearranging…
+<script type="math/tex">\theta_{j}:=\theta_{j}\left(1-\alpha \frac{\lambda}{m}\right)-\alpha \frac{1}{m} \sum_{i=1}^{m}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right) x_{j}^{(i)}</script></p>
+
+<blockquote>
+  <p>Note that $ (1-\alpha \frac{\lambda}{m} $ &lt; 1. Intuitively you can see it as reducing the value of $ \theta_j $ by some amount on every update, which is the purpose of regularisation.</p>
+</blockquote>
+
+<p>Normal Equation</p>
+
+<p><script type="math/tex">% <![CDATA[
+\begin{array}{l}{\theta=\left(X^{T} X+\lambda \cdot L\right)^{-1} X^{T} y} \\ {\text { where } L=\left[\begin{array}{cccc}{0} \\ {} & {1} \\ {} & {} & {1} \\ {} & {} & {} & {1}\end{array}\right]}\end{array} %]]></script></p>
+<blockquote>
+  <p>Adding the term λ⋅L, then the matrix becomes invertible.</p>
+</blockquote>
+
+<h3 id="regularised-logistic-regression">Regularised Logistic Regression</h3>
+<p><script type="math/tex">J(\theta)=-\frac{1}{m} \sum_{i=1}^{m}\left[y^{(i)} \log \left(h_{\theta}\left(x^{(i)}\right)\right)+\left(1-y^{(i)}\right) \log \left(1-h_{\theta}\left(x^{(i)}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{j=1}^{n} \theta_{j}^{2}</script></p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">J</span><span class="p">,</span> <span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="n">costFunctionReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambda</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span>
+<span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">y</span><span class="s1">' * log(g) - (1 - y'</span><span class="p">)</span> <span class="o">*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">g</span><span class="p">));</span> <span class="c1">% error term</span>
+<span class="n">newTheta</span> <span class="o">=</span> <span class="n">theta</span><span class="p">;</span>
+<span class="n">newTheta</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">newTheta</span><span class="o">'</span> <span class="o">*</span> <span class="n">newTheta</span><span class="p">);</span>
+<span class="n">J</span> <span class="o">=</span> <span class="n">e</span> <span class="o">+</span> <span class="n">r</span><span class="p">;</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="o">'</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">newTheta</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="week-4-neural-networks---representation">Week 4: Neural Networks - Representation</h2>
+<h3 id="learning-outcomes-7">Learning Outcomes</h3>
+<ol>
+  <li>Motivation: Non-linear hypotheses</li>
+  <li>Neurons and the Brain</li>
+  <li>Intuition for Neural Networks</li>
+  <li>Model Representation</li>
+  <li>Multiclass Classification</li>
+</ol>
+
+<h3 id="motivation-non-linear-hypotheses">Motivation: Non-linear hypotheses</h3>
+<p>It is expensive for logistic regression to add more polynomial features.</p>
+<blockquote>
+  <ol>
+    <li>Represent all quadratic terms: O($ n^2 $) (sum of arithmetic sequence)</li>
+    <li>Represent all cubic terms: O($ n^3 $)</li>
+  </ol>
+</blockquote>
+
+<p>Neural networks are a faster way to represent non-linear hypothesis.</p>
+
+<h3 id="neurons-and-the-brain">Neurons and the Brain</h3>
+<p>Neural Network’s initial purpose was to build learning systems, thus they modeled after the most amazing one - <strong>human brains</strong>.</p>
+
+<p>Surprisingly, human brains have <em>one learning algorithm</em> (instead of many distinct ones for each functionality). Thus it’ll be valuable to model how the brain learns.</p>
+
+<p><img src="/assets/img/neurons.jpg" alt="neurons" />
+<em>Dendrites</em> (inputs) take in electrical inputs and channel them to <em>axons</em> (outputs).</p>
+
+<h3 id="intuition-for-neural-networks">Intuition for Neural Networks</h3>
+<p>Every additional layer allows the network to compute slightly more complex functions. Thus neural networks are able to compute complicated functions.</p>
+
+<p>Consider this example of predicting digits (credits: 3B1B’s video explaining neural networks <a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">here</a>. Each additional layer builts upon the previous layer in order to compute increasingly complicated functions.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Layer 1</th>
+      <th>Layer 2</th>
+      <th>Layer 3</th>
+      <th>Layer 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Output</td>
+      <td>Pixels</td>
+      <td>Edges</td>
+      <td>Patterns</td>
+      <td>Numbers</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/img/neural-networks-intuition.png" alt="neural networks intuition" /></p>
+
+<h3 id="model-representation">Model Representation</h3>
+<p>Notations
+<script type="math/tex">\begin{array}{l}{a_{i}^{(j)} = \text{"activation" of unit i in layer j}} \\ 
+{\Theta^{(j)} = \text{matrix of weights controlling function mapping from layer j to layer j+1}}\end{array}</script></p>
+
+<p><img src="/assets/img/neural-network-model.png" alt="Neural network model" /></p>
+
+<p>Expanding the terms</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned} a_{1}^{(2)} &=g\left(\Theta_{10}^{(1)} x_{0}+\Theta_{11}^{(1)} x_{1}+\Theta_{12}^{(1)} x_{2}+\Theta_{13}^{(1)} x_{3}\right) \\ a_{2}^{(2)} &=g\left(\Theta_{20}^{(1)} x_{0}+\Theta_{21}^{(1)} x_{1}+\Theta_{22}^{(1)} x_{2}+\Theta_{23}^{(1)} x_{3}\right) \\ a_{3}^{(2)} &=g\left(\Theta_{30}^{(1)} x_{0}+\Theta_{31}^{(1)} x_{1}+\Theta_{32}^{(1)} x_{2}+\Theta_{33}^{(1)} x_{3}\right) \\ h_{\Theta}(x)=a_{1}^{(3)}=& g\left(\Theta_{10}^{(2)} a_{0}^{(2)}+\Theta_{11}^{(2)} a_{1}^{(2)}+\Theta_{12}^{(2)} a_{2}^{(2)}+\Theta_{13}^{(2)} a_{3}^{(2)}\right) \end{aligned} %]]></script>
+
+<p><code class="highlighter-rouge">g</code> is the <strong>logistic activation function,</strong> whose argument is the <strong>linear regression.</strong> However, note the difference in vectorised form between neural networks and logistic regression.</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Logistic Regression</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">*</span> <span class="n">theta</span><span class="p">);</span> <span class="c1">% size = [m, 1]</span>
+
+<span class="c1">% Neural network</span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">g</span><span class="p">;</span>
+<span class="n">a_1</span> <span class="o">=</span> <span class="n">X</span><span class="p">;</span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_1</span> <span class="o">*</span> <span class="n">Theta1</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [m, k], where k denote the number of units in the next layer.</span>
+</code></pre></div></div>
+
+<!-- Different theta size -->
+<p>This is because every neuron has its own set of parameters (refer to the arguments of <code class="highlighter-rouge">g</code> in the expanded equation above), thus the size of $ \Theta $ is $ s_{j+1} \times (s_j + 1) $ while that of $ \theta $ in logistic regression is $ (n + 1) \times 1 $.</p>
+
+<blockquote>
+  <p>Thats why neural networks use $ \Theta $, not $ \theta $.</p>
+</blockquote>
+
+<p>Also, remember to add the bias nodes.</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a_2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">a_2</span><span class="p">];</span>
+</code></pre></div></div>
+
+<h3 id="multiclass-classification">Multiclass Classification</h3>
+<p>Recall that in multiclass classification, our output y $ \in $ {1, 2, … , n}. In neural networks, y is represented as a matrix.</p>
+
+<script type="math/tex; mode=display">y^{(i)}=\left[\begin{array}{l}{1} \\ {0} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {1} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {1} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {0} \\ {1}\end{array}\right]</script>
+
+<p>Neural networks follow the exact same algorithm as logistic regression for multiclass classification. The implementation is as follows:</p>
+
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">p</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">Theta1</span><span class="p">,</span> <span class="n">Theta2</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="k">...</span>
+<span class="n">a_1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">X</span><span class="p">];</span> <span class="c1">% size = [m = 500, n + 1 = 401]</span>
+
+<span class="n">a_2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_1</span> <span class="o">*</span> <span class="n">Theta1</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [500, 25] </span>
+<span class="n">a_2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">a_2</span><span class="p">];</span> <span class="c1">% size = [500, 26]</span>
+
+<span class="n">a_3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a_2</span> <span class="o">*</span> <span class="n">Theta2</span><span class="o">'</span><span class="p">);</span> <span class="c1">% size = [500, 10]</span>
+<span class="p">[</span><span class="n">max_values</span><span class="p">,</span> <span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">a_3</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">indices</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="week-5-neural-networks---learning">Week 5: Neural Networks - Learning</h2>
+<h3 id="learning-outcomes-8">Learning Outcomes</h3>
+<ol>
+  <li>Cost Function</li>
+  <li>Backpropagation: Intuition, Calculus, and Algorithm</li>
+  <li>Gradient Checking</li>
+  <li>Random Initialisation</li>
+</ol>
+
+<h3 id="cost-function-1">Cost Function</h3>
+<p><script type="math/tex">J(\Theta)=-\frac{1}{m} \sum_{i=1}^{m} \sum_{k=1}^{K}\left[y_{k}^{(i)} \log \left(\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)+\left(1-y_{k}^{(i)}\right) \log \left(1-\left(h_{\Theta}\left(x^{(i)}\right)_{k}\right)\right)\right]+\frac{\lambda}{2 m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_{l}} \sum_{j=1}^{s_{l+1}}\left(\Theta_{j, i}^{(l)}\right)^{2}\right.</script></p>
+
+<p>For the double summation,</p>
+<ol>
+  <li>It adds up the logistic regression costs calculated for each unit in the output layer
+    <ul>
+      <li>Inner loop: Loops through each unit in the output layer and computes the cost for a particular training sample. Returns cost of the training sample.</li>
+      <li>Outer loop: Loops through all training sample and computes the cost for the training set (containing the samples).</li>
+    </ul>
+  </li>
+</ol>
+
+<p>For the Triple Summation</p>
+<ol>
+  <li>the triple sum simply adds up the squares of all the individual Θs in the entire network, except the the bias term. (ie <em>i</em> = 0)</li>
+  <li>the <em>i</em> in the triple sum does <strong>not</strong> refer to training example i.</li>
+</ol>
+
+<p>Vectorised Implementation:</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% Compute a</span>
+<span class="k">function</span> <span class="n">computeActivationFunction</span>
+    <span class="n">a_1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">X</span><span class="p">];</span>
+    <span class="n">z_2</span> <span class="o">=</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">Theta1</span><span class="o">'</span><span class="p">;</span>
+    <span class="n">a_2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z_2</span><span class="p">)];</span>
+    <span class="n">z_3</span> <span class="o">=</span> <span class="n">a_2</span> <span class="o">*</span> <span class="n">Theta2</span><span class="o">'</span><span class="p">;</span>
+    <span class="n">a_3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z_3</span><span class="p">);</span>
+<span class="n">endfunction</span>
+
+<span class="c1">% Converts y (size = [m, 1]), where each entry in y is in [1, k]</span>
+<span class="c1">% to label (size = [m, k])</span>
+<span class="k">function</span> <span class="n">y_v</span> <span class="o">=</span> <span class="n">convertLabelsToVectors</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="c1">% Logical arrays</span>
+    <span class="n">y_v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">num_labels</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">;</span> 
+<span class="n">endfunction</span>
+
+<span class="k">function</span> <span class="n">computeCost</span>
+    <span class="n">computeActivationFunction</span><span class="p">;</span>
+    <span class="n">y_v</span> <span class="o">=</span> <span class="n">convertLabelsToVectors</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+
+    <span class="c1">% cost </span>
+    <span class="n">c_each</span> <span class="o">=</span> <span class="o">-</span><span class="n">y_v</span> <span class="o">.*</span> <span class="nb">log</span><span class="p">(</span><span class="n">a_3</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_v</span><span class="p">)</span> <span class="o">.*</span> <span class="nb">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">a_3</span><span class="p">);</span> <span class="c1">% size = [m, s_L]</span>
+    <span class="n">c_all</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">c_each</span><span class="p">));</span>
+
+    <span class="c1">% regularisation term - rmb to not regularise bias terms!</span>
+    <span class="n">Theta1_squared</span> <span class="o">=</span> <span class="n">Theta1</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">Theta2_squared</span> <span class="o">=</span> <span class="n">Theta2</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">Theta1_squared_wo_bias</span> <span class="o">=</span> <span class="n">Theta1_squared</span><span class="p">(:,</span> <span class="mi">2</span><span class="p">:</span><span class="k">end</span><span class="p">);</span>
+    <span class="n">Theta2_squared_wo_bias</span> <span class="o">=</span> <span class="n">Theta2_squared</span><span class="p">(:,</span> <span class="mi">2</span><span class="p">:</span><span class="k">end</span><span class="p">);</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="k">...</span>
+        <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Theta1_squared_wo_bias</span><span class="p">))</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Theta2_squared_wo_bias</span><span class="p">)));</span>
+
+    <span class="c1">% Cost </span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">c_all</span> <span class="o">+</span> <span class="n">r</span><span class="p">;</span>
+<span class="n">endfunction</span>
+</code></pre></div></div>
+
+<h3 id="backpropagation-intuition-and-calculus">Backpropagation: Intuition and Calculus</h3>
+<p>Refer to my post <a href="./calculus-for-backpropagation.html">here</a>.</p>
+
+<h3 id="backpropagation-algorithm">Backpropagation: Algorithm</h3>
+<p><img src="/assets/img/neural-network-model.png" alt="Neural Network" /></p>
+
+<p><img src="/assets/img/backpropagation-algo.png" alt="Backpropagation algorithm" />
+Implementation Note</p>
+<ul>
+  <li>Add bias term (ie 1) for all <code class="highlighter-rouge">a</code> except layer <em>L</em>.</li>
+  <li>Don’t compute $ \delta^{1} $. Input data should not have error terms associated with them.</li>
+  <li>Remove $ \delta_0^{l} $, where <em>l</em> refers to any hidden layer. Bias unit of any layer is assumed to be 1 and independent of computation (ie not connected to previous layer), thus it should not have error term associated with it.</li>
+  <li>Sanity check that $ \Delta $ is of the same dimensions as $ \Theta $. $ \Delta $ is the partial derivative of the cost function wrt each $ \Theta $, thus there is a one-to-one mapping from $ \Theta $ to $ \Delta $.</li>
+  <li>Parameter unrolling</li>
+</ul>
+
+<p>Vectorised Implentation (wo <code class="highlighter-rouge">for-loops</code>! :):</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">backprop</span> 
+    <span class="c1">% Step 1: Compute a </span>
+    <span class="n">computeActivationFunction</span><span class="p">;</span>
+    
+    <span class="c1">% Step 2: Compute error terms</span>
+    <span class="n">y_v</span> <span class="o">=</span> <span class="n">convertLabelsToVectors</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">d_3</span> <span class="o">=</span> <span class="n">a_3</span> <span class="o">-</span> <span class="n">y_v</span><span class="p">;</span> <span class="c1">% size = [5000, 10] </span>
+
+    <span class="c1">% Step 3: Delta 2</span>
+    <span class="n">d_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">d_3</span> <span class="o">*</span> <span class="n">Theta2</span><span class="p">)(:,</span> <span class="mi">2</span><span class="p">:</span> <span class="k">end</span><span class="p">)</span> <span class="o">.*</span> <span class="n">sigmoidGradient</span><span class="p">(</span><span class="n">z_2</span><span class="p">);</span> <span class="c1">% size = [5000, 25]; remember to remove first error term</span>
+
+    <span class="c1">% Step 4 and 5: Accumulate gradient and divide by sample size        </span>
+    <span class="n">Theta1_grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span><span class="n">d_2</span><span class="o">'</span> <span class="o">*</span> <span class="n">a_1</span><span class="p">);</span> <span class="c1">% size = [25, 401]</span>
+    <span class="n">Theta2_grad</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span><span class="n">d_3</span><span class="o">'</span> <span class="o">*</span> <span class="n">a_2</span><span class="p">);</span> <span class="c1">% size = [10, 25]</span>
+
+<span class="n">endfunction</span>
+
+<span class="k">function</span> <span class="n">regularise</span>
+    <span class="n">r_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span><span class="n">Theta1</span><span class="p">);</span>
+    <span class="n">r_1</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">% Don't regularise bias term</span>
+
+    <span class="n">r_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">lambda</span> <span class="p">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span><span class="n">Theta2</span><span class="p">);</span>
+    <span class="n">r_2</span><span class="p">(:,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">% Don't regularise bias term</span>
+
+    <span class="n">Theta1_grad</span> <span class="o">=</span> <span class="n">Theta1_grad</span> <span class="o">+</span> <span class="n">r_1</span><span class="p">;</span>
+    <span class="n">Theta2_grad</span> <span class="o">=</span> <span class="n">Theta2_grad</span> <span class="o">+</span> <span class="n">r_2</span><span class="p">;</span>
+<span class="n">endfunction</span>
+</code></pre></div></div>
+<h3 id="gradient-checking">Gradient Checking</h3>
+
+<script type="math/tex; mode=display">\frac{\partial}{\partial \Theta_{j}} J(\Theta) \approx \frac{J\left(\Theta_{1}, \ldots, \Theta_{j}+\epsilon, \ldots, \Theta_{n}\right)-J\left(\Theta_{1}, \ldots, \Theta_{j}-\epsilon, \ldots, \Theta_{n}\right)}{2 \epsilon}</script>
+
+<p>Compare gradient of approximation with that of backpropagation.
+Implementation tips</p>
+<ol>
+  <li>It is more efficient to use a small neural network with relatively smaller input units and hidden units, thus having a relatively small number of parameters. Each dimension of θ requires two evaluations of the cost function and this can be expensive. After checking is done, turn off gradient checking before running learning algorithm.</li>
+  <li>Gradient checking works for any hypothesis function (linear, log etc).</li>
+</ol>
+
+<p>Vectorised Implementation</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span>
+  <span class="n">thetaPlus</span> <span class="o">=</span> <span class="n">theta</span><span class="p">;</span>
+  <span class="n">thetaPlus</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+=</span> <span class="n">epsilon</span><span class="p">;</span>
+  <span class="n">thetaMinus</span> <span class="o">=</span> <span class="n">theta</span><span class="p">;</span>
+  <span class="n">thetaMinus</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-=</span> <span class="n">epsilon</span><span class="p">;</span>
+  <span class="n">gradApprox</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">thetaPlus</span><span class="p">)</span> <span class="o">-</span> <span class="n">J</span><span class="p">(</span><span class="n">thetaMinus</span><span class="p">))/(</span><span class="mi">2</span><span class="o">*</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="k">end</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="random-initialisation">Random Initialisation</h3>
+<p>Refer to my post <a href="./heuristic-for-random-init.html">here</a></p>
+
+<p>Implementation note:</p>
+<ol>
+  <li>Chooe epislon based on the number of units in the network. A good choice is</li>
+</ol>
+
+<script type="math/tex; mode=display">\epsilon_{i n i t}=\frac{\sqrt{6}}{\sqrt{L_{i n}+L_{o u t}}}</script>
+
+<p>Vectorised Implementation</p>
+<div class="language-m highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.</span>
+
+<span class="n">Theta1</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
+<span class="n">Theta2</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
+<span class="n">Theta3</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">INIT_EPSILON</span><span class="p">)</span> <span class="o">-</span> <span class="n">INIT_EPSILON</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="week-6-evaluating-a-learning-algorithm">Week 6: Evaluating a Learning Algorithm</h2>
+
+<h3 id="model-selection-and-trainvaliationtest-sets">Model Selection and Train/Valiation/Test sets</h3>
+<p>How should we use the Train/Valiation/Test sets?</p>
+<ol>
+  <li><strong>Optimize the parameters Θ</strong>  using the training set for each polynomial degree.</li>
+  <li><strong>Find the polynomial degree d with the least error</strong> using the <em>cross validation set</em>.</li>
+  <li><strong>Estimate the generalization error</strong> using the <em>test set</em> with $ J_{test}(\Theta^{(d)}) $, (d = theta from polynomial with lower error)</li>
+</ol>
+
+<p>Recommended breakdown:</p>
+<ul>
+  <li>Training Set: 60%</li>
+  <li>CV Set: 20%</li>
+  <li>Test Set: 20%</li>
+</ul>
+
+<blockquote>
+  <p>By having an extra CV set, the degree of the polynomial d has not been trained using the test set.</p>
+</blockquote>
+
+<h2 id="week-6-bias--variance">Week 6: Bias &amp; Variance</h2>
+<h3 id="learning-outcomes-9">Learning Outcomes</h3>
+<ol>
+  <li>Degree of polynomial and Bias/Variance</li>
+  <li>Regularisation and Bias/Variance</li>
+  <li>Learning Curves</li>
+  <li>Deciding What To Do Next Summary</li>
+</ol>
+
+<h3 id="degree-of-polynomial-and-biasvariance">Degree of polynomial and Bias/Variance</h3>
+<p><img src="/assets/img/polynomial-bias-variance.png" alt="Degree of polynomial and Bias/Variance" /></p>
+
+<p>In particular, note that</p>
+<ol>
+  <li>As polynomial degree increases, we shift from the problem of underfitting to overfitting.</li>
+  <li>High bias: $ J_{train}(\Theta) $ and $ J_{CV}(\Theta) $ will be high.</li>
+  <li>High variance: $ J_{train}(\Theta) $ will be low but $ J_{CV}(\Theta) $ will be high. This is because the model fit the data too incely, st it does not predict new data well.</li>
+</ol>
+
+<h3 id="regularisation-and-biasvariance">Regularisation and Bias/Variance</h3>
+<p>As λ increases, we regularise more, thus we shift from the issue of high variance to high bias. How do we get the optimal λ then?</p>
+
+<ol>
+  <li>Create a list of lambdas (i.e. λ∈{0,0.01,0.02,0.04,0.08,0.16,0.32,0.64,1.28,2.56,5.12,10.24});</li>
+  <li>Create a set of models with different degrees or any other variants.</li>
+  <li>Iterate through the λs and for each λ go through all the models to learn some Θ.</li>
+  <li>Compute the cross validation error using the learned Θ (computed with λ) on the $ J_{CV}(\Theta) $ without regularization or λ = 0.</li>
+  <li>Select the best combination that produces the lowest error on the cross validation set.</li>
+  <li>Using the best combination Θ and λ, apply it on $ J_{test}(\Theta) $ to see if it has a good generalization of the problem.</li>
+</ol>
+
+<h3 id="learning-curves">Learning Curves</h3>
+<p>Refer to my post <a href="./learning-curves.html">here</a></p>
+
+<h3 id="deciding-what-to-do-next-summary">Deciding What To Do Next Summary</h3>
+<ol>
+  <li>Getting more training examples: Fixes high variance</li>
+  <li>Trying smaller sets of features: Fixes high variance</li>
+  <li>Adding features: Fixes high bias</li>
+  <li>Adding polynomial features: Fixes high bias</li>
+  <li>Decreasing λ: Fixes high bias</li>
+  <li>Increasing λ: Fixes high variance.</li>
+</ol>
+
+<p>Recommended Approach for ML problems:</p>
+<ol>
+  <li>Start with a simple algorithm, implement it quickly, and test it early on your cross validation data.</li>
+  <li>Plot learning curves to decide if more data, more features, etc. are likely to help.</li>
+  <li>Manually examine the errors on examples in the cross validation set and try to spot a trend where most of the errors were made.
+    <ol>
+      <li>Use a single, numerical value to assess algorithm’s performance (e.g. error rate).</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="week-6-handling-skewed-data-and-using-large-datasets">Week 6: Handling Skewed Data and Using Large Datasets</h2>
+<h3 id="learning-outcomes-10">Learning Outcomes</h3>
+<ol>
+  <li>False Positives and Negatives</li>
+  <li>Error Metrics for Skewed Classes: Precision, Recall, F Score</li>
+  <li>Large Data Rationale</li>
+</ol>
+
+<h3 id="false-positives-and-negatives">False Positives and Negatives</h3>
+<p><img src="/assets/img/false-positive-negative.png" alt="false positives and negatives" /></p>
+
+<blockquote>
+  <p><strong>False positive:</strong> Predicted positive incorrectly</p>
+</blockquote>
+
+<h3 id="error-metrics-for-skewed-classes-precision-recall-f-score">Error Metrics for Skewed Classes: Precision, Recall, F Score</h3>
+
+<p>Motivating example: Cancer
+Suppose that only 0.5% of patients have cancer. A function that always outputs 0 will have an accuracy of 99.5%, but this model can surely be improved. Are there any other error metrics that evaluate skewed classes better?</p>
+
+<ol>
+  <li>Accuracy = (true positives + true negatives) / (total examples)</li>
+  <li>Precision = (true positives) / (true positives + false positives)
+    <ol>
+      <li>Precision is how many of the returned hits were true positive i.e. how many of the found were correct hits.</li>
+    </ol>
+  </li>
+  <li>Recall = (true positives) / (true positives + false negatives)
+    <ol>
+      <li>Recall is how many of the true positives were recalled (found), i.e. how many of the correct hits were also found.</li>
+    </ol>
+  </li>
+  <li>F score = (2 * precision * recall) / (precision + recall)
+    <ol>
+      <li>Allows for a single numeric metric as it combines Precision and Recall. By multiplying it, it also effectively punishes the skewed cases (ie P = 1, R = 0, which can be easily achieved with a function that always outputs 1 and vice versa).</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="large-data-rationale">Large Data Rationale</h3>
+<p>“It’s not who has the best algorithm that wins. It’s who has the most data.”</p>
+
+<p><img src="/assets/img/big-data.png" alt="big data" /></p>
+
+<ol>
+  <li>Suppose feature <em>x</em> has sufficient information to predict <em>y</em> accurately
+    <ol>
+      <li>Useful test: Given the input <em>x</em>, can a human expert confidently predict <em>y</em>?</li>
+    </ol>
+  </li>
+  <li>Able to use a <em>low bias</em> algorithm</li>
+  <li>Using a very large training set will resolve issue of low variance</li>
+  <li>Most data wins :)</li>
+</ol>
+
+<h2 id="week-7">Week 7</h2>
+<ol>
+  <li>multiplying by constant does not change x coordinate of the min point</li>
+  <li>SVM: Variation of logistic regression</li>
+  <li>CA + B, where C controls A
+    <ol>
+      <li>it is just a penalization parameter that have the opposite role of the parameter lambda, so whenever C is small, it will have the same effect as when lambda was large, avoiding overfitting.</li>
+      <li>
+        <p>That is why the prof. said that C is “equal to” 1/lambda, in the sense that this parameter C acts just the opposite of lambda, but there is of course no direct mathematical relation between both.</p>
+      </li>
+      <li>SVM Decision Boundary: But theta is will be minimised, so projection is gonna be low</li>
+      <li>Kernel: Develop complex nonlinear classifiers. –&gt; Similarity function to develop features</li>
+      <li>How to choose landmarks? –&gt; Each data point is a landmark. And this is nice because it is saying that my features are basically going to measure how close an example is to one of the things I saw in my training set.</li>
+      <li>Other similarity functions</li>
+      <li>Larger sigma –&gt; Similarity function becomes smoother –&gt; Not so dependent on x1 –&gt; Higher bias, lower variance</li>
+      <li>How to train theta –&gt; Minisation of the cost function, which includes the new feature vectores</li>
+    </ol>
+  </li>
+</ol>
+:ET

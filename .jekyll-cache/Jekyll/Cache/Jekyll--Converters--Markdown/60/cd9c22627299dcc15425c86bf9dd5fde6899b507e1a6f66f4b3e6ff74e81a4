@@ -1,0 +1,23 @@
+I"�<div align="center">
+    <i>"Only half of programming is coding. The other half is debugging." - Unknown</i>
+</div>
+
+<!-- omit in toc -->
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<ul>
+  <li><a href="#geometric-interpretation-of-dot-product">Geometric Interpretation of Dot Product</a></li>
+  <li><a href="#svm-decision-boundary">SVM Decision Boundary</a></li>
+</ul>
+
+<h2 id="geometric-interpretation-of-dot-product">Geometric Interpretation of Dot Product</h2>
+
+<h2 id="svm-decision-boundary">SVM Decision Boundary</h2>
+
+<p>Minimise cost function –&gt; LHS = 0 –&gt; thetax ≥ 1 –&gt; Sub in –&gt; P must be large –&gt; margin will be far away</p>
+
+<!-- omit in toc -->
+<h2 id="credits">Credits</h2>
+<p>Mathworld for the interpretation of Dot Product. Source <a href="http://mathworld.wolfram.com/DotProduct.html">here</a>.</p>
+
+<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning">here</a>.</p>
+:ET

@@ -1,0 +1,92 @@
+I"^<div align="center">
+    <i>"Only half of programming is coding. The other half is debugging." - Unknown</i>
+</div>
+
+<!-- omit in toc -->
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<ul>
+  <li><a href="#prerequisite-geometric-interpretation-of-dot-product">Prerequisite: Geometric Interpretation of Dot Product</a></li>
+  <li><a href="#large-margin-intuition">Large Margin Intuition</a></li>
+  <li><a href="#math-behind-large-margin">Math Behind Large Margin</a></li>
+</ul>
+
+<h2 id="prerequisite-geometric-interpretation-of-dot-product">Prerequisite: Geometric Interpretation of Dot Product</h2>
+
+<p>The dot product is defined for two vectors X and Y by</p>
+
+<script type="math/tex; mode=display">X \cdot Y = |X||Y|cos\theta</script>
+
+<table>
+  <tbody>
+    <tr>
+      <td>where $ \theta $ is the angle between the vectors and $</td>
+      <td>X</td>
+      <td>$ is the length of the vector (aka the norm). Consequently, the dot product has the geometric interpretation of the length of projection X on Y, multiplied by the norm of Y (or vice versa, since dot product is commutative).</td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="math/tex; mode=display">X \cdot Y = p \times |Y|</script>
+
+<p>where p is the length of projection of X on Y.</p>
+
+<h2 id="large-margin-intuition">Large Margin Intuition</h2>
+<p>Support vector machines (SVM) are known as large margin classifiers. Intuitively, this is because the minimisation of the cost function will lead to large margins (ie the margin in the center).</p>
+
+<p><img src="/assets/img/svm-margins.png" alt="Support Vector Machine Margins" /></p>
+
+<p>Let us now look at the math justifying this intuition.</p>
+
+<h2 id="math-behind-large-margin">Math Behind Large Margin</h2>
+<p>Recall that the cost function of SVM is as such:</p>
+
+<script type="math/tex; mode=display">J(\theta) = C \sum_{i=1}^{m}\left[y^{(i)} cost_{1}\left(\theta^{T} x^{(i)}\right)+\left(1-y^{(i)}\right) cos t_{0}\left(\theta^{T} x^{(i)}\right)\right]+\frac{1}{2} \sum_{i=1}^{n} \theta_{j}^{2}</script>
+
+<p>If y = 1, the the first function (ie <code class="highlighter-rouge">cost</code>) will be the graph on the left. If y = 0, it will be the graph on the right.</p>
+
+<p><img src="/assets/img/svm.png" alt="Support Vector Machine" /></p>
+
+<p>At the optimal minimisation of the cost function, the first term will equals zero. In order for the first term to be zero,</p>
+<ol>
+  <li>If $ y^{(i)} = 1 $, $ \theta^{T}x^{(i)} $ ≥ 1 (refer to the left graph)</li>
+  <li>If $ y^{(i)} = 0 $, $ \theta^{T}x^{(i)} $ ≤ -1 (refer to the right graph)</li>
+</ol>
+
+<p>Thus we can rewrite the cost function as</p>
+
+<script type="math/tex; mode=display">J(\theta) = \frac{1}{2} \sum_{i=1}^{n} \theta_{j}^{2}</script>
+
+<p>such that</p>
+<ol>
+  <li>If $ y^{(i)} = 1 $, $ \theta^{T}x^{(i)} $ ≥ 1</li>
+  <li>If $ y^{(i)} = 0 $, $ \theta^{T}x^{(i)} $ ≤ -1</li>
+</ol>
+
+<p>Since</p>
+
+<script type="math/tex; mode=display">\theta^{T}x = \theta \cdot x = p \times |\theta|</script>
+
+<p>We can further rewrite the optimised cost function as</p>
+
+<script type="math/tex; mode=display">J(\theta) = \frac{1}{2} \sum_{i=1}^{n} \theta_{j}^{2}</script>
+
+<p>such that</p>
+
+<ol>
+  <li>If $ y^{(i)} = 1 $, $ p^{(i)} \times \lvert \theta \lvert $ ≥ 1</li>
+  <li>If $ y^{(i)} = 0 $, $ p^{(i)} \times \lvert \theta \lvert $ ≤ -1</li>
+  <li>where $ p^{(i)} $ is the projection of $ x^{(i)} $ on the vector $ \theta $</li>
+</ol>
+
+<p>Since the optimal cost function is still dependent on $ \lvert \theta \lvert $, $ \lvert \theta \lvert $ will likely be small in order at the minimum point of the cost function. If $ \lvert \theta \lvert $ is small, then the projection <em>p</em> has to be large, thus the decision boundary is large.</p>
+
+<p><img src="/assets/img/svm-margin-2.png" alt="Support Vector Margi" /></p>
+
+<p>This is why, the SVM is associated as a large boundary classifier.</p>
+
+<!-- omit in toc -->
+<h2 id="credits">Credits</h2>
+<p>Mathworld for the interpretation of Dot Product. Source <a href="http://mathworld.wolfram.com/DotProduct.html">here</a>.</p>
+
+<p>Andrew Ng’s Machine Learning course. Source <a href="https://www.coursera.org/learn/machine-learning">here</a>.</p>
+:ET

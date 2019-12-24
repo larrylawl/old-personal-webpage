@@ -82,6 +82,7 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [False Positives and Negatives](#false-positives-and-negatives)
   - [Error Metrics for Skewed Classes: Precision, Recall, F Score](#error-metrics-for-skewed-classes-precision-recall-f-score)
   - [Large Data Rationale](#large-data-rationale)
+- [Week 7](#week-7)
 
 
 ## Week 1
@@ -719,7 +720,7 @@ Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 
 ### Model Selection and Train/Valiation/Test sets
 How should we use the Train/Valiation/Test sets?
-1. **Optimize the parameters Θ **using the training set for each polynomial degree.
+1. **Optimize the parameters Θ**  using the training set for each polynomial degree.
 2. **Find the polynomial degree d with the least error** using the _cross validation set_.
 3. **Estimate the generalization error** using the _test set_ with \$ J_{test}(\Theta^{(d)}) \$, (d = theta from polynomial with lower error)
 
@@ -808,3 +809,17 @@ Suppose that only 0.5% of patients have cancer. A function that always outputs 0
 2. Able to use a _low bias_ algorithm
 3. Using a very large training set will resolve issue of low variance
 4. Most data wins :)
+
+## Week 7
+1. multiplying by constant does not change x coordinate of the min point
+2. SVM: Variation of logistic regression
+3. CA + B, where C controls A
+   1.  it is just a penalization parameter that have the opposite role of the parameter lambda, so whenever C is small, it will have the same effect as when lambda was large, avoiding overfitting.
+   2.  That is why the prof. said that C is "equal to" 1/lambda, in the sense that this parameter C acts just the opposite of lambda, but there is of course no direct mathematical relation between both.
+   
+   3. SVM Decision Boundary: But theta is will be minimised, so projection is gonna be low
+   4. Kernel: Develop complex nonlinear classifiers. --> Similarity function to develop features
+   5. How to choose landmarks? --> Each data point is a landmark. And this is nice because it is saying that my features are basically going to measure how close an example is to one of the things I saw in my training set.
+   6. Other similarity functions
+   7. Larger sigma --> Similarity function becomes smoother --> Not so dependent on x1 --> Higher bias, lower variance 
+   8. How to train theta --> Minisation of the cost function, which includes the new feature vectores

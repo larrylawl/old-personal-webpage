@@ -71,7 +71,7 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [Random Initialisation](#random-initialisation)
 - [Week 6: Evaluating a Learning Algorithm](#week-6-evaluating-a-learning-algorithm)
   - [Model Selection and Train/Valiation/Test sets](#model-selection-and-trainvaliationtest-sets)
-- [Week 6: Bias &amp; Variance](#week-6-bias-amp-variance)
+- [Week 6: Bias and Variance](#week-6-bias-and-variance)
   - [Learning Outcomes](#learning-outcomes-8)
   - [Degree of polynomial and Bias/Variance](#degree-of-polynomial-and-biasvariance)
   - [Regularisation and Bias/Variance](#regularisation-and-biasvariance)
@@ -82,7 +82,18 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [False Positives and Negatives](#false-positives-and-negatives)
   - [Error Metrics for Skewed Classes: Precision, Recall, F Score](#error-metrics-for-skewed-classes-precision-recall-f-score)
   - [Large Data Rationale](#large-data-rationale)
-- [Week 7](#week-7)
+- [Week 7: Large Margin Classification](#week-7-large-margin-classification)
+  - [Hypothesis Function](#hypothesis-function)
+  - [Large Margin](#large-margin)
+- [Week 7: Kernels](#week-7-kernels)
+  - [Learning Outcomes](#learning-outcomes-10)
+  - [What are Kernals: Similarity Functions](#what-are-kernals-similarity-functions)
+  - [Choosing Landmarks](#choosing-landmarks)
+- [Week 7: Using an SVM](#week-7-using-an-svm)
+  - [Learning Outcomes](#learning-outcomes-11)
+  - [SVM parameters](#svm-parameters)
+  - [Multi-class classification](#multi-class-classification)
+  - [Logistic vs SVMs](#logistic-vs-svms)
 
 
 ## Week 1
@@ -731,7 +742,7 @@ Recommended breakdown:
 
 > By having an extra CV set, the degree of the polynomial d has not been trained using the test set.
 
-## Week 6: Bias & Variance
+## Week 6: Bias and Variance
 ### Learning Outcomes
 1. Degree of polynomial and Bias/Variance
 2. Regularisation and Bias/Variance
@@ -810,16 +821,85 @@ Suppose that only 0.5% of patients have cancer. A function that always outputs 0
 3. Using a very large training set will resolve issue of low variance
 4. Most data wins :)
 
-## Week 7
-1. multiplying by constant does not change x coordinate of the min point
-2. SVM: Variation of logistic regression
-3. CA + B, where C controls A
-   1.  it is just a penalization parameter that have the opposite role of the parameter lambda, so whenever C is small, it will have the same effect as when lambda was large, avoiding overfitting.
-   2.  That is why the prof. said that C is "equal to" 1/lambda, in the sense that this parameter C acts just the opposite of lambda, but there is of course no direct mathematical relation between both.
-   
-   3. SVM Decision Boundary: But theta is will be minimised, so projection is gonna be low
-   4. Kernel: Develop complex nonlinear classifiers. --> Similarity function to develop features
-   5. How to choose landmarks? --> Each data point is a landmark. And this is nice because it is saying that my features are basically going to measure how close an example is to one of the things I saw in my training set.
-   6. Other similarity functions
-   7. Larger sigma --> Similarity function becomes smoother --> Not so dependent on x1 --> Higher bias, lower variance 
-   8. How to train theta --> Minisation of the cost function, which includes the new feature vectores
+## Week 7: Large Margin Classification
+### Hypothesis Function
+
+$$
+h_{\theta}(x)\left\{\begin{array}{ll}{1} & {\text { if } \theta^{\top} x \geqslant 0} \\ {0} & {\text { otherwise }}\end{array}\right.
+$$
+
+![SVM](/assets/img/svm.png)
+
+_C_ is a penalisation parameter that have the opposite role of the parameter \$ \lambda \$. Concretely, when C decreases, \$ \lambda \$ increases, the regularisation term increases, hence it mitigates overfitting.
+
+Just as how multiplying by a constant does not change the x-coordinate of the minimum point of a graph, multiplying by constant _C_ does not change the theta where the cost funtion is minimm.
+
+<!-- Not very convinced with the explanatin -->
+When y = 1 and SVM hypothesis = 1, that means we predict correctly and thus the cost should be 0. We use the plot on the left above when y = 1. That's the plot for the input (to the sigmoid function) vs the cost when y = 1. When both y and the SVM hypothesis happen to be 1 (meaning the cost is 0), that can only be achieved when the input is to the right of 0 on the horizontal axis in that plot.
+
+
+### Large Margin
+Refer to my post [here](./math-behind-large-margin-classification.html)
+
+## Week 7: Kernels
+### Learning Outcomes
+1. What are Kernals: Similarity Functions
+2. Choosing Landmarks
+3. SVM parameters
+
+### What are Kernals: Similarity Functions
+The purpose of Kernels is to plot non-linear decision boundary. 
+
+Kernels are **similarity functions**. Intuitively, given x, a kernel evaluates the similarity of x and the landmark _l_. (I will elaborate on how to choose landmarks later). 
+
+![Support Vector Machine landmarks](/assets/img/svm-landmarks.png)
+
+> Kernel chosen here is the Gaussian kernel
+
+But how does the similarity function help us plot non-linear decision boundaries?
+
+This is the revised cost function with the kernel. In particular, note the argument to the _cost_ function. By using feature vector instead of the input x, we can plot non-linear decision boundaries.
+
+$$
+\min _{\theta} C \sum_{i=1}^{m} y^{(i)} \operatorname{cost}_{1} \left(\theta^{T} f^{(i)}\right)+\left(1-y^{(i)}\right) \operatorname{cost}_{0}({\theta^{T} f^{(i)})})+{\frac{1}{2} \sum_{j=1}^{m} \theta_{j}^{2}}
+$$
+
+Predict \$ y = 1 \$ if \$ \theta^{T} f ≥ 0 \$ 
+
+### Choosing Landmarks
+
+$$
+l^{(i)} = x^{(i)}
+$$
+for 0 ≤ i ≤ n, where n is the dimension of \$ \theta \$. Thus the similarity function for the same points outputs 1.
+
+Intuitively, this is nice because it is saying that my features are basically going to measure how close an example is to one of the things I saw in my training set.
+
+## Week 7: Using an SVM
+### Learning Outcomes
+0. SVM parameters
+1. Multi-class classification
+2. Logistic vs SVMs
+
+### SVM parameters
+1. **C**: C is a penalisation parameter that have the opposite rote of the parameter \$ \lambda \$. Concretely, when C decreases, \$ \lambda \$ increases, the regularisation term increases, hence it mitigates overfitting.  
+2. _(For Gaussian Kernels)_ \$ \sigma^2 \$: Larger sigma --> Similarity function becomes smoother (Feature decreases less quickly) -->  Not so dependent on x1 --> Higher bias --> lower variance (due to bias-variance tradeoff) 
+![Gaussian kernel variance](/assets/img/gaussian-kernel-variance.png)
+3. **Perform feature scaling**: 
+
+![Feature Scaling for SVM](/assets/img/svm-feature-scaling.png)
+
+### Multi-class classification
+Either
+1. Use built-in multiclass classification
+2. Use one-vs-all method.
+   1. Train K SVMs to get k \$ \theta \$.
+   2. Pick class i with largest with \$ \theta^{T} f \$ (since it fits the hypothesis fn better)
+
+### Logistic vs SVMs
+Let _n_ = number of features and _m_ = number of training examples
+
+1. If _n_ is large relative to _m_, use logistic regression or SVM with linear Kernel: data points are too little to have a complex decision boundary. 
+> SVM with linear kernel have similar performance as logistic regression 
+2. If _n_ is small but _m_ is intermediate, use SVM with Gaussian Kernel: Able to model complex boundary
+3. If _n_ is small but _m_ is large: Create/add more features, then use logistic regression or SVM without a kernel. This is because SVM with Gaussian kernel might run too slowly on large _m_.

@@ -46,6 +46,8 @@ $$
 J(\theta) = C \sum_{i=1}^{m}\left[y^{(i)} cost_{1}\left(\theta^{T} x^{(i)}\right)+\left(1-y^{(i)}\right) cos t_{0}\left(\theta^{T} x^{(i)}\right)\right]+\frac{1}{2} \sum_{i=1}^{n} \theta_{j}^{2}
 $$
 
+> _C_ is a penalisation parameter that have the opposite role of the parameter \$ \lambda \$. Concretely, when C decreases, \$ \lambda \$ increases, the regularisation term increases, hence it mitigates overfitting.
+
 If y = 1, the first function (ie `cost`) will be the graph on the left. If y = 0, it will be the graph on the right.
 
 ![Support Vector Machine](/assets/img/svm.png)

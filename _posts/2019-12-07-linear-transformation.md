@@ -64,12 +64,6 @@ Notice how matrix multiplication does not violate the two requirements of linear
 
 If _A_ is a _function_ that moves the input vector from the representation of the basis vectors in A to the standard basis, then \$ A^{-1} \$, being the _inverse function_, will do the opposite: move the input vector from the standard basis back to the basis vectors in A.
 
-## Linear Transformation of vectors represented by other basis vectors
-(10:20 - 11.00) of 3B1B video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE) animates this really well.
-
-![linear transformation of vectors represented by basis vectors](/assets/img/linear-transformation-other-basis.png)
-
-
 <!-- omit in toc -->
 ## Credits
 For a more detailed explanation, check out 3Blue1Brown's video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE).

@@ -1,0 +1,44 @@
+I"&<div align="center">
+    <i>"Go down deep enough into anything and you will find mathematics." - Dean Schlicter</i>
+</div>
+
+<!-- Write down defn of eigen -->
+
+<!-- omit in toc -->
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<ul>
+  <li><a href="#eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</a></li>
+  <li><a href="#eigenbasis-and-diagonal-matrixes">Eigenbasis and Diagonal Matrixes</a></li>
+</ul>
+
+<h2 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h2>
+<p>Recall that linear transformation is a function that moves a vector from its representation in its coefficient matrix to the standard basis.</p>
+
+<script type="math/tex; mode=display">Av = \lambda  v</script>
+
+<p>If the linear transformation of this vector <em>v</em> <strong>retains its span</strong>, (ie a scalar transformation of the vector), then <em>v</em> is called an <em>eigenvector</em>.</p>
+
+<p>This <strong>scalar transformation</strong>, $ \lambda $, is the <em>eigenvalue</em>.</p>
+
+<h2 id="eigenbasis-and-diagonal-matrixes">Eigenbasis and Diagonal Matrixes</h2>
+
+<ol>
+  <li>Linear transformation of the vector retains its span; its only a scalar transformation of the vector . These special vectors are called the eigenvector, and the factor by which it was stretched is called the eigenvalue. Matrix vector multiplication gives the same result as sclaing by some factor lambda.
+    <ol>
+      <li>Negative –&gt; Flip</li>
+      <li>Recall that span is all possible lc of the vector</li>
+    </ol>
+  </li>
+  <li>Solving for that eqn –&gt; det of coefficient needs to be 0. Find a lambda that the det coefficient becomes 0</li>
+  <li>Eigenbasis</li>
+  <li>Diagonal Matrix and its usefulness
+    <ol>
+      <li>Interpretation of diagonal matrix –&gt; basis vectors are eigenvectors, diagonal entries being eigenvalues; usefulness of diagonal matrix</li>
+    </ol>
+  </li>
+</ol>
+
+<!-- omit in toc -->
+<h2 id="credits">Credits</h2>
+<p>3Blue1Brown’s video on Eigenvectors and Eigenvalues. Source <a href="https://www.youtube.com/watch?v=PFDu9oVAE-g&amp;t=887s">here</a>.</p>
+:ET

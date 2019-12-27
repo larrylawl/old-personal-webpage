@@ -1,0 +1,54 @@
+I"â	<div align="center">
+    <i>"Eigen: a german translation of 'Own'"</i>
+</div>
+
+<!-- Write down defn of eigen -->
+
+<!-- omit in toc -->
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<ul>
+  <li><a href="#eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</a></li>
+  <li><a href="#intuition-for-solving-for-eigenvalues">Intuition for Solving for Eigenvalues</a></li>
+  <li><a href="#eigenbasis">Eigenbasis</a></li>
+</ul>
+
+<h2 id="eigenvectors-and-eigenvalues">Eigenvectors and Eigenvalues</h2>
+<p>Recall that linear transformation is a function that moves a vector from its representation in its coefficient matrix to the standard basis.</p>
+
+<script type="math/tex; mode=display">Av = \lambda  v</script>
+
+<p>If the linear transformation of this vector <em>v</em> <strong>retains its span</strong> then <em>v</em> is called an <strong>eigenvector</strong>.</p>
+
+<blockquote>
+  <p>Recall that span of a vector represents all possible linear combinations of a vector.</p>
+</blockquote>
+
+<p>Since this transformation of <em>v</em> retains its span, it is scalar transformation, $ \lambda $. <strong>The factor by which the vector is scaled</strong> is the <strong>eigenvalue.</strong></p>
+
+<h2 id="intuition-for-solving-for-eigenvalues">Intuition for Solving for Eigenvalues</h2>
+
+<script type="math/tex; mode=display">Av = \lambda  v \\
+Av - I\lambda  v = 0 \\
+(A - I\lambda) v = 0</script>
+
+<p>In order for the above linear transformation to hold, the determinant of the coefficient matrix must equals 0.</p>
+
+<script type="math/tex; mode=display">det(A - I\lambda) = 0</script>
+
+<p>This is because the determinant computes the <strong>factor by which the space was changed by this linear transformation</strong>. Thus if determinant is zero, the factor by which the space was changed will be 0, which = RHS.</p>
+
+<blockquote>
+  <p>Read more about determinants in my post <a href="./determinant.html">here</a></p>
+</blockquote>
+
+<p>Solving for the determinant of the coefficient matrix gives us our eigenvalues.</p>
+
+<p>With the eigenvalues, we can proceed to solve for eigenvectors. Concrete steps can be found <a href="https://www.scss.tcd.ie/Rozenn.Dahyot/CS1BA1/SolutionEigen.pdf">here</a>.</p>
+
+<h2 id="eigenbasis">Eigenbasis</h2>
+<p>An eigenbasis is a <strong>basis wherein every vector is an eigenvector</strong>.</p>
+
+<!-- omit in toc -->
+<h2 id="credits">Credits</h2>
+<p>3Blue1Brownâ€™s video on Eigenvectors and Eigenvalues. Source <a href="https://www.youtube.com/watch?v=PFDu9oVAE-g&amp;t=887s">here</a>.</p>
+:ET

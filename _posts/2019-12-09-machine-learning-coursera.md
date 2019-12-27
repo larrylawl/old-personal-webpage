@@ -903,3 +903,28 @@ Let _n_ = number of features and _m_ = number of training examples
 > SVM with linear kernel have similar performance as logistic regression 
 2. If _n_ is small but _m_ is intermediate, use SVM with Gaussian Kernel: Able to model complex boundary
 3. If _n_ is small but _m_ is large: Create/add more features, then use logistic regression or SVM without a kernel. This is because SVM with Gaussian kernel might run too slowly on large _m_.
+
+Week 8
+K means algo
+
+1. cost function will nver decrease. in each iteration, the first step minimizes J over a range which includes the current value (minimizing wrt c^{(i)}c 
+(i)
+ -s, and one of the opssibilities is to keep the existing c^{(i)}c 
+(i)
+ -s) and so after it we have a new value for J which is *at most* as it was before.
+
+the same goes for the second step (but this time, wrt \mu_kμ 
+k
+​	 -s, and one of the possibilities is to keep the existing \mu_kμ 
+k
+​	 -s), so after it we have a new value for J which is *at most* as it was after the first step (which was at most what it was at the beginning of the iteration) - so alltogether - we couldn't have raised J's value in any iteration.
+2. Cost function is also called Distortion
+3. Dimenion reducing --> Choose k vectors and find the span of these vectors
+   1. Span: It’s the Set of all the linear combinations of a number vectors.
+4. PCA vs linear regression
+   1. PCA: It's trying to find a lower dimensional surface onto which to project the data, so as to minimize this squared projection error.
+   2. Vertical vs Orthogonal distance (thus shortest)
+      1. Interpretation: ppd. Formally: Dot product is 0
+   3. Predicting y vs focusing on a list of features (x1... xn)
+5. Cuz each data point is normalised --> no mean --> to maximise will be MSD (displacement from mean of 0, so subtract nth)
+6. Why is retaining variance equivalent to maximising variance? --> Original variance is without u --> To retain, u need a `u` st when multiplied with the dot product, it gets back the original variance --> Since u is a unit vector, the best u you can obtain is when they lie on the same span, thus cos(0) = 1 --> dot product will be x itself

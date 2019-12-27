@@ -1,0 +1,12 @@
+I"Û<!-- omit in toc -->
+<h2 id="learning-outcomes">Learning Outcomes</h2>
+<ul>
+  <li><a href="#prerequisite-basis-vectors">Prerequisite: Basis Vectors</a></li>
+  <li><a href="#interpretation-of-matrix-multiplication">Interpretation of Matrix Multiplication</a></li>
+  <li><a href="#interpretation-of-linear-transformation">Interpretation of Linear Transformation</a></li>
+  <li><a href="#interpretation-of-inverse-matrix-multiplication">Interpretation of Inverse Matrix Multiplication</a></li>
+  <li><a href="#linear-transformation-of-vectors-represented-by-other-basis-vectors">Linear Transformation of vectors represented by other basis vectors</a></li>
+</ul>
+
+<p>Without loss of generality to $ R_n $, let us consider $ R_2 $.</p>
+:ET

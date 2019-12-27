@@ -1,4 +1,4 @@
-I"R%<!-- omit in toc -->
+I"/-<!-- omit in toc -->
 <h1 id="machine-learning-coursera-notes">Machine Learning Coursera Notes</h1>
 
 <p>Lecturer: Professor Andrew Ng <br />
@@ -1019,5 +1019,43 @@ for 0 ≤ i ≤ n, where n is the dimension of $ \theta $. Thus the similarity f
   </li>
   <li>If <em>n</em> is small but <em>m</em> is intermediate, use SVM with Gaussian Kernel: Able to model complex boundary</li>
   <li>If <em>n</em> is small but <em>m</em> is large: Create/add more features, then use logistic regression or SVM without a kernel. This is because SVM with Gaussian kernel might run too slowly on large <em>m</em>.</li>
+</ol>
+
+<p>Week 8
+K means algo</p>
+
+<ol>
+  <li>cost function will nver decrease. in each iteration, the first step minimizes J over a range which includes the current value (minimizing wrt c^{(i)}c 
+(i)
+ -s, and one of the opssibilities is to keep the existing c^{(i)}c 
+(i)
+ -s) and so after it we have a new value for J which is <em>at most</em> as it was before.</li>
+</ol>
+
+<p>the same goes for the second step (but this time, wrt \mu_kμ 
+k
+​	 -s, and one of the possibilities is to keep the existing \mu_kμ 
+k
+​	 -s), so after it we have a new value for J which is <em>at most</em> as it was after the first step (which was at most what it was at the beginning of the iteration) - so alltogether - we couldn’t have raised J’s value in any iteration.</p>
+<ol>
+  <li>Cost function is also called Distortion</li>
+  <li>Dimenion reducing –&gt; Choose k vectors and find the span of these vectors
+    <ol>
+      <li>Span: It’s the Set of all the linear combinations of a number vectors.</li>
+    </ol>
+  </li>
+  <li>PCA vs linear regression
+    <ol>
+      <li>PCA: It’s trying to find a lower dimensional surface onto which to project the data, so as to minimize this squared projection error.</li>
+      <li>Vertical vs Orthogonal distance (thus shortest)
+        <ol>
+          <li>Interpretation: ppd. Formally: Dot product is 0</li>
+        </ol>
+      </li>
+      <li>Predicting y vs focusing on a list of features (x1… xn)</li>
+    </ol>
+  </li>
+  <li>Cuz each data point is normalised –&gt; no mean –&gt; to maximise will be MSD (displacement from mean of 0, so subtract nth)</li>
+  <li>Why is retaining variance equivalent to maximising variance? –&gt; Original variance is without u –&gt; To retain, u need a <code class="highlighter-rouge">u</code> st when multiplied with the dot product, it gets back the original variance –&gt; Since u is a unit vector, the best u you can obtain is when they lie on the same span, thus cos(0) = 1 –&gt; dot product will be x itself</li>
 </ol>
 :ET

@@ -6,9 +6,6 @@ categories: journal
 tags: [Linear Algebra]
 image: linear-algebra.jpg
 ---
-
-(For a more detailed explanation, check out 3Blue1Brown's video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE))
-
 Without loss of generality to \$ R_n \$, let us consider \$ R_2 \$.
 
 ## Prerequisite: Basis Vectors
@@ -62,3 +59,17 @@ Matrix multiplication is the main example of a linear transformation. This linea
 2. lines stay as lines. (In other words, the set of vectors that have the same span remains the same after the transformation)
 
 Notice how matrix multiplication does not violate the two requirements of linear transformation
+
+## Interpretation of Inverse Matrix Multiplication
+
+If _A_ is a _function_ that moves the input vector from the representation of the basis vectors in A to the standard basis, then \$ A^{-1} \$, being the _inverse function_, will do the opposite: move the input vector from the standard basis back to the basis vectors in A.
+
+## Linear Transformation of vectors represented by other basis vectors
+(10:20 - 11.00) of 3B1B video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE) animates this really well.
+
+![linear transformation of vectors represented by basis vectors](/assets/img/linear-transformation-other-basis.png)
+
+
+<!-- omit in toc -->
+## Credits
+For a more detailed explanation, check out 3Blue1Brown's video [here](https://www.youtube.com/watch?v=kYB8IZa5AuE).

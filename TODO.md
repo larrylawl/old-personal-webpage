@@ -16,12 +16,11 @@
 
 ## Features
 
+- [ ] log (comments on amazing articles i have read)
+- [ ] Purpose of each section
 - [ ] Abstract notes out
-- [ ] Footer to let me know if there're any mistakes
 - [ ] Tags page
 - [ ] Claps feature
-- [ ] Time in articles
-- [ ] Description in index page not formatted properly
 - [ ] Footer to return to top of page/home
 - [ ] VScode plugin that shows size of matrix
 
@@ -32,11 +31,11 @@
 
 |Article   |I'm writing this because...   |Done?   |
 |---|---|---|
-|Learning Curve|Useful debugging method| Done   |
-|Math for SVM|Understand how the learning model works   |   |
-|   |   |   |
-|   |   |   |
-|   |   |   |
+|Learning Curve|Useful debugging method|Y |
+|Math for SVM|Understand how the learning model works   |Y   |
+|Eigenvectors   |Fundamentals to understand future proofs in ML; explain generally why have learning outcomes and "why is this impt"   |   |
+|Edit linear transformation to include inverse (changing ours to jennifer's language) (defn of inverse! reverse mapping) Also include how to translate a vector of another language --> Transformation matrix in her language   |   |   |
+|Article on Learning   |Share with others what I have learnt   |   |
 |   |   |   |
 
 ## Refactoring

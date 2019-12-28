@@ -2,7 +2,7 @@
 layout: post
 title: "Machine Learning Coursera Notes"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---

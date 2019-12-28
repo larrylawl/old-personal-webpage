@@ -2,7 +2,7 @@
 layout: post
 title: "Heuristic Justifying Random Initialisation In Neural Networks"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Machine Learning]
 image: neural-network.jpeg
 ---

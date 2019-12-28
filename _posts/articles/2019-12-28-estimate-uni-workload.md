@@ -2,7 +2,7 @@
 layout: post
 title: "How to estimate my workload in University?"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [advice]
 image: tree-of-life.png
 ---

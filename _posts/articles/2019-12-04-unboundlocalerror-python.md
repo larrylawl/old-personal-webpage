@@ -2,7 +2,7 @@
 layout: post
 title: "Global, nonlocal, and local values in Python"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [python]
 image: python.jpg
 ---

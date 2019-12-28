@@ -2,7 +2,7 @@
 layout: post
 title: "Calculus of Backpropagation"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Machine Learning]
 image: neural-network.jpeg
 ---

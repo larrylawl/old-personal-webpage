@@ -2,7 +2,7 @@
 layout: post
 title: "Derivation of vectorised form of Gradient Descent for Linear Regression"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---

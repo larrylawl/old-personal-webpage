@@ -2,7 +2,7 @@
 layout: post
 title: "Feature Scaling: why and how"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---

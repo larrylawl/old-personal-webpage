@@ -2,7 +2,7 @@
 layout: post
 title: "Interpretation for Matrix Multiplication and Linear Transformation"
 author: "Larry Law"
-categories: journal
+categories: article
 tags: [Linear Algebra]
 image: linear-algebra.jpg
 ---

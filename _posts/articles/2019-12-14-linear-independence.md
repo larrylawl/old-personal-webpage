@@ -2,7 +2,7 @@
 layout: post
 title: "Intuition for Linear Independence"
 author: "Larry Law"
-categories: article
+categories: articles
 tags: [Linear Algebra]
 image: linear-algebra.jpg
 ---

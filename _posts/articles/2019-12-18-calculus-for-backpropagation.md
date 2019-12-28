@@ -2,7 +2,7 @@
 layout: post
 title: "Calculus of Backpropagation"
 author: "Larry Law"
-categories: article
+categories: articles
 tags: [Machine Learning]
 image: neural-network.jpeg
 ---
@@ -13,7 +13,7 @@ image: neural-network.jpeg
 4. Fitting the Calculus with the Intuition
 
 <!-- Disclaimer that this explains Andrew Ng's course -->
-_(This article explains the calculus of the backpropagation algorithm in Andrew Ng's machine learning course, which can be found [here](https://www.coursera.org/learn/machine-learning).)_
+_(This articles explains the calculus of the backpropagation algorithm in Andrew Ng's machine learning course, which can be found [here](https://www.coursera.org/learn/machine-learning).)_
 ![Andrew Ng's course: Backpropagation Algorithm](/assets/img/backpropagation-algo.png)
 
 ## Prerequisite

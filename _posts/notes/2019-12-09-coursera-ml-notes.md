@@ -128,7 +128,7 @@ The field of study that gives computers the ability to learn without being expli
 
 ### Cost Function
 <!-- TODO: Add in convex vs non-convex cost function, cost functions of diff type of machine learning algo (MSE for linear regression, x for logistic etc) -->
-Refer to post on gradient descent [here](./gradient-descent.html). The below is the 0.5 * Mean-Squared-Error (MSE) cost function.
+The cost function below is the 0.5 * Mean-Squared-Error (MSE) cost function.
 
 $$
 J\left(\theta_{0}, \theta_{1}\right)=\frac{1}{2 m} \sum_{i=1}^{m}\left(\hat{y}_{i}-y_{i}\right)^{2}=\frac{1}{2 m} \sum_{i=1}^{m}\left(h_{\theta}\left(x_{i}\right)-y_{i}\right)^{2}
@@ -143,7 +143,7 @@ $$
 > Note: cost function is a function of the model parameters \$ h_\theta \$ while hypothesis function is a function of the variables \$ x \$...
 
 ### Gradient Descent
-Refer to post on gradient descent [here](./gradient-descent.html). 
+Refer to article on gradient descent [here](/articles/gradient-descent.html). 
 
 ## Week 2: Multivariate Linear Regression
 ### Learning outcomes
@@ -177,7 +177,7 @@ $$
 $$
 
 
-Vectorised form of Gradient Descent for linear regression (derivation [here](./gradient-descent-linear-regression.html)):
+Vectorised form of Gradient Descent for linear regression (derivation [here](/articles/gradient-descent-linear-regression.html)):
 
 $$
 \theta:=\theta-\frac{\alpha}{m} X^{T}(X \theta-\vec{y})
@@ -185,7 +185,7 @@ $$
 
 
 ### Feature Scaling
-Refer to post on feature scaling [here](./feature-scaling.html)
+Refer to post on feature scaling [here](/articles/feature-scaling.html)
 
 ### How to adjust learning rate?
 1. **Debugging gradient descent**: Plotting a graph of the cost function over no. of iterations. If the cost function ever increases, the learning rate is likely to be too high.
@@ -656,7 +656,7 @@ endfunction
 ```
 
 ### Backpropagation: Intuition and Calculus
-Refer to my post [here](./calculus-for-backpropagation.html).
+Refer to my post [here](/articles/calculus-for-backpropagation.html).
 
 ### Backpropagation: Algorithm
 ![Neural Network](/assets/img/neural-network-model.png)
@@ -723,7 +723,7 @@ end;
 ```
 
 ### Random Initialisation
-Refer to my post [here](./heuristic-for-random-init.html)
+Refer to my post [here](/articles/heuristic-for-random-init.html)
 
 Implementation note:
 1. Chooe epislon based on the number of units in the network. A good choice is 
@@ -782,7 +782,7 @@ As λ increases, we regularise more, thus we shift from the issue of high varian
 6. Using the best combination Θ and λ, apply it on \$ J_{test}(\Theta) \$ to see if it has a good generalization of the problem.
 
 ### Learning Curves
-Refer to my post [here](./learning-curves.html)
+Refer to my post [here](/articles/learning-curves.html)
 
 ### Deciding What To Do Next Summary 
 1. Getting more training examples: Fixes high variance
@@ -853,7 +853,7 @@ When y = 1 and SVM hypothesis = 1, that means we predict correctly and thus the 
 
 
 ### Large Margin
-Refer to my post [here](./math-behind-large-margin-classification.html)
+Refer to my post [here](/articles/math-behind-large-margin-classification.html)
 
 ## Week 7: Kernels
 ### Learning Outcomes

@@ -2,7 +2,7 @@
 layout: post
 title: "My Workload Estimate of NUS CS+USP Modules (that I have taken)"
 author: "Larry Law"
-categories: article
+categories: articles
 tags: [advice]
 image: tree-of-life.png
 ---

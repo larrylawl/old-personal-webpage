@@ -20,9 +20,9 @@
 
 ## Features
 
-- [ ] log (comments on amazing articles i have read)
+- [x] log (comments on amazing articles i have read)
 - [ ] Purpose of each section
-- [ ] Abstract notes out
+- [x] Abstract notes out
 - [ ] Tags page
 - [ ] Claps feature
 - [ ] Footer to return to top of page/home

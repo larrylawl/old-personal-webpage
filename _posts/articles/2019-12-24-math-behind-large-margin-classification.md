@@ -2,7 +2,7 @@
 layout: post
 title: "Math behind Large Margin Classifications for Support Vector Machines"
 author: "Larry Law"
-categories: article
+categories: articles
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---

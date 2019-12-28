@@ -8,7 +8,8 @@ google-ID: "UA-143006563-1"
 
 menu:
   - { name: "About Me", path: "menu", url: "about.html" }
-  - { name: "Articles", path: "menu", url: "article.html" }
+  - { name: "Articles", path: "menu", url: "articles.html" }
+  - { name: "Logs", path: "menu", url: "logs.html" }
   - { name: "Notes", path: "menu", url: "notes.html" }
   # - { name: "Contact", path: "menu", url: "contact.html" }
 

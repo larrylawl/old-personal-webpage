@@ -42,6 +42,7 @@
 
 ## Refactoring
 - [ ] Update readme with links to articles and notes
+- [ ] Enforce that every post has a quote by making it a custom front matter variable
 
 ## v2.0
 

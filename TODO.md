@@ -33,9 +33,7 @@
 |---|---|---|
 |Learning Curve|Useful debugging method|Y |
 |Math for SVM|Understand how the learning model works   |Y   |
-|Eigenvectors   |Fundamentals to understand future proofs in ML; explain generally why have learning outcomes and "why is this impt"   |   |
-|Edit linear transformation to include inverse (changing ours to jennifer's language) (defn of inverse! reverse mapping) Also include how to translate a vector of another language --> Transformation matrix in her language   |   |   |
-|Article on Learning   |Share with others what I have learnt   |   |
+|Eigenvectors   |Fundamentals to understand future proofs in ML; explain generally why have learning outcomes and "why is this impt"   |(not yet - diagonalisation)   |
 |   |   |   |
 
 ## Refactoring

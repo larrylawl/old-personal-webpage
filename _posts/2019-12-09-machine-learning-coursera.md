@@ -94,6 +94,20 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [SVM parameters](#svm-parameters)
   - [Multi-class classification](#multi-class-classification)
   - [Logistic vs SVMs](#logistic-vs-svms)
+- [Week 8: Clustering](#week-8-clustering)
+  - [Learning Outcomes](#learning-outcomes-12)
+  - [Unsupervised Learning: K-Means Algorithm](#unsupervised-learning-k-means-algorithm)
+  - [Optimisation Objective](#optimisation-objective)
+  - [Random Initialisation](#random-initialisation-1)
+  - [Choosing the number of clusters](#choosing-the-number-of-clusters)
+- [Week 8: Principal Component Analysis](#week-8-principal-component-analysis)
+  - [Learning Outcomes](#learning-outcomes-13)
+  - [Motivations: Data Compression and Data Visualisation](#motivations-data-compression-and-data-visualisation)
+  - [Principal Component Analysis Algorithm](#principal-component-analysis-algorithm)
+  - [Reconstruction from Compressed representation](#reconstruction-from-compressed-representation)
+  - [PCA vs Linear Regression](#pca-vs-linear-regression)
+  - [Choosing the Number of Principal Components](#choosing-the-number-of-principal-components)
+  - [Advice for applying PCA](#advice-for-applying-pca)
 
 
 ## Week 1
@@ -904,27 +918,117 @@ Let _n_ = number of features and _m_ = number of training examples
 2. If _n_ is small but _m_ is intermediate, use SVM with Gaussian Kernel: Able to model complex boundary
 3. If _n_ is small but _m_ is large: Create/add more features, then use logistic regression or SVM without a kernel. This is because SVM with Gaussian kernel might run too slowly on large _m_.
 
-Week 8
-K means algo
+## Week 8: Clustering
+### Learning Outcomes
+1. Unsupervised Learning: K-Means Algorithm
+2. Optimisation Objective
+3. Random Initialisation
+4. Choosing the number of clusters
 
-1. cost function will nver decrease. in each iteration, the first step minimizes J over a range which includes the current value (minimizing wrt c^{(i)}c 
-(i)
- -s, and one of the opssibilities is to keep the existing c^{(i)}c 
-(i)
- -s) and so after it we have a new value for J which is *at most* as it was before.
+### Unsupervised Learning: K-Means Algorithm
+![K means algorithm](/assets/img/k-means-algo.png)
 
-the same goes for the second step (but this time, wrt \mu_kμ 
-k
-​	 -s, and one of the possibilities is to keep the existing \mu_kμ 
-k
-​	 -s), so after it we have a new value for J which is *at most* as it was after the first step (which was at most what it was at the beginning of the iteration) - so alltogether - we couldn't have raised J's value in any iteration.
-2. Cost function is also called Distortion
-3. Dimenion reducing --> Choose k vectors and find the span of these vectors
-   1. Span: It’s the Set of all the linear combinations of a number vectors.
-4. PCA vs linear regression
-   1. PCA: It's trying to find a lower dimensional surface onto which to project the data, so as to minimize this squared projection error.
-   2. Vertical vs Orthogonal distance (thus shortest)
-      1. Interpretation: ppd. Formally: Dot product is 0
-   3. Predicting y vs focusing on a list of features (x1... xn)
-5. Cuz each data point is normalised --> no mean --> to maximise will be MSD (displacement from mean of 0, so subtract nth)
-6. Why is retaining variance equivalent to maximising variance? --> Original variance is without u --> To retain, u need a `u` st when multiplied with the dot product, it gets back the original variance --> Since u is a unit vector, the best u you can obtain is when they lie on the same span, thus cos(0) = 1 --> dot product will be x itself
+### Optimisation Objective
+
+$$
+J\left(c^{(1)}, \ldots, c^{(m)}, \mu_{1}, \ldots, \mu_{K}\right)=\frac{1}{m} \sum_{i=1}^{m}  {\left\|x^{(i)}-\mu_{c^{(i)}}\right\|^{2}}
+$$
+
+> Cost function is also called Distortion
+
+Intuitively, 
+1. the cluster assignment step minimises J wrt the centroids, _c_, holding \$ \mu \$ fixed.
+2. the moving of centroids minimises J wrt to \$ \mu \$ while holding _c_ fixed.
+3. Steps 1 and 2 optimises the cost function J
+
+> Cost function will never decrease. 
+
+### Random Initialisation
+1. Randomly pick _K_ training examples.
+2. Set centroids, \$ \mu_{i} \$, to these K examples.
+3. Repeat steps 1-2 for _n_ times, and pick clustering that gave lowest cost function
+
+### Choosing the number of clusters
+1. Elbow method
+
+![Elbow method](/assets/img/elbow-method.png)
+
+2. Manually choosing _K_ (ie choosing T-shirt size)
+
+## Week 8: Principal Component Analysis
+### Learning Outcomes
+1. Motivations: Data Compression and Data Visualisation
+2. Principal Component Analysis Algorithm
+3. Reconstruction from Compressed representation
+4. PCA vs Linear Regression
+5. Choosing the Number of Principal Components
+6. Advice for applying PCA
+
+### Motivations: Data Compression and Data Visualisation
+Reducing dimensions allow for
+1. Data Compression 
+2. Data Visualisation (ie 2d - x,y axis etc)
+
+### Principal Component Analysis Algorithm
+1. Data preprocessing
+   1. Mean normalisation and Feature Scaling
+2. Algorithm
+ 
+![PCA algorithm](/assets/img/pca-algorithm.png)
+1. Sigma is the covariance matrix
+2. K is the top k eigenvectors of the covariance matrix
+3. z is the reduced vector from dimension _n_ to _k_; it best represents x of _n_ dimensions in _k_ dimensions, where _k_ < _n_.
+
+> Proof (here)[http://cs229.stanford.edu/notes/cs229-notes10.pdf] 
+
+> Why is retaining variance equivalent to maximising variance? --> Original variance is without u --> To retain, u need a `u` st when multiplied with the dot product, it gets back the original variance --> Since u is a unit vector, the best u you can obtain is when they lie on the same span, thus cos(0) = 1 --> dot product will be x itself
+
+### Reconstruction from Compressed representation
+
+Recall when reducing,
+
+$$
+z = U^{\top}_{reduce}x
+$$
+
+Thus to reconstruct _x_, simply
+
+$$
+U_{reduce}z = x
+$$
+
+### PCA vs Linear Regression
+1. Vertical vs Orthogonal distance (thus shortest)
+   1. Interpretation: ppd. Formally: Dot product is 0
+2. Predicting y vs focusing on a list of features (x1... xn)
+
+### Choosing the Number of Principal Components
+Choose _k_ to be the smallest value such that maximum variance is retained.
+
+$$
+\frac{\frac{1}{m} \sum_{i=1}^{m}\left\|x^{(i)}-x_{a p p r o x}^{(i)}\right\|^{2}}{\frac{1}{m} \sum_{i=1}^{m}\left\|x^{(i)}\right\|^{2}} ≤ 0.01\%
+$$
+
+It turns out that this is equivalent to
+
+$$
+\frac{\sum_{i=1}^{k} S_{i i}}{\sum_{i=1}^{m} S_{i i}} \leqslant 0.99
+$$
+
+where S is the diagonal matrix return from `svd`.
+
+
+### Advice for applying PCA
+1. **To prevent overfitting**: While PCA reduces dimension, thus reducing number of features thus reducing overfitting, you should use regularisation instead! PCA, unlike regularisation, loses information as it squishes dimension.
+2. **Use raw data first**: Only use PCA if you need the speedup.
+
+Week 9 
+1. Evaluation metric: Don't use accuracy due to skewed classes
+2. Anomaly detection
+   1. Have large no. of negative examples (correct) --> Can use them to train obtain the _p(x)_; save positive examples (anomaly) for test/cv 
+   2. `histogram` to manipulate feature to gaussian distribution --> Need to manipulate as your probability distribution is for gaussian distribution
+3. Error analysis --> Similar to (supervised?) manually looking at each anamoly that was wrong (ie has p(x) that is comparable w the normal eg) --> Come up w new feature to handle the anomaly better
+4. Original model corresponds to mv gaussian (?)
+   1. Zero off diagonal --> Each dimension is independent of the other --> joint prob is = the multiplication of the individual prob
+
+5. MV gaussian: Sigma inverse is expensive as its nxn

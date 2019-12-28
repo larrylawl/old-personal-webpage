@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Machine Learning Coursera Notes"
+title: "Coursera, Stanford: Machine Learning Notes"
 author: "Larry Law"
-categories: article
-tags: [Machine Learning]
+categories: notes
+tags: [notes, Machine Learning]
 image: machine-learning.jpg
 ---
 <!-- omit in toc -->
-# Machine Learning Coursera Notes
+# Coursera, Stanford: Machine Learning Notes
 
 Lecturer: Professor Andrew Ng <br>
 Source: [here](https://www.coursera.org/learn/machine-learning)

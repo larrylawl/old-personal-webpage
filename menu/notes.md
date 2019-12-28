@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Articles
+title: Notes
 ---
 <ul class="posts">
-  {% for post in site.categories.article %}
+  {% for post in site.categories.notes %}
 
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>

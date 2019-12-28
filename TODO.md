@@ -14,6 +14,10 @@
 - [x] Update images
 - [ ] Timer
 
+## Bugs
+- [x] Timer incorrect
+- [x] Notes do not have year
+
 ## Features
 
 - [ ] log (comments on amazing articles i have read)

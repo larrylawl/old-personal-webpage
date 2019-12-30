@@ -108,6 +108,20 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [PCA vs Linear Regression](#pca-vs-linear-regression)
   - [Choosing the Number of Principal Components](#choosing-the-number-of-principal-components)
   - [Advice for applying PCA](#advice-for-applying-pca)
+- [Week 9: Anomaly Detection](#week-9-anomaly-detection)
+  - [Learning Outcomes](#learning-outcomes-14)
+  - [Anomaly Detection Algorithm](#anomaly-detection-algorithm)
+  - [Algorithm Evaluation](#algorithm-evaluation)
+  - [Anomaly detecion vs Supervised Learning](#anomaly-detecion-vs-supervised-learning)
+  - [Choosing what features to use](#choosing-what-features-to-use)
+  - [Anomaly detection using Multivariate Gaussian Distribution](#anomaly-detection-using-multivariate-gaussian-distribution)
+- [Week 9: Recommender Systems](#week-9-recommender-systems)
+  - [Learning Outcomes](#learning-outcomes-15)
+  - [Notations and Problem Formulation](#notations-and-problem-formulation)
+  - [Optimisation Objective](#optimisation-objective-1)
+  - [Collaborative Filtering Algorithm](#collaborative-filtering-algorithm)
+  - [Finding Related Movies](#finding-related-movies)
+  - [Mean Normalisation](#mean-normalisation)
 
 
 ## Week 1
@@ -1022,13 +1036,142 @@ where S is the diagonal matrix return from `svd`.
 1. **To prevent overfitting**: While PCA reduces dimension, thus reducing number of features thus reducing overfitting, you should use regularisation instead! PCA, unlike regularisation, loses information as it squishes dimension.
 2. **Use raw data first**: Only use PCA if you need the speedup.
 
-Week 9 
-1. Evaluation metric: Don't use accuracy due to skewed classes
-2. Anomaly detection
-   1. Have large no. of negative examples (correct) --> Can use them to train obtain the _p(x)_; save positive examples (anomaly) for test/cv 
-   2. `histogram` to manipulate feature to gaussian distribution --> Need to manipulate as your probability distribution is for gaussian distribution
-3. Error analysis --> Similar to (supervised?) manually looking at each anamoly that was wrong (ie has p(x) that is comparable w the normal eg) --> Come up w new feature to handle the anomaly better
-4. Original model corresponds to mv gaussian (?)
-   1. Zero off diagonal --> Each dimension is independent of the other --> joint prob is = the multiplication of the individual prob
+## Week 9: Anomaly Detection
+### Learning Outcomes
+1. Anomaly Detection Algorithm
+2. Algorithm Evaluation
+3. Anomaly detecion vs Supervised Learning
+4. Choosing what features to use
+5. Anomaly detection using Multivariate Gaussian Distribution
 
-5. MV gaussian: Sigma inverse is expensive as its nxn
+### Anomaly Detection Algorithm
+![Anomaly detection algorithm](/assets/img/anomaly-detection-algo.png)
+
+### Algorithm Evaluation
+1. Fit model _p(x)_ on training set.
+2. On cross validation/test example _x_, predict 
+
+$$
+y=\left\{\begin{array}{ll}{1} & {\text { if } p(x) < \epsilon} \text{ (anomaly)}\\ 
+{0} & {\text { if } p(x) ≥ \epsilon \text{ (normal)}}\end{array}\right.
+$$
+
+3. Evaluate based on `F-score` (not accuracy!). This is because anomalies represent skewed classes.
+
+4. Iterate through values of \$ \epsilon \$ to determine best threshold value.
+
+### Anomaly detecion vs Supervised Learning
+
+|Anomaly Detection  |Supervised Learning  |
+|---|---|
+|Very small no. of positive examples. Large no. of negative examples.  |Large no. of positive and negative examples  |
+|Many different "types" of anomalies. Hard for algo to learn from positive examples as future anomalies may be completely different. |Enough positive examples for algo to get a sense of what positive examples are like  |
+
+Because 1) the mean and sv of positive examples are more consistent and 2) negative examples are rare, anomaly detection systems trains _p(x)_ on the positive examples (ie _y = 0_), and saves the negative examples for cv or test sets.
+
+### Choosing what features to use
+1. **Error Analysis:** manually looking at each anomaly that was wrong (ie has p(x) that is comparable w the normal eg). Come up w new feature to handle the anomaly better 
+2. **Feature Engineering**
+   1. _f(x)_: function of feature itself so as to get a normal distribution. Need to manipulate as your probability distribution _p_ is for gaussian distribution. (Use `histogram` to do so).
+   2. _f(x, y)_: function of multiple features so as to capture anomalies better.
+
+### Anomaly detection using Multivariate Gaussian Distribution
+Instead of modeling \$ p(x_1), p(x_2),... \$ separately, mv gaussian distribution models \$ p(x_1, x_2, ..., x_n) \$.
+
+1. Fit model _p(x)_ by setting
+
+$$
+\mu=\frac{1}{m} \sum_{i=1}^{m} x^{(i)}
+$$
+
+$$
+\Sigma=\frac{1}{m} \sum_{i=1}^{m}\left(x^{(i)}-\mu\right)\left(x^{(i)}-\mu\right)^{T}
+$$
+
+2. Given a new example x, compute
+
+$$
+p(x; \mu, \Sigma)=\frac{1}{(2 \pi)^{\frac{n}{2}}|\Sigma|^{\frac{1}{2}}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)
+$$
+
+Flag an anomaly if \$ p(x) < \epsilon \$.
+
+If the features are independent of each other (ie the covariance matrix is zero off diagonal), then **the probability distribution of the gaussian distribution of the individual features equals that of the multivariate gaussian distribution.** That is, the two equations below are equal.
+
+$$
+p(x) = p(x_1 ; \mu_1; \sigma^2_1) \times p(x_2 ; \mu_2; \sigma^2_2) \times ... \times p(x_n ; \mu_n; \sigma^2_n)
+$$
+
+$$
+p(x; \mu, \Sigma)=\frac{1}{(2 \pi)^{\frac{n}{2}}|\Sigma|^{\frac{1}{2}}} \exp \left(-\frac{1}{2}(x-\mu)^{T} \Sigma^{-1}(x-\mu)\right)
+$$
+
+> Explanation: Zero off diagonal --> Each dimension is independent of the other --> joint prob distribution = the multiplication of the individual prob
+
+|Original Model|Multivariate Gaussian  |
+|---|---|
+|Manually create features to capture anomalies (ie feature engineering) | Automatically captures correlations between features |
+|Computationally cheaper |Computationally more expensive (as covariance matrix is nxn, thus calculating inverse will be n^2)  |
+|Ok even if m is small  |Must have m > n (rec m ≥ 10n) in order for covariance matrix to be invertible  |
+
+## Week 9: Recommender Systems
+### Learning Outcomes
+1. Notations and Problem Formulation
+2. Optimisation Objective
+3. Collaborative Filtering algorithm
+
+### Notations and Problem Formulation
+- _r(i, j) = 1_ if user _j_ has rated movie _i_ (0 otherwise)
+- \$ y^{(i, j)} \$ = rating by user _j_ on movie _i_ (if defined)
+- \$ \theta^{(j)} \$ = parameter vector for user _j_
+- \$ x^{(i)} \$ = feature vector for movie _i_
+- For user _j_, movie _i_, predicted rating: \$ (\theta^{(j)})^{\top}(x^{(i)}) \$
+
+Objective is recommend the movies with highest predicted ratings to the user.
+
+### Optimisation Objective
+
+$$
+J\left(x^{(1)}, \ldots, x^{\left(n_{m}\right)}, \theta^{(1)}, \ldots, \theta^{\left(n_{\omega}\right)}\right)=\frac{1}{2} \sum_{(i, j): r(i, j)=1}\left(\left(\theta^{(j)}\right)^{T} x^{(i)}-y^{(i, j)}\right)^{2}+\frac{\lambda}{2} \sum_{i=1}^{n_{m}} \sum_{k=1}^{n}\left(x_{k}^{(i)}\right)^{2}+\frac{\lambda}{2} \sum_{j=1}^{n_{u}} \sum_{k=1}^{n}\left(\theta_{k}^{(j)}\right)^{2}
+$$
+
+Note that:
+1. Do not include bias term (ie _x_ exists in _n_ dimension, not _n+1_).
+2. Updates both _x_ and \$ \theta \$ simultaneously.
+3. Cost function is the same as linear regression, except that it does not normalise by _1/m_ (which does not shift the minimum point of the cost function).
+
+> Explanation: Normalizing by 1/m helps in regression because you may want to vary the size of the training set, but still have comparable cost values for analysis. Typically this isn't required in the recommender system. So we can remove the 1/m calculation and save a bit of computer processing time.
+
+### Collaborative Filtering Algorithm
+![Collaborative Filtering Algorithm](/assets/img/collaborative-filtering-algo.png)
+
+> Collaborative Filtering Algorithm is also called the _low rank matrix factorisation_.
+
+> Why does initialising random values work? _(Disclaimer: This is my own rationalisation)_ 
+
+This serves as symmetry breaking (similar to the random initialization of a neural network’s parameters) and ensures the algorithm learns all features (x) that are different from each other.
+
+> How can we make predictions when we have neither _x_ (movie features) nor \$ \theta \$ (user preference)?
+
+Notice that the cost function only computes the cost when there is a true value (ie _r(i, j) = 1_). For _i and j_ which have a true value, the cost function  sums up the squared difference between the predicted value (ie _thetax_) and the true value (ie _y_). Thus, the optimisation of the cost function will be based on minimising the squared difference above, only when there is a true value. After learning the parameters based on _y_, we can now predict the entries which are missing _x_ or \$ \theta \$.
+
+> Why is it called collaborative filtering?
+All these users are collaborating to help the system to learn better features. With every user rating some subset within the movies, every user is helping the algo a lil bit to learn the features better.
+
+### Finding Related Movies
+Find a movie with small euclidean distance, ie 
+
+$$
+||x^{(i)} - x^{(j)}||
+$$
+
+### Mean Normalisation
+Important to perform (mean) normalisation.
+> You can skip the variance if all the movies have the same ratings (ie 1-5)
+
+Suppose not,
+1. For entries without prediction, in order to minimise cost function, specifically the regularisation term, \$ \theta = 0 \$.
+2. Which makes the prediction (ie \$ (\theta^{(j)})^{\top}(x^{(i)}) \$ = 0)
+3. Not useful result
+
+With mean normalisation, you can add the mean to 0, ie \$ (\theta^{(j)})^{\top}(x^{(i)}) + \mu_i \$

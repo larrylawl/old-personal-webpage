@@ -35,10 +35,8 @@
 
 |Article   |I'm writing this because...   |Done?   |
 |---|---|---|
-|Learning Curve|Useful debugging method|Y |
-|Math for SVM|Understand how the learning model works   |Y   |
 |Eigenvectors   |Fundamentals to understand future proofs in ML; explain generally why have learning outcomes and "why is this impt"   |(not yet - diagonalisation)   |
-|   |   |   |
+| Low Rank Matrix  |   |   |
 
 ## Refactoring
 - [ ] Update readme with links to articles and notes

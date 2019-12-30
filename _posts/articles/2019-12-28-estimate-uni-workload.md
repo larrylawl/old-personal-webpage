@@ -21,7 +21,7 @@ Unlike high school, undergraduates need to plan our own semester. Thus, a questi
 
 Unfortunately, it is hard for me to answer this question as everyone has different capacities. A semester that is too heavy for me might be too light for someone else.
 
-Instead, I would advise him to _estimate his own capacity_, and judge for himself if he shud add mod _j_.
+Instead, I would advise him to _estimate his own capacity_, and judge for himself if he should add mod _j_.
 
 > Without loss of generality to her :P
 

@@ -122,6 +122,14 @@ Source: [here](https://www.coursera.org/learn/machine-learning)
   - [Collaborative Filtering Algorithm](#collaborative-filtering-algorithm)
   - [Finding Related Movies](#finding-related-movies)
   - [Mean Normalisation](#mean-normalisation)
+- [Week 10: Large Scale Machine Learning](#week-10-large-scale-machine-learning)
+  - [Learning Outcomes](#learning-outcomes-16)
+  - [Motivation](#motivation)
+  - [Stochastic Gradient Descent](#stochastic-gradient-descent)
+  - [Mini-Batch Gradient Descent](#mini-batch-gradient-descent)
+  - [Stochastic Gradient Descent Convergence](#stochastic-gradient-descent-convergence)
+  - [Online Learning](#online-learning)
+  - [Map-Reduce and Data Parallelism](#map-reduce-and-data-parallelism)
 
 
 ## Week 1
@@ -1175,3 +1183,63 @@ Suppose not,
 3. Not useful result
 
 With mean normalisation, you can add the mean to 0, ie \$ (\theta^{(j)})^{\top}(x^{(i)}) + \mu_i \$
+
+All the basis vectors are eigenvectors 
+
+## Week 10: Large Scale Machine Learning
+### Learning Outcomes
+1. Motivation
+2. Stochastic Gradient Descent
+3. Mini-batch Gradient Descent
+4. Stochastic Gradient Descent Convergence
+5. Online Learning
+6. Map-Reduce and Data Parallelism
+
+### Motivation
+"It's not who has the best algorithm that wins. It's who has the most data." - Finding from research by Banko and Brill, 2001. 
+
+Thus we need an time-complexity efficient way of handling this data.
+
+> Before performing faster gradient descent methods, first check if algo will perform just as well with a smaller subset of the data. Plot a learning curve for a range of values of m and verify that the algorithm has high variance when _m_ is small.
+
+### Stochastic Gradient Descent
+![Stochastic Gradient Descent Algorithm](/assets/img/stochastic-gradient-descent-algo.png)
+
+The term after alpha is the partial derivative term of the cost function of a single training sample.
+
+$$
+\operatorname{cost}\left(\theta,\left(x^{(i)}, y^{(i)}\right)\right)=\frac{1}{2}\left(h_{\theta}\left(x^{(i)}\right)-y^{(i)}\right)^{2}
+$$
+
+### Mini-Batch Gradient Descent
+1. **Batch Gradient Descent**: Use all _m_ examples in each iteration
+2. **Stochastic Gradient Descent**: Use _1_ example in each iteration
+3. **Mini-Batch gradient descent**: Use _b_ examples in each iteration
+
+![Mini-batch gradient descent algo](/assets/img/minibatch-gradient-descent-algo.png)
+
+Mini-Batch vs Stochastic Gradient Descent
+   1. Advantage: leverage vectorisation 
+   2. Disadv: Need to find _b_
+
+### Stochastic Gradient Descent Convergence
+![Convergence](/assets/img/convergence.png)
+
+> Every data point is the cost function averaged above _m_ examples.
+
+Learning rate is typically held constant. We can slowly decrease if we want theta to converge. However, 1) now we have more parameters to deal with and 2) we are usually satisfied so long as its in the region of local min.
+
+$$
+\alpha = \frac{\text{const1}}{\text{iterationNumber} + \text{const2}}
+$$
+
+
+### Online Learning
+![Online Learning](/assets/img/online-learning.png)
+
+Data is continuously thrown away
+
+### Map-Reduce and Data Parallelism
+![Map Reduce](/assets/img/map-reduce.png)
+
+> `reduce` the partial derivatives to a single sum.

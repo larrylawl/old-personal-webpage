@@ -6,11 +6,16 @@ categories: articles
 tags: [Machine Learning]
 image: machine-learning.jpg
 ---
-## Learning outcomes
-1. Purpose of Gradient Descent
-2. Intuition of Gradient Descent
-3. Understand the math behind Gradient Descent
-4. Understand simultaneous updates
+<!-- omit in toc -->
+## Learning Outcomes
+- [Prerequisite: Cost Function](#prerequisite-cost-function)
+- [Purpose of Gradient Descent](#purpose-of-gradient-descent)
+- [Intuition of Gradient Descent](#intuition-of-gradient-descent)
+- [The math behind Gradient Descent](#the-math-behind-gradient-descent)
+  - [Understanding the partial derivative term](#understanding-the-partial-derivative-term)
+  - [Understanding the learning rate, $ \alpha $](#understanding-the-learning-rate--alpha)
+- [Gradient Descent for multiple variables](#gradient-descent-for-multiple-variables)
+- [Terminating Conditions for Gradient Descent](#terminating-conditions-for-gradient-descent)
 
 ## Prerequisite: Cost Function
 Cost function is a function of our model's parameters that **measures the effectiveness of a machine learning model**. It is commonly denoted as,
@@ -61,6 +66,12 @@ Intuitively, the learning rate denotes the _"size"_ of each descent. This makes 
 Simultaneous updates brings us to the minimum of the cost function quicker.
 ![Simultaneous update](/assets/img/simult-update.jpg)
 
+## Terminating Conditions for Gradient Descent
+1. `maxit` - predetermined max no. of iterations
+2. `abstol` - Stop when the cost function returns approximately 0.
+3. `reltol` - Stop when the improvement drops below a threshold.
+
+<!-- omit in toc -->
 ## Credits
 Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning)
 

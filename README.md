@@ -14,7 +14,7 @@
 
 My personal website where I document my love of learning, one byte at a time. More concretely, I write... 
 1. Articles of important concepts that I have learnt.
-2. Logs of my takeaways from others' articles.
+2. Logs of my takeaways from articles written by others.
 3. Notes for my coursework.
 
 ## Why do this?

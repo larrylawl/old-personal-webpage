@@ -35,7 +35,7 @@ where p is the length of projection of X on Y.
 ## Large Margin Intuition
 Support vector machines (SVM) are known as large margin classifiers. Intuitively, this is because the minimisation of the cost function will lead to large margins (ie the margin in the center).
 
-![Support Vector Machine Margins](/assets/img/svm-margins.png)
+![Support Vector Machine Margins](/assets/img/2019-12-24-math-behind-large-margin-classification/svm-margins.png)
 
 Let us now look at the math justifying this intuition.
 
@@ -50,7 +50,7 @@ $$
 
 If y = 1, the first function (ie `cost`) will be the graph on the left. If y = 0, it will be the graph on the right.
 
-![Support Vector Machine](/assets/img/svm.png)
+![Support Vector Machine](/assets/img/2019-12-24-math-behind-large-margin-classification/svm.png)
 
 At the optimal minimisation of the cost function, the first term will equals zero. In order for the first term to be zero, 
 1. If \$ y^{(i)} = 1 \$, \$ \theta^{T}x^{(i)} \$ ≥ 1 (refer to the left graph)
@@ -86,7 +86,7 @@ such that
 
 Since the optimal cost function is still dependent on \$ \lvert \theta \lvert \$, \$ \lvert \theta \lvert \$ will likely be small at the minimum point of the cost function. If \$ \lvert \theta \lvert \$ is small, then the projection _p_ has to be large, thus the decision boundary is large.
 
-![Support Vector Margin](/assets/img/svm-margin-2.png)
+![Support Vector Margin](/assets/img/2019-12-24-math-behind-large-margin-classification/svm-margin-2.png)
 
 This is why, the SVM is associated as a large boundary classifier.
 

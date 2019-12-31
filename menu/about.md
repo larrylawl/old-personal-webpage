@@ -3,7 +3,7 @@ layout: page
 title: 0001 about me
 ---
 
-![Larry Photo](/assets/img/larry.jpg)
+![Larry Photo](/assets/img/site/larry.jpg)
 
 ### Intro
 

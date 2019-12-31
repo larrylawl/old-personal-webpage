@@ -20,7 +20,7 @@ image: machine-learning.jpg
 ## Purpose of Learning Curves
 Learning curves diagnose **underfitting/high bias** (left graph) and **overfitting/high variance** (right graph) problems.
 
-![fitting](/assets/img/fitting.jpg)
+![fitting](/assets/img/2019-12-23-learning-curves/fitting.jpg)
 
 > A model that underfits are biased for its assumption despite the training data saying otherwise.
 
@@ -31,7 +31,7 @@ Let _N_ denote the training set size, and _n_ denote the number of training data
 
 More concretely, it is a function of _n_. But what does this function do? This function first trains the parameters given _n_ training samples, and outputs (1) **\$ J_{train}(\Theta) \$**: the cost function of these parameters (y-coordinate) on the _training set of size n_ and (2) **\$ J_{CV}(\Theta) \$**: the cost function of these parameters on the _cross validation set of size N_.
 
-![Learning Curve of High Bias](/assets/img/learning-curve-underfit.png) 
+![Learning Curve of High Bias](/assets/img/2019-12-23-learning-curves/learning-curve-underfit.png) 
 
 Note that we used _n_ for the \$ J_{train}(\Theta) \$ but _N_ for \$ J_{CV}(\Theta) \$. This is because the learning curve seeks to compare between the cost function that the model was trained on (which is over _n_ training samples) with the cost function that shows the accurate cost of the current model, (which is over _N_ cross validation samples).
 
@@ -42,12 +42,12 @@ J(\theta)=\frac{1}{2n} \sum_{i=1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}=\frac{1}
 $$
 
 ## Interpreting Learning Curves
-![fitting](/assets/img/fitting.jpg)
-![Learning Curve of High Bias](/assets/img/learning-curve-underfit.png) 
+![fitting](/assets/img/2019-12-23-learning-curves/fitting.jpg)
+![Learning Curve of High Bias](/assets/img/2019-12-23-learning-curves/learning-curve-underfit.png) 
 
 Learning Curve of model with _High Bias_. In particular, note that the **training error and test error converges.** Consider the underfitting example on the left. When _N_ is high, the model is not able to optimise the line much more as it is trying to fit a linear equation to a data points of quadratic/log nature. Since the model is not changing much, both the training and test error stagnates. Consequently, **collecting more training data** will not improve a model with high bias.
 
-![Learning Curve of High Variance](/assets/img/learning-curve-overfit.png)
+![Learning Curve of High Variance](/assets/img/2019-12-23-learning-curves/learning-curve-overfit.png)
 
 Learning Curve of model with _High Variance_. In particular, note that **test error decreases as N increases**. Consider the overfitting example on the right. With more data points, the overfitted model forces the polynomial equation to fit the data points. While it gets harder to fit the equation (thus training error increases), the equation also gets closer to the correct structure of the data points (thus test error decreases). Consequently, **collecting more training data** will improve a model with high variance.
 

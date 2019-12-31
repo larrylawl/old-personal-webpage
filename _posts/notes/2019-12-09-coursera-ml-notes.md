@@ -265,9 +265,7 @@ $$
 
 ### Normal Equation vs Gradient Descent
 
-![Normal Equation vs Gradient Descent](/assets/img/comparison.jpg)
-
-<!-- TODO: Normal equation only for linear regression? -->
+![Normal Equation vs Gradient Descent](/assets/img/2019-12-09-coursera-ml-notes/comparison.jpg)
 
 ### Causes for Normal Equation noninvertibility
 If \$ X^{T} X \$ is **noninvertible**, the common causes include
@@ -317,7 +315,7 @@ g = 1 ./ (1 .+ e .^ -z) % size = [m, 1]
 ```
 
 Graphically, it looks like this:
-![logistic function](/assets/img/logistic.jpg)
+![logistic function](/assets/img/2019-12-09-coursera-ml-notes/logistic.jpg)
 Note certain properties of it
 1. **\$ h_\theta(x) \in (1, 0) \$.** This makes sense as the hypothesis function is a probability.
 2. **\$ If x = 0, h_\theta(x) = 0.5 \$.** Intuitively, if the input data is null, the model will not have any information to make a prediction, thus the probability of the binary classification will be 0.5
@@ -325,7 +323,7 @@ Note certain properties of it
 ### Decision boundary: what
 The decision boundary is the **line** that partitions y (ie. {0, 1}). 
 
-![decision boundary](/assets/img/decision-boundary-fit.jpg)
+![decision boundary](/assets/img/2019-12-09-coursera-ml-notes/decision-boundary-fit.jpg)
 
 ### Decision boundary: how to compute
 Let us start with an example.
@@ -365,7 +363,7 @@ J = (1 / m) * (-y' * log(g) - (1 - y') * log(1 - g));
 ```
 
 Plotting the graph of the Cost Function,
-![cost function graph](/assets/img/cost-function-graph.jpg) 
+![cost function graph](/assets/img/2019-12-09-coursera-ml-notes/cost-function-graph.jpg) 
 
 
 Note the following properties
@@ -445,7 +443,7 @@ p = indices;
 ```
 > Note use of `max` function.
 
-![multiclass](/assets/img/multiclass.jpg)
+![multiclass](/assets/img/2019-12-09-coursera-ml-notes/multiclass.jpg)
 
 ## Week 3: Solving the Problem of Overfitting
 ### Learning Outcomes
@@ -456,7 +454,7 @@ p = indices;
 
 
 ### Understanding Underfitting and Overfitting
-![fitting](/assets/img/fitting.jpg)
+![fitting](/assets/img/2019-12-09-coursera-ml-notes/fitting.jpg)
 
 Underfitting (left) is when the hypothesis function, \$ h_\theta{x} \$, maps poorly to the trend of the data. Notice how the \$ h_\theta{x} \$ is a linear function while the data is quadratic (mid). Underfitting is usually caused by a function that is too simple.
 
@@ -542,7 +540,7 @@ Neural Network's initial purpose was to build learning systems, thus they modele
 
 Surprisingly, human brains have _one learning algorithm_ (instead of many distinct ones for each functionality). Thus it'll be valuable to model how the brain learns.
 
-![neurons](/assets/img/neurons.jpg)
+![neurons](/assets/img/2019-12-09-coursera-ml-notes/neurons.jpg)
 _Dendrites_ (inputs) take in electrical inputs and channel them to _axons_ (outputs).
 
 ### Intuition for Neural Networks
@@ -554,7 +552,7 @@ Consider this example of predicting digits (credits: 3B1B's video explaining neu
 |--------|---------|---------|----------|---------|
 | Output | Pixels  | Edges   | Patterns | Numbers |
 
-![neural networks intuition](/assets/img/neural-networks-intuition.png)
+![neural networks intuition](/assets/img/2019-12-09-coursera-ml-notes/neural-networks-intuition.png)
 
 
 ### Model Representation
@@ -564,7 +562,7 @@ $$
 {\Theta^{(j)} = \text{matrix of weights controlling function mapping from layer j to layer j+1}}\end{array}
 $$
 
-![Neural network model](/assets/img/neural-network-model.png)
+![Neural network model](/assets/img/2019-12-09-coursera-ml-notes/neural-network-model.png)
 
 Expanding the terms
 
@@ -681,9 +679,9 @@ endfunction
 Refer to my post [here](/articles/calculus-for-backpropagation.html).
 
 ### Backpropagation: Algorithm
-![Neural Network](/assets/img/neural-network-model.png)
+![Neural Network](/assets/img/2019-12-09-coursera-ml-notes/neural-network-model.png)
 
-![Backpropagation algorithm](/assets/img/backpropagation-algo.png)
+![Backpropagation algorithm](/assets/img/2019-12-09-coursera-ml-notes/backpropagation-algo.png)
 Implementation Note
 - Add bias term (ie 1) for all `a` except layer _L_. 
 - Don't compute \$ \delta^{1} \$. Input data should not have error terms associated with them.
@@ -786,7 +784,7 @@ Recommended breakdown:
 4. Deciding What To Do Next Summary
 
 ### Degree of polynomial and Bias/Variance
-![Degree of polynomial and Bias/Variance](/assets/img/polynomial-bias-variance.png)
+![Degree of polynomial and Bias/Variance](/assets/img/2019-12-09-coursera-ml-notes/polynomial-bias-variance.png)
 
 In particular, note that
 1. As polynomial degree increases, we shift from the problem of underfitting to overfitting.
@@ -828,7 +826,7 @@ Recommended Approach for ML problems:
 
 
 ### False Positives and Negatives
-![false positives and negatives](/assets/img/false-positive-negative.png)
+![false positives and negatives](/assets/img/2019-12-09-coursera-ml-notes/false-positive-negative.png)
 
 > **False positive:** Predicted positive incorrectly
 
@@ -849,7 +847,7 @@ Suppose that only 0.5% of patients have cancer. A function that always outputs 0
 ### Large Data Rationale
 "It's not who has the best algorithm that wins. It's who has the most data."
 
-![big data](/assets/img/big-data.png)
+![big data](/assets/img/2019-12-09-coursera-ml-notes/big-data.png)
 
 1. Suppose feature _x_ has sufficient information to predict _y_ accurately 
    1. Useful test: Given the input _x_, can a human expert confidently predict _y_?
@@ -864,7 +862,7 @@ $$
 h_{\theta}(x)\left\{\begin{array}{ll}{1} & {\text { if } \theta^{\top} x \geqslant 0} \\ {0} & {\text { otherwise }}\end{array}\right.
 $$
 
-![SVM](/assets/img/svm.png)
+![SVM](/assets/img/2019-12-09-coursera-ml-notes/svm.png)
 
 _C_ is a penalisation parameter that have the opposite role of the parameter \$ \lambda \$. Concretely, when C decreases, \$ \lambda \$ increases, the regularisation term increases, hence it mitigates overfitting.
 
@@ -888,7 +886,7 @@ The purpose of Kernels is to plot non-linear decision boundary.
 
 Kernels are **similarity functions**. Intuitively, given x, a kernel evaluates the similarity of x and the landmark _l_. (I will elaborate on how to choose landmarks later). 
 
-![Support Vector Machine landmarks](/assets/img/svm-landmarks.png)
+![Support Vector Machine landmarks](/assets/img/2019-12-09-coursera-ml-notes/svm-landmarks.png)
 
 > Kernel chosen here is the Gaussian kernel
 
@@ -920,10 +918,10 @@ Intuitively, this is nice because it is saying that my features are basically go
 ### SVM parameters
 1. **C**: C is a penalisation parameter that have the opposite rote of the parameter \$ \lambda \$. Concretely, when C decreases, \$ \lambda \$ increases, the regularisation term increases, hence it mitigates overfitting.  
 2. _(For Gaussian Kernels)_ \$ \sigma^2 \$: Larger sigma --> Similarity function becomes smoother (Feature decreases less quickly) -->  Not so dependent on x1 --> Higher bias --> lower variance (due to bias-variance tradeoff) 
-![Gaussian kernel variance](/assets/img/gaussian-kernel-variance.png)
+![Gaussian kernel variance](/assets/img/2019-12-09-coursera-ml-notes/gaussian-kernel-variance.png)
 3. **Perform feature scaling**: 
 
-![Feature Scaling for SVM](/assets/img/svm-feature-scaling.png)
+![Feature Scaling for SVM](/assets/img/2019-12-09-coursera-ml-notes/svm-feature-scaling.png)
 
 ### Multi-class classification
 Either
@@ -948,7 +946,7 @@ Let _n_ = number of features and _m_ = number of training examples
 4. Choosing the number of clusters
 
 ### Unsupervised Learning: K-Means Algorithm
-![K means algorithm](/assets/img/k-means-algo.png)
+![K means algorithm](/assets/img/2019-12-09-coursera-ml-notes/k-means-algo.png)
 
 ### Optimisation Objective
 
@@ -973,7 +971,7 @@ Intuitively,
 ### Choosing the number of clusters
 1. Elbow method
 
-![Elbow method](/assets/img/elbow-method.png)
+![Elbow method](/assets/img/2019-12-09-coursera-ml-notes/elbow-method.png)
 
 2. Manually choosing _K_ (ie choosing T-shirt size)
 
@@ -996,7 +994,7 @@ Reducing dimensions allow for
    1. Mean normalisation and Feature Scaling
 2. Algorithm
  
-![PCA algorithm](/assets/img/pca-algorithm.png)
+![PCA algorithm](/assets/img/2019-12-09-coursera-ml-notes/pca-algorithm.png)
 1. Sigma is the covariance matrix
 2. K is the top k eigenvectors of the covariance matrix
 3. z is the reduced vector from dimension _n_ to _k_; it best represents x of _n_ dimensions in _k_ dimensions, where _k_ < _n_.
@@ -1053,7 +1051,7 @@ where S is the diagonal matrix return from `svd`.
 5. Anomaly detection using Multivariate Gaussian Distribution
 
 ### Anomaly Detection Algorithm
-![Anomaly detection algorithm](/assets/img/anomaly-detection-algo.png)
+![Anomaly detection algorithm](/assets/img/2019-12-09-coursera-ml-notes/anomaly-detection-algo.png)
 
 ### Algorithm Evaluation
 1. Fit model _p(x)_ on training set.
@@ -1151,7 +1149,7 @@ Note that:
 > Explanation: Normalizing by 1/m helps in regression because you may want to vary the size of the training set, but still have comparable cost values for analysis. Typically this isn't required in the recommender system. So we can remove the 1/m calculation and save a bit of computer processing time.
 
 ### Collaborative Filtering Algorithm
-![Collaborative Filtering Algorithm](/assets/img/collaborative-filtering-algo.png)
+![Collaborative Filtering Algorithm](/assets/img/2019-12-09-coursera-ml-notes/collaborative-filtering-algo.png)
 
 > Collaborative Filtering Algorithm is also called the _low rank matrix factorisation_.
 
@@ -1203,7 +1201,7 @@ Thus we need an time-complexity efficient way of handling this data.
 > Before performing faster gradient descent methods, first check if algo will perform just as well with a smaller subset of the data. Plot a learning curve for a range of values of m and verify that the algorithm has high variance when _m_ is small.
 
 ### Stochastic Gradient Descent
-![Stochastic Gradient Descent Algorithm](/assets/img/stochastic-gradient-descent-algo.png)
+![Stochastic Gradient Descent Algorithm](/assets/img/2019-12-09-coursera-ml-notes/stochastic-gradient-descent-algo.png)
 
 The term after alpha is the partial derivative term of the cost function of a single training sample.
 
@@ -1216,14 +1214,14 @@ $$
 2. **Stochastic Gradient Descent**: Use _1_ example in each iteration
 3. **Mini-Batch gradient descent**: Use _b_ examples in each iteration
 
-![Mini-batch gradient descent algo](/assets/img/minibatch-gradient-descent-algo.png)
+![Mini-batch gradient descent algo](/assets/img/2019-12-09-coursera-ml-notes/minibatch-gradient-descent-algo.png)
 
 Mini-Batch vs Stochastic Gradient Descent
    1. Advantage: leverage vectorisation 
    2. Disadv: Need to find _b_
 
 ### Stochastic Gradient Descent Convergence
-![Convergence](/assets/img/convergence.png)
+![Convergence](/assets/img/2019-12-09-coursera-ml-notes/convergence.png)
 
 > Every data point is the cost function averaged above _m_ examples.
 
@@ -1235,11 +1233,11 @@ $$
 
 
 ### Online Learning
-![Online Learning](/assets/img/online-learning.png)
+![Online Learning](/assets/img/2019-12-09-coursera-ml-notes/online-learning.png)
 
 Data is continuously thrown away
 
 ### Map-Reduce and Data Parallelism
-![Map Reduce](/assets/img/map-reduce.png)
+![Map Reduce](/assets/img/2019-12-09-coursera-ml-notes/map-reduce.png)
 
 > `reduce` the partial derivatives to a single sum.

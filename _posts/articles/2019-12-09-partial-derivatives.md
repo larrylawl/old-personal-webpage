@@ -25,7 +25,7 @@ $$ \frac{df(x_1, x_2)}{dx_1} $$
 
 In other words, we are interested in the derivative of the red line below for a fixed value of \$ x_2 \$.
 
-![Geometric interpretation of partial derivative of a single variable](/assets/img/partial-derivative-sv.jpg)
+![Geometric interpretation of partial derivative of a single variable](/assets/img/2019-12-09-partial-derivatives/partial-derivative-sv.jpg)
 
 Note that the partial derivative of a function of \$ x_1 \$ is still a function of \$ x_1 \$. This function outputs the gradient of the multivariate function with respect to \$ x_1 \$, and with \$ x_2 \$ held constant. 
 
@@ -35,7 +35,7 @@ $$ \frac{df(x_1, x_2, ... , x_n)}{dx_1dx_2...dx_n} $$
 
 Similarly, the partial derivatives wrt multiple variables tells us how a small change in all \$ x_i \$ changes the multivariate function. It is a function of all \$ x_i \$ that outputs the gradient of the multivariate function with respect to all \$ x_i \$. In \$ R_3 \$, this is the gradient of any surface we see.
 
-![Geometric interpretation of partial derivative of a two variables](/assets/img/gradient-descent-3d.jpg)
+![Geometric interpretation of partial derivative of a two variables](/assets/img/2019-12-09-partial-derivatives/gradient-descent-3d.jpg)
 
 ## Computation of partial derivatives wrt multiple variables
 Recall that to compute partial derivatives wrt \$ x_i \$, we differentiate wrt to our variable of interest, and _treat the rest of the variables constant_. We iteratively repeat the partial differentiation until all variables have been partially differentiated. But can _treating the rest of the variables constant_ allow us to arrive at the interpretation we have above?

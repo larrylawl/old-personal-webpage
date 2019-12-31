@@ -14,7 +14,7 @@ image: neural-network.jpeg
 
 <!-- Disclaimer that this explains Andrew Ng's course -->
 _(This articles explains the calculus of the backpropagation algorithm in Andrew Ng's machine learning course, which can be found [here](https://www.coursera.org/learn/machine-learning).)_
-![Andrew Ng's course: Backpropagation Algorithm](/assets/img/backpropagation-algo.png)
+![Andrew Ng's course: Backpropagation Algorithm](/assets/img/2019-12-18-calculus-for-backpropagation/backpropagation-algo.png)
 
 ## Prerequisite
 Standard notations for neural networks as used in Andrew Ng's course. With some discrepancies, definition of the notations can be found in this [link](https://cs230.stanford.edu/files/Notation.pdf).
@@ -103,6 +103,6 @@ Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/lear
 
 [Neil Ostrove](https://www.linkedin.com/in/neilostrove) for the proof of the partial derivative term.
 
-![Back propagation proof 1](/assets/img/backpropagation-proof-1.png)
+![Back propagation proof 1](/assets/img/2019-12-18-calculus-for-backpropagation/backpropagation-proof-1.png)
 
-![Back propagation proof 2](/assets/img/backpropagation-proof-2.png)
+![Back propagation proof 2](/assets/img/2019-12-18-calculus-for-backpropagation/backpropagation-proof-2.png)

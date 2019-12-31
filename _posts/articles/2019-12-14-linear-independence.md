@@ -41,11 +41,11 @@ First, perform Gaussian Jordan Elimination to solve for the scalars (or matrix) 
 
 Consider the example below where there are no zero rows. Observe that from the 3rd equation, \$ c_3 = 0 \$. Thus \$ c_2 = 0 \$, and hence \$ c_1 = 0 \$. Since the only scalars that satisfy the equation are all zeroes, this set of vectors is linearly independent.
 
-![linear-independence](/assets/img/linearly-independent.jpg)
+![linear-independence](/assets/img/2019-12-14-linear-independence/linearly-independent.jpg)
 
 Next consider the example below where there is a zero row. \$ c_3 \$ can take on any real value. Since there are non zero scalars that satisfy the equation, this set of vectors is not linearly independent.
 
-![linear-dependence](/assets/img/linearly-dependent.jpg).
+![linear-dependence](/assets/img/2019-12-14-linear-independence/linearly-dependent.jpg).
 
 More generally, **the maximum number of linearly independent vectors is equal to the number of non-zero rows.**
 

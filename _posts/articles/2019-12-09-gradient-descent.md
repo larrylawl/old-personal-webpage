@@ -13,7 +13,7 @@ image: machine-learning.jpg
 - [Intuition of Gradient Descent](#intuition-of-gradient-descent)
 - [The math behind Gradient Descent](#the-math-behind-gradient-descent)
   - [Understanding the partial derivative term](#understanding-the-partial-derivative-term)
-  - [Understanding the learning rate, $ \alpha $](#understanding-the-learning-rate--alpha)
+  - [Understanding the learning rate](#understanding-the-learning-rate)
 - [Gradient Descent for multiple variables](#gradient-descent-for-multiple-variables)
 - [Terminating Conditions for Gradient Descent](#terminating-conditions-for-gradient-descent)
 
@@ -32,7 +32,7 @@ Gradient descent achieves its purpose by _iteratively moving in the direction of
 
 In the context of the graph below, each cross marks the result of each iteration of the gradient descent, and they converge towards the (local) minimum of the cost function. 
 
-![Gradient Descent](/assets/img/gradient-descent-3d.jpg)
+![Gradient Descent](/assets/img/2019-12-09-gradient-descent/gradient-descent-3d.jpg)
 
 ## The math behind Gradient Descent
 
@@ -43,28 +43,28 @@ $$
 ### Understanding the partial derivative term
 Let's consider \$ R_2 \$ first. Suppose that we initialise \$ \theta_{1} \$ to the left of the minimum point of graph below. The derivative at that point is negative, thus the updated value of \$ \theta_{1} \$ will be increased (moves right) and hence _converges_ towards the local minimum, which is the purpose of gradient descent.
 
-![Gradient Descent](/assets/img/gradient-descent-2d.jpg)
+![Gradient Descent](/assets/img/2019-12-09-gradient-descent/gradient-descent-2d.jpg)
 
 I intentionally used the word "_converges_". As can be seen from the graph, the derivative of each iteration as we approach the local minimum decreases, thus each update of \$ \theta_{1} \$ will correspondingly get smaller. This "natural" convergence is also the reason why the learning rate can be fixed, instead of decreasing as we approach the local minimum.
 
 Now let's consider \$ R_3 \$. Recall that by taking the partial derivative of a multivariate function, I first need to fix the other variables as constants. This will give us the red line below.
 
-![Partial Derivative of Single Variable](/assets/img/partial-derivative-sv.jpg)
+![Partial Derivative of Single Variable](/assets/img/2019-12-09-gradient-descent/partial-derivative-sv.jpg)
 
 This "reduces" the problem we had in \$ R_2 \$, where we have shown how the subtraction of the derivative eventually brings us to the local minimum.
 > Local minimum as the cost function might have ≥1 minimums. The graph below has 2 minimums, as denoted by the red arrows.
 
-![Geometric interpretation of partial derivative of a two variables](/assets/img/gradient-descent-3d.jpg)
+![Geometric interpretation of partial derivative of a two variables](/assets/img/2019-12-09-gradient-descent/gradient-descent-3d.jpg)
 > To learn more about partial derivatives, check out my post [here](./partial-derivatives.html).
 
-### Understanding the learning rate, \$ \alpha \$
+### Understanding the learning rate
 Intuitively, the learning rate denotes the _"size"_ of each descent. This makes sense as the learning rate is the coefficient of the partial derivative, which gives us the _direction of descent_. The image below summarises the implications of the different partitions of the chosen learning rate.
 
-![Learning rate](/assets/img/learning-rate.jpg)
+![Learning rate](/assets/img/2019-12-09-gradient-descent/learning-rate.jpg)
 
 ## Gradient Descent for multiple variables
 Simultaneous updates brings us to the minimum of the cost function quicker.
-![Simultaneous update](/assets/img/simult-update.jpg)
+![Simultaneous update](/assets/img/2019-12-09-gradient-descent/simult-update.jpg)
 
 ## Terminating Conditions for Gradient Descent
 1. `maxit` - predetermined max no. of iterations

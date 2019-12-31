@@ -1,22 +1,6 @@
 # TODO
 
-## v1.0
-
-- [x] Change basic information
-- [x] Update google analytics
-- [x] Comment
-- [x] Latex
-- [x] Post
-- [x] Syntax highlighting
-- [x] Travis for deployment
-- [x] Update README.md
-- [x] Blog name
-- [x] Update images
-- [ ] Timer
-
 ## Bugs
-- [x] Timer incorrect
-- [x] Notes do not have year
 
 ## Features
 
@@ -30,8 +14,6 @@
 
 ## Articles
 - [ ] Understand `figmincg` and `fminunc`
-- [x] learning curves
-- [ ] Math behind large margin classification
 
 |Article   |I'm writing this because...   |Done?   |
 |---|---|---|

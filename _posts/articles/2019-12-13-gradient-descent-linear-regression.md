@@ -14,7 +14,7 @@ image: machine-learning.jpg
 Read more about gradient descent in my post [here](./gradient-descent.html).
 
 ## Purpose of Vectorisation
-![vectorisation](/assets/img/vectorisation.jpg)
+![vectorisation](/assets/img/2019-12-13-gradient-descent-linear-regression/vectorisation.jpg)
 
 Notice how the vectorised form is...
 

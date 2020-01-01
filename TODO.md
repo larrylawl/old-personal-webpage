@@ -19,6 +19,7 @@
 |---|---|---|
 |Eigenvectors   |Fundamentals to understand future proofs in ML; explain generally why have learning outcomes and "why is this impt"   |(not yet - diagonalisation)   |
 | Low Rank Matrix  |   |   |
+| Sigmoid < reLu |   |   |
 
 ## Refactoring
 - [ ] Update readme with links to articles and notes

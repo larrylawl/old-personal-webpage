@@ -5,12 +5,11 @@ author: "Larry Law"
 categories: notes
 tags: [notes, Machine Learning]
 image: machine-learning.jpg
+hidden: true
 ---
-<!-- omit in toc -->
-# Coursera, Stanford: Machine Learning Notes
-
 Lecturer: Professor Andrew Ng <br>
-Source: [here](https://www.coursera.org/learn/machine-learning)
+Course available [here](https://www.coursera.org/learn/machine-learning).
+Source code available [here](https://github.com/larrylawl/machine-learning-coursera-stanford)
 
 <!-- omit in toc -->
 ## Table of Contents

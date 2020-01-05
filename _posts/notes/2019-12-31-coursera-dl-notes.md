@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Coursera, Stanford: Deep Learning Notes"
+title: "Coursera, deeplearning.ai: Deep Learning Notes"
 author: "Larry Law"
 categories: notes
 tags: [notes, Deep Learning]
@@ -26,21 +26,23 @@ https://www.coursera.org/learn/neural-networks-deep-learning/discussions/weeks/1
 ## Learning Outcomes
 1. Defensive Programming with Matrixes
 2. Activation Functions
-3. Why do we need non-linear activation functions?
+3. Notable Quiz Questions
 
 ### Defensive Programming with Matrixes
 ```
-a = np.random.randn(5) # rank 1 array - don't use!
+a = np.random.randn(5) 
+# a.shape = (5,) 
+# rank 1 array (as it has only one axis) - don't use!
 
 a = np.random.randn(5, 1) # a.shape = (5, 1)
 a = np.random.randn(1, 5) # a.shape = (1, 5)
 assert(a.shape == (5, 1))
 ```
 
-### Why do we need non-linear activation functions?
-![non linear activation function](/assets/img/2019-12-31-coursera-dl-notes/non-linear.png)
+### Activation Functions
+Refer to my article [here](/articles/comparison-between-activation-functions.html)
 
-Suppose not, the _a_ will essentially be a linear regression, which reduces the problem to a linear regression problem (which can be solved using linear regression).
+### Notable Quiz Questions
+> Logistic regression’s weights w should be initialized randomly rather than to all zeros, because if you initialize to all zeros, then logistic regression will fail to learn a useful decision boundary because it will fail to “break symmetry”, True/False?
 
-> ReLU is a piecewise linear function.
-
+True, Logistic Regression doesn't have a hidden layer. If you initialize the weights to zeros, the first example x fed in the logistic regression will output zero but the derivatives of the Logistic Regression depend on the input x (because there's no hidden layer) which is not zero. So at the second iteration, the weights values follow x's distribution and are different from each other if x is not a constant vector.

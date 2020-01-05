@@ -343,6 +343,8 @@ This inequality is useful as it tells us both the _equation of the decision boun
 
 > Notice how the boundary line is not dependent on \$ x_2 \$
 
+> Notice that the decision boundary is a linear equation. Consequently, logistic regression only works well with a dataset of structure which is linearly separable. If a more complex decision boundary is needed, you should consider using neural networks.
+
 ## Week 3: Logistic Regression Model
 ### Learning Outcomes
 1. What is the Cost Function of the Logistic Regression Model? What is the Gradient Descent of it?

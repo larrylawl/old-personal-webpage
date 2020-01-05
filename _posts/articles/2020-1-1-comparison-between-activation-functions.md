@@ -17,7 +17,7 @@ image: neural-network.jpeg
 - [The Vanishing Gradient Problem of TanH and logistic](#the-vanishing-gradient-problem-of-tanh-and-logistic)
 - [Why is ReLU preferred over TanH and logistic?](#why-is-relu-preferred-over-tanh-and-logistic)
 - [The Dead Neuron Problem of ReLU](#the-dead-neuron-problem-of-relu)
-- [Leaky Relu](#leaky-relu)
+- [Leaky RelU](#leaky-relu)
 
 ## Definitions of activation functions
 
@@ -81,7 +81,7 @@ However, notice that for the domain _z < 0_, the gradient is 0. This is problema
 
 To circumvent this, people use leaky ReLU, parametric ReLU, and SWISH activation functions. Let's consider the leaky ReLU to understand how it resolves the dead neuron problem.
 
-## Leaky Relu
+## Leaky RelU
 
 The leaky ReLU is defined as:
 

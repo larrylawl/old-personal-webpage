@@ -9,18 +9,6 @@ hidden: true
 ---
 Lecturer: Professor Andrew Ng <br>
 Course available [here](https://www.coursera.org/specializations/deep-learning).<br>
-Course notations available [here](https://d3c33hcgiwev3.cloudfront.net/_106ac679d8102f2bee614cc67e9e5212_deep-learning-notation.pdf?Expires=1578096000&Signature=GpoeRBwFaUWIr5ryWYRyovABkIaqsTUJiplq4Fh-5BSyeHNZ~8hVirdtULblmZFvyYdVcWvZnC-soZilkuXf0rGgMs~uCGjPwoK7TFTcG6l5AaHen-86m-teuS37zFdeR0doeUzqX-jkAlhkqwZjPr7epdFBrnjrgiFp9GZXE7k_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A).
-
-
-<!-- ## Table of Contents
-Week 1:
-
-1. Rectify: Taking a max of 0 which is why you get a function shape like this
-2. Online advertising: lucrative app
-3. Why sigmoid over relu? 
-<!-- Relu function greater than 1? 
-https://www.coursera.org/learn/neural-networks-deep-learning/discussions/weeks/1/threads/bJAuE_qXSgqQLhP6l9oKnQ-->
-
 
 # Course 1: Neural Networks and Deep Learning
 ## Learning Outcomes
@@ -46,3 +34,29 @@ Refer to my article [here](/articles/comparison-between-activation-functions.htm
 > Logistic regression’s weights w should be initialized randomly rather than to all zeros, because if you initialize to all zeros, then logistic regression will fail to learn a useful decision boundary because it will fail to “break symmetry”, True/False?
 
 True, Logistic Regression doesn't have a hidden layer. If you initialize the weights to zeros, the first example x fed in the logistic regression will output zero but the derivatives of the Logistic Regression depend on the input x (because there's no hidden layer) which is not zero. So at the second iteration, the weights values follow x's distribution and are different from each other if x is not a constant vector.
+
+# Course 2: Improving Deep Neural Networks - Hyperparameter tuning, Regularization and Optimization
+## Practical Aspects of Deep Learning
+### Learning Outcomes
+1. Dropout Regularisation
+
+Intuition: Can't rely on any one feature, so we have to spread out weight
+
+Prevent overfitting (putting all eggs in one basket)
+
+> Why divide by `keep_prob`
+
+Maintain expected value of _a3_
+
+> Why do we remove dropout in at test time?
+
+Ensure that our predictions are deterministic at test time.
+
+Drawback: cost function J is less well defined (as every iteration we eliminate nodes at random)
+
+Solution: Turn off dropout first (ie `keep_prob = 1`) and check that J is monotonely decreasing. This ensures that our gradient descent is implemented correctly. THen turn on dropout.
+
+### Early stopping
+> Not recommended as it couples both optimising cost function J and solving overfitting.
+
+### Vanis

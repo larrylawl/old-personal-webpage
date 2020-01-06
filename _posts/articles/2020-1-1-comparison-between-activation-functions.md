@@ -17,7 +17,7 @@ image: neural-network.jpeg
 - [The Vanishing Gradient Problem of TanH and logistic](#the-vanishing-gradient-problem-of-tanh-and-logistic)
 - [Why is ReLU preferred over TanH and logistic?](#why-is-relu-preferred-over-tanh-and-logistic)
 - [The Dead Neuron Problem of ReLU](#the-dead-neuron-problem-of-relu)
-- [Leaky RelU](#leaky-relu)
+- [Leaky ReLU](#leaky-relu)
 
 ## Definitions of activation functions
 
@@ -29,29 +29,28 @@ Notice that the mean of the output of the TanH is approximately 0. The centering
 > Logistic function is usually only used in the final layer for _binary classification problems_, where the output of the network is a probability (that exists in _(0, 1)_).
 
 ## The Vanishing Gradient Problem of TanH and logistic
+Notice that at the extreme ends of the domain of both TanH and logistic, the **gradient gradually approaches 0**. The marginal change in gradient causes gradient-based learning methods to learn at a slower rate. 
 
-Notice that at the extreme ends of the domain of both TanH and logistic, the **gradient gradually approaches 0**. Without loss of generality to TanH, let us focus at the logistic function. 
+Let us look at the math to understand this more concretely. For simplicity, let me make the following assumptions
 
-The marginal change in gradient causes gradient-based learning methods to learn at a slower rate. More concretely, let us look at the partial derivative of the Cost Function used in Backpropagation.
+1. Neural network with 4 hidden layers with a single neuron each
+2. Let us focus on the logistic function (heuristic applies to TanH as both their functions gradually approaches 0)
+3. Weights are initialised using the gaussian method (ie mean = 0 and sv = 1).
 
-$$
-\frac{\partial{J(\Theta)}}{\partial \Theta^{(l)}_{i, j}} =a^{(l)}_{j} \delta^{(l+1)}_{i}
-$$
-
-where \$ \delta \$, also known as the "error term", is a recurrence relation such that
-
-$$
-\\ \delta^{(l+1)} := \frac{\partial{J(\Theta)}}{\partial z^{(l+1)}} = \delta^{(l+2)} \Theta^{(l+1)} g^{\prime}\left(z^{(l+1)}\right),
-\\ \delta^{(L)} = a^{(L)} - y,
-$$
-
-and _a_ is the output of the logistic function.
+Thus, the partial derivative of the cost function with respect to the weight of the first neuron will be:
 
 $$
-a = g(z) := \sigma(z)
+\frac{\partial J}{\partial \Theta_{1}}=a_0 \delta_{1} = a_0 \times \sigma^{\prime}\left(z_{1}\right) \times w_{2} \times \sigma^{\prime}\left(z_{2}\right) \times w_{3} \times \sigma^{\prime}\left(z_{3}\right) \times w_{4} \times \sigma^{\prime}\left(z_{4}\right) \times \frac{\partial J}{\partial a_{4}}
 $$
 
-Since \$ g^{\prime}\left(z^{(l+1)}\right) \$ changes marginally, the partial derivative of the cost function and hence the parameters will also change marginally. The problem of the gradient approaching 0 leading to slower parameter learning is also known as the **vanishing gradient problem**.
+Notice that the derivative of the logistic function is multiplied _l_ times, where _l = 4_ here. As the derivative is always less than _0.25_ (proof below), the multiplication of the small derivatives will lead to an even smaller partial derivative of the cost function. With the partial derivative being such a small number and the optimisation objective being to reduce the partial derivative to 0 (ie minimum point), the change in partial derivative caused by each step of the gradient descent will be very small, and hence the parameters will also change marginally. The problem of an activation function's gradient approaching 0 leading to slower parameter learning is also known as the **vanishing gradient problem**.
+
+> Why is the derivative of the logistic function lesser than 0.25? 
+
+1. Since the initialised weights have standard normal distribution, \$ -1 < w_i < 1 \$. 
+2. Since the derivative of the sigmoid function = _f(x)(1 - f(x))_, the maximum value of *f'(x) = 0.25* (when *f(x) = 0.5*) 
+
+> If the derivative of the activation function is > 1, the compounding effect of this derivative will lead to a very large partial derivative of the cost function. This problem is known as the **exploding gradient problem.**
 
 The slower learning matters as performance is increasingly dependent on size of data (and the learning from it), rather than the type of algorithm used. To understand why, consider the graph below, which plots the performance of different algorithms over number of samples.
 
@@ -81,7 +80,7 @@ However, notice that for the domain _z < 0_, the gradient is 0. This is problema
 
 To circumvent this, people use leaky ReLU, parametric ReLU, and SWISH activation functions. Let's consider the leaky ReLU to understand how it resolves the dead neuron problem.
 
-## Leaky RelU
+## Leaky ReLU
 
 The leaky ReLU is defined as:
 
@@ -91,7 +90,7 @@ $$
 
 where \$ \delta \$ is a very small positive real number.
 
-![Relu vs Leaky Relu](/assets/img/2020-1-1-comparison-between-activation-functions/relu-vs-leaky-relu.png)
+![Relu vs Leaky ReLU](/assets/img/2020-1-1-comparison-between-activation-functions/relu-vs-leaky-relu.png)
 
 The advantage of the leaky ReLU (left) is that for the domain _z < 0_, the derivative will still be positive (as opposed to 0 for the ReLU (right)). This resolves the dead neuron problem. 
 

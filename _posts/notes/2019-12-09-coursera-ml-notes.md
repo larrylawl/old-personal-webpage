@@ -474,6 +474,12 @@ $$
 
 > We regulate all parameters as we are not able to predict which parameter is more important than the other.
 
+> Regularisation term is the euclidean norm. It is also known as the L2 regularisation, and weight decay. It's called the latter as in the gradient descent step, we are subtracting a very small multiple of W. 
+
+$$
+W^{l} := W^{l} - \frac{\alpha \lambda}{m}W^{l} - \alpha(\text{from backprop})
+$$
+
 ### The Tradeoff between Underfitting and Overfitting
 
 Recall that the error function (1st term) measures how different our model's prediction is from the expected value. Optimising the error function allows us to fit the training sample better at the risk of overfitting.
@@ -726,9 +732,16 @@ $$
 \frac{\partial}{\partial \Theta_{j}} J(\Theta) \approx \frac{J\left(\Theta_{1}, \ldots, \Theta_{j}+\epsilon, \ldots, \Theta_{n}\right)-J\left(\Theta_{1}, \ldots, \Theta_{j}-\epsilon, \ldots, \Theta_{n}\right)}{2 \epsilon}
 $$
 
+$$
+\text { difference }=\frac{\| g r a d-\text {gradapprox} \|_{2}}{\| \text {grad}\left\|_{2}+\right\| \text {gradaprox} \|_{2}}
+$$
+
+1. Numerator: Euclidean Distance between the two gradients
+2. Denominator: Normalises the distance as a ratio of the difference and the length of the two gradients (in case any of these vectors are really small or large). 
+
 Compare gradient of approximation with that of backpropagation.
 Implementation tips
-1. It is more efficient to use a small neural network with relatively smaller input units and hidden units, thus having a relatively small number of parameters. Each dimension of θ requires two evaluations of the cost function and this can be expensive. After checking is done, turn off gradient checking before running learning algorithm.
+1. Approximating the cost function is slow (need to run forward propagation). For this reason, we don't run gradient checking at every iteration of descent during training. Just a few times to check if the gradient is correct.
 2. Gradient checking works for any hypothesis function (linear, log etc).
 
 Vectorised Implementation

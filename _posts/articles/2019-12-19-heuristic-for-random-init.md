@@ -3,7 +3,7 @@ layout: post
 title: "Heuristic Justifying Random Initialisation In Neural Networks"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: neural-network.jpeg
 ---
 ## Learning outcomes

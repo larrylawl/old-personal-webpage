@@ -3,7 +3,6 @@ layout: post
 title: "Coursera, Stanford: Machine Learning Notes"
 author: "Larry Law"
 categories: notes
-tags: [notes, Machine Learning]
 image: machine-learning.jpg
 hidden: true
 ---

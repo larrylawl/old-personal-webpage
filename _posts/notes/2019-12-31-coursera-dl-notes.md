@@ -3,7 +3,6 @@ layout: post
 title: "Coursera, deeplearning.ai: Deep Learning Notes"
 author: "Larry Law"
 categories: notes
-tags: [notes, Deep Learning]
 image: neural-network.jpeg
 hidden: true
 ---
@@ -26,6 +25,11 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [Early stopping](#early-stopping)
       - [Vanishing and Exploding Gradients](#vanishing-and-exploding-gradients)
       - [Weight Initialisation for Deep Networks](#weight-initialisation-for-deep-networks)
+  - [Optimisation Alogrithms](#optimisation-alogrithms)
+    - [Exponentially Weighted Average](#exponentially-weighted-average)
+      - [Bias Correction](#bias-correction)
+      - [Gradient Descent with Momentum](#gradient-descent-with-momentum)
+      - [RMSprop](#rmsprop)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -61,7 +65,7 @@ True, Logistic Regression doesn't have a hidden layer. If you initialize the wei
 ### Setting Up Your Machine Learning Application
 #### Decreasing Significance of Bias-Variance Tradeoff
 1. **To reduce bias (wo affecting variance):** Get more data and regularise
-2. 1. **To reduce variance (wo affecting bias):** Get more data
+2. **To reduce variance (wo affecting bias):** Get more data
 
 #### Train/Dev/Test split and tips
 1. **Smaller dataset (1K-10K):** 60/20/20 split.
@@ -126,3 +130,50 @@ This works as \$ Var(aX) = a^2Var(X) \$
 
 1. Weight of Relu: \$ \frac{2}{n^{l - 1}} \$ (*He Initialisation*)
 2. Weight of TanH: \$ \frac{1}{n^{l-1}} or \frac{2}{n^{l-1} + n^{l}} \$ (*Xavier Initialisation*)
+
+## Optimisation Alogrithms
+1. Remember different optimization methods such as (Stochastic) Gradient Descent, Momentum, RMSProp and Adam
+2. Use random minibatches to accelerate the convergence and improve the optimization
+3. Know the benefits of learning rate decay and apply it to your optimization
+
+### Exponentially Weighted Average
+
+$$
+v_t = \beta v_{t - 1} + (1 - \beta)\theta_t
+$$
+
+vt as approximately average over 1/1-beta days
+Higher beta --> Adapts more quickly (sharper graphs)
+
+<!-- Add in graph of exponentially weighted average -->
+
+Weighted average of all the parameters, where the coefficients (or probability) is exponentially decreasing as t decreases. (ie \$ f(x) = 0.1 \times 0.9^{-x} \$). Advantage of weighted average is that its O(1) space complexity.
+
+> Why is \$ V_t \$ approximately average over \$ \frac{1}{1-\beta} days? \$
+
+$$
+(1 - \epsilon)^{\frac{1}{\epsilon}} = \frac{1}{e} \\
+0.9^10 \approx 0.35 \approx \frac{1}{e}
+$$
+
+Coefficients after \$ \frac{1}{\epsilon} \$ (ie after 10 days) are too negligble to consider.  
+
+#### Bias Correction
+When t is large, then it becomes 0
+
+#### Gradient Descent with Momentum
+
+Compute an exponentially weighted average of your gradients, and then use that gradient to update your weights.
+
+Vertical direction will average out to be approx 0
+
+<!-- Why does gradient descent oscillate like that? Because you are taking the derivative from the previous example (ie beta = 0), thus it moves more sharply -->
+
+<!-- By taking the exponentially weighted average, you'll focus on the right direction towards minimum, wrong direction cancels each other out. -->
+
+#### RMSprop
+<!-- What if it's descending towards the correct direction? -->
+<!-- Derivatives are much larger in the vertical direction than the horizontal direction -->
+<!-- Gradient towards the cost function is near 0 (horizontal) -->
+<!-- Why square? -->
+<!-- Why mean? -->

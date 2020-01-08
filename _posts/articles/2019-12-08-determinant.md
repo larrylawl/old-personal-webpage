@@ -3,7 +3,7 @@ layout: post
 title: "Interpretation for Determinant"
 author: "Larry Law"
 categories: articles
-tags: [Linear Algebra]
+tags: [linear-algebra]
 image: linear-algebra.jpg
 ---
 

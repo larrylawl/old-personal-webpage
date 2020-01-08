@@ -3,7 +3,7 @@ layout: post
 title: "Learning Curves in Machine Learning"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: machine-learning.jpg
 ---
 <div align="center">

@@ -184,6 +184,14 @@ hr {
   font-family: 'Quattrocento Sans', sans-serif;
 }
 
+.posts .articles h2 {
+  text-align: center
+}
+
+.posts .articles h2 a {
+  text-decoration: none;
+}
+
 /*
   Pagination
 */

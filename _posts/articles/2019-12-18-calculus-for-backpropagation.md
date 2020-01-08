@@ -3,7 +3,7 @@ layout: post
 title: "Calculus of Backpropagation"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: neural-network.jpeg
 ---
 ## Learning outcomes

@@ -3,7 +3,7 @@ layout: post
 title: "Interpretation for Partial Derivatives"
 author: "Larry Law"
 categories: articles
-tags: [Calculus]
+tags: [calculus]
 image: calculus.jpg
 ---
 

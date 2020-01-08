@@ -3,7 +3,7 @@ layout: post
 title: "Gradient Descent"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: machine-learning.jpg
 ---
 <!-- omit in toc -->

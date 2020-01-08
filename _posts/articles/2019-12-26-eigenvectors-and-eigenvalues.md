@@ -3,7 +3,7 @@ layout: post
 title: "Eigenvectors and Eigenvalues"
 author: "Larry Law"
 categories: articles
-tags: [Linear Algebra]
+tags: [linear-algebra]
 image: linear-algebra.jpg
 ---
 <div align="center">

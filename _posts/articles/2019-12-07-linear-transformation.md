@@ -3,7 +3,7 @@ layout: post
 title: "Interpretation for Matrix Multiplication and Linear Transformation"
 author: "Larry Law"
 categories: articles
-tags: [Linear Algebra]
+tags: [linear-algebra]
 image: linear-algebra.jpg
 ---
 Without loss of generality to \$ R_n \$, let us consider \$ R_2 \$.

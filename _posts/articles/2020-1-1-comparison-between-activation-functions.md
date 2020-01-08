@@ -3,7 +3,7 @@ layout: post
 title: "Comparison between Logistic, TanH, and ReLU activation functions"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: neural-network.jpeg
 ---
 <div align="center">

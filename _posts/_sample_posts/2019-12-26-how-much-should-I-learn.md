@@ -3,7 +3,7 @@ layout: post
 title: "How much should I learn?"
 author: "Larry Law"
 categories: articles
-tags: [Machine Learning]
+tags: [machine-learning]
 image: machine-learning.jpg
 ---
 <!-- <div align="center">

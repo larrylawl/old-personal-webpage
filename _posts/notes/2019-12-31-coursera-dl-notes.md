@@ -26,10 +26,15 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [Vanishing and Exploding Gradients](#vanishing-and-exploding-gradients)
       - [Weight Initialisation for Deep Networks](#weight-initialisation-for-deep-networks)
   - [Optimisation Alogrithms](#optimisation-alogrithms)
+    - [Difference Between Batch, Mini-Batch, and Stochastic Gradient Descent](#difference-between-batch-mini-batch-and-stochastic-gradient-descent)
     - [Exponentially Weighted Average](#exponentially-weighted-average)
-      - [Bias Correction](#bias-correction)
-      - [Gradient Descent with Momentum](#gradient-descent-with-momentum)
-      - [RMSprop](#rmsprop)
+    - [Bias Correction](#bias-correction)
+    - [Gradient Descent with Momentum](#gradient-descent-with-momentum)
+    - [RMSprop](#rmsprop)
+    - [Adam](#adam)
+    - [Learning Rate Decay](#learning-rate-decay)
+    - [The problem of local optima](#the-problem-of-local-optima)
+    - [Notable Quiz Questions](#notable-quiz-questions-1)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -136,44 +141,114 @@ This works as \$ Var(aX) = a^2Var(X) \$
 2. Use random minibatches to accelerate the convergence and improve the optimization
 3. Know the benefits of learning rate decay and apply it to your optimization
 
+### Difference Between Batch, Mini-Batch, and Stochastic Gradient Descent
+
+The difference between gradient descent, mini-batch gradient descent and stochastic gradient descent is *the number of examples* you use to perform one update step.
+
+> With a well-turned mini-batch size, usually mini-batch gd outperforms either gradient descent or stochastic gradient descent (particularly when the training set is large). Mini-batch size performs better than stochastic as it leverages vectorisation.
+
+> Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
+
 ### Exponentially Weighted Average
+Weighted average of all the previous velocities, where the coefficients (or probability) exponentially decreases as t decreases. 
 
 $$
 v_t = \beta v_{t - 1} + (1 - \beta)\theta_t
 $$
 
-vt as approximately average over 1/1-beta days
-Higher beta --> Adapts more quickly (sharper graphs)
+![Exponentially Weighted Average](/assets/img/2019-12-31-coursera-dl-notes/exponentially-weighted-average.png)
 
-<!-- Add in graph of exponentially weighted average -->
+> coefficient => \$ f(x) = 0.1 \times 0.9^{-x} \$, where x is \$ \v_t \$). 
 
-Weighted average of all the parameters, where the coefficients (or probability) is exponentially decreasing as t decreases. (ie \$ f(x) = 0.1 \times 0.9^{-x} \$). Advantage of weighted average is that its O(1) space complexity.
+Advantage of exponentially weighted average is that (a) its O(1) space complexity while (b) considering the weighted average of all the previous parameters, not jus the current parameter.
 
-> Why is \$ V_t \$ approximately average over \$ \frac{1}{1-\beta} days? \$
+> Why is \$ v_t \$ approximately average over \$ \frac{1}{1-\beta} days? \$
 
 $$
 (1 - \epsilon)^{\frac{1}{\epsilon}} = \frac{1}{e} \\
-0.9^10 \approx 0.35 \approx \frac{1}{e}
+0.9^{10} \approx 0.35 \approx \frac{1}{e}
 $$
 
-Coefficients after \$ \frac{1}{\epsilon} \$ (ie after 10 days) are too negligble to consider.  
+In the example above, when \$ \beta = 0.1 \$, it is an approximation for the weighted average over the past 10 days, as the coefficients for the days after that are too small for the number to be meaningful. 
 
-#### Bias Correction
-When t is large, then it becomes 0
+### Bias Correction
 
-#### Gradient Descent with Momentum
+$$
+\begin{array}{l}{v_{d W^{[l]}}=\beta_{1} v_{d W^{[l]}}+\left(1-\beta_{1}\right) \frac{\partial \mathcal{J}}{\partial W^{[l]}}} \\ {v_{d W^{[l]}}^{c o r r e c t e d}=\frac{v_{d W}[l]}{1-\left(\beta_{1}\right)^{t}}}\end{array}
+$$
 
-Compute an exponentially weighted average of your gradients, and then use that gradient to update your weights.
+- When _t_ is small, then bias correction scales up \$ v_t \$ (as the velocity, \$ v_{t - 1} \$, is very small)
+- When _t_ is large, then bias correction has no effect on \$ v_t \$ (denominator ~= 1)
 
-Vertical direction will average out to be approx 0
+### Gradient Descent with Momentum
 
-<!-- Why does gradient descent oscillate like that? Because you are taking the derivative from the previous example (ie beta = 0), thus it moves more sharply -->
+Intuitively, GD with Momentum (a) dampens oscillations in directions of high curvature by cancelling out gradients with opposite signs and (b) builds up velocity in directions (towards min) with a gentle but consistent gradient (since they don't cancel each other out).
 
-<!-- By taking the exponentially weighted average, you'll focus on the right direction towards minimum, wrong direction cancels each other out. -->
+$$
+\begin{aligned}\left\{\begin{array}{l}{v_{d W^{[l]}}} & {=\beta v_{d W^{[l]}}+(1-\beta) d W^{[l]}} \\ {W^{[l]}} & {=W^{[l]}-\alpha v_{d W^{[l]}}}\end{array}\right.\\\left\{\begin{array}{l}{v_{d b^{[l]}}} & {=\beta v_{d b^{[l]}}+(1-\beta) d b^{[l]}} \\ {b^{[l]}} & {=b^{[l]}-\alpha v_{d b^{[l]}}}\end{array}\right.\end{aligned}
+$$
 
-#### RMSprop
+\$ d W^{[l]} \$ is acceleration, \$ v_{d W^{[l]}} \$ is velocity, \$ beta \$ (being <1) is friction.
+
+> Why is this called GD with momentum?
+
+Its momentum makes it keep going in the previous direction.
+
+**Comparison of Gradient Descent w/ various momentums**
+1. Gradient Descent
+2. Gradient Descent w smaller momentum
+3. Gradient Descent w larger momentum
+
+![Gradient Descent Comparison](/assets/img/2019-12-31-coursera-dl-notes/grad-descent-comparison.png)
+
+> Why does gradient descent oscillate so sharply? 
+
+Because you are taking the derivative only from the previous iteration (ie beta = 0), and not the exponential weighted average of all the previous iterations, thus it moves more sharply.
+
+
+### RMSprop
+TODO.
 <!-- What if it's descending towards the correct direction? -->
 <!-- Derivatives are much larger in the vertical direction than the horizontal direction -->
 <!-- Gradient towards the cost function is near 0 (horizontal) -->
 <!-- Why square? -->
 <!-- Why mean? -->
+
+### Adam
+Combination of gradient descent with momentum and RMSprop.
+
+$$
+\left\{\begin{array}{l}{v_{d W^{[l]}}=\beta_{1} v_{d W^{[l]}}+\left(1-\beta_{1}\right) \frac{\partial \mathcal{J}}{\partial W^{[l]{l}}}} \\ {v_{d W^{[l]}}^{c o r r e c t e d}=\frac{v_{d W^{[l]}}}{1-\left(\beta_{1}\right\}^{t}}} \\ {s_{d W^{[l]}}=\beta_{2} s_{d W^{[l]}}+\left(1-\beta_{2}\right)\left(\frac{\partial J}{\partial W^{[l]}}\right)^{2}} \\ {s_{d W^{[l]}}^{c o r r e c t e d}=\frac{s_{d W l}[l]}{1-\left(\beta_{2}\right)^{t}}} \\ {W^{[l]}=W^{[l]}-\alpha \frac{v_{d W^{(l)}}^{r_{\text {diving }}}}{\sqrt{s_{d W[l]}^{s s w(l)}+\varepsilon}}}\end{array}\right.
+$$
+
+> Not different \$ beta_i \$ for _s_ (RMS prop) and _v_ (grad desc w momentum)
+
+
+Some advantages of Adam include:
+- Relatively low memory requirements (though higher than gradient descent and gradient descent with momentum) 
+- Usually works well even with little tuning of hyperparameters (except \$ \alpha \$)
+
+Adam paper [here](https://arxiv.org/pdf/1412.6980.pdf)
+
+### Learning Rate Decay
+
+![learning rate decay](/assets/img/2019-12-31-coursera-dl-notes/learning-rate-decay.png)
+
+1. When you just started training, it's okay to take bigger steps.
+2. When nearing minimum point, take smaller steps so that you oscillate in a tighter region around this minimum. 
+
+### The problem of local optima
+
+![local min vs saddle points](/assets/img/2019-12-31-coursera-dl-notes/local-min-vs-saddle.png)
+
+In higher dimensional space, it's more likely to obtain *saddle points* instead of *local minimums*. This is because to obtain a local minimum, **all** _n_ dimensions need to be a convex-like function. In contrast to obtain a saddle point, you only need a mixure of convex and concave functions. Consequently, we need not worry too much about gradient descent being stuck at local minimums.
+
+![saddle point](/assets/img/2019-12-31-coursera-dl-notes/saddle.png)
+
+However, the problem with saddle points is that it take very long to go down the plateau. Thus there's a need for gradient descent algorithms which work faster.
+
+### Notable Quiz Questions
+
+![Quiz on exponentially weighted average](/assets/img/2019-12-31-coursera-dl-notes/quiz-exponentially-weighted-avg.png)
+
+When you increase \$ \beta \$ , you are taking into account more days, thus the graph adapts more slowly (consequently smoother), and hence the red line is shifted slightly to the right

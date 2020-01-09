@@ -1,5 +1,10 @@
 # TODO
 
+## Questions
+1. Math behind He Initialisation for random init.
+2. Math behind RMSprop.
+3. Diagonalisation
+
 ## Bugs
 
 ## Features
@@ -7,10 +12,10 @@
 - [x] log (comments on amazing articles i have read)
 - [ ] Purpose of each section
 - [x] Abstract notes out
-- [ ] Tags page
+- [x] Tags page
 - [ ] Claps feature
 - [ ] Footer to return to top of page/home
-- [ ] Private section
+- [x] Unpublished section
 
 ## Articles
 
@@ -22,4 +27,4 @@
 
 - [ ] Icon for byte sized
 - [ ] Byte theme
-- [ ] Abstract posts out into directories
+- [x] Abstract posts out into directories

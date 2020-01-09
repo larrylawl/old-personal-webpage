@@ -4,6 +4,7 @@
 1. Math behind He Initialisation for random init.
 2. Math behind RMSprop.
 3. Diagonalisation
+4. Orthogonal/Orthonormal
 
 ## Bugs
 

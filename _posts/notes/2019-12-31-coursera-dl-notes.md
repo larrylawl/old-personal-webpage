@@ -158,7 +158,7 @@ $$
 
 ![Exponentially Weighted Average](/assets/img/2019-12-31-coursera-dl-notes/exponentially-weighted-average.png)
 
-> coefficient => \$ f(x) = 0.1 \times 0.9^{-x} \$, where x is \$ \v_t \$). 
+> coefficient => \$ f(x) = 0.1 \times 0.9^{-x} \$, where x is \$ v_t \$). 
 
 Advantage of exponentially weighted average is that (a) its O(1) space complexity while (b) considering the weighted average of all the previous parameters, not jus the current parameter.
 

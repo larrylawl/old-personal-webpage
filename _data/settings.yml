@@ -11,7 +11,7 @@ menu:
   - { name: "Articles", path: "menu", url: "articles.html" }
   - { name: "Logs", path: "menu", url: "logs.html" }
   - { name: "Notes", path: "menu", url: "notes.html" }
-  - { name: , path: , url: "unpublished.html" }
+  - { name: "", path: "menu", url: "unpublished.html" }
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer
 social:

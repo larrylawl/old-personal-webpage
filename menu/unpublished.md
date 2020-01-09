@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Notes
+title: Unpublished Articles
 ---
 <ul class="posts">
-  {% for post in site.categories.notes %}
+  {% for post in site.categories.unpublished %}
 
     <li itemscope>
       <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>

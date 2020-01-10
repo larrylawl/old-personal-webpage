@@ -66,7 +66,7 @@ where _A_ is a square matrix, _P_ is an invertible matrix composed of the eigenv
 
 **Why is matrix diagonalisation useful?**
 
-Consider the case where we want to find \$ A^{100} \$. Suppose _A_ is not a diagonal matrix, doing matrix multiplication directly will be tedious. By applying matrix multiplication, we'll get
+Consider the case where we want to find \$ A^{100} \$. Suppose _A_ is not a diagonal matrix, doing matrix multiplication directly will be tedious. However, matrix diagonalisation allows us to convert A to a diagonal matrix.
 
 $$
 A = PDP^{-1} \\
@@ -75,17 +75,16 @@ $$
 
 Computing the power of a diagonal matrix is simply computing the power of each diagonal entries.
 
-**So why does matrix multiplication work?**
+**So why does matrix diagonalisation work?**
 
 $$
 P^{-1}AP = D
 $$
 
-Let's first understand the expression on the left. The expression \$ P^{-1}AP \$ returns the *transformation in the "language" of P* (Specifically, in the basis vectors of P).
-
-> Watch 3Blue1Brown's video on the change of basis to understand this better. Video [here](https://www.youtube.com/watch?v=P2LTAUO1TdA)
-
-Since _P_ is the eigenvector of _A_, this transformation will be a scalar transformation, with the scalar value denoted by the corresponding eigenvectors - which is precisely _D_! Thus LHS = RHS. 
+Here's the proof sketch:
+1. *AP* represents a scalar transformation of any vector as *P* is chosen to use the eigenvectors of A. The scalar values will be the corresponding eigenvectors.
+2. When we premultiply this scalar transformation with \$ P^{-1} \$, we can take the scalar values out, thus it'll be equivalent to a matrix multiplication of the scalar matrix and identity matrix (ie \$ ZP^{-1}P = ZI \$, where *Z* denote the scalar matrix).
+3. This matrix multiplication will return precisely the diagonal matrix, with each entry denoting the corresponding eigenvector.
 
 > The set of basis vectors which we can choose _P_ from is also called the **eigenbasis**
 

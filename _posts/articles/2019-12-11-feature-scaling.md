@@ -12,10 +12,8 @@ image: machine-learning.jpg
 2. How is feature scaling implemented? 
 
 ## Why do we need feature scaling?
-**To speed up gradient descent**. Recall that the purpose of gradient descent is to _learn our model's parameters._ Suppose that the range of our parameters are uneven. A larger range will lead to a slower descent, while a smaller range will lead to a faster descent. The uneven simultaneous update of our parameters will cause the descent to _oscillate_ which is inefficient. 
+**To speed up gradient descent**. Recall that the purpose of gradient descent is to _learn our model's parameters._ Suppose that the range of our parameters are uneven (ie some parameters have larger range, while others have smaller range). A larger range will lead to a slower descent, while a smaller range will lead to a faster descent. The uneven simultaneous update of our parameters will cause the descent to _oscillate_ which is inefficient. 
 > Not sure what is gradient descent? Simultaenous update? Read more in the post about it [here](./gradient-descent.html)
-
-<!-- TODO: Include example -->
 
 ## How do we implement feature scaling?
 One common way is to **normalise the feature** (ie subtracting the mean and dividing by the standard deviation). 

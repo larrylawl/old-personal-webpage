@@ -35,6 +35,19 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
     - [Learning Rate Decay](#learning-rate-decay)
     - [The problem of local optima](#the-problem-of-local-optima)
     - [Notable Quiz Questions](#notable-quiz-questions-1)
+  - [Hyperparameter tuning, Batch Normalization and Programming Frameworks](#hyperparameter-tuning-batch-normalization-and-programming-frameworks)
+    - [Hyperparameter Tuning](#hyperparameter-tuning)
+      - [Tuning Process](#tuning-process)
+      - [Using an appropriate scale to pick hyperparameters](#using-an-appropriate-scale-to-pick-hyperparameters)
+      - [Hyperparameters tuning in practice](#hyperparameters-tuning-in-practice)
+    - [Batch Normalisation](#batch-normalisation)
+      - [Implementation](#implementation)
+      - [Why do we need batch normalisation, and why does it work?](#why-do-we-need-batch-normalisation-and-why-does-it-work)
+      - [Batch norm at Test Time](#batch-norm-at-test-time)
+    - [Multi-class classifiction](#multi-class-classifiction)
+      - [Softmax Regression](#softmax-regression)
+      - [Loss Function of Softmax](#loss-function-of-softmax)
+    - [Deep Learning Frameworks](#deep-learning-frameworks)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -252,3 +265,104 @@ However, the problem with saddle points is that it take very long to go down the
 ![Quiz on exponentially weighted average](/assets/img/2019-12-31-coursera-dl-notes/quiz-exponentially-weighted-avg.png)
 
 When you increase \$ \beta \$ , you are taking into account more days, thus the graph adapts more slowly (consequently smoother), and hence the red line is shifted slightly to the right
+
+## Hyperparameter tuning, Batch Normalization and Programming Frameworks
+1. Master the process of hyperparameter tuning
+2. TensorFlow
+
+### Hyperparameter Tuning
+#### Tuning Process
+**Priortise parameters in the following order:**
+1. Learning Rate (\$ \alpha \$)
+2. Momentum Term (\$ \beta \$), no. hidden units, Mini-batch size
+3. No. of layers, learning rate decay
+4. Adam's parameters 
+
+> Recommended by Andrew Ng
+
+**Use random values instead of grid:** a 5x5 grid will only yield 5 distinct values of x or y, but 25 randomly chosen values will yield 25 distinct values of x and y.
+
+**Coarse to fine scheme:** zooming into areas of interest
+
+![Coarse to fine scheme](/assets/img/2020-1-1-comparison-between-activation-functions/coarse-to-fine.png)
+
+#### Using an appropriate scale to pick hyperparameters
+Scale according to orders of magnitude. Here's a great explanation from classmate Giovanna Roda.
+
+> The problem with choosing numbers at random from an interval pops up when the two endpoints are of two different orders of magnitude. <br />
+> For instance, it makes sense to select uniformly random numbers from the interval [3,10] because these two numbers have the same order of magnitude. <br />
+> But if you select at random from [0.0001, 10] then 90% of your numbers will be between 1 and 10 and you will have only 10% between 0.0001 and 1. This might be a disadvantage for the choice of hyperparameters. If you use a very small value 0.0001 on the left, you probable want to try out many different small values.  <br />
+> So what you actually want is an uniform random choice across orders of magnitude. But order of magnitude is nothing else but the logarithm (0.0001 has order of magnitude -4 in base 10, 10 has order 1). So instead of choosing a random number between [0.0001,10] you choose a random exponent between [-4, 1] (note: an exponent can be also a decimal number) and exponentiate 10 (the base) to it.
+
+From the above explanation, we would expect,
+
+$$
+\alpha = 10 ^ r \text{(Learning rate)} \\
+\beta = 1 - 10^r \text{(Exponentially weighted average)}
+$$
+
+> \$ \beta \$ is scaled as such because it is more sensitive when beta is closer to _1_. Plot \$ \frac{1}{1 - \beta} \$ to see this sensitivity.
+
+#### Hyperparameters tuning in practice
+How do we tune our hyperparameters in practice? Depends on **computational power**.
+1. If you have it, then train multiple models in parallel and see which hyperparameters work best.
+2. Else, babysite a model and manually tune the hyperparameters.
+
+### Batch Normalisation
+#### Implementation
+For each hidden layer of the NN of each mini batch, normalise _z_.
+
+> Don't normalise the input and output layers!
+
+$$
+\begin{aligned} \mu &=\frac{1}{m} \sum_{i} z^{(i)} \\ \sigma^{2} &=\frac{1}{m} \sum_{i}\left(z^{(i)}-\mu\right)^{2} \\ z_{\text {norm }}^{(i)} &=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}} \\ \tilde{z}^{(i)} &=\gamma z_{\text {norm }}^{(i)}+\beta \end{aligned}
+$$
+
+> \$ \epsilon \$ is added for numerical stability (prevent division by 0)
+
+> Parameters (\$ \mu \$ and \$ \gamma \$) are trained using normal learning methods (such as gradient descent).
+
+![batch norm neural network](/assets/img/2020-1-1-comparison-between-activation-functions/batch-norm-nn.png)
+
+#### Why do we need batch normalisation, and why does it work?
+Batch normalisation makes **gradient descent quicker** because it...
+1. **Normalises each layer st they have the same scale:** Having the same scale allows descent to be smoother as opposed to an oscillating descent. (same reason as feature scaling)
+2. **Limits the covariate shift of the previous layers:** By normalising each layer, the mean and variance is fixed by \$ \mu \$ and \$ \gamma \$ respectively. This limits the covariate shift of each layer, thus the more stable changes allow the subsequent layers to have less adjustments to make, and hence learn faster.
+
+> Covariate shift is simply the shift in the distribution of the input layer. If covariate shift occurs, our model needs to relearn the mapping of the input layer and the output.
+
+> Because it limits covariate shift, **batch norm has a slight regularisation effect:** By adding noise to each layer, further layers are forced to not rely on the previous layer too much (similar to dropout). However, don't use batch norm to regularise - single role responsibility!
+
+#### Batch norm at Test Time
+Estimate \$ \mu \$ and \$ \gamma \$ using **exponentially weighted average from training set**. (no need to compute the parameters from the entire training set)
+  
+> Why do we need to batch norm at test time?
+
+The weights are trained on normalised \$ z_{train} \$ of the input layers. In order to maintain the same distribution between \$ z_{train} \$ and \$ z_{test} \$, we do batch norm at test time too.
+
+### Multi-class classifiction
+#### Softmax Regression
+Softmax regresion generalises logistic regression to *C* classes.
+
+![softmax activation function](/assets/img/2020-1-1-comparison-between-activation-functions/softmax.png)
+
+> Hardmax: Only one one, rest zeros
+
+> If *C = 2*, softmax regression reduces to logistic regression
+
+#### Loss Function of Softmax
+
+$$
+J(y, p)=-\sum_{i} y_{i} \log \left(p_{i}\right)
+$$
+
+Intuitively, this loss function looks at whatever is the ground true class in the training set, and tries to make the corresponding probability of that class as high as possible.
+
+> This is a form of maximum likelihood estimation
+
+### Deep Learning Frameworks
+How does one pick a suitable framework?
+1. Ease of programming (dev and dep)
+2. Running spseed
+3. Truly open (open source w good governance)
+  

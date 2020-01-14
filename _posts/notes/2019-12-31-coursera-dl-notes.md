@@ -48,6 +48,16 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [Softmax Regression](#softmax-regression)
       - [Loss Function of Softmax](#loss-function-of-softmax)
     - [Deep Learning Frameworks](#deep-learning-frameworks)
+- [Course 3: Convolutional Neural Networks (CNN)](#course-3-convolutional-neural-networks-cnn)
+  - [Foundations of CNN](#foundations-of-cnn)
+    - [Why learn CNN?](#why-learn-cnn)
+    - [Convolution Operation](#convolution-operation)
+    - [Padding](#padding)
+    - [Strided Convolutions](#strided-convolutions)
+    - [Summary of Notations for Convolution Operation](#summary-of-notations-for-convolution-operation)
+    - [Pooling Layers](#pooling-layers)
+    - [Fully Connected Layer](#fully-connected-layer)
+    - [CNN Example](#cnn-example)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -366,3 +376,84 @@ How does one pick a suitable framework?
 2. Running spseed
 3. Truly open (open source w good governance)
   
+# Course 3: Convolutional Neural Networks (CNN)
+## Foundations of CNN
+1. Understand the convolution operation
+2. Understand the pooling operation
+3. Remember the vocabulary used in convolutional neural network (padding, stride, filter, ...)
+4. Build a convolutional neural network for image multi-class classification
+
+### Why learn CNN?
+1. New Technology
+2. Computer Vision research inspires other sub-domains (cross-fertilization)
+
+### Convolution Operation
+**Motivation:** Every image represents very large matrixes (3D and RGB; ie 1000x1000x1000x3); there are too many parameters to learn. There needs to be a more efficient way to learn these large matrixes. 
+
+**Intuition:** Convolution operation is applying a *filter* on the original matrix. In doing so, it solves the problem of large matrixes by having...
+1. **Parameter sharing:** A feature detector (such as a vertical edge detector) that's useful in one part of the image is probably useful in another part of the image; able to reuse the feature detector across the image. (ie a filter is reused across the entire image)
+2. **Sparsity of connections:** Each output value depends only on a small number of values (ie *-5* is dependent only on the *9/36* values of the input image and the filter image)
+
+![Edge Detection](/assets/img/2019-12-31-coursera-dl-notes/edge-detection.png)
+![Convolution Superimpose Example](/assets/img/2019-12-31-coursera-dl-notes/convolution-rgb.png)
+![Convolution Layer Example](/assets/img/2019-12-31-coursera-dl-notes/convolution-layer.png)
+Video available [here](/assets/img/2019-12-31-coursera-dl-notes/convolution-operation.mp4)
+
+### Padding
+**Motivation:** 
+1. **Retain same dimensions of image**: It allows you to use a CONV layer without necessarily shrinking the height and width of the volumes. This is important for building deeper networks, since otherwise the height/width would shrink as you go to deeper layers. An important special case is the "same" convolution, in which the height/width is exactly preserved after one layer.
+2. **Retains information at the border:** Without padding, very few values at the next layer would be affected by pixels at the edges of an image.
+
+> Padding does not affect channel of filter matrix (≠ output!!), only height and width. This is because you apply convolution filter across all channels. 
+> ![Convolution Superimpose Example](/assets/img/2019-12-31-coursera-dl-notes/convolution-rgb.png)
+
+> *f* is usually odd: 1) symmetric padding 2) Presense of central pixel so that you can talk about the position of the filter
+
+### Strided Convolutions
+Hyperparemeter which determines **how much the convolution window steps over**.
+
+### Summary of Notations for Convolution Operation
+![CNN notation summary](/assets/img/2019-12-31-coursera-dl-notes/cnn-notation-summary.png)
+1. *f* refers to the filter layer (ie *f x f*)
+2. The channel in each filter is dependent on the channel of the previous layer (ie \$ n_c^{[l-1]}\$) as it is applied across all channel at once (see picture)
+> ![Convolution Superimpose Example](/assets/img/2019-12-31-coursera-dl-notes/convolution-rgb.png)
+3. Each filter and bias term is equivalent to *z*
+![Convolution Layer Example](/assets/img/2019-12-31-coursera-dl-notes/convolution-layer.png)
+1. Activation will thus be the output of *g(z)* of point 3.
+2. Parameters refer to each entry of the filter layers. Thus *weights = weights in each filter * no. of filters.*
+
+### Pooling Layers
+The pooling (POOL) layer reduces the height and width of the input. It helps reduce computation, as well as helps make feature detectors more invariant to its position in the input. 
+
+1. **Max-pooling layer:** slides a *(f, f)* window over the input and stores the max value of the window in the output.
+   1. **Intuition:** Large number means that it has detected a particular feature
+2. **Average-pooling layer:** slides an *(f, f)* window over the input and stores the average value of the window in the output.
+
+![pooling layer](/assets/img/2019-12-31-coursera-dl-notes/pooling-layer.png)
+
+Points to note
+1. Hyperparameters: _f_ and _s_
+2. **No parameters to learn:** You can't change these parameters as changing them means changing the size of each layers, which changes size of weights (which is fixed)
+3. \$ N_c \$ does not change since pooling is applied layer by layer.
+
+### Fully Connected Layer
+Essentially a **normal neural network**, which allows the CNN to **train more parameters**. Usually used in the last few layers (wherein the no. of parameters are reduced via the pooling layer)
+
+![Fully connected layer](/assets/img/2019-12-31-coursera-dl-notes/cnn-fully-connected-layer.png)
+
+### CNN Example
+![CNN Example](/assets/img/2019-12-31-coursera-dl-notes/cnn-example.png)
+1.  Max pooling layers don't have parameters
+2.  Parameters mainly come from FC
+3.  Activation size drops gradually across the activation layer
+4.  Conv -> Pool (to reduce image) -> FC
+
+Notable Quiz Qns
+
+> Because pooling layers do not have parameters, they do not affect the backpropagation (derivatives) calculation.
+
+True. Back propagation does have to cross the pooling layers as well. Exactly what it does depends on whether it is a max pooling or average pooling layer. For a max layer, the gradient is passed only to the maximum of the inputs. For an average pooling layer, it gets equally distributed to the inputs. Mathematical explanation available [here.](https://datascience.stackexchange.com/questions/11699/backprop-through-max-pooling-layers)(Locally linear w slope 1 does not change the input gradient.)
+
+> What is an Epoch?
+
+One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.

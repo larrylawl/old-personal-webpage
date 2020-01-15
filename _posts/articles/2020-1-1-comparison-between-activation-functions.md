@@ -45,6 +45,8 @@ $$
 
 Notice that the derivative of the logistic function is multiplied _l_ times, where _l = 4_ here. As the derivative is always less than _0.25_ (proof below), the multiplication of the small derivatives will lead to an even smaller partial derivative of the cost function. With the partial derivative being such a small number and the optimisation objective being to reduce the partial derivative to 0 (ie minimum point), the change in partial derivative caused by each step of the gradient descent will be very small, and hence the parameters will also change marginally. The problem of an activation function's gradient approaching 0 leading to slower parameter learning is also known as the **vanishing gradient problem**.
 
+![Vanishing Gradient Graph](/assets/img/2020-1-1-comparison-between-activation-functions/vanishing-grad-graph.png)
+
 > Why is the derivative of the logistic function lesser than 0.25? 
 
 1. Since the initialised weights have standard normal distribution, \$ -1 < w_i < 1 \$. 

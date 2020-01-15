@@ -58,6 +58,18 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
     - [Pooling Layers](#pooling-layers)
     - [Fully Connected Layer](#fully-connected-layer)
     - [CNN Example](#cnn-example)
+  - [Deep Convolutional Models: Case Studies](#deep-convolutional-models-case-studies)
+    - [Case Studies](#case-studies)
+      - [Classic Networks](#classic-networks)
+      - [ResNets: What and Why it Works](#resnets-what-and-why-it-works)
+      - [ResNets: Implementation Details](#resnets-implementation-details)
+      - [Networks in Networks and 1x1 Convolutions](#networks-in-networks-and-1x1-convolutions)
+      - [Inception Modules: What and Why](#inception-modules-what-and-why)
+      - [Inception Network](#inception-network)
+    - [Practical advices for using ConvNets](#practical-advices-for-using-convnets)
+      - [Transfer Learning](#transfer-learning)
+      - [Data augmentation](#data-augmentation)
+      - [State of Computer Vision](#state-of-computer-vision)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -447,6 +459,7 @@ Essentially a **normal neural network**, which allows the CNN to **train more pa
 2.  Parameters mainly come from FC
 3.  Activation size drops gradually across the activation layer
 4.  Conv -> Pool (to reduce image) -> FC
+5.  \$ n_H \$ and \$ n_W \$ decreases, while \$ n_C \$ increases.
 
 Notable Quiz Qns
 
@@ -457,3 +470,108 @@ True. Back propagation does have to cross the pooling layers as well. Exactly wh
 > What is an Epoch?
 
 One Epoch is when an ENTIRE dataset is passed forward and backward through the neural network only ONCE.
+
+## Deep Convolutional Models: Case Studies
+**Learning Objectives**
+1. Understand multiple foundational papers of convolutional neural networks
+2. Analyze the dimensionality reduction of a volume in a very deep network
+3. Understand and Implement a Residual network
+4. Build a deep neural network using Keras
+5. Implement a skip-connection in your network
+6. Clone a repository from github and use transfer learning
+
+### Case Studies
+#### Classic Networks
+**Why Look at Classic Networks?** They serve as boilerplates. An architecture that has worked well on one computer vision task often works well on other tasks.
+
+**Classic Networks Examples**
+
+![LeNet](/assets/img/2019-12-31-coursera-dl-notes/LeNet.png)
+
+**AlexNet**
+![AlexNet](/assets/img/2019-12-31-coursera-dl-notes/AlexNet.png)
+1. Similarity to Lenet, but much bigger
+2. ReLU instead of sigmoid/Tanh
+**VGG**
+![VGG](/assets/img/2019-12-31-coursera-dl-notes/VGG.png)
+1. Simplified architecture
+2. \$ n_h, n_w \$ decreases by *1/2* but \$ n_c \$ increases by *1/2*
+
+#### ResNets: What and Why it Works
+![ResBlock](/assets/img/2019-12-31-coursera-dl-notes/resblock.png)
+![ResNet](/assets/img/2019-12-31-coursera-dl-notes/resnet.png)
+
+**Why does ResNets work?**
+*How does it achieve monotonely decrease training error even with no. of layers? (ie graph on right instead of left)*
+
+1. **Skip-connection does not worsen training:** 
+   1. What goes wrong in very deep plain nets in very deep network without this residual of the skip connections is that when you make the network deeper and deeper, it's actually very difficult for it to choose parameters that learn even the identity function which is why a lot of layers end up making your result worse rather than making your result better.
+   2. ResNet circumvents that by making it easy to learn the identity function. If using L2 regularisation, *w* and *b* will be minimised. If *w* and *b = 0*, *g(al) = al* (identity function).
+2. **Opportunity to learn a more complex function:** More layers, thus more complex function.
+3. **Skip-connection speeds up backpropagation:** 
+   1. **Propagating through fewer layers:** If grad ~= 0, it'll be the identity function. Consequently, the current layer and the upstream layer will essentially be the same layer, thus gradient descent will be propagating through fewer layers
+   2. **Avoids the problem of vanishing gradient:** if the output from the adjacent layer ~= 0 (thus grad ~= as we are using a ReLU activation fn), you'll use the gradient of the upstream layer's activation instead. (similar explanation to the learning of identity function when *w* and *b* ~= 0)
+
+#### ResNets: Implementation Details
+![Identity Block](/assets/img/2019-12-31-coursera-dl-notes/identity-block.png)
+**Identity Block:** The identity block is the standard block used in ResNets, and corresponds to the case where the input activation (say \$ a^{[l]} \$ ) has the same dimension as the output activation (say \$ a^{[l+2]} \$)
+
+![Convolution Block](/assets/img/2019-12-31-coursera-dl-notes/conv-block.png)
+**Convolution Block:** resize the input *x* to a different dimension, so that the dimensions match up in the final addition needed to add the shortcut value back to the main path. (This plays a similar role as the matrix \$ W_s \$ discussed in lecture.). The CONV2D layer on the shortcut path does not use any non-linear activation function. Its main role is to just apply a (learned) linear function that reduces the dimension of the input, so that the dimensions match up for the later addition step.
+
+#### Networks in Networks and 1x1 Convolutions
+![1x1 convolutions](/assets/img/2019-12-31-coursera-dl-notes/1x1-convolution.png)
+
+> You can use a 1x1 convolutional layer to reduce \$ n_C \$ but not \$ n_H \$ and \$ n_W \$
+
+#### Inception Modules: What and Why
+![Inception Module](/assets/img/2019-12-31-coursera-dl-notes/inception-module.png)
+
+**Inception Network Motivation:**
+Use all types of permutation of layering techniques, and let network choose which one to learn. However, it is computationally expensive to combine these different techniques (ie channel concat). 
+
+![Inception Module Problem](/assets/img/2019-12-09-coursera-ml-notes/inception-module-problem.png)
+
+
+This is resolved by using the 1x1 convolutions to reduce the input data volume's size, before applying larger convolutions.
+
+![Inception Module Solution](/assets/img/2019-12-09-coursera-ml-notes/inception-module-solution.png)
+
+
+#### Inception Network
+![Inception Network](/assets/img/2019-12-09-coursera-ml-notes/inception-network.png)
+Inception Network
+
+> Fun Fact: this meme is actually cited in the research paper. 
+![Inception Meme](/assets/img/2019-12-09-coursera-ml-notes/inception-meme.png)
+
+### Practical advices for using ConvNets
+#### Transfer Learning
+**Use other's initialisation** which they have spent many mths training. Concretely,
+
+1. Use architectures of networks published in the literature
+2. Use open source implementations if possible
+3. Use pretrained models and finetune on your dataset
+
+Implementation Notes:
+1. Simply train softmax layer and freeze parameters of other layers
+2. Since weights are frozen in the hidden layers, the activations are (almost) deterministic, thus you can save the activations into the disk to reuse them. 
+3. If you have data, then you can freeze fewer layers (ie keep the weights of the later layers unfrozen).
+
+#### Data augmentation
+Computer Vision is often limited by the lack of data. Thus we use data augmentation. Common techniques include
+
+1. Mirroring
+2. Random Cropping
+3. Color Shifting (which uses PCA)
+4. Implementing distortions during training
+
+#### State of Computer Vision
+![Computer Vision State](/assets/img/2019-12-09-coursera-ml-notes/computer-vision-state.png)
+
+Interesting Points
+1. Lack of data in computer vision, which leads to more hand engineering.
+
+Given the relative importance of hand engineering, cv focuses more on doing well on benchmarks and on winning competitions. (likelier to get published)
+1. Ensembling - Train several networks independently and average their outputs
+2. Multicrop - make sure you get it right by averaging 10 results

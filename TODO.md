@@ -17,6 +17,8 @@
 - [ ] Claps feature
 - [ ] Footer to return to top of page/home
 - [x] Unpublished section
+- [ ] Add spell checking to CI
+- [ ] Move notes to unpublished
 
 ## Articles
 

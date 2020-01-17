@@ -15,6 +15,7 @@
 My personal website where I document my love of learning, one byte at a time. More concretely, I write... 
 1. Articles of important concepts that I have learnt.
 2. Logs of my takeaways from articles written by others.
+3. Notes for my coursework.
 
 ## Why do this?
 **To achieve mastery -** To me, the litmus test of one’s mastery for a complex concept is the ability to explain said concept simply. By penning my learning down, I hope to have truly understood what I have learnt.

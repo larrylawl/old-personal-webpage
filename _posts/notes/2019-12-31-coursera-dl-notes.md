@@ -70,6 +70,18 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [Transfer Learning](#transfer-learning)
       - [Data augmentation](#data-augmentation)
       - [State of Computer Vision](#state-of-computer-vision)
+  - [Object Detection](#object-detection)
+    - [Object localisation](#object-localisation)
+    - [Landmark detection](#landmark-detection)
+    - [Object Detection](#object-detection-1)
+    - [Conv implementation of sliding windows](#conv-implementation-of-sliding-windows)
+    - [Bounding Box prediction](#bounding-box-prediction)
+    - [Intersection over Union (IOU)](#intersection-over-union-iou)
+    - [Non-max suppression](#non-max-suppression)
+    - [Anchor Boxes](#anchor-boxes)
+    - [Yolo algo](#yolo-algo)
+    - [Region Proposal](#region-proposal)
+    - [Notable Quiz Questions](#notable-quiz-questions-2)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -575,3 +587,100 @@ Interesting Points
 Given the relative importance of hand engineering, cv focuses more on doing well on benchmarks and on winning competitions. (likelier to get published)
 1. Ensembling - Train several networks independently and average their outputs
 2. Multicrop - make sure you get it right by averaging 10 results
+
+## Object Detection
+1. Understand the challenges of Object Localization, Object Detection and Landmark Finding
+2. Understand and implement non-max suppression
+3. Understand and implement intersection over union
+4. Understand how we label a dataset for an object detection application
+5. Remember the vocabulary of object detection (landmark, anchor, bounding box, grid, ...)
+
+### Object localisation
+**Image Classification:** 
+**Classification with Localisation:** Localise the object and Identify it
+**Detection:** Localise and detect multiple objects
+
+![localisation and detection](/assets/img/2019-12-31-coursera-dl-notes/localisation-and-detection.png)
+
+### Landmark detection
+![landmark detection](/assets/img/2019-12-31-coursera-dl-notes/landmark-detection.png)
+
+> Need to (labourously) specify each landmark
+
+### Object Detection
+**Sliding Windows Detection Algorithm:** 
+![Sliding Window Detection Algorithm](/assets/img/2019-12-31-coursera-dl-notes/sliding-window.png)
+
+1. Take these windows and slide them across the entire image and classify every square region with some stride if it contains a car or not.
+3. Increase window size with each iteration
+4. Drawback: Computation cost of individually calculating each sliding window.
+
+### Conv implementation of sliding windows
+![conv implementation of sliding window](/assets/img/2019-12-31-coursera-dl-notes/conv-imp-sliding-windows.png)
+
+1. Run forward propagation on the entire image
+2. **Shared computation:** Entries of output (computed once) corresponds to respective sliding window (computed 9 times for 3x3)
+
+### Bounding Box prediction
+Output vector contains the bounding boxes
+1. \$ b_x \$: x-coordinate of midpoint wrt top left corner of the boundary box
+2. \$ b_y \$: y-coordinate of midpoint wrt top left corner of the boundary box
+3. \$ b_h \$: Height of box
+4. \$ b_w \$: Width of box
+
+> Possible range: 0 < magnitude of \$ b_x, b_y \$ < 1; magnitude of \$ b_h, b_w \$ > 1 (this is why boundary box sizes can differ)
+
+> \$ b_x, b_y, \$ can exist anywhere on the image; it's a normal coordinate.
+
+### Intersection over Union (IOU)
+![intersection over union](/assets/img/2019-12-31-coursera-dl-notes/iou.png)
+
+### Non-max suppression
+![non max suppression](/assets/img/2019-12-31-coursera-dl-notes/non-max-supp.png)
+
+![non max suppression algo](/assets/img/2019-12-31-coursera-dl-notes/non-max-supp-algo.png)
+
+1. Motivation: Multiple detections of the same object. We want the best dection of the object.
+2. Pick the box with highest prob in the region.
+3. Those with high IOU with the highest prob will be suppressed
+
+### Anchor Boxes
+![anchor box](/assets/img/2019-12-31-coursera-dl-notes/anchor-boxes.png)
+
+1. Motivation: One grid box want to detect multiple objects
+2. Output vector _y_ contains prediction for different anchor boxes.
+
+
+### Yolo algo
+This algorithm "only looks once" at the image in the sense that it requires only one forward propagation pass through the network to make predictions. After non-max suppression, it then outputs recognized objects together with the bounding boxes.
+
+![yolo training](/assets/img/2019-12-31-coursera-dl-notes/yolo-training.png)
+
+> Yolo converts the image (of shape *(m, l, h, 3)*) to output vector *y*, which is also known as the encoding architecture for Yolo
+
+![yolo predictions](/assets/img/2019-12-31-coursera-dl-notes/yolo-prediction.png)
+
+Output 1
+![yolo output 1](/assets/img/2019-12-31-coursera-dl-notes/yolo-output-1.png)
+
+Output 2
+![yolo output 2](/assets/img/2019-12-31-coursera-dl-notes/yolo-output-2.png)
+
+Output 3
+![yolo output 3](/assets/img/2019-12-31-coursera-dl-notes/yolo-output-3.png)
+
+### Region Proposal
+![region proposal](/assets/img/2019-12-31-coursera-dl-notes/region-proposal.png)
+
+1. Select just a few blobs, and Run continent classifier
+2. Drawback: R-CNN is still slower than yolo algos
+
+### Notable Quiz Questions
+
+> Suppose you are using YOLO on a 19x19 grid, on a detection problem with 20 classes, and with 5 anchor boxes. During training, for each image you will need to construct an output volume yy as the target value for the neural network; this corresponds to the last layer of the neural network. (yy may include some “?”, or “don’t cares”). What is the dimension of this output volume?
+
+grid length x grid height x anchor classes x (5 + classes) = 19 x 19 x (5 x 25) <br />
+5: \$ p_c \$, midpoint x, midpoint y, height and width
+
+Qn:
+1. Axis?

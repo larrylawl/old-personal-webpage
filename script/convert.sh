@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 IMAGE=$1
-FILEPATH="../assets/img"
 DEFAULT_WIDTH=1024
 DEFAULT_HEIGHT=600
 

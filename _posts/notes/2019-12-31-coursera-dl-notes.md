@@ -82,6 +82,17 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
     - [Yolo algo](#yolo-algo)
     - [Region Proposal](#region-proposal)
     - [Notable Quiz Questions](#notable-quiz-questions-2)
+  - [Special Applications: Face Recognition & Neural Style Transfer](#special-applications-face-recognition--neural-style-transfer)
+    - [Face Recognition](#face-recognition)
+      - [Face Verification vs Face Recognition](#face-verification-vs-face-recognition)
+      - [One shot learning](#one-shot-learning)
+      - [Siamese Network](#siamese-network)
+      - [Triple Loss](#triple-loss)
+      - [Face Verification and Binary Classification](#face-verification-and-binary-classification)
+    - [Neural Style Transfer](#neural-style-transfer)
+      - [What are deep ConvNets learning?](#what-are-deep-convnets-learning)
+      - [Cost Function](#cost-function)
+      - [Convolutional Networks in 1D or 3D](#convolutional-networks-in-1d-or-3d)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -504,6 +515,7 @@ One Epoch is when an ENTIRE dataset is passed forward and backward through the n
 ![AlexNet](/assets/img/2019-12-31-coursera-dl-notes/AlexNet.png)
 1. Similarity to Lenet, but much bigger
 2. ReLU instead of sigmoid/Tanh
+
 **VGG**
 ![VGG](/assets/img/2019-12-31-coursera-dl-notes/VGG.png)
 1. Simplified architecture
@@ -682,5 +694,137 @@ Output 3
 grid length x grid height x anchor classes x (5 + classes) = 19 x 19 x (5 x 25) <br />
 5: \$ p_c \$, midpoint x, midpoint y, height and width
 
-Qn:
-1. Axis?
+## Special Applications: Face Recognition & Neural Style Transfer
+### Face Recognition
+#### Face Verification vs Face Recognition
+Verification
+1. **Input:** image, name/ID
+2. **Output:** whether the input image is that of the claimed person
+3. 1:1 problem
+
+Recognition
+1. Has a database of *K* persons
+2. **Input:** Image
+3. **Output:** ID if the image is any of the K persons (or "not recognised")
+4. 1:k problem
+
+#### One shot learning
+**Motivation:** Difficult to train CNN from just one training example (employee image) <br />
+**Solution:** Learn a similarity function, *d(img1, img2)*, which is used to compare between input image and database of image.
+
+$$
+d(img1, img2) = \text{degree of difference between images} \\
+\text{if } d(img1, img2) ≤ \tau, \text{same} \\
+\text{else diff}
+$$
+
+#### Siamese Network
+![siamese-network](/assets/img/2019-12-31-coursera-dl-notes/siamese-network.png)
+
+#### Triple Loss
+1. A: Anchor
+2. P: Positive
+3. N: Negative
+
+**Learning Objective**
+$$
+d(A, P) + \alpha ≤ d(A, N) \\
+\lVert f(A) -f(P) \rVert^2 + \alpha ≤ \lVert f(A) -f(N) \rVert^2 \\
+\lVert f(A) -f(P) \rVert^2 - \lVert f(A) -f(N) \rVert^2 + \alpha ≤ 0
+$$
+
+> \$ \alpha \$, called margin, is used to avoid the network learning trivial solns to the inequality (ie *d(A,P) = d(A,N)*)
+
+**Loss Function**
+
+$$
+L(A,P,N) = max(\lVert f(A) -f(P) \rVert^2 - \lVert f(A) -f(N) \rVert^2 + \alpha, 0)
+$$
+
+During training, if *A, P, N* are chosen randomly, \$ d(A,P) + \alpha ≤ d(A, N) \$ is easily satisfied as the probability of *d(A,P)* and *d(A, N)* being different is high. Consequently, the network does not need to train the weights much to satisfy the inequality.
+
+Solution: Choose triples that're "hard" to train on (ie *d(A,P) ~= d(A, N)*)
+
+#### Face Verification and Binary Classification
+Use sigmoid or chi-square function
+![Face Verification and Binary Classification](/assets/img/2019-12-31-coursera-dl-notes/face-ver-binary-classification.png)
+
+Implementation notes:
+1. Precompute activations of last layer for existing employees to save computation time for face recognition
+2. Loop through all images in existing database. Pick the one that has the least distance from the input image. Doing so reduces the problem to a Face verification problem, wherein we simply compare the best image with the input image.
+
+### Neural Style Transfer
+> Form of unsupervised, not supervised learning! There is no labelled data.
+
+#### What are deep ConvNets learning?
+![Deep Layer](/assets/img/2019-12-31-coursera-dl-notes/deep-layer-2.png)
+
+1. 9 patches constitute 1 hidden unit to be activated (but it's a larger patch of the picture!)
+2. Each unit computes increasingly complex features as we go deeper
+
+#### Cost Function
+$$
+J(G) = \alpha J_{content}(C, G) + \beta J_{style}(S, G), where
+$$
+
+1. **C:** Content image
+2. **S:** Style image
+
+Algorithm:
+1. Initiate G randomly.
+2. Use gradient descent to minimize *J(G)*
+
+> Q: Shouldn't cost be a function of the parameters? 
+
+*G* is the pixels of the generated image. Hence, optimising *J* wrt *G* will change the values of the pixels such that it'll look closer like the original image (thus minimising cost).
+
+**Content Cost Function**
+
+$$
+J_{content}(C, G) = 0.5 * \lVert a^{[l](c)} - a^{[l](G)} \rVert^2
+$$
+
+> Use a pre-trained ConvNet like VGG
+
+**Style Cost Function** <br />
+**Style:** correlation between activations across channels. 
+
+> Highly correlated measures the degree to which high level texture components tend to occur tgt
+
+Let \$ a^{[l]}_{i, j, k}\$ = activation at *(i, j, k)*. \$ G^{[l]}\$ is \$ n^{[l]}_c \times n^{[l]}_c \$
+
+$$
+G_{k k^{\prime}}^{[l](G)}=\sum_{i=1}^{n_{H}} \sum_{j=1}^{n_{W}} a_{i, j, k}^{[l](G)} a_{i, j, k^{\prime}}^{[l](G)}
+$$
+
+G is also called the [gram matrix](http://mathworld.wolfram.com/GramMatrix.html). Given a set *V* of *m* vectors, the gram matrix G is the matrix of all possible inner products of *V*
+
+$$
+g_{i,j} = v_i^{T}v_j
+$$
+
+1. Set of *m* vectors: {1, 2, ..., \$ n_c \$} (ie all channels)
+2. G includes all possible pairs of channels 
+3. Gij compares how similar vi is to vj: If they are highly similar, you would expect them to have a large dot product, and thus for Gij to be large.
+4. The diagonal elements Gii measure how "active" a channel i is.
+
+For a particular pair of channels, G measures how high the activations are to each other (thus correlated), across the entire height and width of the channel.
+
+$$
+J_{s t y l e}^{[l]}(S, G)=\frac{1}{\left(2 n_{H}^{[l]} n_{W}^{[l]} n_{C}^{[l]}\right)^{2}} \sum_{k} \sum_{k^{\prime}}\left(G_{k k^{\prime}}^{[l](S)}-G_{k k^{\prime}}^{[l](G)}\right)^{2}
+$$
+
+> Coefficient is the normalisation constant. However it does not matter that much as the style cost function is premultiplied by the hyperparameter \$ \beta \$ anyway
+
+Overall style cost function is
+
+$$
+J_{s t y l e}(S, G) = \sum_l \lambda^{[l]}J_{s t y l e}^{[l]}(S, G)
+$$
+
+> We get even better results by combining this representation from multiple different layers. This is in contrast to the content representation, where usually using just a single hidden layer is sufficient.
+
+#### Convolutional Networks in 1D or 3D
+![conv net in 1d](/assets/img/2019-12-31-coursera-dl-notes/conv-1d.png)
+
+![conv net in 3d](/assets/img/2019-12-31-coursera-dl-notes/conv-3d.png)

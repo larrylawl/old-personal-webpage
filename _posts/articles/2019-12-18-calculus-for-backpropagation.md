@@ -101,7 +101,7 @@ Thus Backpropagation is a process wherein the neural network _learns from the ba
 ## Credits
 Andrew Ng's Machine Learning course. Source [here](https://www.coursera.org/learn/machine-learning).
 
-[Neil Ostrove](https://www.linkedin.com/in/neilostrove) for the proof of the partial derivative term.
+Neil Ostrove for the proof of the partial derivative term.
 
 ![Back propagation proof 1](/assets/img/2019-12-18-calculus-for-backpropagation/backpropagation-proof-1.png)
 

@@ -8,6 +8,7 @@ hidden: true
 ---
 Lecturer: Professor Andrew Ng <br>
 Course available [here](https://www.coursera.org/specializations/deep-learning).<br>
+Standard notations for deep learning [here](/assets/img/2019-12-31-coursera-dl-notes/standard-notations-dl.pdf)
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -48,7 +49,7 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [Softmax Regression](#softmax-regression)
       - [Loss Function of Softmax](#loss-function-of-softmax)
     - [Deep Learning Frameworks](#deep-learning-frameworks)
-- [Course 3: Convolutional Neural Networks (CNN)](#course-3-convolutional-neural-networks-cnn)
+- [Course 4: Convolutional Neural Networks (CNN)](#course-4-convolutional-neural-networks-cnn)
   - [Foundations of CNN](#foundations-of-cnn)
     - [Why learn CNN?](#why-learn-cnn)
     - [Convolution Operation](#convolution-operation)
@@ -93,6 +94,19 @@ Course available [here](https://www.coursera.org/specializations/deep-learning).
       - [What are deep ConvNets learning?](#what-are-deep-convnets-learning)
       - [Cost Function](#cost-function)
       - [Convolutional Networks in 1D or 3D](#convolutional-networks-in-1d-or-3d)
+- [Course 5: Sequence Models](#course-5-sequence-models)
+  - [Recurrent Neural Networks](#recurrent-neural-networks)
+    - [Why Sequence Models](#why-sequence-models)
+    - [Notation](#notation)
+    - [RNN Model](#rnn-model)
+    - [Different types of RNNs](#different-types-of-rnns)
+    - [Language modelling](#language-modelling)
+    - [Sampling novel sequences](#sampling-novel-sequences)
+    - [Vanishing Gradients with RNNs](#vanishing-gradients-with-rnns)
+    - [Gated Recurrent Unit](#gated-recurrent-unit)
+    - [Long Short Term Memory (LSTM)](#long-short-term-memory-lstm)
+    - [Bidirectional RNNs](#bidirectional-rnns)
+    - [Deep RNN](#deep-rnn)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -411,7 +425,7 @@ How does one pick a suitable framework?
 2. Running spseed
 3. Truly open (open source w good governance)
   
-# Course 3: Convolutional Neural Networks (CNN)
+# Course 4: Convolutional Neural Networks (CNN)
 ## Foundations of CNN
 1. Understand the convolution operation
 2. Understand the pooling operation
@@ -828,3 +842,159 @@ $$
 ![conv net in 1d](/assets/img/2019-12-31-coursera-dl-notes/conv-1d.png)
 
 ![conv net in 3d](/assets/img/2019-12-31-coursera-dl-notes/conv-3d.png)
+
+# Course 5: Sequence Models
+## Recurrent Neural Networks
+### Why Sequence Models
+![Sequence Examples](/assets/img/2019-12-31-coursera-dl-notes/seq-eg.png)
+
+### Notation
+1. \$ a^{(2)[3]\langle 4 \lrangle}_5 \$: denotes the activation of the 2nd training example (2), 3rd layer [3], 4th time step , and 5th entry in the vector.
+2. \$ T_x^{i} \$: Total number of words for the *ith* example
+3. \$ T_y^{i} \$: Total number of output labels for the *ith* example
+
+> \$ X^{(i)\langle t \rangle} \$ can be computed using one hot encoding
+
+### RNN Model
+**Why not a standard network?**
+1. Doesn't share features learned across different positions of text
+> Suppose that network learns that \$ X^{\langle 1 \rangle} \$ is a name. If \$ X^{(i)\langle j \rangle} \$ = \$ X^{(i)\langle t \rangle} \$, then the network should also learn that \$ X^{(i)\langle j \rangle} \$ is a name.
+2. Inputs, outputs can be of different lengths in different examples
+
+**RNN Model**
+![Basic RNN cell](/assets/img/2019-12-31-coursera-dl-notes/basic-rnn-cell.png)
+
+![Basic RNN](/assets/img/2019-12-31-coursera-dl-notes/basic-rnn.png)
+
+Points to note
+1. This RNN can only learn from previous activation functions and not after. Solution: Bidirectional RNN (BRNN)
+2. This RNN suffers from vanishing graident problem. Solution: LSTM or GRU network.
+3. The RNN works best when each output can be estimated using "local" context. "Local" context refers to information that is close to the prediction's time step *t* .
+
+> The weights and biases (Waa,ba,Wax,bx) are re-used each time ste
+
+$$
+a^{\langle t \rangle} = g(W_a[a^{\langle t - 1 \rangle}, x^{\langle t \rangle}] + b_a) \\
+\hat{y}^{\langle t \rangle} = g(W_{y}a^{\langle t \rangle} + b_y)
+$$
+
+**Loss Function**
+
+$$
+L^{\langle t \rangle}(\hat{y}^{\langle t \rangle}, y^{\langle t \rangle}) = -y^{\langle t \rangle}log\hat{y}^{\langle t \rangle} - (1 - y^{\langle t \rangle})log(1-\hat{y}^{\langle t \rangle}) \\
+L(\hat{y}, y) = \sum_{t = 1}^{T_y} L^{\langle t \rangle}(\hat{y}^{\langle t \rangle}, y^{\langle t \rangle})
+$$
+
+> As the RNN model is a sequence model over time, the backpropagation process is also called backpropagation through time.
+
+### Different types of RNNs
+![Rnn Type Summary](/assets/img/2019-12-31-coursera-dl-notes/rnn-types-summary.png)
+
+1. **Standard RNN:** Many-To-Many (\$ T_x = T_y \$)
+2. **Sentiment Classification:** Many-To-One
+3. **Music Generation:** One-To-Many
+4. **Machine Translation:** Many-To-Many ( \$ T_x ≠ T_y \$)
+
+### Language modelling
+**Motivation:** Differentiate between sentences which sound the same (eg "the apple and pair salad" vs "the apple and pear salad").
+
+We do so by comparing the probability of the different sentences. 
+
+$$
+P(sentence) = P(y^1, y^2, ..., y^{T_y}) = P(y^1)P(y^2 \mid y^1)P(y^3 \mid y^1, y^2)
+$$ 
+
+![RNN model language model](/assets/img/2019-12-31-coursera-dl-notes/rnn-model-lang-model.png)
+
+> Input \$ x^i \$ is of the correct previous word.
+
+> Output is a softmax layer of the entire corpus
+
+> Corpus: large set of eg text
+
+> Most computational music algorithms use some post-processing because it is difficult to generate music that sounds good without such post-processing. The post-processing does things such as clean up the generated audio by making sure the same sound is not repeated too many times, that two successive notes are not too far from each other in pitch, and so on. *One could argue that a lot of these post-processing steps are hacks; also, a lot of the music generation literature has also focused on hand-crafting post-processors*, and a lot of the output quality depends on the quality of the post-processing and not just the quality of the RNN. 
+
+### Sampling novel sequences
+**Motivation.** Informally get a sense of what the sequence model has learnt by generating a sentence from an input word.
+
+**Implementation.**
+1. After generating \$ y^{\langle t+1 \rangle} \$, we want to sample the next word. 
+2. If we select the most probable, the model will always generate the same result given a starting word. Thus to make the results more interesting, we will use `np.random.choice` to select a next letter that is likely, but not always the same. (ie selecting from the probability distribution from the *softmax* layer)
+3. Sampling is the selection of a value from a group of values, where each value has a probability of being picked.
+4. Sampling allows us to generate random sequences of values.
+ 
+![Sampling Novel Sequence](/assets/img/2019-12-31-coursera-dl-notes/sampling-novel-sequences.png)
+
+> Input (\$ x^{i} \$) comes from previous layer's output (ie \$ \hat{y}^{i-1} \$) instead of output labels (ie \$ y^{i-1} \$)
+
+> Randomly sample according to this soft max distribution.
+
+**Character-level language model**
+
+Adv:
+1. Need not deal with unknown words
+
+Disadv:
+1. Much longer sequences
+   1. Not as good at capturing long range dependencies
+   2. Expensive computation
+
+### Vanishing Gradients with RNNs
+"The *cat*, which already ate ..., *was* full."
+
+Due to the need to capture long range dependencies (ie *"cat"* and *"was"*), the earlier layers need to learn from the later layers via backprop. However, with so many layers in between, the gradient of the later layers will have a hard time affecting the gradient of the earlier layers.
+
+> Exploding gradients can be addressed using gradient clipping, wherein we "clip" the max value.
+
+### Gated Recurrent Unit 
+**Motivation:** NN to capture long range dependencies (ie *"cat"* and *"was"*) within the sentence
+
+"The *cat*, which already ate ..., *was* full."
+
+*c* represents the memory cell, which for the GRU it represents the output value *a*. Intuitively, *c* provides memory for the network to remember down the layers.
+
+$$
+c^{\langle t \rangle} = a^{\langle t \rangle}
+$$
+
+Candidate \$ \tilde{c} \$
+
+$$
+\tilde{c}^{\langle t \rangle} = tanh(W_c[\Gamma_r^{\langle t \rangle} \times c^{\langle t - 1 \rangle}, x^{\langle t \rangle}] + b_c), where
+$$
+
+\$ \Gamma_r \$ denotes the relevant gate, which determines if the previous memory cell is useful or not. If it is not, then we simply use the input value \$ x \$.
+
+$$
+\Gamma_r = \sigma(W_r[c^{\langle t - 1 \rangle}, x^{\langle t \rangle}] + b_r)
+$$
+
+Gate \$ \Gamma_u \$ decides if it should update with \$ c \$ or \$ \tilde{c} \$ (thus usage of sigmoid function). Ideally, \$ \Gamma_u = 1 \$ for *cat* and *was*, and \$ \Gamma_u = 0 \$ for words in between them.
+
+$$
+\Gamma_u = \sigma(W_u[c^{\langle t - 1 \rangle}, X^{\langle t \rangle}] + b_u) \\
+c^{\langle t \rangle} = \Gamma_u \times \tilde{c}^{\langle t \rangle} + (1- \Gamma_u) \times c^{\langle t - 1 \rangle}
+$$
+
+### Long Short Term Memory (LSTM)
+![LSTM](/assets/img/2019-12-31-coursera-dl-notes/LSTM.png)
+
+1. \$ \Gamma_f \$: Forget gate. If the subject changes its state (from a singular word to a plural word), the memory of the previous state becomes outdated, so we "forget" that outdated state.
+2. \$ \Gamma_o \$: Output gate. The output gate decides what gets sent as the prediction (output) of the time step.
+
+> No consensus wrt which is better - GRU or LSTM
+
+### Bidirectional RNNs
+**Motivation.**
+1. He said, "Teddy bears are on sale!"
+2. He saisd, "Teddy Roosevelt was a great President!"
+3. The meaning of "Teddy" is determined by the word that comes **after** (ie "bears" or "Roosevelt"); the current iteration of sequence model only allows a neuron to learn from the words before it. To resolve this, we have **bidirectional RNNs**.
+
+![BRNN](/assets/img/2019-12-31-coursera-dl-notes/BRNN.png)
+
+### Deep RNN
+![Deep RNN](/assets/img/2019-12-31-coursera-dl-notes/deep-rnn-eg.png)
+
+> \$ a^{[2]\langle 3 \rangle} \$ is determined both by its preceding layer of the same word (ie \$ a^{[1]\langle 3 \rangle} \$) and the word before of the same layer (ie \$ a^{[2]\langle 2 \rangle} \$)
+
+> Every column represents one RNN cell

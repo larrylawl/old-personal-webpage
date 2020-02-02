@@ -107,6 +107,10 @@ Standard notations for deep learning [here](/assets/img/2019-12-31-coursera-dl-n
     - [Long Short Term Memory (LSTM)](#long-short-term-memory-lstm)
     - [Bidirectional RNNs](#bidirectional-rnns)
     - [Deep RNN](#deep-rnn)
+  - [Natural Language Processing & Word Embeddings](#natural-language-processing--word-embeddings)
+    - [Introduction to Word Embeddings](#introduction-to-word-embeddings)
+    - [Learning Word Embeddings: Word2vec & GloVe](#learning-word-embeddings-word2vec--glove)
+    - [Applications using Word Embeddings](#applications-using-word-embeddings)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -401,9 +405,15 @@ The weights are trained on normalised \$ z_{train} \$ of the input layers. In or
 
 ### Multi-class classifiction
 #### Softmax Regression
-Softmax regresion generalises logistic regression to *C* classes.
+Softmax regresion generalises logistic regression to *K* classes.
 
-![softmax activation function](/assets/img/2020-1-1-comparison-between-activation-functions/softmax.png)
+Given a test input x, we want our hypothesis to estimate the probability that P(y=k\|x) for each value of k=1,…,K.
+
+$$
+h_{\theta}(x)=\left[\begin{array}{c}{P(y=1 | x ; \theta)} \\ {P(y=2 | x ; \theta)} \\ {\vdots} \\ {P(y=K | x ; \theta)}\end{array}\right]=\frac{1}{\sum_{j=1}^{K} \exp \left(\theta^{(j) \top} x\right)}\left[\begin{array}{c}{\exp \left(\theta^{(1) \top} x\right)} \\ {\exp \left(\theta^{(2) \top} x\right)} \\ {\vdots} \\ {\exp \left(\theta^{(K) \top} x\right)}\end{array}\right]
+$$
+
+Here, \$ \theta^{(i)} \$ are the parameters of our model. Notice that the term \$ \frac{1}{\sum_{j=1}^{K} \exp \left(\theta^{(j) \top} x\right)} \$ normalises the distribution so that it sums to one.
 
 > Hardmax: Only one one, rest zeros
 
@@ -412,8 +422,10 @@ Softmax regresion generalises logistic regression to *C* classes.
 #### Loss Function of Softmax
 
 $$
-J(y, p)=-\sum_{i} y_{i} \log \left(p_{i}\right)
+J(\theta)=-\left[\sum_{i=1}^{m} \sum_{k=1}^{K} 1\left\{y^{(i)}=k\right\} \log \frac{\exp \left(\theta^{(k) \top} x^{(i)}\right)}{\sum_{j=1}^{K} \exp \left(\theta^{(j) \top} x^{(i)}\right)}\right]
 $$
+
+In this equation, 1{.} is the indicator function.
 
 Intuitively, this loss function looks at whatever is the ground true class in the training set, and tries to make the corresponding probability of that class as high as possible.
 
@@ -998,3 +1010,125 @@ $$
 > \$ a^{[2]\langle 3 \rangle} \$ is determined both by its preceding layer of the same word (ie \$ a^{[1]\langle 3 \rangle} \$) and the word before of the same layer (ie \$ a^{[2]\langle 2 \rangle} \$)
 
 > Every column represents one RNN cell
+
+## Natural Language Processing & Word Embeddings
+### Introduction to Word Embeddings
+**Problem.** One-hot encoding a) does not capture sementic relationship between words. (ie inner product between any pair of word is 0) and b) is large in size
+
+**Solution.** Featurized representation. (Every dimension represent a feature)
+
+**Visualising word embeddings:** *iD* -> *2D* (t-SNE algorithm)
+
+![Visualise Word Embeddings](/assets/img/2019-12-31-coursera-dl-notes/visualise-word-embeddings.png)
+
+**Transfer learning and word embeddings**
+1. Learn word embeddings from large text corpus (1-100B words)
+2. Transfer embedding to new task with smaller training set (100k words)
+3. Optional: Continue to finetune the word embeddings with new data
+
+> Relation to face encoding: Face encoding takes in an image and outputs a 128D vector (and compares this 128D vector with another 128D vector to determine if the images are the same). Word embedding takes in a word and outputs a fixed vector with each dimension capturing a sementic meaning.
+
+**Comparing between Word Embeddings**
+
+**Cosine similarity**
+
+$$
+sim(u, v) = \frac{u \cdot v}{\lvert u \lvert \lvert v \lvert} = \frac{\lvert u \lvert \lvert v \lvert cos\theta}{\lvert u \lvert \lvert v \lvert} = cos\theta
+$$
+
+where \$ \theta \$ is the angle between the two vectors *u* and *v*,
+
+1. \$ cos\theta = 1 \implies \theta = 0 \$: Perfectly similar
+2. \$ cos\theta = 0 \implies \theta = 90 \$: No similarity
+3. \$ cos\theta = -1 \implies \theta = 180 \$: Completely opposite directions
+
+**Euclidean distance between vectors**
+
+$$
+disim(u, v) = \lvert u - v \lvert^2
+$$
+
+**Embedding Matrix**
+
+$$
+E_{d, m}
+$$
+
+1. *d*: Number of word embedding dimensions
+2. *m*: Number of examples
+
+### Learning Word Embeddings: Word2vec & GloVe
+
+<!-- **Learning Word Embeddings** -->
+<!-- TODO: insert neural language model -->
+
+**Skip-gram model**
+Picking a random context word *c* and outputs a random target word *t* around *c*.
+
+$$
+p(t | c)=\frac{e^{\theta_{t}^{T} e_{c}}}{\sum_{j=1}^{10,000} e^{\theta_{j}^{T} e_{c}}}
+$$
+
+1. \$ \theta_t =\$ parameter associated with output *t*
+2. 10,000 refers to the no. of words in the dictionary.
+
+> This is at the softmax layer
+
+**Problems with softmax classification**
+Denominator (summation over *i* number of dictionary words) is computationally expensive. 
+
+Solution: 
+1. Hierarchal softmax (similar to hierarchal addressing for IP addresses). 
+> Common words are placed at the top of the hierarchal softmax classifier, as opposed to having a BBST
+
+
+<!-- **Negative Sampling** -->
+<!-- Q: Don't understand-->
+
+<!-- **GloVe word vectors**
+GloVe: Global vectors for word representation
+
+$$
+X_{i,j} = \text{# times j appears in context of i}
+$$
+
+> i: context, j: target
+
+How related are i and j, depending on how closely they are to each other. (but what about distance ... ... ...)
+
+Why is theta and ej symmetrical for glove but not for the others?
+
+Individual rows can't be assigned indiv rows of english description. -->
+
+### Applications using Word Embeddings
+
+**Sentiment Classification** 
+**Definition.** Task of looking at a piece of text and telling if someone likes or dislikes the thing they're talking about.
+
+![RNN sentiment classfication](/assets/img/2019-12-31-coursera-dl-notes/rnn-sentiment-classification.png)
+
+**Debiasing word embeddings**
+
+**Problem.** Man as Computer Programmer and Woman as Homemaker -> Enforces gender stereotype.
+
+**Solution.**
+1. Identify bias direction (ie \$ e_{he} - e_{she} \$)
+2. Neutralize: For every word that is not definitional (ie doctor/nurse), project to get rid of bias. (ie shift towards non-bias direction)
+
+![Neutralize Bias](/assets/img/2019-12-31-coursera-dl-notes/neutralize-bias.png)
+
+$$
+\begin{aligned} e^{\text{bias-component}}&=\frac{e \cdot g}{\|g\|_{2}^{2}} * g \\ e^{\text {debiased}} &=e-e^{\text {bias-component}} \end{aligned}
+$$
+
+> \$ e^{bias_component} is the projection of e onto the direction g.
+
+1. Equalize pairs of words that you might want to have differ only through the bias property (st they are equidistant from the non-bias axis)
+
+> As a concrete example, suppose that "actress" is closer to "babysit" than "actor." By applying neutralizing to "babysit" we can reduce the gender-stereotype associated with babysitting. But this still does not guarantee that "actor" and "actress" are equidistant from "babysit." The equalization algorithm takes care of this.
+
+**Confusion Matrix**
+1. Printing the confusion matrix can also help understand which classes are more difficult for your model.
+2. A confusion matrix shows how often an example whose label is one class ("actual" class) is mislabeled by the algorithm with a different class ("predicted" class).
+
+![Confusion Matrix](/assets/img/2019-12-31-coursera-dl-notes/confusion-matrix.png)

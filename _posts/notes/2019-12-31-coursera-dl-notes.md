@@ -111,6 +111,8 @@ Standard notations for deep learning [here](/assets/img/2019-12-31-coursera-dl-n
     - [Introduction to Word Embeddings](#introduction-to-word-embeddings)
     - [Learning Word Embeddings: Word2vec & GloVe](#learning-word-embeddings-word2vec--glove)
     - [Applications using Word Embeddings](#applications-using-word-embeddings)
+  - [Various Sequence to Sequence Architectures](#various-sequence-to-sequence-architectures)
+    - [Speech Recognition - Audio Data](#speech-recognition---audio-data)
 
 # Course 1: Neural Networks and Deep Learning
 ## Defensive Programming with Matrixes
@@ -861,7 +863,7 @@ $$
 ![Sequence Examples](/assets/img/2019-12-31-coursera-dl-notes/seq-eg.png)
 
 ### Notation
-1. \$ a^{(2)[3]\langle 4 \lrangle}_5 \$: denotes the activation of the 2nd training example (2), 3rd layer [3], 4th time step , and 5th entry in the vector.
+1. \$ a^{(2)[3]\langle 4 \rangle}_5 \$: denotes the activation of the 2nd training example (2), 3rd layer [3], 4th time step , and 5th entry in the vector.
 2. \$ T_x^{i} \$: Total number of words for the *ith* example
 3. \$ T_y^{i} \$: Total number of output labels for the *ith* example
 
@@ -1132,3 +1134,121 @@ $$
 2. A confusion matrix shows how often an example whose label is one class ("actual" class) is mislabeled by the algorithm with a different class ("predicted" class).
 
 ![Confusion Matrix](/assets/img/2019-12-31-coursera-dl-notes/confusion-matrix.png)
+
+## Various Sequence to Sequence Architectures
+![Language Model vs Machine Translation](/assets/img/2019-12-31-coursera-dl-notes/language-model-vs-machine-translation.png)
+
+**Language Model vs Machine Translation**
+1. Input is different (Random initialisation vs Conditional Language)
+2. Probability of output \$ y^{\langle i \rangle} \$ vs Probability of output \$ y^{\langle i \rangle} \$ conditioned on input \$ x^{\langle i \rangle} \$ vs 
+3. Sample \$ y^{\langle i \rangle} \$ randomly vs Deterministic output (intuitively, consistent translation) by taking the max **joint** probability (as opposed to the max prob of each word - greedy search)
+
+**Beam Search Algorithm**
+Instead of taking the max prob of each word, beam search takes the max joint probability conditioned on the input x
+
+$$
+\arg \max _{y} \prod_{t=1}^{T_{y}} P\left(y^{<t>} | x, y^{<1>}, \ldots, y^{<t-1>}\right)
+$$
+
+In order to take the max joint prob, it needs to store the words with highest probability at each step, or Beam Width \$ \beta \$.
+
+**Definition.** Beam Width stores a predetermined number, \$ \beta \$, of best states at each level.
+
+> If \$ \beta \$ = 1, beam search = greedy search.
+
+> \$ \beta \$ = 3 in the example below.
+
+![Beam Search Algo](/assets/img/2019-12-31-coursera-dl-notes/beam-search-algo.png)
+
+Beam Width \$ \beta \$: large \$ \beta \$ results in better result, but slower (as you need to keep more words in memory)
+
+**Refinements to Beam Search**
+The joint probability is a product of probabilities which are much less than 1, thus it is a very tiny number that can result in a numerical underflow.
+
+**Definition.** Number is too small to be represented by a float.
+
+$$
+\arg \max _{y} \prod_{t=1}^{T_{y}} P\left(y^{<t>} | x, y^{<1>}, \ldots, y^{<t-1>}\right)
+$$
+
+A neat trick is to insert \$ log \$, such that it'll be a sum of log probabilities.
+
+$$
+\arg \max _{y} \sum_{y=1}^{T_{y}} \log P\left(y^{<t>} | x, y^{<1>}, \ldots, y^{<t-1>}\right)
+$$
+
+Doing so will likely give you the same result. This is because \$ log(P(y \mid x)) \$ is a non-decreasing monotone graph, thus a value of y that maximises \$ P(y \mid x) \$ will also maximise \$ log(P(y \mid x)) \$.
+
+Lastly, most of the terms are in the range 0 < x < 1, thus they are exponentially negative. Thus the more terms there are, the more negative the joint probability. To nullify this, we can **normalise the joint probability**, which reduces the penalty of outputting longer translations.
+
+$$
+\frac{1}{T_y^{\alpha}}\arg \max _{y} \sum_{y=1}^{T_{y}} \log P\left(y^{<t>} | x, y^{<1>}, \ldots, y^{<t-1>}\right)
+$$
+
+where \$ \alpha \$ is a parameter (often tuned to 0.7, but with no theoretical justification).
+
+**Error Analysis in Beam Search** <br />
+**Motivation.** Does the error lie with Beam Search or RNN?
+
+Assume that \$ y^* \$ is the better sentence than \$ \hat{y} \$, and the algorithm wrongly chose \$ \hat{y} \$.
+
+![Error Analysis on Beam Search](/assets/img/2019-12-31-coursera-dl-notes/error-analysis-beam-search.png)
+
+Repeat this on the errors of the deveopment set, and figure out what fraction of errors are "due to" beam search vs RNN model.
+
+**Bilingual Evaluation Understudy (Bleu) Score** <br />
+Automatic evaluation of machine translation (instead of having a human to do it)
+
+Probability for n-gram
+
+> **n-grams:** n number of words appearing next to each other
+
+$$
+P_n = \frac{\sum_{\text{n-grams in y}}Count_{clip}(n-gram)}{\sum_{\text{n-grams in y}}Count(n-gram)}
+$$
+
+> Count-clip: Clips the specific part of the sentence. If countclip(1-gram), it'll return the individual words of the sentence.
+
+Combined Bleu Score:
+
+$$
+BP\exp^{\frac{1}{k}\sum_{n=1}^{k}p_n}
+$$
+
+> Brevity Penalty: Penalises translations which are too short (easier to have higher precision with shorter translation)
+
+**Attention Model Intuition** <br />
+**Intuition.** An attention mechanism allows a network to focus on the most relevant parts of the input when producing a specific part of the output. (similar to how a human would translate portion by portion of the sentence, instead of translating the entire sentence.)
+
+$$
+\alpha^{<t, t^{\prime}>}=\text { amount of attention } y^{<t>} \text { should pay to  } a^{<t^{\prime}>}
+$$
+
+$$
+\alpha^{<t, t^{\prime}>}=\frac{\exp \left(e^{<t, t^{\prime}>}\right)}{\sum_{t^{\prime}=1}^{T_{x}} \exp \left(e^{<t, t^{\prime}>}\right)}
+$$
+
+The terms \$ e(t, t') \$ are passed into a softmax layer to ensure that for every fix value of t, \$ \alpha^{\langle t, t^{\prime} \rangle} \$ will sum to one. 
+
+The terms \$ e(t, t') \$ are computed from \$ s^{\langle t - 1 \rangle} \$ and \$ a^{\langle t^{\prime} \rangle} \$.
+
+![Attention Model](/assets/img/2019-12-31-coursera-dl-notes/attention-model.png)
+
+### Speech Recognition - Audio Data
+**Problem.** Given input audio clip *x*, output transcript *y*.
+
+> Audio clips are plots with the air pressure against time. Human ear doesn't process raw wave forms, but has physical structures that measures the amounts of intensity of different frequencies.
+
+![CTC cost speech recognition](/assets/img/2019-12-31-coursera-dl-notes/ctc-cost-speech-recognition.png)
+
+**Trigger Word Detection** <br />
+![Trigger Word Detection Algo](/assets/img/2019-12-31-coursera-dl-notes/trigger-word-algo.png)
+
+> E.g.: Apple Siri, Google Home
+
+Implementation Details:
+1. Dataset usually comprises of synthesised data: keyword overlayed with background noises. Because speech data is hard to acquire and label, synthesizing your training data using the audio clips of activates, negatives, and background is easier.
+2. Unidirectional RNN rather than a bidirectional RNN.
+This is really important for trigger word detection, since we want to be able to detect the trigger word almost immediately after it is said.
+
+

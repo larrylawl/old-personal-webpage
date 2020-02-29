@@ -392,7 +392,7 @@ $$
 #### Why do we need batch normalisation, and why does it work?
 Batch normalisation makes **gradient descent quicker** because it...
 1. **Normalises each layer st they have the same scale:** Having the same scale allows descent to be smoother as opposed to an oscillating descent. (same reason as feature scaling)
-2. **Limits the covariate shift of the previous layers:** By normalising each layer, the mean and variance is fixed by \$ \mu \$ and \$ \gamma \$ respectively. This limits the covariate shift of each layer, thus the more stable changes allow the subsequent layers to have less adjustments to make, and hence learn faster.
+2. **Limits the covariate shift of the previous layers:** By normalising each layer, the mean and variance is fixed by the hyperparameters \$ \mu \$ and \$ \gamma \$ respectively. This limits the covariate shift of each layer, thus the more stable changes allow the subsequent layers to have less adjustments to make, and hence learn faster.
 
 > Covariate shift is simply the shift in the distribution of the input layer. If covariate shift occurs, our model needs to relearn the mapping of the input layer and the output.
 
@@ -1001,7 +1001,7 @@ $$
 ### Bidirectional RNNs
 **Motivation.**
 1. He said, "Teddy bears are on sale!"
-2. He saisd, "Teddy Roosevelt was a great President!"
+2. He said, "Teddy Roosevelt was a great President!"
 3. The meaning of "Teddy" is determined by the word that comes **after** (ie "bears" or "Roosevelt"); the current iteration of sequence model only allows a neuron to learn from the words before it. To resolve this, we have **bidirectional RNNs**.
 
 ![BRNN](/assets/img/2019-12-31-coursera-dl-notes/BRNN.png)

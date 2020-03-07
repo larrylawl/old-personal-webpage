@@ -882,7 +882,7 @@ $$
 
 Points to note
 1. This RNN can only learn from previous activation functions and not after. Solution: Bidirectional RNN (BRNN)
-2. This RNN suffers from vanishing graident problem. Solution: LSTM or GRU network.
+2. This RNN suffers from vanishing gradient problem. Solution: LSTM or GRU network.
 3. The RNN works best when each output can be estimated using "local" context. "Local" context refers to information that is close to the prediction's time step *t* .
 
 > The weights and biases (Waa,ba,Wax,bx) are re-used each time ste
@@ -1123,7 +1123,7 @@ $$
 \begin{aligned} e^{\text{bias-component}}&=\frac{e \cdot g}{\|g\|_{2}^{2}} * g \\ e^{\text {debiased}} &=e-e^{\text {bias-component}} \end{aligned}
 $$
 
-> \$ e^{bias_component} is the projection of e onto the direction g.
+> \$ e^{bias_component} \$ is the projection of e onto the direction g.
 
 1. Equalize pairs of words that you might want to have differ only through the bias property (st they are equidistant from the non-bias axis)
 
@@ -1137,6 +1137,8 @@ $$
 
 ## Various Sequence to Sequence Architectures
 ![Language Model vs Machine Translation](/assets/img/2019-12-31-coursera-dl-notes/language-model-vs-machine-translation.png)
+
+> **Machine Translation:** automatic translation of text from one language to another.
 
 **Language Model vs Machine Translation**
 1. Input is different (Random initialisation vs Conditional Language)

@@ -7,7 +7,7 @@ title: 0001 about me
 
 ### Intro
 
-I am a computer science sophomore with a minor in mathematics at the
+My name's Larry Law, and I'm a computer science sophomore with a minor in mathematics at the
 [National University of Singapore](https://www.comp.nus.edu.sg/programmes/ug/cs/),
 and a scholar of the [University Scholar's Programme](http://www.usp.nus.edu.sg/)
 (a multidisciplinary academic programme wherein I learn to write and think critically).

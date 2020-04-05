@@ -8,8 +8,8 @@ title: 0001 about me
 ### Intro
 
 My name's Larry Law, and I'm a computer science sophomore with a minor in mathematics at the
-[National University of Singapore](https://www.comp.nus.edu.sg/programmes/ug/cs/),
-and a scholar of the [University Scholar's Programme](http://www.usp.nus.edu.sg/)
+[National University of Singapore (NUS)](https://www.comp.nus.edu.sg/programmes/ug/cs/),
+and a scholar of the [University Scholar's Programme (USP)](http://www.usp.nus.edu.sg/)
 (a multidisciplinary academic programme wherein I learn to write and think critically).
 
 I'm currently in the midst of my second semester at NUS, and am taking the [deep learning course](https://www.coursera.org/specializations/deep-learning) by Andrew Ng on the side.

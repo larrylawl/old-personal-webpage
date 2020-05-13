@@ -6,5 +6,10 @@ categories: logs
 logurl: http://www.paulgraham.com/hs.html
 hidden: true
 ---
+*(Full article can be found [here](logurl: http://www.paulgraham.com/hs.html).)*
 
-1. Upwind: "Instead of working back from a goal, work forward from promising situations... Work on things that interest you and increase your options, and worry later about which you'll take."
+Before I entered college, I read this transcript by Paul Graham which gave the single-most helpful general career advice - to stay upwind. That is, 
+
+```
+Instead of working back from a goal, work forward from promising situations... Work on things that interest you and increase your options, and worry later about which you'll take
+```

@@ -17,8 +17,10 @@
 - [ ] Claps feature
 - [ ] Footer to return to top of page/home
 - [x] Unpublished section
-- [ ] Add spell checking to CI
 - [ ] Move notes to unpublished
+- [ ] Update about me - doing research + Kaggling. Experience to include ML and DL course.
+- [ ] Change name of logs to takeaways from others (?)
+- [ ] Logs - updates of my professional life
 
 ## Articles
 

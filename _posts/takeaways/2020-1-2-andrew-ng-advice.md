@@ -2,7 +2,7 @@
 layout: post
 title: "Building a Career in Machine Learning"
 author: "Andrew Ng"
-categories: logs
+categories: takeaways
 hidden: true
 ---
 *(Here's the youtube [link](https://www.youtube.com/watch?v=4kiHsIaK9_w&t=46s))*
@@ -47,3 +47,7 @@ Multiple passes of ...
 ### How to Select a job
 1. Work with great people/projects (not on the "brand" of the company)
 2. Apply to both graduate programmes and industry, and pick the best opportunity from there: the line between academia and industry is blurring in AI, thus it's wiser to apply for opportunities in both areas, and pick the best one moving forward
+
+### Long-Term Advice
+1. Do important work
+2. Learn the most

@@ -12,12 +12,12 @@ My name's Larry Law, and I'm a computer science sophomore with a minor in mathem
 and a scholar of the [University Scholar's Programme (USP)](http://www.usp.nus.edu.sg/)
 (a multidisciplinary academic programme wherein I learn to write and think critically).
 
-I'm currently in the midst of my second semester at NUS, and am taking the [deep learning course](https://www.coursera.org/specializations/deep-learning) by Andrew Ng on the side.
+For this summer, I will be doing research on theoretical Machine Learning under [Dr Bryan Low](https://www.comp.nus.edu.sg/~lowkh/research.html). On the side, I will (finally!) be competing in Natural Language Processing Kaggle competitions to complement the theoretical research.
 
 ### Experience
 
 I have previously interned at [AXA Singapore](https://www.axa.com.sg/),
-where I did full stack web development.
+where I did full stack web development. I have also completed both Dr Andrew Ng's [Machine Learning](https://github.com/larrylawl/machine-learning-coursera-stanford) and [Deep Learning](https://github.com/larrylawl/deep-learning-coursera) courses.
 
 ### Why document my learning?
 

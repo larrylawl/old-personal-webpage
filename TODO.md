@@ -18,9 +18,10 @@
 - [ ] Footer to return to top of page/home
 - [x] Unpublished section
 - [ ] Move notes to unpublished
-- [ ] Update about me - doing research + Kaggling. Experience to include ML and DL course.
-- [ ] Change name of logs to takeaways from others (?)
-- [ ] Logs - updates of my professional life
+- [x] Update about me - doing research + Kaggling. Experience to include ML and DL course.
+- [x] Change name of logs to takeaways from others
+- [ ] Logs of my professional life
+- [ ] Article for Kaggle comp
 
 ## Articles
 

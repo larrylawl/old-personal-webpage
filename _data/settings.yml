@@ -12,7 +12,7 @@ menu:
   - { name: "Takeaways", path: "menu", url: "takeaways.html" }
   - { name: "Logs", path: "menu", url: "logs.html" }
   - { name: "Notes", path: "menu", url: "notes.html" }
-  - { name: "", path: "menu", url: "unpublished.html" }
+  # - { name: "", path: "menu", url: "unpublished.html" }
   # - { name: "", path: "menu", url: "archive.html" }
 
 # Available social icons are powered by Font Awesome, so you can use any icon that they offer

@@ -2,6 +2,7 @@
 layout: page
 title: Takeaways From Others
 ---
+“To know the road ahead, ask those coming back.”
 <ul class="posts">
   <div class ="articles">
     {% for post in site.categories.takeaways %}

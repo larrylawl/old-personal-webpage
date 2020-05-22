@@ -5,7 +5,7 @@ author: "Paul Graham"
 categories: takeaways
 hidden: true
 ---
-*(Full article can be found [here](logurl: http://www.paulgraham.com/hs.html).)*
+*(Full article can be found [here](http://www.paulgraham.com/hs.html).)*
 
 Before I entered college, I read this transcript by Paul Graham which gave the single-most helpful general career advice - to stay upwind. That is, 
 

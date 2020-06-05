@@ -49,6 +49,16 @@ Standard notations for deep learning [here](/assets/img/2019-12-31-coursera-dl-n
       - [Softmax Regression](#softmax-regression)
       - [Loss Function of Softmax](#loss-function-of-softmax)
     - [Deep Learning Frameworks](#deep-learning-frameworks)
+- [Course 3: Structuring Machine Learning Projects](#course-3-structuring-machine-learning-projects)
+  - [Introduction to ML Strategy](#introduction-to-ml-strategy)
+  - [Setting up your goal](#setting-up-your-goal)
+  - [Comparing to human-level performance](#comparing-to-human-level-performance)
+  - [Error Analysis](#error-analysis)
+  - [Mismatched training and dev/test set](#mismatched-training-and-devtest-set)
+    - [Bias and Variance with mismatched data distributions.](#bias-and-variance-with-mismatched-data-distributions)
+    - [Addressing Data Mismatch](#addressing-data-mismatch)
+    - [Learning from multiple tasks](#learning-from-multiple-tasks)
+    - [End-To-End Deep Learning](#end-to-end-deep-learning)
 - [Course 4: Convolutional Neural Networks (CNN)](#course-4-convolutional-neural-networks-cnn)
   - [Foundations of CNN](#foundations-of-cnn)
     - [Why learn CNN?](#why-learn-cnn)
@@ -438,6 +448,101 @@ How does one pick a suitable framework?
 1. Ease of programming (dev and dep)
 2. Running spseed
 3. Truly open (open source w good governance)
+
+# Course 3: Structuring Machine Learning Projects
+## Introduction to ML Strategy
+**Motivation.** One of the challenges of a ML system is the number of tools (or "knobs") to try. Thus it's important to be able to evaluate which of these options will be the most effective.
+
+**Single Role Responsibility.** Identify the purpose of each knob such that the knobs are orthogonal to each other; they don't overlap.
+
+**Chain of assumptions in ML**
+1. Fit training set well on cost function
+2. Fit dev set well on cost function
+3. Fit test set well on cost function
+4. Performs well in real world
+
+> For instance, Dr Andrew tend not to use early stopping technique as it 1) worsens training set performance and simultaneously 2) improves dev set performance. ES is not a bad technique to use, but there are other techniques that solely focuses on improving training/dev set performance.
+
+## Setting up your goal 
+**Single number evaluation metric.** Such as F1 score, average.
+
+**Satisficing and Optimizing Metric.** Optimise for 1 metric, and ensure that the remaining *n - 1* metrics are satisifed. 
+
+**Train/Dev/Test Distributions.** Choose a dev/test set to reflect data you 1) expect to get in the future and 2) consider important to do well on. Ideally, dev and test set should have the same distribution. Setting up dev/test set + metric defines defines the target; training set defines how well you can hit the target.
+
+<!-- Dev/test data should come from the same distribution! They are the target markers. Training can come from a different distribution. -->
+
+**Size of the dev and test sets.** Set your test set to be big enough to give high confidence in the overall performance of your system.
+
+## Comparing to human-level performance
+**Why human-level performance?** Humans are quite good at a lot of tasks. So long as ML is worse than humans, you can:
+1. Get labeled data from humans
+2. Gain insight from manual error analysis: why did a person get this right?
+3. Better analysis of bias/variance
+
+**Bayes Error.** In statistical classification, Bayes error rate is the lowest possible error rate for any classifier of a random outcome (into, for example, one of two categories) and is analogous to the irreducible error.
+
+**Avoidable Bias.** Difference between human-level error and training error. Use Human-level error as a proxy for Bayes error. If avoidable bias is low, then you can focus on reducing variance (as there's not much more to improve for training error).
+
+## Error Analysis
+Recommended approach:
+1. Start with the simplest possible algorithm (avoid premature optimization!) that you can implement quickly
+Implement it and test it on your cross-validation set
+1. Plot Learning Curves to perform bias/variance analysis.
+2. Do the Error Analysis
+    1. Manually examine the examples (in your CV set) that your algorithm misclassified.
+    2. See if you spot any systematic trend in what types of examples it makes errors on
+
+Manually examine the examples (in your CV set) that your algorithm misclassified. From there, See if you spot any systematic trend in what types of examples it makes errors on.
+
+**Cleaning up incorrectly labeled data.** Is it worth the effort? If errors due to incorrect labels are high, then it would be worth fixing them.
+
+## Mismatched training and dev/test set
+**Training and Testing on different distributions**
+1. Ensure that dev/test set have 1) the same distribution and 2) the dev/test set distribution should match the target goal as much as possible.
+2. Attaining point 1 can be at the expense of training set distribution. For example, if I have 200K images of cats from webpages and only 10K images from mobile apps, 5k of the mobile app can go to dev/test set (wlog), with the remaining going to the training set; this split is better than a random split of the aggregated 210k examples, which will result in dev/test set being far away from the target goal.
+
+### Bias and Variance with mismatched data distributions.
+Estimating the bias and variance of your learning algorithm really helps you prioritize what to work on next. But the way you analyze bias and variance changes when your training set comes from a different distribution than your dev and test sets. 
+
+**Motivation.** Suppose that the training set comes from a different distribution as your dev and test sets. The difference between the training error and dev error could either come from 1) low variance (model is overfitting on training data) or 2) training data was too easy (for example, if the images were clearer there).
+
+**Training-dev set.** Same distribution as training set, but not used for training. From there, you can plot 1) training error, 2) training-dev error and 3) dev error. If the difference between 1) and 2) is significant, thnn there is low variance. Else, the training data was too easy.
+
+Summary of errors:
+1. Human Level (avoidable bias)
+2. Training Set Error (variance)
+3. Training-Dev set error (data mismatch)
+4. Dev error (degree of overfitting to dev set)
+5. Test error
+
+### Addressing Data Mismatch
+1. Carry out manual error analysis to try to understand difference between training and dev/test sets
+2. Make training data more similar; or collect more data similar to dev/test sets.
+
+### Learning from multiple tasks
+**Transfer Learning.** When does transfer learning makes sense?
+1. Task A and B have the same input *x*
+2. You have a lot more data for Task A than Task B
+3. Low level features from A could be helpful for learning B
+
+**Multi-task learning.** Multi-task learning (MTL) is a subfield of machine learning in which multiple learning tasks are solved at the same time, while exploiting commonalities and differences across tasks. This can result in improved learning efficiency and prediction accuracy for the task-specific models, when compared to training the models separately. When does it makes sense?
+1. Training on a set of tasks that could benefit from having shared lower-level features
+2. Amount of data you have for each task is quite similar
+3. Can train a big enough neural network to do well on all tasks
+
+### End-To-End Deep Learning
+**What is end-to-end learning?** End-to-end (E2E) learning refers to training a possibly complex learning system represented by a single model (specifically a Deep Neural Network) that represents the complete target system, bypassing the intermediate layers usually present in traditional pipeline designs.
+
+Pros:
+1. Let the data speak
+2. Less hand-designing of components needed
+
+Cons
+1. May need large amount of data
+2. Excludes potentially useful hand-designed components
+
+**Key Question:** Do you have sufficient data to learn a function of the complexity needed to map *x* to *y*.
   
 # Course 4: Convolutional Neural Networks (CNN)
 ## Foundations of CNN

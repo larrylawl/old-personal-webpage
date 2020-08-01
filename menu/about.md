@@ -7,12 +7,12 @@ title: 0001 about me
 
 ### Intro
 
-My name's Larry Law (or Law Ann Liat, Larry), and I'm a computer science sophomore with a minor in mathematics at the
+My name's Larry Law (or Law Ann Liat, Larry), and I'm a computer science junior with a minor in mathematics at the
 [National University of Singapore (NUS)](https://www.comp.nus.edu.sg/programmes/ug/cs/),
 and a scholar of the [University Scholar's Programme (USP)](http://www.usp.nus.edu.sg/)
 (a multidisciplinary academic programme wherein I learn to write and think critically).
 
-For this summer, I will be doing research on theoretical Machine Learning under [Dr Bryan Low](https://www.comp.nus.edu.sg/~lowkh/research.html). On the side, I will (finally!) be competing in  Kaggle competitions to complement the theoretical research.
+For this summer, I will be researching on Neural Architecture Search with Bayesian Optimisation under [Dr Bryan Low](https://www.comp.nus.edu.sg/~lowkh/research.html). 
 
 ### Experience
 

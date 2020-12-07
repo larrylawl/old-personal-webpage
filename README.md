@@ -13,9 +13,9 @@
 ## What is this?
 
 My personal website where I document my love of learning, one byte at a time. More concretely, I write... 
+0. Updates on my (professional) life
 1. Articles of important concepts that I have learnt.
-2. Logs of my takeaways from articles written by others.
-3. Notes for my coursework.
+2. Takeaways from others
 
 ## Why do this?
 **To achieve mastery -** To me, the litmus test of one’s mastery for a complex concept is the ability to explain said concept simply. By penning my learning down, I hope to have truly understood what I have learnt.
@@ -26,4 +26,4 @@ My personal website where I document my love of learning, one byte at a time. Mo
 Always welcomed, either via my socials or directly in the comment section of my articles.
 
 ## Credits
-Paul Le's boilerplate [here](https://github.com/LeNPaul/Lagrange)
+Paul Le's boilerplate [here](https://github.cobm/LeNPaul/Lagrange)

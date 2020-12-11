@@ -6,5 +6,4 @@ Gemfile.lock
 .jekyll-cache
 .DS_Store
 vendor/** 
-
 _posts/archive

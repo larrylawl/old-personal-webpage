@@ -5,7 +5,7 @@ title: 0001 about me
 
 ![Larry Photo](/assets/img/site/larry.jpg)
 
-### Intro
+### Greetings World!
 
 My name's Larry Law (or Law Ann Liat, Larry), and I'm a computer science junior with a minor in mathematics at the
 [National University of Singapore (NUS)](https://www.comp.nus.edu.sg/programmes/ug/cs/),

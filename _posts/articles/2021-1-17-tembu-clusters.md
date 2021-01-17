@@ -8,9 +8,6 @@ image: cs.png
 ---
 
 ## Crash Course on using Tembusu Clusters
-*"I google this everytime. Related comic."* -Top comment on stackoverflow
-![Comic](/assets/img/2021-1-17-tembusu-clusters/comic.png)
-
 ### Logging In
 ```
 # VPN or when using NUS wifi
@@ -40,6 +37,7 @@ scp -r results/rs-obs/net_75/ larrylaw@sunfire.comp.nus
 2. `tmux` to run parallal processes
 3. `nvidia-smi` to check GPU usage (before sending jobs)
 
+![Comic](/assets/img/2021-1-17-tembusu-clusters/comic.png)
 
 
 

@@ -6,7 +6,9 @@ categories: articles
 tags: [Networking]
 image: cs.png
 ---
-
+<div align="center">
+    <i>“I google this everytime.” - StackOverflow</i>
+</div>
 ## Crash Course on using Tembusu Clusters
 ### Logging In
 ```

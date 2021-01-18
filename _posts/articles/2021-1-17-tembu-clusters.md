@@ -6,9 +6,6 @@ categories: articles
 tags: [Networking]
 image: cs.png
 ---
-<div align="center">
-    <i>“I google this everytime.” - StackOverflow</i>
-</div>
 ## Crash Course on using Tembusu Clusters
 ### Logging In
 ```
@@ -36,7 +33,7 @@ scp -r results/rs-obs/net_75/ larrylaw@sunfire.comp.nus
 
 ### Development
 1. `pyenv` for python version and `pyvenv` for virtual environment
-2. `tmux` to run parallal processes
+2. `tmux` to keep process running after ending ssh session. Help [here](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session).
 3. `nvidia-smi` to check GPU usage (before sending jobs)
 
 ![Comic](/assets/img/2021-1-17-tembusu-clusters/comic.png)

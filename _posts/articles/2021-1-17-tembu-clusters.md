@@ -9,7 +9,7 @@ image: cs.png
 ## Crash Course on using Tembusu Clusters
 ### Logging In
 ```
-# VPN or when using NUS wifi
+# VPN
 ssh larrylaw@xgpc2.comp.nus.edu.sg
 
 # Otherwise through sunfire
@@ -17,24 +17,31 @@ ssh larrylaw@sunfire.comp.nus.edu.sg
 ssh xgpc2
 ```
 
-> Guide to use [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn). Compute cluster hardware configuration [here](https://dochub.comp.nus.edu.sg/cf/guides/compute-cluster/hardware).
+> 
+1. Guide to use [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn). 
+2. Compute cluster hardware configuration [here](https://dochub.comp.nus.edu.sg/cf/guides/compute-cluster/hardware).
+3. Use RSA key to skip typing of password. Guide [here](https://linuxize.com/post/how-to-setup-passwordless-ssh-login/)
 
 ### Transfering Data
 ```
 # From tembusu cluster to local 
-## VPN or when using NUS wifi
+## VPN
 scp -r larrylaw@xgpc2.comp.nus.edu.sg:~/NM2/results/exp-e ./
 
 ## Otherwise through sunfire
 scp -r larrylaw@sunfire.comp.nus.edu.sg:~/net_75 .
 scp -r results/rs-obs/net_75/ larrylaw@sunfire.comp.nus
 .edu.sg:~/
+
+# From local to tembusu cluster
+scp lab1.tar.gz larrylaw@xcne2.comp.nus.edu.sg:~/
 ```
 
 ### Development
 1. `pyenv` for python version and `pyvenv` for virtual environment
 2. `tmux` to keep process running after ending ssh session. Help [here](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session).
 3. `nvidia-smi` to check GPU usage (before sending jobs)
+4. Remote development on VSCode. Help [here](https://code.visualstudio.com/docs/remote/ssh)
 
 ![Comic](/assets/img/2021-1-17-tembusu-clusters/comic.png)
 

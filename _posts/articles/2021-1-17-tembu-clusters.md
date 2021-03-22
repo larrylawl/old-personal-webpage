@@ -39,7 +39,7 @@ scp lab1.tar.gz larrylaw@xcne2.comp.nus.edu.sg:~/
 
 ### Lazy to manually check cluster availability?
 
-```
+```bash
 #!/usr/bin/bash
 
 echo "Checking all remote! /prays hard"

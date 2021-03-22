@@ -37,6 +37,25 @@ scp -r results/rs-obs/net_75/ larrylaw@sunfire.comp.nus
 scp lab1.tar.gz larrylaw@xcne2.comp.nus.edu.sg:~/
 ```
 
+### Lazy to manually check cluster availability?
+
+```
+#!/usr/bin/bash
+
+echo "Checking all remote! /prays hard"
+
+declare -a arr=("xgpb0" "xgpc0" "xgpc1" "xgpc2" "xgpc3" "xgpc4" "xgpd0" "xgpd1" "xgpd4" "xgpf11" "cgpa1" "cpga2" "cpga3")
+
+rm output.txt
+for node in "${arr[@]}"
+do
+    echo "$node" >> output.txt
+    echo yes | ssh -o ConnectTimeout=10 "larrylaw@$node.comp.nus.edu.sg" nvidia-smi | grep "MiB /" >> output.txt
+done
+
+echo "Go get em!"
+
+```
 ### Development
 1. `pyenv` for python version and `pyvenv` for virtual environment
 2. `tmux` to keep process running after ending ssh session. Help [here](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session).

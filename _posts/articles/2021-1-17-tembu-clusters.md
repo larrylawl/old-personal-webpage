@@ -63,6 +63,7 @@ echo "Go get em!"
 4. Remote development on VSCode. Help [here](https://code.visualstudio.com/docs/remote/ssh)
 
 ![Comic](/assets/img/2021-1-17-tembusu-clusters/comic.png)
+5. Run on specific GPU via prepending `CUDA_VISIBLE_DEVICES=2,3 python xxx.py`
 
 
 

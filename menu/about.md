@@ -11,7 +11,7 @@ My name's Larry Law (or Law Ann Liat, Larry), and I'm a computer science junior 
 [National University of Singapore (NUS)](https://www.comp.nus.edu.sg/programmes/ug/cs/), a scholar of the [University Scholar's Programme (USP)](http://www.usp.nus.edu.sg/) (a multidisciplinary academic programme wherein I learn to write and think critically) and a student at the [Turing Programme](https://www.comp.nus.edu.sg/programmes/ug/cs/tp/) (an invitation-based NUS research programme).
 
 <!-- Prior experience (?) -->
-For this semester, I will be finishing my research on **'Integrating Non-Myopic Bayesian Optimisation with Network Morphism for Neural Architecture Search'** under [A/P Low Kian Hsiang](https://www.comp.nus.edu.sg/~lowkh/research.html). Previously, I'm fortunate to have done a small research project on autonomous robots under [Professor David Hsu](https://www.comp.nus.edu.sg/~dyhsu/).
+For this summer, I will be researching on understanding multilingual embeddings with [DSO](https://www.dso.org.sg) under [Dr. Chieu Hai Leong](https://chaileon.github.io). Previously, I'm fortunate to have researched on **'Integrating Non-Myopic Bayesian Optimisation with Network Morphism for Neural Architecture Search'** under [A/P Low Kian Hsiang](https://www.comp.nus.edu.sg/~lowkh/research.html). 
 
 My **resume** can be viewed [here](/assets/larry_resume.pdf).
 

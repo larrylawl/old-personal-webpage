@@ -50,7 +50,7 @@ This is because the determinant computes the **factor by which the space was cha
 
 Solving for the determinant of the coefficient matrix gives us our eigenvalues.
 
-With the eigenvalues, we can proceed to solve for eigenvectors. Concrete steps can be found [here](https://www.scss.tcd.ie/Rozenn.Dahyot/CS1BA1/SolutionEigen.pdf).
+With the eigenvalues, we can proceed to solve for eigenvectors.
 
 ## Eigenbasis
 An eigenbasis is a **set of basis vectors wherein every vector is an eigenvector**.

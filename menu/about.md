@@ -13,6 +13,8 @@ My name's Larry Law (or Law Ann Liat, Larry), and I'm a computer science junior 
 <!-- Prior experience (?) -->
 For this summer, I will be researching on understanding multilingual embeddings with [DSO](https://www.dso.org.sg) under [Dr. Chieu Hai Leong](https://chaileon.github.io). Previously, I'm fortunate to have researched on **'Integrating Non-Myopic Bayesian Optimisation with Network Morphism for Neural Architecture Search'** under [A/P Low Kian Hsiang](https://www.comp.nus.edu.sg/~lowkh/research.html). 
 
+Along with a few friends, I've built an automatic github issue labeller, which is published in the Github action marketplace [here](https://github.com/marketplace/actions/auto-github-issue-labeller). 
+
 My **resume** can be viewed [here](/assets/larry_resume.pdf).
 
 <!-- ### Logs

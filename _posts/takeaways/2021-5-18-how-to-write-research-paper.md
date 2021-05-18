@@ -5,7 +5,10 @@ author: "Simon Peyton Jones"
 categories: takeaways
 hidden: true
 ---
+
 *(Here's the [link](https://www.microsoft.com/en-us/research/academic-program/write-great-research-paper/))*
+
+How to write a great research paper by Simon Peyton Jones from microsoft.
 
 ## 1. Don't Wait: Write
 Wrong: Idea -> Research -> Write
@@ -32,7 +35,7 @@ Structure
 7. Related work (1-2 pages, 10 readers)
 8. Conclusion (0.5 pages)
 
-## Nail your contributions to the mast
+## 4. Nail your contributions to the mast
 
 Introduction: 
 - Describe the problem 
@@ -43,7 +46,7 @@ Introduction:
     - Reader thinks "gosh, if they can really deliver this, that'd be exciting; I better read on"
     - Contributions should be refutable
 
-## Related work: later
+## 5. Related work: later
 No: Abstract -> Intro -> Related work -> Problem -> Idea -> Details -> Conclusion
 
 Yes: Abstract -> Intro -> Problem -> Idea -> Details -> Related work -> Conclusion
@@ -54,11 +57,11 @@ Why?
 
 Giving credit to others does not diminish credit I get from my paper
 
-## Put your readers first
+## 6. Put your readers first
 1. Conveying intuition
 2. Presenting idea
 
-## Listen to your readers
+## 7. Listen to your readers
 
 > DO not respond "you stupid person, I meant X". Lol.
 

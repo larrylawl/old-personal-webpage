@@ -34,6 +34,8 @@ In the context of the graph below, each cross marks the result of each iteration
 
 ![Gradient Descent](/assets/img/2019-12-09-gradient-descent/gradient-descent-3d.jpg)
 
+![Gradient Descent](https://github.com/larrylawl/larrylawl.github.io/blob/assets/assets/img/2019-12-09-gradient-descent/gradient-descent-3d.jpg?raw=true)
+
 ## The math behind Gradient Descent
 
 $$
@@ -43,7 +45,7 @@ $$
 ### Understanding the partial derivative term
 Let's consider \$ R_2 \$ first. Suppose that we initialise \$ \theta_{1} \$ to the left of the minimum point of graph below. The derivative at that point is negative, thus the updated value of \$ \theta_{1} \$ will be increased (moves right) and hence _converges_ towards the local minimum, which is the purpose of gradient descent.
 
-![Gradient Descent](/assets/img/2019-12-09-gradient-descent/gradient-descent-2d.jpg)
+![Gradient Descent](assets/img/2019-12-09-gradient-descent/gradient-descent-2d.jpg)
 
 I intentionally used the word "_converges_". As can be seen from the graph, the derivative of each iteration as we approach the local minimum decreases, thus each update of \$ \theta_{1} \$ will correspondingly get smaller. This "natural" convergence is also the reason why the learning rate can be fixed, instead of decreasing as we approach the local minimum.
 

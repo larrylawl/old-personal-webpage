@@ -21,14 +21,6 @@ My personal website where I document my love of learning, one byte at a time. Mo
 **To achieve mastery -** To me, the litmus test of one’s mastery for a complex concept is the ability to explain said concept simply. By penning my learning down, I hope to have truly understood what I have learnt.
 
 **To share knowledge -** I have always loved how developers helped each other so readily. These articles are my humble way of contributing to this open-source culture; I will be delighted if others found the articles helpful in their own pursuit of knowledge.
-
-## How to get it running?
-
-```
-bundle install
-bundle exec jekyll serve
-```
-
 ## Comments?
 Always welcomed, either via my socials or directly in the comment section of my articles.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building a Career in Machine Learning"
-author: "Andrew Ng"
+author: "Prof Andrew Ng (Stanford)"
 categories: takeaways
 hidden: true
 ---

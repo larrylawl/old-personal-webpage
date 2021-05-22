@@ -20,7 +20,7 @@ ssh xgpc2
 > 
 1. Guide to use [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn). 
 2. Compute cluster hardware configuration [here](https://dochub.comp.nus.edu.sg/cf/guides/compute-cluster/hardware).
-3. Use RSA key to skip typing of password. Guide [here](https://linuxize.com/post/how-to-setup-passwordless-ssh-login/)
+3. Use RSA key to skip typing of password. Google `set up passwordless SSH login`.
 
 ### Transfering Data
 ```
@@ -38,6 +38,7 @@ scp lab1.tar.gz larrylaw@xcne2.comp.nus.edu.sg:~/
 ```
 
 ### Lazy to manually check cluster availability?
+This bash script echos the availability of specified nodes.
 
 ```bash
 #!/usr/bin/bash

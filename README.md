@@ -22,8 +22,15 @@ My personal website where I document my love of learning, one byte at a time. Mo
 
 **To share knowledge -** I have always loved how developers helped each other so readily. These articles are my humble way of contributing to this open-source culture; I will be delighted if others found the articles helpful in their own pursuit of knowledge.
 
+## How to get it running?
+
+```
+bundle install
+bundle exec jekyll serve
+```
+
 ## Comments?
 Always welcomed, either via my socials or directly in the comment section of my articles.
 
 ## Credits
-Paul Le's boilerplate [here](https://github.cobm/LeNPaul/Lagrange)
+Paul Le's boilerplate [here](https://github.com/LeNPaul/Lagrange)

@@ -2,7 +2,8 @@
 layout: default
 title: "What You'll Wish You'd Known"
 author: "Paul Graham"
-categories: takeaways
+categories: articles
+tags: advice
 hidden: true
 ---
 *(Full article can be found [here](http://www.paulgraham.com/hs.html).)*

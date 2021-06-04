@@ -15,7 +15,7 @@ hidden: true
 - [Multilingual Models](#multilingual-models)
 - [Datasets](#datasets)
 - [Attribution Methods](#attribution-methods)
-- [Topic](#topic)
+- [Rationale](#rationale)
 
 <!-- no toc -->
 ## Motivation
@@ -60,6 +60,8 @@ hidden: true
 - When only trained on hypothesis, can acc as high as twice the majority baseline (67% vs. 34%)
 - This is possible due to hypothesis- only biases, such as the observation that **negation words (“no” or “never”) are more commonly used in contradicting hypotheses** (Gururangan et al., 2018; Poliak et al., 2018). The hypothesis sen-tence length is another example of an artefact that models can learn from, with **entailment hypotheses being, on average, shorter than either contradiction or neutral hypotheses** (Gururangan et al., 2018). Important to train only on hypothesis as a sanity check that it doesn't beat majority baseline.
 
+**Translation Artifacts in Cross-lingual Transfer Learning**(https://arxiv.org/pdf/2004.04721.pdf, Mikel Artetxe, Gorka Labaka, Eneko Agirre, EMNLP2020)
+- For instance, in natural language inference, translating the premise and the hypothesis independently can reduce the lexical overlap between them, which cur- rent models are highly sensitive to
 
 `**`
 
@@ -282,7 +284,22 @@ hidden: true
 
 `*`
 
-## Topic
+## Rationale
+`*****`
+
+`****`
+**Rationalizing Neural Predictions**(https://people.csail.mit.edu/taolei/papers/emnlp16_rationale.pdf, Tao Lei, Regina Barzilay and Tommi Jaakkola, EMNLP2016)
+- Contrary to prior work that required human-annotated rationales, proposed self-supervised methodology to extract rationales. Did not test for cross-lingual transfer.
+
+`***`
+**An Information Bottleneck Approach for Controlling Conciseness in Rationale Extraction**(https://arxiv.org/abs/2005.00652, Bhargavi Paranjape, Mandar Joshi, John Thickstun, Hannaneh Hajishirzi, Luke Zettlemoyer, EMNLP2020)
+- Related work showed that models conditioned on predictions are more trustworthy/faithful than post-hoc explanations
+
+`**`
+
+`*`
+
+<!-- ## Topic
 `*****`
 
 `****`
@@ -291,6 +308,6 @@ hidden: true
 
 `**`
 
-`*`
+`*` -->
 
 ![ML research comic](https://drive.google.com/uc?export=view&id=1bNRyr_Ubi2Sd-74KzKy5tJVkJoPlRKPi)
